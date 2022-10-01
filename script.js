@@ -8,15 +8,18 @@ function formatAMPM(date) {
     var strTime = hours + ':' + minutes + ' ' + ampm;
     return strTime;
   }
+ var lat;
+ var lon;
  let weather = {
     apiKey: "20a36f8e1152244bbbd9ac296d3640f2",
-    fetchWeather: function(city) {
-        fetch(
-                "https://api.openweathermap.org/data/2.5/weather?q=" +
-                city +
-                "&units=metric&appid=" +
-                this.apiKey
-            )
+    fetchWeather: function(city, lat, lon) {
+        let url;
+        if(city != ""){
+            url = "https://api.openweathermap.org/data/2.5/weather?q=" + city + "&units=metric&appid=" + this.apiKey
+        }else if(lat){
+            url = "https://api.openweathermap.org/data/2.5/weather?lat=" + lat +"&lon=" + lon + "&units=metric&appid=" + this.apiKey
+        }
+        fetch(url)
             .then((response) => {
                 if (!response.ok) {
                     alert("No weather found.");
@@ -90,7 +93,7 @@ function showWeatherData (data){
 document.querySelector(".search button").addEventListener("click", function() {
     weather.search();
 });
-
+ 
 document
     .querySelector(".search-bar")
     .addEventListener("keyup", function(event) {
@@ -98,5 +101,22 @@ document
             weather.search();
         }
     });
-
-weather.fetchWeather("Delhi");
+    let opt = {
+        enableHighAccuracy: true,
+        maximumAge: 0,  
+        timeout: 5000
+      };
+      if (window.navigator.geolocation) {
+          navigator.geolocation.getCurrentPosition(pos, error, opt);
+      } 
+      function error(err){
+          if(err.code === err.PERMISSION_DENIED){
+              console.log("Location perms denied.");
+              weather.fetchWeather("delhi");
+          }
+      }
+      function pos(p){
+        lon = p.coords.longitude;
+        lat = p.coords.latitude;
+        weather.fetchWeather("", lat, lon);
+      }
