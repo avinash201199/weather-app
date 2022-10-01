@@ -113,14 +113,14 @@ h1.temp {
 .future-forecast{
   background:#000000d0;;
   padding: 25px;
-  position: fixed;
-  bottom: 0;
-  display: flex;
   color:white;
-  width: 100%;
-  align-items: center;
-  justify-content: center;
+  /* width: 100%; */
   overflow-y: hidden;
+  overflow-x: hidden;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 4%;
 }
 
 .future-forecast .today{
@@ -150,17 +150,24 @@ h1.temp {
 .future-forecast .weather-forecast{
   display: flex;
 }
-
+.weather-forecast{
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+  /* width:90% ; */
+  overflow-y: hidden;
+  overflow-x: hidden;
+}
 .weather-forecast .weather-forecast-item{
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  margin: 0 10px;
+  margin: 10px 10px;
   border: 1px solid #eee;
   padding: 15px;
   border-radius: 10px;
-  background: rgba(0,0,0,0.2)
+  background: rgba(0,0,0,0.2);
 }
 
 .weather-forecast .weather-forecast-item .day{
