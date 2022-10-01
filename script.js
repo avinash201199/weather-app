@@ -70,14 +70,14 @@ async function getWeatherWeekly(url)
 
 function showWeatherData (data){
     const time = new Date();
-    const month = time.getMonth();
-    const date = time.getDate();
     const day = time.getDay();
+    var currentDate = moment();
+    var weekStart = currentDate;
     let otherDayForcast = ''
     data.daily.forEach((day, idx) => {
             otherDayForcast += `
             <div class="weather-forecast-item">
-                <div class="day">${window.moment(day.dt*1000).format('dddd')}</div>
+                <div class="day">${window.moment(weekStart).add(idx, 'days').format("MMMM Do,dddd")}</div>
                 <img src="http://openweathermap.org/img/wn/${day.weather[0].icon}.png" alt="weather icon" class="w-icon">
                 <div class="temp">Night - ${day.temp.night}&#176;C</div>
                 <div class="temp">Day - ${day.temp.day}&#176;C</div>

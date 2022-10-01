@@ -175,6 +175,7 @@ h1.temp {
   background:#7c7c7c6b;
   border-radius: 50px;
   text-align: center;
+  font-size: 12px;
 }
 
 .weather-forecast .weather-forecast-item .temp{
