@@ -1,4 +1,14 @@
-let weather = {
+function formatAMPM(date) {
+    var hours = date.getHours();
+    var minutes = date.getMinutes();
+    var ampm = hours >= 12 ? 'PM' : 'AM';
+    hours = hours % 12;
+    hours = hours ? hours : 12; // the hour '0' should be '12'
+    minutes = minutes < 10 ? '0'+minutes : minutes;
+    var strTime = hours + ':' + minutes + ' ' + ampm;
+    return strTime;
+  }
+ let weather = {
     apiKey: "20a36f8e1152244bbbd9ac296d3640f2",
     fetchWeather: function(city) {
         fetch(
@@ -21,6 +31,10 @@ let weather = {
         const { icon, description } = data.weather[0];
         const { temp, humidity } = data.main;
         const { speed } = data.wind;
+        const {sunrise,sunset}=data.sys;
+        let date1=new Date(sunrise*1000);
+        let date2=new Date(sunset*1000);
+        //console.log(formatAMPM(date));
         document.querySelector(".city").innerText = "Weather in " + name;
         document.querySelector(".icon").src =
             "https://openweathermap.org/img/wn/" + icon + ".png";
@@ -33,6 +47,8 @@ let weather = {
         document.querySelector(".weather").classList.remove("loading");
         document.body.style.backgroundImage =
             "url('https://source.unsplash.com/1600x900/?" + name + "')";
+            document.querySelector(".sun .sunrise").innerText="Sunrise:"+formatAMPM(date1);
+            document.querySelector(".sun .sunset").innerText="Sunset:"+formatAMPM(date2);
     },
     search: function() {
         this.fetchWeather(document.querySelector(".search-bar").value);

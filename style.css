@@ -84,3 +84,19 @@ h1.temp {
   top: 0;
   left: 20px;
 }
+.forecast{
+  display: flex;
+  height: 70px;
+}
+.child1{
+  flex:1;
+  padding: 1%;
+}
+.sun{
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  justify-content: space-evenly;
+  align-items: left;
+  padding-bottom: 2%;
+}
