@@ -6,6 +6,9 @@ body {
   font-family: 'Open Sans', sans-serif;
   background: #222;
   background-image: url('https://source.unsplash.com/1600x900/?landscape');
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: 50% 50%;
   font-size: 120%;
 }
 
