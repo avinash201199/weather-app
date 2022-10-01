@@ -61,8 +61,16 @@ input.search-bar {
   width: calc(100% - 100px);
 }
 
+input.search-bar:focus {
+  box-shadow: 0px 0px 10px rgb(255 255 255 / 50%);
+}
+
 button:hover {
   background: #7c7c7c6b;
+}
+
+button:focus {
+  box-shadow: 0px 0px 10px rgb(255 255 255 / 50%);
 }
 
 h1.temp {
