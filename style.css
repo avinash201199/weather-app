@@ -71,9 +71,14 @@ button:hover {
 }
 
 
-h1.temp {
+h2.temp {
   margin: 0;
   margin-bottom: 0.4em;
+  font-size: 2em;
+}
+
+h1.city {
+  font-size: 1.5em;
 }
 
 .flex {
