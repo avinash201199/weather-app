@@ -3,6 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="A simple weather app displaying a weekly forecast for a selected location"/>
     <title>Weather App</title>
     <link rel="preconnect" href="https://fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css2?family=Open+Sans&display=swap" rel="stylesheet">
@@ -10,11 +11,11 @@
 </head>
 
 <body>
-<div class="container">
+<main class="container">
     <div class="card">
       <div class="search">
-        <input type="text" class="search-bar" placeholder="Search" />
-        <button>
+        <input type="text" class="search-bar" placeholder="Search"  autocomplete="address-level2"/>
+        <button aria-label="click here to search">
           <svg
             stroke="currentColor"
             fill="currentColor"
@@ -31,8 +32,8 @@
         </button>
       </div>
       <div class="weather loading">
-        <h2 class="city">Weather in Delhi</h2>
-        <h1 class="temp">32°C</h1>
+        <h1 class="city">Weather in Delhi</h1>
+        <h2 class="temp">32°C</h2>
         <div class="flex">
           <img
             src="https://openweathermap.org/img/wn/04n.png"
