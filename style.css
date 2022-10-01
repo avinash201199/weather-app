@@ -1,5 +1,4 @@
 body {
-  display: flex;
   justify-content: center;
   align-items: center;
   height: 100vh;
@@ -159,4 +158,9 @@ h1.temp {
 .weather-forecast .weather-forecast-item .temp{
   font-weight: 100;
   font-size: 12px;
+}
+.container
+{
+  display: flex;
+  justify-content: center;
 }
