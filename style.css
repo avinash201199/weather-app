@@ -19,6 +19,10 @@ body {
   margin: 1em;
 }
 
+.card {
+  color: rgb(255, 238, 241);
+}
+
 .card-small {
   background: #000000d0;
   color: white;
@@ -164,3 +168,4 @@ h1.temp {
   display: flex;
   justify-content: center;
 }
+
