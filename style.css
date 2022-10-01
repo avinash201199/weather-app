@@ -61,6 +61,11 @@ input.search-bar {
   width: calc(100% - 100px);
 }
 
+input:target, input:focus, 
+button:target, button:focus {
+  outline: 2px solid yellow;
+}
+
 button:hover {
   background: #7c7c7c6b;
 }
