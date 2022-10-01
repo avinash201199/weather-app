@@ -10,11 +10,7 @@ Web Url- https://avinash201199.github.io/weather-app/
 
 You can contribute in this project by adding some new features or anything in your mind 
 To contribute 
-1. Star this repository
-2. Create an issue with description.
-3. Then fork this repository.
-4. Do your changes 
-5. Make pull request and wait for review.
+[check for getting started ](https://github.com/avinash201199/weather-app/blob/main/CONTRIBUTING.md)
 
 <br> 
 For any query dm here -https://www.instagram.com/lets__code/
