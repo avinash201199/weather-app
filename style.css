@@ -86,15 +86,22 @@ h2.temp {
 h1.city {
   font-size: 1.5em;
 }
-
+.air{
+  display: block;
+  width: auto;
+}
 .flex {
   display: flex;
   align-items: center;
+  flex: 1;
+  justify-content: space-around;
 }
 
 .description {
   text-transform: capitalize;
-  margin-left: 8px;
+}
+.airDescribe{
+  margin-left: 0;
 }
 
 .weather.loading {
