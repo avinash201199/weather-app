@@ -138,13 +138,12 @@ h1.city {
   background:#000000d0;;
   padding: 25px;
   color:white;
-  /* width: 100%; */
+  width: 100%;
   overflow-y: hidden;
   overflow-x: hidden;
   display: flex;
   justify-content: center;
   align-items: center;
-  margin-top: 4%;
 }
 
 .future-forecast .today{
@@ -175,25 +174,31 @@ h1.city {
   display: flex;
 }
 .weather-forecast{
-  display: flex;
   flex-wrap: wrap;
-  justify-content: space-around;
+  justify-content: center;
+  align-items: center;
   /* width:90% ; */
+  min-height: 290px;
+  max-width: 100%;
   overflow-y: hidden;
   overflow-x: hidden;
+  transition: 2s;
 }
 .weather-forecast .weather-forecast-item{
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  margin: 10px 10px;
+  margin: 10px 15px;
   border: 1px solid #eee;
-  padding: 15px;
+  padding: 17px;
   border-radius: 10px;
   background: rgba(0,0,0,0.2);
 }
-
+.weather-forecast-item {
+  height: 100px;
+  width: 100px;
+}
 .weather-forecast .weather-forecast-item .day{
   padding: 5px 15px;
   background:#7c7c7c6b;
@@ -212,4 +217,26 @@ h1.city {
   justify-content: center;
   flex-direction: column;
   align-items: center;
+}
+
+.weather-forecast-item:hover {
+  min-width: 164px;
+  min-height: 200px;
+  padding:10px 0px;
+  margin-left:0px;
+  margin-right: 0px;
+  background: linear-gradient(0deg,rgb(16, 16, 80),#7c7c7c6b);
+}
+.weather-forecast-item:hover .view-more {
+  display:unset;
+  padding-top: 10px;
+}
+.view-more:hover {
+  padding: 10px;
+  text-decoration: none;
+  color: blue;
+  cursor: pointer;
+}
+.view-more {
+  display:none;
 }
