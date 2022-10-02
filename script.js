@@ -8,9 +8,35 @@ function formatAMPM(date) {
   var strTime = hours + ":" + minutes + " " + ampm;
   return strTime;
 }
+let air_key="427f7ef80457a39a26407e17ef0d604339190901";
+const AirQuality=(log,lat)=>{
+  fetch(`https://api.waqi.info/feed/geo:${lat};${log}/?token=${air_key}`).then((res)=>res.json()).then((res)=>{
+    let aqi=res.data.aqi;
+    document.querySelector(".air .flex .aiq").innerText=`Air Quality:${aqi}`;
+    if(aqi>=0 && aqi<=50){
+      document.querySelector(".air .flex .airDescribe").innerText="(Good)";
+    }
+    if(aqi>50 && aqi<=100){
+      document.querySelector(".air .flex .airDescribe").innerText="(Satisfactory)";
+    }
+    if(aqi>100 && aqi<=150){
+      document.querySelector(".air .flex .airDescribe").innerText="(Sensitive)";
+    }
+    if(aqi>150 && aqi<=200){
+      document.querySelector(".air .flex .airDescribe").innerText="(Unhealthy)";
+    }
+    if(aqi>200 && aqi<=300){
+      document.querySelector(".air .flex .airDescribe").innerText="(Very Unhealthy)";
+    }
+    if(aqi>300){
+      document.querySelector(".air .flex .airDescribe").innerText="(Hazardous)";
+    }
+  });
+}
 let weather = {
   apiKey: "20a36f8e1152244bbbd9ac296d3640f2",
   fetchWeather: function (city) {
+    //console.log(city);
     fetch(
       "https://api.openweathermap.org/data/2.5/weather?q=" +
         city +
@@ -27,7 +53,9 @@ let weather = {
       .then((data) => this.displayWeather(data));
   },
   displayWeather: function (data) {
+    //console.log(data);
     const { name } = data;
+    //console.log(name);
     const { icon, description } = data.weather[0];
     const { temp, humidity } = data.main;
     const { speed } = data.wind;
@@ -36,6 +64,7 @@ let weather = {
     let date2 = new Date(sunset * 1000);
     //console.log(formatAMPM(date));
     const { lat, lon } = data.coord;
+    const airIndex=AirQuality(lon,lat);
     document.querySelector(".city").innerText = "Weather in " + name;
     document.querySelector(".icon").src =
       "https://openweathermap.org/img/wn/" + icon + ".png";
@@ -63,6 +92,7 @@ let weather = {
   },
   search: function () {
     if (document.querySelector(".search-bar").value != "") {
+      //console.log(document.querySelector(".search-bar").value);
       this.fetchWeather(document.querySelector(".search-bar").value);
     } else {
       window.alert("Please add a location");
@@ -73,7 +103,7 @@ async function getWeatherWeekly(url) {
   fetch(url)
     .then((res) => res.json())
     .then((data) => {
-      console.log(data);
+      //console.log(data);
       showWeatherData(data);
     });
 }
