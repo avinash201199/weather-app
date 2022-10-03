@@ -1,5 +1,5 @@
+import Capitals from "./Capitals.js";
 const AIR_KEY = "427f7ef80457a39a26407e17ef0d604339190901";
-
 function formatAMPM(date) {
   var hours = date.getHours();
   var minutes = date.getMinutes();
@@ -11,35 +11,55 @@ function formatAMPM(date) {
   return strTime;
 }
 
-const AirQuality=(log,lat)=>{
-  fetch(`https://api.waqi.info/feed/geo:${lat};${log}/?token=${AIR_KEY}`).then((res)=>res.json()).then((res)=>{
-    let aqi=res.data.aqi;
-    document.querySelector(".air .flex .aiq").innerText=`Air Quality:${aqi}`;
-    if(aqi>=0 && aqi<=50){
-      document.querySelector(".air .flex .airDescribe").innerText="(Good)";
-    }
-    if(aqi>50 && aqi<=100){
-      document.querySelector(".air .flex .airDescribe").innerText="(Satisfactory)";
-    }
-    if(aqi>100 && aqi<=150){
-      document.querySelector(".air .flex .airDescribe").innerText="(Sensitive)";
-    }
-    if(aqi>150 && aqi<=200){
-      document.querySelector(".air .flex .airDescribe").innerText="(Unhealthy)";
-    }
-    if(aqi>200 && aqi<=300){
-      document.querySelector(".air .flex .airDescribe").innerText="(Very Unhealthy)";
-    }
-    if(aqi>300){
-      document.querySelector(".air .flex .airDescribe").innerText="(Hazardous)";
-    }
-  });
-}
+const AirQuality = (log, lat) => {
+  fetch(`https://api.waqi.info/feed/geo:${lat};${log}/?token=${AIR_KEY}`)
+    .then((res) => res.json())
+    .then((res) => {
+      let aqi = res.data.aqi;
+      document.querySelector(
+        "#AirQuality"
+      ).innerText = `Air Quality:${aqi}`;
+      if (aqi >= 0 && aqi <= 50) {
+        document.querySelector(".ml-0").innerText = "(Good)";
+      }
+      if (aqi > 50 && aqi <= 100) {
+        document.querySelector(".ml-0").innerText =
+          "(Satisfactory)";
+      }
+      if (aqi > 100 && aqi <= 150) {
+        document.querySelector(".ml-0").innerText =
+          "(Sensitive)";
+      }
+      if (aqi > 150 && aqi <= 200) {
+        document.querySelector(".ml-0").innerText =
+          "(Unhealthy)";
+      }
+      if (aqi > 200 && aqi <= 300) {
+        document.querySelector(".ml-0").innerText =
+          "(Very Unhealthy)";
+      }
+      if (aqi > 300) {
+        document.querySelector(".ml-0").innerText =
+          "(Hazardous)";
+      }
+    });
+};
 
 let weather = {
   apiKey: "20a36f8e1152244bbbd9ac296d3640f2",
   fetchWeather: function (city) {
-    //console.log(city);
+    let isCountry=false;
+    let index;
+    for(let i=0;i<Capitals.length;i++){
+      if(Capitals[i].country.toUpperCase()==city.toUpperCase()){
+        isCountry=true;
+        index=i;
+        break;
+      }
+    }
+    if(isCountry){
+      city=Capitals[index].city;
+    }
     fetch(
       "https://api.openweathermap.org/data/2.5/weather?q=" +
         city +
@@ -67,11 +87,13 @@ let weather = {
     let date2 = new Date(sunset * 1000);
     //console.log(formatAMPM(date));
     const { lat, lon } = data.coord;
-    const airIndex=AirQuality(lon,lat);
+    const airIndex = AirQuality(lon, lat);
 
     document.getElementById("city").innerText = "Weather in " + name;
 
-    document.getElementById("icon").src = `https://openweathermap.org/img/wn/${icon}.png`;
+    document.getElementById(
+      "icon"
+    ).src = `https://openweathermap.org/img/wn/${icon}.png`;
 
     document.getElementById("description").innerText = description;
 
@@ -83,9 +105,13 @@ let weather = {
 
     document.getElementById("weather").classList.remove("loading");
 
-    document.getElementById("sunrise").innerText = `Sunrise: ${formatAMPM(date1)}`;
+    document.getElementById("sunrise").innerText = `Sunrise: ${formatAMPM(
+      date1
+    )}`;
 
-    document.getElementById("sunset").innerText = `Sunset: ${formatAMPM(date2)}`;
+    document.getElementById("sunset").innerText = `Sunset: ${formatAMPM(
+      date2
+    )}`;
 
     let url = `https://api.openweathermap.org/data/2.5/onecall?lat=${lat}&lon=${lon}&units=metric&appid=${this.apiKey}`;
     getWeatherWeekly(url);
@@ -107,7 +133,12 @@ async function getWeatherWeekly(url) {
     });
 }
 
-function generateWeatherItem(dayString,iconName,nightTemperature,dayTemperature){
+function generateWeatherItem(
+  dayString,
+  iconName,
+  nightTemperature,
+  dayTemperature
+) {
   let container = document.createElement("div");
   container.className = "weather-forecast-item rounded text-center";
 
@@ -115,14 +146,14 @@ function generateWeatherItem(dayString,iconName,nightTemperature,dayTemperature)
   day.innerText = dayString;
 
   let icon = document.createElement("img");
-  icon.src= `http://openweathermap.org/img/wn/${iconName}.png`;
+  icon.src = `http://openweathermap.org/img/wn/${iconName}.png`;
 
   let nightTemp = document.createElement("div");
   nightTemp.innerHTML = `${nightTemperature}&#176;C`;
 
   let dayTemp = document.createElement("div");
   dayTemp.innerHTML = `${dayTemperature}&#176;C`;
-  
+
   container.appendChild(day);
   container.appendChild(icon);
   container.appendChild(nightTemp);
@@ -135,7 +166,12 @@ function showWeatherData(data) {
   container.innerHTML = "";
   data.daily.forEach((day, idx) => {
     let dayString = window.moment(day.dt * 1000).format("dddd");
-    let element = generateWeatherItem(dayString,day.weather[0].icon,day.temp.night,day.temp.day);
+    let element = generateWeatherItem(
+      dayString,
+      day.weather[0].icon,
+      day.temp.night,
+      day.temp.day
+    );
     container.appendChild(element);
   });
 }
@@ -153,3 +189,7 @@ document
   });
 
 weather.fetchWeather("Delhi");
+
+
+
+
