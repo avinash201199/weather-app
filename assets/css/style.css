@@ -107,8 +107,15 @@ button:focus {
 .weather-forecast-item{
   border: 1px solid rgb(35, 35, 35);
   background: rgba(0, 0, 0, 0.8);
+  padding: 10px;
 }
 
+.weather-forecast-item:hover {
+  background-color: #898AA6;
+  opacity: 0.9;
+  border: 2px solid white;
+  cursor: pointer;
+} 
 
 /* Responsive */
 
