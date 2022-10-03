@@ -39,6 +39,13 @@ input.search-bar {
   font-family: inherit;
   font-size: 105%;
   width: calc(100% - 100px);
+  color: darkgray;
+}
+
+
+
+option:hover,  .active{
+  background-color: lightblue;
 }
 
 input.search-bar:focus {
@@ -100,20 +107,20 @@ button:focus {
 
 .weather-forecast{
   display: grid;
-  grid-template-columns: auto auto auto auto auto auto;
-  grid-gap: 0.3rem;
+  grid-template-columns: auto auto auto auto;
+  grid-gap: 0.5rem;
 }
 
 .weather-forecast-item{
   border: 1px solid rgb(35, 35, 35);
   background: rgba(0, 0, 0, 0.8);
-  padding: 10px;
+  padding: 20px 0;
 }
 
 .weather-forecast-item:hover {
-  background-color: #898AA6;
+  background-color: #898aa6db;
   opacity: 0.9;
-  border: 2px solid white;
+  border: 1px solid white;
   cursor: pointer;
 } 
 
