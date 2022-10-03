@@ -110,16 +110,23 @@ button:focus {
   border: 1px solid rgb(35, 35, 35);
   background: rgba(0, 0, 0, 0.8);
   padding: 10px;
+  transition: background-color 0.5s ease;
 }
 
 .weather-forecast-item:hover {
   background-color: #898AA6;
   opacity: 0.9;
-  border: 2px solid white;
+  border: 1px solid white;
   cursor: pointer;
 } 
 
 /* Responsive */
+
+@media only screen and (min-width: 1200px) {
+  .weather-forecast{
+    grid-template-columns: auto auto auto auto;
+  }
+}
 
 @media only screen and (max-width: 992px) {
   .weather-forecast{
@@ -138,3 +145,4 @@ button:focus {
     grid-template-columns: auto auto ;
   }
 }
+
