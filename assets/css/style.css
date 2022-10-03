@@ -1,0 +1,131 @@
+body {
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  margin: 0;
+  font-family: 'Open Sans', sans-serif;
+  background: #222;
+  background-image: url('https://source.unsplash.com/1600x900/?landscape');
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-attachment: fixed;
+  background-position: 50% 50%;
+}
+
+/* Card */
+
+.card {
+  position: relative;
+  top: 1rem;
+  background: #000000d0;
+  padding: 1em;
+  width: 100%;
+  max-width: 420px;
+}
+
+/* Search bar */
+.search {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+input.search-bar {
+  border: none;
+  outline: none;
+  padding: 0.4em 1em;
+
+  background: #7c7c7c2b;
+  font-family: inherit;
+  font-size: 105%;
+  width: calc(100% - 100px);
+}
+
+input.search-bar:focus {
+  box-shadow: 0px 0px 10px rgb(255 255 255 / 50%);
+}
+
+button {
+  margin: 0.5em;
+  border-radius: 50%;
+  border: none;
+  height: 44px;
+  width: 44px;
+  outline: none;
+  background: #7c7c7c2b;
+  cursor: pointer;
+  transition: 0.2s ease-in-out;
+}
+
+button:hover {
+  background: #7c7c7c6b;
+}
+
+button:focus {
+  box-shadow: 0px 0px 10px rgb(255 255 255 / 50%);
+}
+
+/* weather section */
+.loading {
+  visibility: hidden;
+  max-height: 20px;
+  position: relative;
+}
+
+.loading:after {
+  visibility: visible;
+  content: "Loading...";
+  position: absolute;
+  top: 0;
+  left: 20px;
+}
+
+
+/* Global Styles */
+
+.flex-1{
+  flex:1;
+}
+
+.transition{
+  transition: 2s;
+}
+
+
+/* Forecast */
+.future-forecast{
+  position: relative;
+  top: 4rem;
+}
+
+.weather-forecast{
+  display: grid;
+  grid-template-columns: auto auto auto auto auto auto;
+  grid-gap: 0.3rem;
+}
+
+.weather-forecast-item{
+  border: 1px solid rgb(35, 35, 35);
+  background: rgba(0, 0, 0, 0.8);
+}
+
+
+/* Responsive */
+
+@media only screen and (max-width: 992px) {
+  .weather-forecast{
+    grid-template-columns: auto auto auto auto;
+  }
+}
+
+@media only screen and (max-width: 768px) {
+  .weather-forecast{
+    grid-template-columns: auto auto auto;
+  }
+}
+
+@media only screen and (max-width: 576px) {
+  .weather-forecast{
+    grid-template-columns: auto auto ;
+  }
+}
