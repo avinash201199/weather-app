@@ -1,3 +1,4 @@
+html{overflow-y: hidden;}
 body {
   justify-content: center;
   align-items: center;
@@ -10,6 +11,7 @@ body {
   background-size: cover;
   background-attachment: fixed;
   background-position: 50% 50%;
+  overflow-y: hidden;
 }
 
 /* Card */
