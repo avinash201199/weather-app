@@ -1,6 +1,4 @@
-html {
-  overflow-y: hidden;
-}
+
 body {
   justify-content: center;
   align-items: center;
@@ -13,7 +11,6 @@ body {
   background-size: cover;
   background-attachment: fixed;
   background-position: 50% 50%;
-  overflow-y: hidden;
 }
 
 /* Card */
@@ -48,6 +45,8 @@ input.search-bar {
   width: calc(100% - 100px);
   color: darkgray;
 }
+
+
 
 option:hover,
 .active {
@@ -235,4 +234,23 @@ button:focus {
   .weather-forecast {
     grid-template-columns: auto auto;
   }
+}
+
+/* Custom Scrool Bar */
+
+::-webkit-scrollbar-track {
+  -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+  border-radius: 10px;
+  background-color: #645d5d2c;
+}
+
+::-webkit-scrollbar {
+  width: 12px;
+  background-color: #645d5d2c;
+}
+
+::-webkit-scrollbar-thumb {
+  border-radius: 10px;
+  -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, .3);
+  background-color: #222;
 }
