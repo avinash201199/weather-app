@@ -6,7 +6,7 @@ body {
   margin: 0;
   font-family: 'Open Sans', sans-serif;
   background: #222;
-  background-image: url('https://source.unsplash.com/1600x900/?landscape');
+  
   background-repeat: no-repeat;
   background-size: cover;
   background-attachment: fixed;
@@ -14,7 +14,19 @@ body {
   overflow-y: hidden;
 }
 
-/* Card */
+/*video-background Card */
+.video-background
+{
+  position:absolute;
+  right: 0;
+  bottom: 0;
+  min-width:100%;
+  min-height: 100%;
+  width: auto;
+  z-index: -1;
+}
+
+
 
 .card {
   position: relative;
