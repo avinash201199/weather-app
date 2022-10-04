@@ -11,6 +11,8 @@ body {
   background-size: cover;
   background-attachment: fixed;
   background-position: 50% 50%;
+  overflow-y: scroll;   /* Scroll is required to see full info */
+
 }
 
 /* Card */
@@ -21,7 +23,7 @@ body {
   background: #000000d0;
   padding: 1em;
   width: 100%;
-  max-width: 420px;
+  max-width: 500px;
 }
 
 .searchbar h1 {
@@ -37,13 +39,14 @@ body {
 input.search-bar {
   border: none;
   outline: none;
-  padding: 0.4em 1em;
-
+  padding: 0.4em 1.2em;
+  border-radius: 20px;
   background: #7c7c7c2b;
   font-family: inherit;
   font-size: 105%;
-  width: calc(100% - 100px);
+  width: calc(100% - 80px);
   color: darkgray;
+  color: white;
 }
 
 
@@ -54,15 +57,17 @@ option:hover,
 }
 
 input.search-bar:focus {
+  transition: 700ms;
   box-shadow: 0px 0px 10px rgb(255 255 255 / 50%);
+  border-radius: 0;
 }
 
 button {
   margin: 0.5em;
   border-radius: 50%;
   border: none;
-  height: 44px;
-  width: 44px;
+  height: 40px;
+  width: 40px;
   outline: none;
   background: #7c7c7c2b;
   cursor: pointer;
@@ -78,6 +83,38 @@ button:focus {
 }
 
 /* weather section */
+
+
+#temp{
+  margin-top: 15px;
+  margin-bottom: 10px;
+  font-weight: 500;
+}
+
+
+.weather{
+  padding: 16px;
+}
+
+.weather-desc{
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 10px;
+}
+
+.weather-icn{
+  margin-bottom: 0;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+#AirQuality{
+  margin: 0 5px;
+}
+
 .loading {
   visibility: hidden;
   max-height: 20px;
@@ -205,6 +242,8 @@ button:focus {
 
 /* Responsive */
 
+
+
 @media only screen and (min-width: 1200px) {
   .weather-forecast {
     grid-template-columns: auto auto auto auto;
@@ -233,6 +272,12 @@ button:focus {
 @media only screen and (max-width: 576px) {
   .weather-forecast {
     grid-template-columns: auto auto;
+  }
+  .card{
+    padding: 7px;
+  }
+  .weather{
+    padding: 10px;
   }
 }
 
