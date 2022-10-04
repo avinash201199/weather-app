@@ -47,7 +47,7 @@ const AirQuality = (log, lat) => {
 
 let weather = {
   apiKey: "20a36f8e1152244bbbd9ac296d3640f2",
-  fetchWeatherByCity: function (city) {
+  fetchWeather: function (city) {
     let isCountry=false;
     let index;
     for(let i=0;i<Capitals.length;i++){
@@ -75,24 +75,6 @@ let weather = {
       })
       .then((data) => this.displayWeather(data));
   },
-  fetchWeatherByCoords: function (lat, lon) {
-		fetch(
-			"https://api.openweathermap.org/data/2.5/weather?lat=" +
-				lat +
-				"&lon=" +
-				lon +
-				"&units=metric&appid=" +
-				this.apiKey
-		)
-			.then((response) => {
-				if (!response.ok) {
-					alert("No weather found.");
-					throw new Error("No weather found.");
-				}
-				return response.json();
-			})
-			.then((data) => this.displayWeather(data));
-	},
   displayWeather: function (data) {
     //console.log(data);
     const { name } = data;
@@ -136,7 +118,7 @@ let weather = {
   },
   search: function () {
     if (document.querySelector(".search-bar").value != "") {
-      this.fetchWeatherByCity(document.querySelector(".search-bar").value);
+      this.fetchWeather(document.querySelector(".search-bar").value);
     } else {
       window.alert("Please add a location");
     }
@@ -206,21 +188,7 @@ document
     }
   });
 
-  function init() {
-    if (navigator.geolocation) {
-      navigator.geolocation.getCurrentPosition(successFunction, errorFunction);
-    }
-    function successFunction(position) {
-      const lat = position.coords.latitude;
-      const lng = position.coords.longitude;
-      weather.fetchWeatherByCoords(lat, lng);
-    }
-    function errorFunction() {
-      weather.fetchWeatherByCity("Delhi");
-    }
-  }
-  
-  init();
+weather.fetchWeather("Delhi");
 
 
 
