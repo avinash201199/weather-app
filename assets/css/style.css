@@ -25,11 +25,14 @@ body {
   max-width: 420px;
 }
 
-/* Search bar */
-.search {
-  display: flex;
-  align-items: center;
-  justify-content: center;
+.searchbar h1 {
+
+  overflow: hidden;
+  border-right: 1px solid;
+  margin: 0 auto;
+  position: relative;
+  animation: reza 4s steps(30 , end);
+  animation-iteration-count: infinite;
 }
 
 input.search-bar {
