@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+ 
 
 <head>
   <meta charset="UTF-8" />
@@ -11,7 +12,6 @@
   <link rel="stylesheet" href="./assets/css/bootstrap.min.css">
   <link rel="stylesheet" href="./assets/css/style.css">
 </head>
-
 <body id="body">
   <div class="container d-flex justify-content-center align-items-center flex-column">
     <div class="card text-white rounded">
@@ -677,37 +677,50 @@
             <div id="AirQuality">Air Quality:75</div>
             <div class="ml-0">(Satisfactory)</div>
           </div>
-          <div class="d-flex">
-            <div class="d-flex flex-1 flex-column">
-              <div id="humidity">Humidity: 60%</div>
-              <div id="wind">Wind speed: 6.2 km/h</div>
-            </div>
-            <div class="d-flex flex-1 flex-column">
-              <div id="sunrise">Sunrise:5:00AM</div>
-              <div id="sunset">Sunset:6:00PM</div>
+            <div class="d-flex">
+              <div class="d-flex flex-1 flex-column">
+                <div id="humidity">Humidity: 60%</div>
+                <div id="wind">Wind speed: 6.2 km/h</div>
+              </div>
+              <div class="d-flex flex-1 flex-column">
+                <div id="sunrise">Sunrise:5:00AM</div>
+                <div id="sunset">Sunset:6:00PM</div>
+              </div>
             </div>
           </div>
         </div>
       </div>
-    </div>
-    <div class="future-forecast p-2 overflow-hidden text-white w-100 pb-5">
-      <div class="weather-forecast transition overflow-hidden " id="weather-forecast">
-
-        <div class="weather-forecast-item rounded text-center" id="weather-forecast-item">
-          <div>Mon</div>
-          <img src="http://openweathermap.org/img/wn/10d@2x.png" alt="weather icon">
-          <div>Night - 25.6&#176; C</div>
-          <div>Day - 35.6&#176; C</div>
-          <div>view more</div>
+      <div class="future-forecast p-2 overflow-hidden text-white w-100 pb-5">
+        <div
+          class="weather-forecast transition overflow-hidden"
+          id="weather-forecast"
+        >
+          <div
+            class="weather-forecast-item rounded text-center"
+            id="weather-forecast-item"
+          >
+            <div>Mon</div>
+            <img
+              src="http://openweathermap.org/img/wn/10d@2x.png"
+              alt="weather icon"
+            />
+            <div>Night - 25.6&#176; C</div>
+            <div>Day - 35.6&#176; C</div>
+            <div>view more</div>
+          </div>
         </div>
-
       </div>
     </div>
-  </div>
-</body>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js"
-  integrity="sha512-qTXRIMyZIFb8iQcfjXWCO8+M5Tbc38Qi5WzdPOYZHIlZpzBHG3L3by84BBBOiRGiEb7KKtAOAs5qYdUiZiQNNQ=="
-  crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-<script type="module" src="./assets/js/script.js"></script>
-
+    <!-- toast -->
+    <div id="toast">
+      <div class="checkicon"><i class="fas fa-check-square"></i></div>
+    </div>
+  </body>
+  <script
+    src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js"
+    integrity="sha512-qTXRIMyZIFb8iQcfjXWCO8+M5Tbc38Qi5WzdPOYZHIlZpzBHG3L3by84BBBOiRGiEb7KKtAOAs5qYdUiZiQNNQ=="
+    crossorigin="anonymous"
+    referrerpolicy="no-referrer"
+  ></script>
+  <script type="module" src="./assets/js/script.js"></script>
 </html>
