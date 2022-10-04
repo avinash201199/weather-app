@@ -18,29 +18,29 @@ const AirQuality = (log, lat) => {
       let aqi = res.data.aqi;
       document.querySelector(
         "#AirQuality"
-      ).innerText = `Air Quality:${aqi}`;
+      ).innerText = `Air Quality: ${aqi}`;
       if (aqi >= 0 && aqi <= 50) {
-        document.querySelector(".ml-0").innerText = "(Good)";
+        document.querySelector(".ml-0").innerText = " (Good)";
       }
       if (aqi > 50 && aqi <= 100) {
         document.querySelector(".ml-0").innerText =
-          "(Satisfactory)";
+          " (Satisfactory)";
       }
       if (aqi > 100 && aqi <= 150) {
         document.querySelector(".ml-0").innerText =
-          "(Sensitive)";
+          " (Sensitive)";
       }
       if (aqi > 150 && aqi <= 200) {
         document.querySelector(".ml-0").innerText =
-          "(Unhealthy)";
+          " (Unhealthy)";
       }
       if (aqi > 200 && aqi <= 300) {
         document.querySelector(".ml-0").innerText =
-          "(Very Unhealthy)";
+          " (Very Unhealthy)";
       }
       if (aqi > 300) {
         document.querySelector(".ml-0").innerText =
-          "(Hazardous)";
+          " (Hazardous)";
       }
     });
 };
@@ -149,10 +149,10 @@ function generateWeatherItem(
   icon.src = `http://openweathermap.org/img/wn/${iconName}.png`;
 
   let nightTemp = document.createElement("div");
-  nightTemp.innerHTML = `${nightTemperature}&#176;C`;
+  nightTemp.innerHTML = ` Night: ${nightTemperature}&#176;C`;
 
   let dayTemp = document.createElement("div");
-  dayTemp.innerHTML = `${dayTemperature}&#176;C`;
+  dayTemp.innerHTML = ` Day: ${dayTemperature}&#176;C`;
 
   container.appendChild(day);
   container.appendChild(icon);

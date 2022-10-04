@@ -16,6 +16,9 @@ body {
 
 /* Card */
 
+#AirQuality{
+  margin-bottom: 0px !important;
+}
 .card {
   position: relative;
   top: 1rem;
@@ -118,6 +121,7 @@ button:focus {
   opacity: 0.9;
   border: 1px solid white;
   cursor: pointer;
+  /* transform: scale(1.1); */
 } 
 
 /* Responsive */
