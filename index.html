@@ -4,10 +4,13 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="description" content="A simple weather app displaying a weekly forecast for a selected location" />
+  <meta name="description"
+    content="A Beautiful weather app displaying a weekly weather forecast for the selected location" />
   <title>Weather App</title>
   <link rel="preconnect" href="https://fonts.gstatic.com">
   <link href="https://fonts.googleapis.com/css2?family=Open+Sans&display=swap" rel="stylesheet">
+  <!-- favicon -->
+  <link rel="shortcut icon" type="image/jpg" href="./assets/weather-icon.png" />
   <link rel="stylesheet" href="./assets/css/bootstrap.min.css">
   <link rel="stylesheet" href="./assets/css/style.css">
 </head>
@@ -493,6 +496,7 @@
           <option value="Raipur">Raipur</option>
           <option value="Raisen">Raisen</option>
           <option value="Rajauri">Rajauri</option>
+          <option value="Rajahmundry">Rajahmundry</option>
           <option value="Rajgarh">Rajgarh</option>
           <option value="Rajkot">Rajkot</option>
           <option value="Rajnandgaon">Rajnandgaon</option>
@@ -666,8 +670,8 @@
         </button>
       </div>
       <div id="weather" class="weather loading">
-        <h1 id="city">Weather in ___</h1>
-        <h2 id="temp">32°C</h2>
+        <h1 id="city" class="city-name">Weather in ___</h1>
+        <h2 id="temp" class="city-temperature">32°C</h2>
         <div>
           <div class="d-flex flex-1 justify-content-around align-items-center">
             <img src="https://openweathermap.org/img/wn/04n.png" alt="" id="icon" />
@@ -679,35 +683,48 @@
           </div>
           <div class="d-flex">
             <div class="d-flex flex-1 flex-column">
-              <div id="humidity">Humidity: 60%</div>
-              <div id="wind">Wind speed: 6.2 km/h</div>
+              <div class="d-flex flex-1 flex-row humidity" > <img src="./assets/icons/humidity.png" alt="" class="humidity-img">
+                <div id="humidity">Humidity: 60%</div>
+              </div>
+              <div class="d-flex flex-1 flex-row wind" ><img src="./assets/icons/wind.png" alt="" class="wind-img">
+                <div id="wind">Wind speed: 6.2 km/h</div>
+              </div>
+
             </div>
             <div class="d-flex flex-1 flex-column">
-              <div id="sunrise">Sunrise:5:00AM</div>
-              <div id="sunset">Sunset:6:00PM</div>
+
+              <div class="d-flex flex-1 flex-row sunrise"> <img src="./assets/icons/sunrise (2).png" alt="" class="sunrise-img">
+                <div id="sunrise">sunrise</div>
+              </div>
+
+              <div class="d-flex flex-1 flex-row sunset" ><img src="./assets/icons/sunset (1).png" alt="" class="sunset-img">
+                <div id="sunset">Wind speed: 6.2 km/h</div>
+              </div>
             </div>
+
           </div>
         </div>
       </div>
     </div>
-    <div class="future-forecast p-2 overflow-hidden text-white w-100 pb-5">
-      <div class="weather-forecast transition overflow-hidden " id="weather-forecast">
+  </div>
+  <div class="future-forecast p-2 overflow-hidden text-white w-100">
+    <div class="weather-forecast transition overflow-hidden " id="weather-forecast">
 
-        <div class="weather-forecast-item rounded text-center" id="weather-forecast-item">
-          <div>Mon</div>
-          <img src="http://openweathermap.org/img/wn/10d@2x.png" alt="weather icon">
-          <div>Night - 25.6&#176; C</div>
-          <div>Day - 35.6&#176; C</div>
-          <div>view more</div>
-        </div>
-
+      <div class="weather-forecast-item rounded text-center" id="weather-forecast-item">
+        <div>Mon</div>
+        <img src="http://openweathermap.org/img/wn/10d@2x.png" alt="weather icon">
+        <div>Night - 25.6&#176; C</div>
+        <div>Day - 35.6&#176; C</div>
+        <div>view more</div>
       </div>
+
     </div>
   </div>
 </body>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js"
   integrity="sha512-qTXRIMyZIFb8iQcfjXWCO8+M5Tbc38Qi5WzdPOYZHIlZpzBHG3L3by84BBBOiRGiEb7KKtAOAs5qYdUiZiQNNQ=="
-  crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+  crossorigin="anonymous" referrerpolicy="no-referrer">
+  </script>
 <script type="module" src="./assets/js/script.js"></script>
 
 </html>
