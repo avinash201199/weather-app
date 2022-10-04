@@ -11,7 +11,7 @@ body {
   background-size: cover;
   background-attachment: fixed;
   background-position: 50% 50%;
-  overflow-y: hidden;
+  overflow-y: scroll;
 }
 
 /* Card */
@@ -22,7 +22,7 @@ body {
   background: #000000d0;
   padding: 1em;
   width: 100%;
-  max-width: 420px;
+  max-width: 500px;
 }
 
 /* Search bar */
@@ -36,11 +36,12 @@ input.search-bar {
   border: none;
   outline: none;
   padding: 0.4em 1em;
-
   background: #7c7c7c2b;
   font-family: inherit;
   font-size: 105%;
   width: calc(100% - 100px);
+  color:white;
+  caret-color: white;
 }
 
 input.search-bar:focus {
@@ -97,13 +98,13 @@ button:focus {
 /* Forecast */
 .future-forecast{
   position: relative;
-  top: 4rem;
+  top: 2.5rem;
 }
 
 .weather-forecast{
   display: grid;
   grid-template-columns: auto auto auto auto auto auto;
-  grid-gap: 0.3rem;
+  grid-gap: 0.6rem;
 }
 
 .weather-forecast-item{
@@ -118,7 +119,56 @@ button:focus {
   opacity: 0.9;
   border: 1px solid white;
   cursor: pointer;
-} 
+}
+
+/* images and icons */
+.humidity-img{
+  width:20px;
+  height:20px;
+  margin: 0 10px 0 10px;
+}
+.wind-img{
+  width:25px;
+  height:25px;
+  margin:0 10px 0 10px;
+}
+.sunrise-img{
+  width:25px;
+  height:25px;
+  
+  margin:0 10px 0 0;
+}
+.sunset-img{
+  width:30px;
+  height:30px;
+
+  margin:0 10px 0 0px;
+}
+.city-name{
+text-align: center;
+font-size: 2.5rem;
+}
+.city-temperature{
+text-align: center;
+}
+
+.humidity{
+margin:10px;
+}
+.wind{
+  margin:10px;
+}
+.sunrise{
+  margin:10px;
+}
+.sunset{
+  margin:10px;
+}
+
+
+
+
+
 
 /* Responsive */
 
