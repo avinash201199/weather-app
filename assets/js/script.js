@@ -1,13 +1,8 @@
 import Capitals from "./Capitals.js";
 const AIR_KEY = "427f7ef80457a39a26407e17ef0d604339190901";
+
 function formatAMPM(date) {
-  var hours = date.getHours();
-  var minutes = date.getMinutes();
-  var ampm = hours >= 12 ? "PM" : "AM";
-  hours = hours % 12;
-  hours = hours ? hours : 12; // the hour '0' should be '12'
-  minutes = minutes < 10 ? "0" + minutes : minutes;
-  var strTime = `${hours}:${minutes} ${ampm}`;
+  let strTime = date.toLocaleString('en-US', { hour: 'numeric', minute : 'numeric', hour12: true });
   return strTime;
 }
 
@@ -189,7 +184,3 @@ document
   });
 
 weather.fetchWeather("Delhi");
-
-
-
-
