@@ -134,7 +134,7 @@ function generateWeatherItem(
   day.innerText = dayString;
 
   let icon = document.createElement("img");
-  icon.src = `http://openweathermap.org/img/wn/${iconName}.png`;
+  icon.src = `https://openweathermap.org/img/wn/${iconName}.png`;
 
   let nightTemp = document.createElement("div");
   nightTemp.innerHTML = `${nightTemperature}&#176;C`;
