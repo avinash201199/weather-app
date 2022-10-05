@@ -185,4 +185,19 @@ document
     }
   });
 
-weather.fetchWeather("Delhi");
+navigator.geolocation.getCurrentPosition(
+  (position) => {
+    const { latitude: lat, longitude: lng } = position.coords;
+
+    const city = fetch(
+      `https://geocode.xyz/${lat},${lng}?geoit=json&auth=${"358188419627352935843x53112"}`
+    )
+      .then((res) => res.json())
+      .then((data) => {
+        weather.fetchWeather(data.state);
+      });
+  },
+  (err) => {
+    weather.fetchWeather("Delhi");
+  }
+);
