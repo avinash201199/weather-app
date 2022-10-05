@@ -12,7 +12,6 @@ body {
   background-attachment: fixed;
   background-position: 50% 50%;
   overflow-y: scroll;   /* Scroll is required to see full info */
-
 }
 
 /* Card */
@@ -39,14 +38,13 @@ body {
 input.search-bar {
   border: none;
   outline: none;
-  padding: 0.4em 1.2em;
-  border-radius: 20px;
+  padding: 0.4em 1em;
   background: #7c7c7c2b;
   font-family: inherit;
   font-size: 105%;
-  width: calc(100% - 80px);
-  color: darkgray;
-  color: white;
+  width: calc(100% - 100px);
+  color:white;
+  caret-color: white;
 }
 
 
@@ -142,29 +140,78 @@ button:focus {
 /* Forecast */
 .future-forecast {
   position: relative;
-  top: 4rem;
+  top: 2.5rem;
 }
 
 .weather-forecast {
   display: grid;
-  grid-template-columns: auto auto auto auto;
-  grid-gap: 0.5rem;
+  grid-template-columns: auto auto auto auto auto auto;
+  grid-gap: 0.6rem;
 }
 
 .weather-forecast-item {
   border: 1px solid rgb(35, 35, 35);
   background: rgba(0, 0, 0, 0.8);
-
-  padding: 20px 0;
+  padding: 10px;
   transition: background-color 0.5s ease;
 }
 
 .weather-forecast-item:hover {
-  background-color: #898aa6db;
+  background-color: #898AA6;
   opacity: 0.9;
   border: 1px solid white;
   cursor: pointer;
 }
+
+
+/* images and icons  for wind-speed,sunrise,sunset,humidity*/
+.humidity-img{
+  width:20px;
+  height:20px;
+  margin: 0 10px 0 10px;
+}
+.wind-img{
+  width:25px;
+  height:25px;
+  margin:0 10px 0 10px;
+}
+.sunrise-img{
+  width:25px;
+  height:25px;
+  
+  margin:0 10px 0 0;
+}
+.sunset-img{
+  width:30px;
+  height:30px;
+
+  margin:0 10px 0 0px;
+}
+.city-name{
+text-align: center;
+font-size: 2.5rem;
+}
+.city-temperature{
+text-align: center;
+}
+
+.humidity{
+margin:10px;
+}
+.wind{
+  margin:10px;
+}
+.sunrise{
+  margin:10px;
+}
+.sunset{
+  margin:10px;
+}
+
+
+
+
+
 
 /* toast style */
 .center {
@@ -175,7 +222,6 @@ button:focus {
   visibility: hidden;
   min-width: 170px;
   background: #fafafacd;
-
   box-shadow: rgb(0 0 0 / 40%) 0px 3px 8px;
   color: black;
   text-align: center;
@@ -239,6 +285,7 @@ button:focus {
   font-size: 40px;
   color: #47d764;
 }
+
 
 /* Responsive */
 
