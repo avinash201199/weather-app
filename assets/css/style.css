@@ -25,6 +25,9 @@ body {
   max-width: 500px;
 }
 
+.search{
+  display:flex; justify-content:center;
+}
 .searchbar h1 {
 
   overflow: hidden;
