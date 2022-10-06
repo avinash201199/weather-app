@@ -26,6 +26,10 @@ body {
 }
 
 .searchbar h1 {
+<<<<<<< HEAD
+=======
+
+>>>>>>> b68eae13ba08dc451974af911bb8a95be05b65ac
   overflow: hidden;
   border-right: 1px solid;
   margin: 0 auto;
@@ -51,6 +55,13 @@ input.search-bar {
   color:white;
   caret-color: white;
   height:2.5em;
+}
+
+
+
+option:hover,
+.active {
+  background-color: lightblue;
 }
 
 
