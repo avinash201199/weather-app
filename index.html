@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+ 
 
 <head>
   <meta charset="UTF-8" />
@@ -14,12 +15,26 @@
   <link rel="stylesheet" href="./assets/css/bootstrap.min.css">
   <link rel="stylesheet" href="./assets/css/style.css">
 </head>
-
 <body id="body">
   <div class="container d-flex justify-content-center align-items-center flex-column">
     <div class="card text-white rounded">
       <div class="search">
+        <div class="d-flex justify-content-end align-content-center">
         <input type="text" class="search-bar" list="place" placeholder="Search" autocomplete="address-level2" />
+       <div class="d-flex justify-content-end align-content-center">
+          <button aria-label="click here to search class" class="text-white rounded-circl">
+            <svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 1024 1024" height="1.5em"
+              width="1.5em" xmlns="http://www.w3.org/2000/svg">
+              <path
+                d="M909.6 854.5L649.9 594.8C690.2 542.7 712 479 712 412c0-80.2-31.3-155.4-87.9-212.1-56.6-56.7-132-87.9-212.1-87.9s-155.5 31.3-212.1 87.9C143.2 256.5 112 331.8 112 412c0 80.1 31.3 155.5 87.9 212.1C256.5 680.8 331.8 712 412 712c67 0 130.6-21.8 182.7-62l259.7 259.6a8.2 8.2 0 0 0 11.6 0l43.6-43.5a8.2 8.2 0 0 0 0-11.6zM570.4 570.4C528 612.7 471.8 636 412 636s-116-23.3-158.4-65.6C211.3 528 188 471.8 188 412s23.3-116.1 65.6-158.4C296 211.3 352.2 188 412 188s116.1 23.2 158.4 65.6S636 352.2 636 412s-23.3 116.1-65.6 158.4z">
+              </path>
+            </svg>
+          </button>
+        </div>
+         </div>
+         
+
+      
         <datalist id="place">
           <option value="Adilabad">Adilabad</option>
           <option value="Agra">Agra</option>
@@ -660,27 +675,23 @@
           <option value="Yavatmal">Yavatmal</option>
           <option value="Zunheboto">Zunheboto</option>
         </datalist>
-        <button aria-label="click here to search clas" class="text-white rounded-circl">
-          <svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 1024 1024" height="1.5em"
-            width="1.5em" xmlns="http://www.w3.org/2000/svg">
-            <path
-              d="M909.6 854.5L649.9 594.8C690.2 542.7 712 479 712 412c0-80.2-31.3-155.4-87.9-212.1-56.6-56.7-132-87.9-212.1-87.9s-155.5 31.3-212.1 87.9C143.2 256.5 112 331.8 112 412c0 80.1 31.3 155.5 87.9 212.1C256.5 680.8 331.8 712 412 712c67 0 130.6-21.8 182.7-62l259.7 259.6a8.2 8.2 0 0 0 11.6 0l43.6-43.5a8.2 8.2 0 0 0 0-11.6zM570.4 570.4C528 612.7 471.8 636 412 636s-116-23.3-158.4-65.6C211.3 528 188 471.8 188 412s23.3-116.1 65.6-158.4C296 211.3 352.2 188 412 188s116.1 23.2 158.4 65.6S636 352.2 636 412s-23.3 116.1-65.6 158.4z">
-            </path>
-          </svg>
-        </button>
+        
       </div>
       <div id="weather" class="weather loading">
+
         <h1 id="city" class="city-name">Weather in ___</h1>
         <h2 id="temp" class="city-temperature">32°C</h2>
+
         <div>
-          <div class="d-flex flex-1 justify-content-around align-items-center">
-            <img src="https://openweathermap.org/img/wn/04n.png" alt="" id="icon" />
-            <div class="text-uppercase text-wrap" id="description">___</div>
-            <div class="d-flex flex-1 justify-content-around align-items-center">
-              <p id="AirQuality">Air Quality:75</p>
-              <p class="ml-0">(Satisfactory)</p>
+          <div class="weather-desc">
+            <div class="weather-icn">
+              <img src="https://openweathermap.org/img/wn/04n.png" alt="" id="icon" />
+              <div class="text-uppercase text-wrap" id="description">___</div>
             </div>
+            <div id="AirQuality">Air Quality:75</div>
+            <div class="ml-0">(Satisfactory)</div>
           </div>
+
           <div class="d-flex">
             <div class="d-flex flex-1 flex-column">
               <div class="d-flex flex-1 flex-row humidity" > <img src="./assets/icons/humidity.png" alt="" class="humidity-img">
@@ -694,37 +705,49 @@
             <div class="d-flex flex-1 flex-column">
 
               <div class="d-flex flex-1 flex-row sunrise"> <img src="./assets/icons/sunrise (2).png" alt="" class="sunrise-img">
-                <div id="sunrise">sunrise</div>
+                <div id="sunrise">sunrise:5:00AM</div>
               </div>
 
               <div class="d-flex flex-1 flex-row sunset" ><img src="./assets/icons/sunset (1).png" alt="" class="sunset-img">
-                <div id="sunset">Wind speed: 6.2 km/h</div>
+                <div id="sunset">Sunset:6:00AM</div>
+
               </div>
             </div>
 
           </div>
         </div>
       </div>
+
     </div>
   </div>
   <div class="future-forecast p-2 overflow-hidden text-white w-100">
     <div class="weather-forecast transition overflow-hidden " id="weather-forecast">
-
       <div class="weather-forecast-item rounded text-center" id="weather-forecast-item">
         <div>Mon</div>
         <img src="http://openweathermap.org/img/wn/10d@2x.png" alt="weather icon">
         <div>Night - 25.6&#176; C</div>
         <div>Day - 35.6&#176; C</div>
         <div>view more</div>
+        </div>
+        </div>
+
       </div>
 
     </div>
+
   </div>
-</body>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js"
-  integrity="sha512-qTXRIMyZIFb8iQcfjXWCO8+M5Tbc38Qi5WzdPOYZHIlZpzBHG3L3by84BBBOiRGiEb7KKtAOAs5qYdUiZiQNNQ=="
-  crossorigin="anonymous" referrerpolicy="no-referrer">
-  </script>
-<script type="module" src="./assets/js/script.js"></script>
+
+
+
+    <!-- toast -->
+    <div id="toast">
+      <div class="checkicon"><i class="fas fa-check-square"></i></div>
+    </div>
+  </body>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js"
+    integrity="sha512-qTXRIMyZIFb8iQcfjXWCO8+M5Tbc38Qi5WzdPOYZHIlZpzBHG3L3by84BBBOiRGiEb7KKtAOAs5qYdUiZiQNNQ=="
+    crossorigin="anonymous" referrerpolicy="no-referrer">
+    </script>
+  <script type="module" src="./assets/js/script.js"></script>
 
 </html>
