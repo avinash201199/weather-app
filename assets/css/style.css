@@ -60,6 +60,13 @@ option:hover,
   background-color: lightblue;
 }
 
+
+
+option:hover,
+.active {
+  background-color: lightblue;
+}
+
 input.search-bar:focus {
   transition: 700ms;
   box-shadow: 0px 0px 10px rgb(255 255 255 / 50%);

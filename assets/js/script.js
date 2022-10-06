@@ -1,13 +1,8 @@
 import Capitals from "./Capitals.js";
 const AIR_KEY = "427f7ef80457a39a26407e17ef0d604339190901";
+
 function formatAMPM(date) {
-  var hours = date.getHours();
-  var minutes = date.getMinutes();
-  var ampm = hours >= 12 ? "PM" : "AM";
-  hours = hours % 12;
-  hours = hours ? hours : 12; // the hour '0' should be '12'
-  minutes = minutes < 10 ? "0" + minutes : minutes;
-  var strTime = `${hours}:${minutes} ${ampm}`;
+  let strTime = date.toLocaleString('en-US', { hour: 'numeric', minute : 'numeric', hour12: true });
   return strTime;
 }
 
@@ -16,31 +11,24 @@ const AirQuality = (log, lat) => {
     .then((res) => res.json())
     .then((res) => {
       let aqi = res.data.aqi;
-      document.querySelector(
-        "#AirQuality"
-      ).innerText = `Air Quality:${aqi}`;
+      document.querySelector("#AirQuality").innerText = `Air Quality:${aqi}`;
       if (aqi >= 0 && aqi <= 50) {
         document.querySelector(".ml-0").innerText = "(Good)";
       }
       if (aqi > 50 && aqi <= 100) {
-        document.querySelector(".ml-0").innerText =
-          "(Satisfactory)";
+        document.querySelector(".ml-0").innerText = "(Satisfactory)";
       }
       if (aqi > 100 && aqi <= 150) {
-        document.querySelector(".ml-0").innerText =
-          "(Sensitive)";
+        document.querySelector(".ml-0").innerText = "(Sensitive)";
       }
       if (aqi > 150 && aqi <= 200) {
-        document.querySelector(".ml-0").innerText =
-          "(Unhealthy)";
+        document.querySelector(".ml-0").innerText = "(Unhealthy)";
       }
       if (aqi > 200 && aqi <= 300) {
-        document.querySelector(".ml-0").innerText =
-          "(Very Unhealthy)";
+        document.querySelector(".ml-0").innerText = "(Very Unhealthy)";
       }
       if (aqi > 300) {
-        document.querySelector(".ml-0").innerText =
-          "(Hazardous)";
+        document.querySelector(".ml-0").innerText = "(Hazardous)";
       }
     });
 };
@@ -48,17 +36,17 @@ const AirQuality = (log, lat) => {
 let weather = {
   apiKey: "20a36f8e1152244bbbd9ac296d3640f2",
   fetchWeather: function (city) {
-    let isCountry=false;
+    let isCountry = false;
     let index;
-    for(let i=0;i<Capitals.length;i++){
-      if(Capitals[i].country.toUpperCase()==city.toUpperCase()){
-        isCountry=true;
-        index=i;
+    for (let i = 0; i < Capitals.length; i++) {
+      if (Capitals[i].country.toUpperCase() == city.toUpperCase()) {
+        isCountry = true;
+        index = i;
         break;
       }
     }
-    if(isCountry){
-      city=Capitals[index].city;
+    if (isCountry) {
+      city = Capitals[index].city;
     }
     fetch(
       "https://api.openweathermap.org/data/2.5/weather?q=" +
@@ -68,7 +56,7 @@ let weather = {
     )
       .then((response) => {
         if (!response.ok) {
-          alert("No weather found.");
+          toastFunction("No weather found.");
           throw new Error("No weather found.");
         }
         return response.json();
@@ -120,7 +108,7 @@ let weather = {
     if (document.querySelector(".search-bar").value != "") {
       this.fetchWeather(document.querySelector(".search-bar").value);
     } else {
-      window.alert("Please add a location");
+      toastFunction("Please add a location.");
     }
   },
 };
@@ -146,7 +134,7 @@ function generateWeatherItem(
   day.innerText = dayString;
 
   let icon = document.createElement("img");
-  icon.src = `http://openweathermap.org/img/wn/${iconName}.png`;
+  icon.src = `https://openweathermap.org/img/wn/${iconName}.png`;
 
   let nightTemp = document.createElement("div");
   nightTemp.innerHTML = `${nightTemperature}&#176;C`;
@@ -175,7 +163,16 @@ function showWeatherData(data) {
     container.appendChild(element);
   });
 }
-
+//toast function
+function toastFunction(val) {
+  var x = document.getElementById("toast");
+  x.className = "show";
+  //change inner text
+  document.getElementById("toast").innerText = val;
+  setTimeout(function () {
+    x.className = x.className.replace("show", "");
+  }, 3000);
+}
 document.querySelector(".search button").addEventListener("click", function () {
   weather.search();
 });
@@ -189,7 +186,3 @@ document
   });
 
 weather.fetchWeather("Delhi");
-
-
-
-
