@@ -175,9 +175,11 @@ button:focus {
 }
 
 .weather-forecast-item:hover {
-  background-color: #898AA6;
-  opacity: 0.9;
+  backdrop-filter: blur(16px) saturate(180%);
+  -webkit-backdrop-filter: blur(16px) saturate(180%);
+  background-color: rgba(69, 66, 66, 0.75);
   border: 1px solid white;
+  border-radius: 12px;
   cursor: pointer;
 }
 
