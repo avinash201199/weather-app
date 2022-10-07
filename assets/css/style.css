@@ -25,18 +25,19 @@ body {
   max-width: 500px;
 }
 
-.search{
-  display:flex; justify-content:center;
-}
 .searchbar h1 {
-
-  overflow: hidden;
   border-right: 1px solid;
   margin: 0 auto;
   position: relative;
   animation: reza 4s steps(30, end);
   animation-iteration-count: infinite;
 }
+
+.search {
+  margin-top: 15px;
+}
+
+
 
 input.search-bar {
   border: none;
@@ -48,16 +49,16 @@ input.search-bar {
   width: calc(100% - 100px);
   color: white;
   caret-color: white;
+  height: 2.5em;
 }
 
-.search {
-  display: flex;
-  justify-content: center;
+
+
+option:hover,
+.active {
+  background-color: lightblue;
 }
 
-.search-bar{
-  border-radius: 30px;
-}
 
 
 option:hover,
@@ -69,11 +70,10 @@ input.search-bar:focus {
   transition: 700ms;
   box-shadow: 0px 0px 10px rgb(255 255 255 / 50%);
   border-radius: 0;
-  border-radius: 30px;
 }
 
 button {
-  margin: 0.5em;
+  margin: 0 0.5em;
   border-radius: 50%;
   border: none;
   height: 40px;
@@ -94,11 +94,6 @@ button:focus {
 
 /* weather section */
 
-.AQI{
-  width: max-content;
-  display: flex;
-  flex-direction: row;
-}
 
 #temp {
   margin-top: 15px;
@@ -164,7 +159,6 @@ button:focus {
   display: grid;
   grid-template-columns: auto auto auto auto auto auto;
   grid-gap: 0.6rem;
-  align-items: center;
 }
 
 .weather-forecast-item {
