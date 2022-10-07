@@ -2,7 +2,11 @@ import Capitals from "./Capitals.js";
 const AIR_KEY = "427f7ef80457a39a26407e17ef0d604339190901";
 
 function formatAMPM(date) {
-  let strTime = date.toLocaleString('en-US', { hour: 'numeric', minute : 'numeric', hour12: true });
+  let strTime = date.toLocaleString("en-US", {
+    hour: "numeric",
+    minute: "numeric",
+    hour12: true,
+  });
   return strTime;
 }
 
@@ -185,4 +189,16 @@ document
     }
   });
 
-weather.fetchWeather("Delhi");
+// identify the user's location without asking for permission
+// using the ipinfo.io API
+
+fetch("http://ip-api.com/json")
+  .then((response) => response.json())
+  .then((data) => {
+    console.log(data);
+    // get the user's city
+    let city = data.city;
+
+    // set the user's location
+    weather.fetchWeather(city);
+  });
