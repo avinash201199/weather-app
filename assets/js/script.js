@@ -1,4 +1,6 @@
 import Capitals from "./Capitals.js";
+import languages from "../../lang/translation.js";
+var userLang = navigator.language || navigator.userLanguage;
 const AIR_KEY = "427f7ef80457a39a26407e17ef0d604339190901";
 
 const place = document.querySelector("#place");
@@ -19,24 +21,24 @@ const AirQuality = (log, lat) => {
     .then((res) => res.json())
     .then((res) => {
       let aqi = res.data.aqi;
-      document.querySelector("#AirQuality").innerText = `Air Quality:${aqi}`;
+      document.querySelector("#AirQuality").innerText = `${languages[userLang].airQuality}:${aqi}`;
       if (aqi >= 0 && aqi <= 50) {
-        document.querySelector(".ml-0").innerText = "(Good)";
+        document.querySelector(".ml-0").innerText = `(${languages[userLang].good})`;
       }
       if (aqi > 50 && aqi <= 100) {
-        document.querySelector(".ml-0").innerText = "(Satisfactory)";
+        document.querySelector(".ml-0").innerText = `(${languages[userLang].satisfactory})`;
       }
       if (aqi > 100 && aqi <= 150) {
-        document.querySelector(".ml-0").innerText = "(Sensitive)";
+        document.querySelector(".ml-0").innerText = `(${languages[userLang].sensitive})`;
       }
       if (aqi > 150 && aqi <= 200) {
-        document.querySelector(".ml-0").innerText = "(Unhealthy)";
+        document.querySelector(".ml-0").innerText = `(${languages[userLang].unhealthy})`;
       }
       if (aqi > 200 && aqi <= 300) {
-        document.querySelector(".ml-0").innerText = "(Very Unhealthy)";
+        document.querySelector(".ml-0").innerText = `(${languages[userLang].veryUnhealthy})`;
       }
       if (aqi > 300) {
-        document.querySelector(".ml-0").innerText = "(Hazardous)";
+        document.querySelector(".ml-0").innerText = `(${languages[userLang].hazardous})`;
       }
     });
 };
@@ -60,12 +62,13 @@ let weather = {
       "https://api.openweathermap.org/data/2.5/weather?q=" +
         city +
         "&units=metric&appid=" +
-        this.apiKey
+        this.apiKey + 
+        `&lang=${languages[userLang].apiLang}`
     )
       .then((response) => {
         if (!response.ok) {
-          toastFunction("No weather found.");
-          throw new Error("No weather found.");
+          toastFunction(`${languages[userLang].noWeatherFound}`);
+          throw new Error(`${languages[userLang].noWeatherFound}`);
         }
         return response.json();
       })
@@ -85,7 +88,7 @@ let weather = {
     const { lat, lon } = data.coord;
     const airIndex = AirQuality(lon, lat);
 
-    document.getElementById("city").innerText = "Weather in " + name;
+    document.getElementById("city").innerText = `${languages[userLang].weatherIn} ` + name;
 
     document.getElementById(
       "icon"
@@ -95,17 +98,17 @@ let weather = {
 
     document.getElementById("temp").innerText = temp + "°C";
 
-    document.getElementById("humidity").innerText = `Humidity: ${humidity}%`;
+    document.getElementById("humidity").innerText = `${languages[userLang].humidity}: ${humidity}%`;
 
-    document.getElementById("wind").innerText = `Wind speed: ${speed}km/h`;
+    document.getElementById("wind").innerText = `${languages[userLang].windSpeed}: ${speed}km/h`;
 
     document.getElementById("weather").classList.remove("loading");
 
-    document.getElementById("sunrise").innerText = `Sunrise: ${formatAMPM(
+    document.getElementById("sunrise").innerText = `${languages[userLang].sunrise}: ${formatAMPM(
       date1
     )}`;
 
-    document.getElementById("sunset").innerText = `Sunset: ${formatAMPM(
+    document.getElementById("sunset").innerText = `${languages[userLang].sunset}: ${formatAMPM(
       date2
     )}`;
 
@@ -116,7 +119,7 @@ let weather = {
     if (document.querySelector(".search-bar").value != "") {
       this.fetchWeather(document.querySelector(".search-bar").value);
     } else {
-      toastFunction("Please add a location.");
+      toastFunction(languages[userLang].pleaseAddLocation);
     }
   },
 };
@@ -163,7 +166,7 @@ function showWeatherData(data) {
   data.daily.forEach((day, idx) => {
     let dayString = window.moment(day.dt * 1000).format("dddd");
     let element = generateWeatherItem(
-      dayString,
+      languages[userLang][dayString.toLowerCase()],
       day.weather[0].icon,
       day.temp.night,
       day.temp.day
@@ -199,3 +202,5 @@ fetch("https://ipapi.co/json/")
   .then((data) => {
     weather.fetchWeather(data.city);
   });
+
+document.getElementsByName("search-bar")[0].placeholder = languages[userLang].search
