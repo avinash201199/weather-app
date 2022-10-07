@@ -1,6 +1,7 @@
 import Capitals from "./Capitals.js";
 import languages from "../../lang/translation.js";
-var userLang = navigator.language || navigator.userLanguage;
+var userLang
+Object.keys(languages).includes(navigator.language) === true ? userLang = navigator.language : userLang = "en-US"
 const AIR_KEY = "427f7ef80457a39a26407e17ef0d604339190901";
 
 const place = document.querySelector("#place");
