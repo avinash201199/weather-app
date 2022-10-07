@@ -204,4 +204,4 @@ fetch("https://ipapi.co/json/")
     weather.fetchWeather(data.city);
   });
 
-document.getElementsByName("search-bar")[0].placeholder = languages[userLang].search
+document.getElementsByName("search-bar")[0].placeholder = languages[userLang].search;
