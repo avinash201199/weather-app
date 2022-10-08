@@ -119,6 +119,8 @@ let weather = {
   search: function () {
     if (document.querySelector(".search-bar").value != "") {
       this.fetchWeather(document.querySelector(".search-bar").value);
+      document.querySelector(".search-bar").value = "";
+      console.log(document.querySelector(".search-bar").value)
     } else {
       toastFunction("Please add a location.");
     }
@@ -211,7 +213,7 @@ document
       weather.search();
     }
   });
-  
+
 // get user city name via ip api
 // identify the user's location without asking for permission
 // using the ipinfo.io API
