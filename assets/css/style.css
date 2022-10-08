@@ -23,19 +23,14 @@ body {
   padding: 1em;
   width: 100%;
   max-width: 500px;
+  height: 110px;
 }
 
 .search{
   display:flex; justify-content:center;
 }
 .searchbar h1 {
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
 
->>>>>>> b68eae13ba08dc451974af911bb8a95be05b65ac
-=======
->>>>>>> 776f7c36b0e1d6f414aa4b3d55a4e8c8650a29e3
   overflow: hidden;
   border-right: 1px solid;
   margin: 0 auto;
@@ -234,10 +229,13 @@ button:focus {
 .city-name {
   text-align: center;
   font-size: 2.5rem;
+  margin-top: 20px;
+ color:white;
 }
 
 .city-temperature {
   text-align: center;
+  color:white;
 }
 
 .humidity {
@@ -256,7 +254,14 @@ button:focus {
   margin: 10px;
 }
 
-
+/* weater-data */
+.weather-data{
+  color: rgb(0,0,0);
+  font-weight: bold;
+  border-radius: 3px;
+  background-color: rgba(255, 255,255,0.1);
+  backdrop-filter: blur(100px);
+}
 
 
 
@@ -264,6 +269,7 @@ button:focus {
 /* toast style */
 .center {
   text-align: center;
+  mix-blend-mode: difference;
 }
 
 #toast {
@@ -384,7 +390,7 @@ button:focus {
   }
 }
 
-/* Custom Scrool Bar */
+/* Custom Scroll Bar */
 
 ::-webkit-scrollbar-track {
   -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
