@@ -24,9 +24,13 @@ export default {
     thursday: "Thursday",
     friday: "Friday",
     saturday: "Saturday",
+<<<<<<< HEAD
     sunday: "Sunday",
     day: "Day",
     night: "Night"
+=======
+    sunday: "Sunday"
+>>>>>>> ab4ba7ee779bb84143dd1f01f8bd1bf5216cd3a2
   },
   "pt-BR": {
     apiLang: "pt_br",
@@ -51,8 +55,12 @@ export default {
     thursday: "Quinta-feira",
     friday: "Sexta-feira",
     saturday: "Sábado",
+<<<<<<< HEAD
     sunday: "Domingo",
     day: "Dia",
     night: "Noite"
+=======
+    sunday: "Domingo"
+>>>>>>> ab4ba7ee779bb84143dd1f01f8bd1bf5216cd3a2
   }
 }

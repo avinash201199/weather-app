@@ -223,6 +223,7 @@ document
 fetch("http://ip-api.com/json")
   .then((response) => response.json())
   .then((data) => {
+<<<<<<< HEAD
     console.log(data);
     // get the user's city
     let city = data.city;
@@ -232,3 +233,9 @@ fetch("http://ip-api.com/json")
   });
 
 document.getElementsByName("search-bar")[0].placeholder = languages[userLang].search
+=======
+    weather.fetchWeather(data.city);
+  });
+
+document.getElementsByName("search-bar")[0].placeholder = languages[userLang].search;
+>>>>>>> ab4ba7ee779bb84143dd1f01f8bd1bf5216cd3a2
