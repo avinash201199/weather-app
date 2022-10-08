@@ -140,20 +140,35 @@ function generateWeatherItem(
 
   let day = document.createElement("div");
   day.innerText = dayString;
+  day.style.color="#00dcff"
+  day.style.fontFamily="cursive"
+  day.style.fontWeight="bolder"
+  day.style.textTransform="uppercase"
+  day.style.fontSize="20px"
 
   let icon = document.createElement("img");
   icon.src = `https://openweathermap.org/img/wn/${iconName}.png`;
 
-  let nightTemp = document.createElement("div");
-  nightTemp.innerHTML = `${nightTemperature}&#176;C`;
 
   let dayTemp = document.createElement("div");
-  dayTemp.innerHTML = `${dayTemperature}&#176;C`;
+  dayTemp.innerHTML = "DAY \t"+`${dayTemperature}&#176;C`;
+  dayTemp.style.fontFamily="cursive"
+  dayTemp.style.fontWeight="bolder"
+  dayTemp.style.textTransform="uppercase"
 
+  let nightTemp = document.createElement("div");
+  nightTemp.innerHTML = "NIGHT \t"+`${nightTemperature}&#176;C`;
+  nightTemp.style.color="#00dcff"
+  nightTemp.style.fontFamily="cursive"
+  nightTemp.style.fontWeight="bolder"
+  nightTemp.style.textTransform="uppercase"
+
+
+  
   container.appendChild(day);
   container.appendChild(icon);
-  container.appendChild(nightTemp);
   container.appendChild(dayTemp);
+  container.appendChild(nightTemp);
   return container;
 }
 
