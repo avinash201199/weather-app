@@ -10,7 +10,11 @@ for(var i in CITY){
   place.appendChild(option);
 }
 function formatAMPM(date) {
-  let strTime = date.toLocaleString('en-US', { hour: 'numeric', minute : 'numeric', hour12: true });
+  let strTime = date.toLocaleString("en-US", {
+    hour: "numeric",
+    minute: "numeric",
+    hour12: true,
+  });
   return strTime;
 }
 
@@ -207,10 +211,18 @@ document
       weather.search();
     }
   });
+  
 // get user city name via ip api
+// identify the user's location without asking for permission
+// using the ipinfo.io API
 
-fetch("https://ipapi.co/json/")
+fetch("http://ip-api.com/json")
   .then((response) => response.json())
   .then((data) => {
-    weather.fetchWeather(data.city);
+    console.log(data);
+    // get the user's city
+    let city = data.city;
+
+    // set the user's location
+    weather.fetchWeather(city);
   });
