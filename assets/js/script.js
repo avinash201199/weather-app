@@ -1,6 +1,6 @@
 import Capitals from "./Capitals.js";
-const AIR_KEY = "427f7ef80457a39a26407e17ef0d604339190901";
 import languages from "../../lang/translation.js";
+import config from './../../config/config.js'
 var userLang;
 Object.keys(languages).includes(navigator.language) === true ? userLang = navigator.language : userLang = "en-US";
 
@@ -18,7 +18,7 @@ function formatAMPM(date) {
 }
 
 const AirQuality = (log, lat) => {
-  fetch(`https://api.waqi.info/feed/geo:${lat};${log}/?token=${AIR_KEY}`)
+  fetch(`https://api.waqi.info/feed/geo:${lat};${log}/?token=${config.AIR_KEY}`)
     .then((res) => res.json())
     .then((res) => {
       let aqi = res.data.aqi;
@@ -45,7 +45,6 @@ const AirQuality = (log, lat) => {
 };
 
 let weather = {
-  apiKey: "20a36f8e1152244bbbd9ac296d3640f2",
   fetchWeather: function (city) {
     let isCountry = false;
     let index;
@@ -63,7 +62,7 @@ let weather = {
       "https://api.openweathermap.org/data/2.5/weather?q=" +
         city +
         "&units=metric&appid=" +
-        this.apiKey +
+        config.API_KEY +
         `&lang=${languages[userLang].apiLang}`
     )
       .then((response) => {
@@ -113,7 +112,7 @@ let weather = {
       date2
     )}`;
 
-    let url = `https://api.openweathermap.org/data/2.5/onecall?lat=${lat}&lon=${lon}&units=metric&appid=${this.apiKey}`;
+    let url = `https://api.openweathermap.org/data/2.5/onecall?lat=${lat}&lon=${lon}&units=metric&appid=${config.API_KEY}`;
     getWeatherWeekly(url);
   },
   search: function () {
