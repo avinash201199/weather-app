@@ -11,7 +11,19 @@ body {
   background-attachment: fixed;
   background-position: 50% 50%;
   overflow-y: scroll;
+  z-index: 1;
   /* Scroll is required to see full info */
+}
+
+/* Hide scrollbar for Chrome, Safari and Opera */
+body::-webkit-scrollbar{
+  display: none;
+}
+
+/* Hide scrollbar for IE, Edge and Firefox */
+body{
+  -ms-overflow-style: none;  /* IE and Edge */
+  scrollbar-width: none;  /* Firefox */
 }
 
 /* Card */
@@ -367,7 +379,7 @@ button:focus {
 /* Custom Scrool Bar */
 
 ::-webkit-scrollbar-track {
-  -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+  /* -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3); */
   border-radius: 10px;
   background-color: #645d5d2c;
 }
@@ -379,6 +391,58 @@ button:focus {
 
 ::-webkit-scrollbar-thumb {
   border-radius: 10px;
-  -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, .3);
+  /* -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, .3); */
   background-color: #222;
+}
+
+
+.checkbox {
+  opacity: 0;
+  position: absolute;
+  z-index: 10;
+  height: 2rem;
+  width: 4rem;
+  cursor: pointer;
+}
+
+.label {
+  width: 48px;
+  height: 24px;
+  background-color: #111;
+  display: flex;
+  border-radius: 50px;
+  align-items: center;
+  justify-content: space-between;
+  padding: 5px;
+  position: relative;
+  transform: scale(1);
+}
+
+.ball {
+  width: 20px;
+  height: 20px;
+  background-color: white;
+  position: absolute;
+  top: 2px;
+  left: 2px;
+  border-radius: 50%;
+  transition: transform 0.2s linear;
+}
+
+.checkbox:checked + .label .ball {
+  transform: translateX(24px);
+}
+
+.celcius{
+  color: white;
+  font-size: 15px;
+}
+
+.farenheit {
+  color: white;
+  font-size: 15px;
+}
+
+.navbar{
+  height: 0px;
 }
