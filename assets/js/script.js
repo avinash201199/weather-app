@@ -112,6 +112,9 @@ let weather = {
     let url = `https://api.openweathermap.org/data/2.5/onecall?lat=${lat}&lon=${lon}&units=metric&appid=${this.apiKey}`;
     getWeatherWeekly(url);
   },
+
+
+
   search: function () {
     if (document.querySelector(".search-bar").value != "") {
       this.fetchWeather(document.querySelector(".search-bar").value);
