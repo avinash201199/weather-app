@@ -23,7 +23,6 @@ body {
   padding: 1em;
   width: 100%;
   max-width: 500px;
-  height: 110px;
 }
 
 .search{
@@ -39,12 +38,6 @@ body {
   animation-iteration-count: infinite;
 }
 
-.search{
-  margin-top: 15px;
-}
-
-
-
 input.search-bar {
   border: none;
   outline: none;
@@ -55,14 +48,6 @@ input.search-bar {
   width: calc(100% - 100px);
   color: white;
   caret-color: white;
-  height:2.5em;
-}
-
-
-
-option:hover,
-.active {
-  background-color: lightblue;
 }
 
 .search {
@@ -88,7 +73,7 @@ input.search-bar:focus {
 }
 
 button {
-  margin: 0 0.5em;
+  margin: 0.5em;
   border-radius: 50%;
   border: none;
   height: 40px;
@@ -229,13 +214,10 @@ button:focus {
 .city-name {
   text-align: center;
   font-size: 2.5rem;
-  margin-top: 20px;
- color:white;
 }
 
 .city-temperature {
   text-align: center;
-  color:white;
 }
 
 .humidity {
@@ -254,14 +236,7 @@ button:focus {
   margin: 10px;
 }
 
-/* weater-data */
-.weather-data{
-  color: rgb(0,0,0);
-  font-weight: bold;
-  border-radius: 3px;
-  background-color: rgba(255, 255,255,0.1); 
-  backdrop-filter: blur(100px);
-}
+
 
 
 
@@ -269,7 +244,6 @@ button:focus {
 /* toast style */
 .center {
   text-align: center;
-  mix-blend-mode: difference;
 }
 
 #toast {
@@ -390,7 +364,7 @@ button:focus {
   }
 }
 
-/* Custom Scroll Bar */
+/* Custom Scrool Bar */
 
 ::-webkit-scrollbar-track {
   -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
