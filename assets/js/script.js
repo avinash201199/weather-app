@@ -103,7 +103,7 @@ let weather = {
 
     document.getElementById("wind").innerText = `Wind speed: ${speed}km/h`;
 
-    document.getElementById("weather").classList.remove("loading");
+    document.getElementById("load").style.visibility= "hidden";
 
     document.getElementById("sunrise").innerText = `Sunrise: ${formatAMPM(
       date1
@@ -118,6 +118,7 @@ let weather = {
   },
   search: function () {
     if (document.querySelector(".search-bar").value != "") {
+      document.getElementById("load").style.visibility= "visible";
       this.fetchWeather(document.querySelector(".search-bar").value);
     } else {
       toastFunction("Please add a location.");

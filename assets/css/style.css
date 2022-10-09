@@ -131,17 +131,14 @@ button:focus {
 }
 
 .loading {
-  visibility: hidden;
-  max-height: 20px;
-  position: relative;
-}
-
-.loading:after {
-  visibility: visible;
-  content: "Loading...";
+  height: 100%;
+  width: 100%;
+  background: #000;
+  text-align: center;
+  color: #fff;
+  padding-top: 15%;
   position: absolute;
-  top: 0;
-  left: 20px;
+  z-index: 100;
 }
 
 /* Global Styles */

@@ -14,10 +14,15 @@
   <link rel="shortcut icon" type="image/jpg" href="./assets/weather-icon.png" />
   <link rel="stylesheet" href="./assets/css/bootstrap.min.css">
   <link rel="stylesheet" href="./assets/css/style.css">
+  <link rel="stylesheet" href="./assets/css/loader.css">
   <link rel="icon" href="assets/favicon.ico">
 </head>
 
 <body id="body">
+  <div id="load" class="loading">
+    <span class="loader"></span>
+    <h2>Fetching weather from the GODS !!</h2>
+  </div>
   <div class="container d-flex justify-content-center align-items-center flex-column">
     <div class="card text-white rounded">
       <div class="search"  >
@@ -34,7 +39,7 @@
           </svg>
         </button>
       </div>
-      <div id="weather" class="weather loading">
+      <div id="weather" class="weather">
 
         <h1 id="city" class="city-name fw-bold">Weather in ___</h1>
         <h2 id="temp" class="city-temperature fw-bold display-1">32°C</h2>
