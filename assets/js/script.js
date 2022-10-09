@@ -118,6 +118,7 @@ let weather = {
   search: function () {
     if (document.querySelector(".search-bar").value != "") {
       this.fetchWeather(document.querySelector(".search-bar").value);
+      document.querySelector(".search-bar").value = "";
     } else {
       toastFunction(languages[userLang].pleaseAddLocation);
     }
@@ -210,6 +211,8 @@ document
       weather.search();
     }
   });
+
+
 // get user city name via ip api
 
 fetch("https://ipapi.co/json/")
