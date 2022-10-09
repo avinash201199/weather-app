@@ -120,7 +120,6 @@ let weather = {
     if (document.querySelector(".search-bar").value != "") {
       this.fetchWeather(document.querySelector(".search-bar").value);
       document.querySelector(".search-bar").value = "";
-      console.log(document.querySelector(".search-bar").value)
     } else {
       toastFunction("Please add a location.");
     }
