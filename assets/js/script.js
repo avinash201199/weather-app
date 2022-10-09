@@ -11,11 +11,7 @@ for (var i in CITY) {
   place.appendChild(option);
 }
 function formatAMPM(date) {
-  let strTime = date.toLocaleString("en-US", {
-    hour: "numeric",
-    minute: "numeric",
-    hour12: true,
-  });
+  let strTime = date.toLocaleString('en-US', { hour: 'numeric', minute : 'numeric', hour12: true });
   return strTime;
 }
 
@@ -216,12 +212,11 @@ document
   });
 
 // get user city name via ip api
-// identify the user's location without asking for permission
-// using the ipinfo.io API
 
-fetch("http://ip-api.com/json")
+fetch("https://ipapi.co/json/")
   .then((response) => response.json())
   .then((data) => {
+
     console.log(data);
     // get the user's city
     let city = data.city;
@@ -250,3 +245,4 @@ function showCurrDay(dayString, dateString, element) {
       "rgba(0, 0, 0, 0.8)";
   }
 }
+
