@@ -230,6 +230,7 @@ fetch("http://ip-api.com/json")
     weather.fetchWeather(city);
   });
 
+// SHOWS CURRENT DAY IN THE RENDERED DAYS
 function showCurrDay(dayString, dateString, element) {
   const days = [
     "Sunday",
