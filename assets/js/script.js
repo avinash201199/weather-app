@@ -151,13 +151,13 @@ function generateWeatherItem(
 
 
   let dayTemp = document.createElement("div");
-  dayTemp.innerHTML = "DAY \t"+`${dayTemperature}&#176;C`;
+  dayTemp.innerHTML = "🌞 \t"+`${dayTemperature}&#176;C`;
   dayTemp.style.fontFamily="cursive"
   dayTemp.style.fontWeight="bolder"
   dayTemp.style.textTransform="uppercase"
 
   let nightTemp = document.createElement("div");
-  nightTemp.innerHTML = "NIGHT \t"+`${nightTemperature}&#176;C`;
+  nightTemp.innerHTML = "🌜 \t"+`${nightTemperature}&#176;C`;
   nightTemp.style.color="#00dcff"
   nightTemp.style.fontFamily="cursive"
   nightTemp.style.fontWeight="bolder"
