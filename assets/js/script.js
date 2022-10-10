@@ -1,6 +1,7 @@
 import Capitals from "./Capitals.js";
 import languages from "../../lang/translation.js";
 import config from './../../config/config.js'
+import notify from "./notification.js";
 var userLang;
 Object.keys(languages).includes(navigator.language) === true ? userLang = navigator.language : userLang = "en-US";
 
@@ -12,6 +13,8 @@ for(var i in CITY){
   option.text = CITY[i];
   place.appendChild(option);
 }
+
+ notify();
 function formatAMPM(date) {
   let strTime = date.toLocaleString('en-US', { hour: 'numeric', minute : 'numeric', hour12: true });
   return strTime;
