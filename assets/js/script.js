@@ -17,6 +17,28 @@ function formatAMPM(date) {
   return strTime;
 }
 
+let isCelcius = true;
+
+$(".checkbox").change(function() {
+  if(this.checked) {
+      isCelcius = false;
+      fetch("https://ipapi.co/json/")
+      .then((response) => response.json())
+      .then((data) => {
+        weather.fetchWeather(data.city);
+      });
+  }
+  else{
+      isCelcius = true;
+      fetch("https://ipapi.co/json/")
+      .then((response) => response.json())
+      .then((data) => {
+        weather.fetchWeather(data.city);
+      });
+  }
+});  
+
+
 const AirQuality = (log, lat) => {
   fetch(`https://api.waqi.info/feed/geo:${lat};${log}/?token=${config.AIR_KEY}`)
     .then((res) => res.json())
@@ -96,7 +118,16 @@ let weather = {
 
     document.getElementById("description").innerText = description;
 
-    document.getElementById("temp").innerText = temp + "°C";
+    let temperature = temp;
+
+    if(!isCelcius){
+      temperature = (temperature*(9/5))+32;
+      temperature = (Math.round(temperature * 100) / 100).toFixed(2);
+      document.getElementById("temp").innerText = temperature + "°F";
+    }
+    else{
+      document.getElementById("temp").innerText = temperature + "°C";
+    }
 
     document.getElementById("humidity").innerText = `${languages[userLang].humidity}: ${humidity}%`;
 
@@ -155,13 +186,27 @@ function generateWeatherItem(
 
 
   let dayTemp = document.createElement("div");
-  dayTemp.innerHTML = `${languages[userLang].day} \t`+`${dayTemperature}&#176;C`;
+  if(!isCelcius){
+    dayTemperature = (dayTemperature*(9/5))+35;
+    dayTemperature = (Math.round(dayTemperature * 100) / 100).toFixed(2);
+    dayTemp.innerHTML = "DAY \t"+`${dayTemperature}&#176;F`;
+  }
+  else{
+    dayTemp.innerHTML = "DAY \t"+`${dayTemperature}&#176;C`;
+  } 
   dayTemp.style.fontFamily="cursive"
   dayTemp.style.fontWeight="bolder"
   dayTemp.style.textTransform="uppercase"
 
   let nightTemp = document.createElement("div");
-  nightTemp.innerHTML = `${languages[userLang].night} \t`+`${nightTemperature}&#176;C`;
+  if(!isCelcius){
+    nightTemperature = (nightTemperature*(9/5))+35;
+    nightTemperature = (Math.round(nightTemperature * 100) / 100).toFixed(2);
+    nightTemp.innerHTML = "NIGHT \t"+`${nightTemperature}&#176;F`;
+  }
+  else{
+    nightTemp.innerHTML = "NIGHT \t"+`${nightTemperature}&#176;C`;
+  }
   nightTemp.style.color="#00dcff"
   nightTemp.style.fontFamily="cursive"
   nightTemp.style.fontWeight="bolder"
