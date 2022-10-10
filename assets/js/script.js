@@ -69,7 +69,10 @@ let weather = {
         }
         return response.json();
       })
-      .then((data) => {this.displayWeather(data);});
+      .then((data) => {this.displayWeather(data);})
+      .then(()=>{
+        this.notification();
+      });
   },
   displayWeather: function (data) {
     //console.log(data);
@@ -119,6 +122,9 @@ let weather = {
       toastFunction("Please add a location.");
     }
   },
+  notification: async function(){
+    let permission = await Notification.requestPermission();
+  }
 };
 
 async function getWeatherWeekly(url) {
