@@ -30,7 +30,7 @@ body{
 .card {
     position: relative;
     top: 1rem;
-    background: #000000d0;
+    background: #9b9b9bad;
     padding: 1em;
     width: 100%;
     max-width: 500px;
@@ -54,14 +54,16 @@ input.search-bar {
     border: none;
     outline: none;
     padding: 0.4em 1em;
-    background: #7c7c7c2b;
+    background: #3d3d3daa;
     font-family: inherit;
     font-size: 105%;
     width: calc(100% - 100px);
-    color: white;
+    color: rgb(255, 255, 255);
     caret-color: white;
 }
-
+input.search-bar::placeholder{
+    color: rgb(230, 230, 230);
+}
 .search {
     display: flex;
     justify-content: center;
