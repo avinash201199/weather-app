@@ -17,6 +17,8 @@ function formatAMPM(date) {
   return strTime;
 }
 
+
+
 const AirQuality = (log, lat) => {
   fetch(`https://api.waqi.info/feed/geo:${lat};${log}/?token=${config.AIR_KEY}`)
     .then((res) => res.json())
@@ -150,6 +152,9 @@ function generateWeatherItem(
   day.style.textTransform="uppercase"
   day.style.fontSize="20px"
 
+  let newDiv = document.createElement("div");
+  newDiv.className = "image-wrapper"; 
+
   let icon = document.createElement("img");
   icon.src = `https://openweathermap.org/img/wn/${iconName}.png`;
 
@@ -170,7 +175,9 @@ function generateWeatherItem(
 
   
   container.appendChild(day);
-  container.appendChild(icon);
+  container.appendChild(newDiv);
+  newDiv.appendChild(icon);
+ // container.appendChild(icon);
   container.appendChild(dayTemp);
   container.appendChild(nightTemp);
   return container;
@@ -203,6 +210,8 @@ function toastFunction(val) {
 document.querySelector(".search button").addEventListener("click", function () {
   weather.search();
 });
+
+
 
 document
   .querySelector(".search-bar")
