@@ -1,6 +1,7 @@
 import Capitals from "./Capitals.js";
 import CITY from "./City.js";
 import languages from "../../lang/translation.js";
+import {translations, getUserLanguage} from "../../lang/translation.js";
 import config from './../../config/config.js'
 import notify from "./notification.js";
 
@@ -9,6 +10,8 @@ Object.keys(languages).includes(navigator.language) === true
   ? (userLang = navigator.language)
   : (userLang = "en-US");
 
+
+const userLang = getUserLanguage() || "en-US";
 const place = document.querySelector("#place");
 
 for (var i in CITY) {
@@ -20,12 +23,10 @@ for (var i in CITY) {
 
  notify();
 function formatAMPM(date) {
-  let strTime = date.toLocaleString("en-US", {
+  return date.toLocaleString(translations[userLang].formattingLocale, {
     hour: "numeric",
     minute: "numeric",
-    hour12: true,
   });
-  return strTime;
 }
 
 let isCelcius = true;
@@ -47,7 +48,7 @@ $(".checkbox").change(function() {
         weather.fetchWeather(data.city);
       });
   }
-});  
+});
 
 
 const AirQuality = (log, lat) => {
@@ -57,36 +58,37 @@ const AirQuality = (log, lat) => {
       let aqi = res.data.aqi;
       document.querySelector(
         "#AirQuality"
-      ).innerText = `${languages[userLang].airQuality}:${aqi}`;
+      ).innerText = `${translations[userLang].airQuality}: ${aqi}`;
+
       if (aqi >= 0 && aqi <= 50) {
         document.querySelector(
           ".ml-0"
-        ).innerText = `(${languages[userLang].good})`;
+        ).innerText = `(${translations[userLang].good})`;
       }
       if (aqi > 50 && aqi <= 100) {
         document.querySelector(
           ".ml-0"
-        ).innerText = `(${languages[userLang].satisfactory})`;
+        ).innerText = `(${translations[userLang].satisfactory})`;
       }
       if (aqi > 100 && aqi <= 150) {
         document.querySelector(
           ".ml-0"
-        ).innerText = `(${languages[userLang].sensitive})`;
+        ).innerText = `(${translations[userLang].sensitive})`;
       }
       if (aqi > 150 && aqi <= 200) {
         document.querySelector(
           ".ml-0"
-        ).innerText = `(${languages[userLang].unhealthy})`;
+        ).innerText = `(${translations[userLang].unhealthy})`;
       }
       if (aqi > 200 && aqi <= 300) {
         document.querySelector(
           ".ml-0"
-        ).innerText = `(${languages[userLang].veryUnhealthy})`;
+        ).innerText = `(${translations[userLang].veryUnhealthy})`;
       }
       if (aqi > 300) {
         document.querySelector(
           ".ml-0"
-        ).innerText = `(${languages[userLang].hazardous})`;
+        ).innerText = `(${translations[userLang].hazardous})`;
       }
     });
 };
@@ -96,7 +98,7 @@ let weather = {
     let isCountry = false;
     let index;
     for (let i = 0; i < Capitals.length; i++) {
-      if (Capitals[i].country.toUpperCase() == city.toUpperCase()) {
+      if (Capitals[i].country.toUpperCase() === city.toUpperCase()) {
         isCountry = true;
         index = i;
         break;
@@ -110,12 +112,12 @@ let weather = {
         city +
         "&units=metric&appid=" +
         config.API_KEY +
-        `&lang=${languages[userLang].apiLang}`
+        `&lang=${translations[userLang].apiLang}`
     )
       .then((response) => {
         if (!response.ok) {
-          toastFunction(`${languages[userLang].noWeatherFound}`);
-          throw new Error(`${languages[userLang].noWeatherFound}`);
+          toastFunction(`${translations[userLang].noWeatherFound}`);
+          throw new Error(`${translations[userLang].noWeatherFound}`);
         }
         return response.json();
       })
@@ -138,7 +140,7 @@ let weather = {
     const airIndex = AirQuality(lon, lat);
 
     document.getElementById("city").innerText =
-      `${languages[userLang].weatherIn} ` + name;
+      `${translations[userLang].weatherIn} ` + name;
 
     document.getElementById(
       "icon"
@@ -159,20 +161,20 @@ let weather = {
 
     document.getElementById(
       "humidity"
-    ).innerText = `${languages[userLang].humidity}: ${humidity}%`;
+    ).innerText = `${translations[userLang].humidity}: ${humidity}%`;
 
     document.getElementById(
       "wind"
-    ).innerText = `${languages[userLang].windSpeed}: ${speed}km/h`;
+    ).innerText = `${translations[userLang].windSpeed}: ${speed}km/h`;
 
     document.getElementById("weather").classList.remove("loading");
 
     document.getElementById("sunrise").innerText = `${
-      languages[userLang].sunrise
+      translations[userLang].sunrise
     }: ${formatAMPM(date1)}`;
 
     document.getElementById("sunset").innerText = `${
-      languages[userLang].sunrise
+      translations[userLang].sunrise
     }: ${formatAMPM(date2)}`;
 
     let url = `https://api.openweathermap.org/data/2.5/onecall?lat=${lat}&lon=${lon}&units=metric&appid=${config.API_KEY}`;
@@ -183,7 +185,7 @@ let weather = {
       this.fetchWeather(document.querySelector(".search-bar").value);
       document.querySelector(".search-bar").value = "";
     } else {
-      toastFunction(languages[userLang].pleaseAddLocation);
+      toastFunction(translations[userLang].pleaseAddLocation);
     }
   },
 };
@@ -221,11 +223,11 @@ function generateWeatherItem(
   if(!isCelcius){
     dayTemperature = (dayTemperature*(9/5))+35;
     dayTemperature = (Math.round(dayTemperature * 100) / 100).toFixed(2);
-    dayTemp.innerHTML = "DAY \t"+`${dayTemperature}&#176;F`;
+    dayTemp.innerHTML = `${translations[userLang].day} ${dayTemperature}&#176;F`;
   }
   else{
-    dayTemp.innerHTML = "DAY \t"+`${dayTemperature}&#176;C`;
-  } 
+    dayTemp.innerHTML = `${translations[userLang].day} ${dayTemperature}&#176;C`;
+  }
   dayTemp.style.fontFamily="cursive"
   dayTemp.style.fontWeight="bolder"
   dayTemp.style.textTransform="uppercase"
@@ -234,10 +236,10 @@ function generateWeatherItem(
   if(!isCelcius){
     nightTemperature = (nightTemperature*(9/5))+35;
     nightTemperature = (Math.round(nightTemperature * 100) / 100).toFixed(2);
-    nightTemp.innerHTML = "NIGHT \t"+`${nightTemperature}&#176;F`;
+    nightTemp.innerHTML = `${translations[userLang].night} ${nightTemperature}&#176;F`;
   }
   else{
-    nightTemp.innerHTML = "NIGHT \t"+`${nightTemperature}&#176;C`;
+    nightTemp.innerHTML = `${translations[userLang].night} ${nightTemperature}&#176;C`;
   }
   nightTemp.style.color="#00dcff"
   nightTemp.style.fontFamily="cursive"
@@ -258,7 +260,7 @@ function showWeatherData(data) {
     let dayString = window.moment(day.dt * 1000).format("dddd");
     let dateString = window.moment(day.dt * 1000).format("Do");
     let element = generateWeatherItem(
-      languages[userLang][dayString.toLowerCase()],
+      translations[userLang][dayString.toLowerCase()],
       day.weather[0].icon,
       day.temp.night,
       day.temp.day
@@ -300,7 +302,7 @@ fetch("https://ipapi.co/json/")
 
 
 document.getElementsByName("search-bar")[0].placeholder =
-  languages[userLang].search;
+  translations[userLang].search;
 
 // SHOWS CURRENT DAY IN THE RENDERED DAYS
 function showCurrDay(dayString, dateString, element) {
