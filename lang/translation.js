@@ -54,5 +54,32 @@ export default {
     sunday: "Domingo",
     day: "Dia",
     night: "Noite"
-  }
+  },
+  "es-MX": {
+    apiLang: "es",
+    airQuality: "Calidad De Aire",
+    good: "Buena",
+    satisfactory: "Satisfactoria",
+    sensitive: "Sensible",
+    unhealthy: "Dañino",
+    veryUnhealthy: "Muy Dañino",
+    hazardous: "Peligroso",
+    weatherIn: "Clima en",
+    humidity: "Humedad",
+    windSpeed: "Velocidad Del Viento",
+    sunrise: "Amanecer",
+    sunset: "Anochecer",
+    noWeatherFound: "No se encontró ningun clima.",
+    search: "Buscar",
+    pleaseAddLocation: "Por favor agrega una localización.",
+    monday: "Lunes",
+    tuesday: "Martes",
+    wednesday: "Miercoles",
+    thursday: "Jueves",
+    friday: "Viernes",
+    saturday: "Sabado",
+    sunday: "Domingo",
+    day: "Día",
+    night: "Noche"
+  },
 }
