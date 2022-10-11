@@ -307,8 +307,6 @@ function showCurrDay(dayString, dateString, element) {
   const dayName = days[date.getDay()];
   const dayNumber = date.getDate();
   if (dayString == dayName && dateString == dayNumber) {
-    element.style.backgroundColor = "#fff";
-    element.querySelector(".weather-forecast-day").style.color =
-      "rgba(0, 0, 0, 0.8)";
+    element.classList.add("weather-forecast-item-current-day")
   }
 }
