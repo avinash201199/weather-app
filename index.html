@@ -15,9 +15,28 @@
   <link rel="stylesheet" href="./assets/css/bootstrap.min.css">
   <link rel="stylesheet" href="./assets/css/style.css">
   <link rel="icon" href="assets/favicon.ico">
+
+  <!-- jquery CDN -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
+
 </head>
 
 <body id="body">
+
+  <nav class="navbar ">
+    <a class="navbar-brand" href="#">
+      <div class="col-auto" style="margin: 10px 20px;">
+        <input type="checkbox" id="unit" class="checkbox">
+        <label for="checkbox" class="label">
+            <span class="celcius">C°</span>
+            <span class="farenheit">F°</span>
+            <div class='ball'>
+        </label>
+    </div>
+    </a>
+  </nav>
+
+
   <div class="container d-flex justify-content-center align-items-center flex-column">
     <div class="card text-white rounded">
       <div class="search"  >
@@ -34,6 +53,9 @@
           </svg>
         </button>
       </div>
+
+      
+
       <div id="weather" class="weather loading">
 
         <h1 id="city" class="city-name fw-bold">Weather in ___</h1>
@@ -104,10 +126,17 @@
   <div id="toast">
     <div class="checkicon"><i class="fas fa-check-square"></i></div>
   </div>
+
+  <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+
+  <script type="module" src="./assets/js/script.js"></script>
+
 </body>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js"
   integrity="sha512-qTXRIMyZIFb8iQcfjXWCO8+M5Tbc38Qi5WzdPOYZHIlZpzBHG3L3by84BBBOiRGiEb7KKtAOAs5qYdUiZiQNNQ=="
   crossorigin="anonymous" referrerpolicy="no-referrer">
   </script>
-<script type="module" src="./assets/js/script.js"></script>
+
+
 </html>
