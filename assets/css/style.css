@@ -25,6 +25,18 @@ body {
   scrollbar-width: none; /* Firefox */
 }
 
+/* Header Text */
+.header-text {
+  padding: 5px 20px;
+  border-radius: 15px;
+  text-align: center;
+  color: #fff;
+  background-color: rgba(0, 0, 0, 0.5);
+  font-size: 1em;
+  font-weight: 700;
+  /* width: fit-content; */
+}
+
 /* Card */
 
 .card {
@@ -316,7 +328,7 @@ button:focus {
 
 footer{
   height: 500px;
-  display: flex; 
+  display: flex;
   justify-content: center;
   align-items: center;
   text-decoration-color: white;
@@ -468,4 +480,11 @@ footer{
 
 .navbar {
   height: 0px;
+}
+
+/* current day in future weather forecast*/
+.weather-forecast-item-current-day {
+  background-color: rgba(69, 66, 66, 0.75);
+  backdrop-filter: blur(16px) saturate(180%);
+  -webkit-backdrop-filter: blur(16px) saturate(180%);
 }
