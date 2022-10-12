@@ -3,6 +3,11 @@ import CITY from "./City.js";
 import {translations, getUserLanguage} from "../../lang/translation.js";
 import config from "./../../config/config.js";
 
+// focus the search input as the DOM loads
+window.onload = function() {
+  document.getElementsByName("search-bar")[0].focus();
+}
+
 const userLang = getUserLanguage() || "en-US";
 const place = document.querySelector("#place");
 
