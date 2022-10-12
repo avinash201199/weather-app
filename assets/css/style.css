@@ -314,6 +314,15 @@ button:focus {
   visibility: visible;
 }
 
+footer{
+  height: 500px;
+  display: flex; 
+  justify-content: center;
+  align-items: center;
+  text-decoration-color: white;
+  text-emphasis-style: bold;
+}
+
 @-webkit-keyframes fadein {
   from {
     bottom: 0;
