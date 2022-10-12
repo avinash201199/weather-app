@@ -1,7 +1,15 @@
 import Capitals from "./Capitals.js";
 import CITY from "./City.js";
+import languages from "../../lang/translation.js";
 import {translations, getUserLanguage} from "../../lang/translation.js";
-import config from "./../../config/config.js";
+import config from './../../config/config.js'
+import notify from "./notification.js";
+
+var userLang;
+Object.keys(languages).includes(navigator.language) === true
+  ? (userLang = navigator.language)
+  : (userLang = "en-US");
+
 
 const userLang = getUserLanguage() || "en-US";
 const place = document.querySelector("#place");
@@ -12,6 +20,8 @@ for (var i in CITY) {
   option.text = CITY[i];
   place.appendChild(option);
 }
+
+ notify();
 function formatAMPM(date) {
   return date.toLocaleString(translations[userLang].formattingLocale, {
     hour: "numeric",
@@ -289,6 +299,8 @@ fetch("https://ipapi.co/json/")
     weather.fetchWeather(data.city);
   });
 
+
+
 document.getElementsByName("search-bar")[0].placeholder =
   translations[userLang].search;
 
@@ -312,3 +324,4 @@ function showCurrDay(dayString, dateString, element) {
       "rgba(0, 0, 0, 0.8)";
   }
 }
+
