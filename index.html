@@ -22,7 +22,7 @@
 </head>
 
 <body id="body">
-
+  <h2 style="color: indigo; text-align: center;">Today is <span id='date-time'></h2>
   <nav class="navbar ">
     <a class="navbar-brand" href="#">
       <div class="col-auto" style="margin: 10px 20px;">
@@ -137,6 +137,17 @@
   integrity="sha512-qTXRIMyZIFb8iQcfjXWCO8+M5Tbc38Qi5WzdPOYZHIlZpzBHG3L3by84BBBOiRGiEb7KKtAOAs5qYdUiZiQNNQ=="
   crossorigin="anonymous" referrerpolicy="no-referrer">
   </script>
+
+<script>
+  var myDate = new Date();
+  var myDay = myDate.getDay();
+  var weekday = ['Sunday', 'Monday', 'Tuesday',
+    'Wednesday', 'Thursday', 'Friday', 'Saturday'
+  ];
+  document.write("Today is : " + weekday[myDay]);
+  document.write("<br/>");
+  document.getElementById('date-time').innerHTML = myDate;
+</script>
 
 
 </html>
