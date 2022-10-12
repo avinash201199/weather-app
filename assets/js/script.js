@@ -311,4 +311,4 @@ function showCurrDay(dayString, dateString, element) {
     element.querySelector(".weather-forecast-day").style.color =
       "rgba(0, 0, 0, 0.8)";
   }
-}
+ }
