@@ -3,9 +3,9 @@ body {
   align-items: center;
   height: 100vh;
   margin: 0;
-  font-family: "Open Sans", sans-serif;
+  font-family: 'Open Sans', sans-serif;
   background: #222;
-  background-image: url("https://source.unsplash.com/1600x900/?landscape");
+  background-image: url('https://source.unsplash.com/1600x900/?landscape');
   background-repeat: no-repeat;
   background-size: cover;
   background-attachment: fixed;
@@ -23,6 +23,9 @@ body::-webkit-scrollbar {
 body {
   -ms-overflow-style: none; /* IE and Edge */
   scrollbar-width: none; /* Firefox */
+}
+main {
+  height: 970px;
 }
 
 /* Card */
@@ -121,8 +124,8 @@ button:focus {
   width: 57%;
   font-size: 2.8rem;
   font-weight: bold;
-  font-family: "Lucida Sans", "Lucida Sans Regular", "Lucida Grande",
-    "Lucida Sans Unicode", Geneva, Verdana, sans-serif;
+  font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande',
+    'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
   text-shadow: 3px 6px 3px black;
   background-color: rgba(219, 228, 228, 0.32);
   border-radius: 16px;
@@ -166,7 +169,7 @@ button:focus {
 
 .loading:after {
   visibility: visible;
-  content: "Loading...";
+  content: 'Loading...';
   position: absolute;
   top: 0;
   left: 20px;
@@ -314,9 +317,9 @@ button:focus {
   visibility: visible;
 }
 
-footer{
+footer {
   height: 500px;
-  display: flex; 
+  display: flex;
   justify-content: center;
   align-items: center;
   text-decoration-color: white;

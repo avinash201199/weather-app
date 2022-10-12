@@ -9,7 +9,9 @@
     content="A Beautiful weather app displaying a weekly weather forecast for the selected location" />
   <title>Weather App</title>
   <link rel="preconnect" href="https://fonts.gstatic.com">
+
   <link href="https://fonts.googleapis.com/css2?family=Open+Sans&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="footer.css">
   <!-- favicon -->
   <link rel="shortcut icon" type="image/jpg" href="./assets/weather-icon.png" />
   <link rel="stylesheet" href="./assets/css/bootstrap.min.css">
@@ -22,6 +24,7 @@
 </head>
 
 <body id="body">
+  <main>
   <h2 style="color: white; text-align: center; margin-top: 10px; padding: 10px; background-color: gray; width: 75%; margin-left: auto; margin-right: auto; border-radius: 25px;">Today is <span id='date-time'></h2>
   <nav class="navbar ">
     <a class="navbar-brand" href="#">
@@ -132,12 +135,12 @@
 
   <script type="module" src="./assets/js/script.js"></script>
 
-  <footer>
-    <p>
-        Made with 💝 by Avinash
-    </p>
-</footer>
-</body>
+
+  </main>
+  <!-- <footer>
+    
+
+</footer> -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js"
   integrity="sha512-qTXRIMyZIFb8iQcfjXWCO8+M5Tbc38Qi5WzdPOYZHIlZpzBHG3L3by84BBBOiRGiEb7KKtAOAs5qYdUiZiQNNQ=="
   crossorigin="anonymous" referrerpolicy="no-referrer">
@@ -153,6 +156,84 @@
   document.write("<br/>");
   document.getElementById('date-time').innerHTML = myDate;
 </script>
+<footer class="footer-section">
+  <div class="container">
+      <div class="footer-content pt-5 pb-5">
+          <div class="row">
+              <div class="col-xl-4 col-lg-4 mb-50">
+                  <div class="footer-widget">
+                     <h1 style="color: white;">we provide best services</h1>
+                      <div class="footer-text">
+                          <p>we are one of the most trusted site on the web in the field of weather forcasting.</p>
+                      </div>
+                      
+                  </div>
+              </div>
+              <div class="col-xl-4 col-lg-4 col-md-6 mb-30">
+                  <div class="footer-widget">
+                      <div class="footer-widget-heading">
+                          <h3>Useful Links</h3>
+                      </div>
+                      <ul>
+                          <li><a href="#">Home</a></li>
+                          <li><a href="#">about</a></li>
+                          <li><a href="#">services</a></li>
+                          <li><a href="#">portfolio</a></li>
+                          <li><a href="#">Contact</a></li>
+                          <li><a href="#">About us</a></li>
+                          <li><a href="#">Our Services</a></li>
+                          <li><a href="#">Expert Team</a></li>
+                          <li><a href="#">Contact us</a></li>
+                          <li><a href="#">Latest News</a></li>
+                      </ul>
+                  </div>
+              </div>
+              <div class="col-xl-4 col-lg-4 col-md-6 mb-50">
+                  <div class="footer-widget">
+                      <div class="footer-widget-heading">
+                          <h3>Subscribe</h3>
+                      </div>
+                      <div class="footer-text mb-25">
+                          <p>Don't miss to subscribe to our new feeds, kindly fill the form below.</p>
+                      </div>
+                      <div class="subscribe-form">
+                          <form action="#">
+                              <input type="text" placeholder="Email Address">
+                              <button><i class="fab fa-telegram-plane"></i></button>
+                          </form>
+                      </div>
+                  </div>
+              </div>
+          </div>
+      </div>
+  </div>
+  <div class="copyright-area">
+      <div class="container">
+          <div class="row">
+              <div class="col-xl-6 col-lg-6 text-center text-lg-left">
+                  <div class="copyright-text">
+                      <p>
+                        Made with 💝 by 
+                    </p> <a href="#">Avinash</a></p>
+                  </div>
+              </div>
+              <div class="col-xl-6 col-lg-6 d-none d-lg-block text-right">
+                  <div class="footer-menu">
+                      <ul>
+                          <li><a href="#">Home</a></li>
+                          <li><a href="#">Terms</a></li>
+                          <li><a href="#">Privacy</a></li>
+                          <li><a href="#">Policy</a></li>
+                          <li><a href="#">Contact</a></li>
+                      </ul>
+                  </div>
+              </div>
+          </div>
+      </div>
+  </div>
+</footer>
+</body>
+
 
 
 </html>
