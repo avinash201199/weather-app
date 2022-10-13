@@ -500,3 +500,10 @@ footer{
   margin-right:25%; 
   font-size: large;
 }
+
+/* current day in future weather forecast*/
+.weather-forecast-item-current-day {
+  background-color: rgba(69, 66, 66, 0.75);
+  backdrop-filter: blur(16px) saturate(180%);
+  -webkit-backdrop-filter: blur(16px) saturate(180%);
+}
