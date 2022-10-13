@@ -206,7 +206,7 @@ function generateWeatherItem(
   day.style.fontSize = "20px";
 
   let newDiv = document.createElement("div");
-  newDiv.className = "image-wrapper"; 
+  newDiv.className = "image-wrapper";
 
   let icon = document.createElement("img");
   icon.src = `https://openweathermap.org/img/wn/${iconName}.png`;
@@ -314,8 +314,6 @@ function showCurrDay(dayString, dateString, element) {
   const dayName = days[date.getDay()];
   const dayNumber = date.getDate();
   if (dayString == dayName && dateString == dayNumber) {
-    element.style.backgroundColor = "#fff";
-    element.querySelector(".weather-forecast-day").style.color =
-      "rgba(0, 0, 0, 0.8)";
+    element.classList.add("weather-forecast-item-current-day")
   }
 }
