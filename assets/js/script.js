@@ -205,7 +205,7 @@ function generateWeatherItem(
   let day = document.createElement("div");
   day.innerText = dayString;
   day.style.color = "#00dcff";
-  day.style.fontFamily = "cursive";
+  day.style.fontFamily = "Inter";
   day.style.fontWeight = "bolder";
   day.style.textTransform = "uppercase";
   day.style.fontSize = "20px";
@@ -226,7 +226,7 @@ function generateWeatherItem(
   else{
     dayTemp.innerHTML = `${translations[userLang].day} ${dayTemperature}&#176;C`;
   }
-  dayTemp.style.fontFamily="cursive"
+  dayTemp.style.fontFamily="Inter"
   dayTemp.style.fontWeight="bolder"
   dayTemp.style.textTransform="uppercase"
 
@@ -240,7 +240,7 @@ function generateWeatherItem(
     nightTemp.innerHTML = `${translations[userLang].night} ${nightTemperature}&#176;C`;
   }
   nightTemp.style.color="#00dcff"
-  nightTemp.style.fontFamily="cursive"
+  nightTemp.style.fontFamily="Inter"
   nightTemp.style.fontWeight="bolder"
   nightTemp.style.textTransform="uppercase"
 
