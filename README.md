@@ -8,7 +8,8 @@ This is a simple javascript project made with the help of HTML, CSS and OpenWeat
 
 # Demo of App
 
-![Screenshot (20)](https://user-images.githubusercontent.com/90332218/194750372-b524eec3-5ef9-4f0c-b82b-770ec8850fc1.png)
+
+![Screenshot (28)](https://user-images.githubusercontent.com/90332218/195845574-33a1dccd-c6fd-4993-9d1c-09b1925f5c36.png)
 
 
 # check out live 
