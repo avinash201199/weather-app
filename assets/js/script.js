@@ -346,6 +346,7 @@ function showCurrDay(dayString, dateString, element) {
   if (window.scrollY != 0) {
   setTimeout(function () {
   window.scrollTo(0, window.scrollY - 50);
+  window.scroll({top: 0, behavior: "smooth"})
   scrollWindow();
   }, 10);
   }

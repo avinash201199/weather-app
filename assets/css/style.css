@@ -470,7 +470,12 @@ footer{
   height: 0px;
 }
 
-#scroll-btn {
+/* scroll btn css */
+html{
+  scroll-behavior: unset !important;
+}
+
+html body #scroll-btn {
   opacity: 0;
   width: 40px;
   height: 40px;
@@ -483,16 +488,17 @@ footer{
   border-radius: 50%;
   font: bold 20px monospace;
   transition: opacity 0.5s, transform 0.5s;
- 
+
 }
+
 #scroll-btn.show {
   opacity: 1;
   transition: opacity 1s, transform 1s;
 }
 
-html {
-  scroll-behavior: unset !important;
-}
+
+
+
 
 
   
