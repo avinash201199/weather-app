@@ -327,8 +327,10 @@ button:focus {
 }
 
 footer{
-  height: 500px;
-  display: flex;
+
+  height: 300px;
+  display: flex; 
+
   justify-content: center;
   align-items: center;
   text-decoration-color: white;
@@ -482,9 +484,44 @@ footer{
   height: 0px;
 }
 
+
+.link1{
+  max-width: 10%;
+   padding: 0.5rem 1rem;
+   box-sizing: border-box; 
+   display: inline;
+   float: right;
+  margin-right: 25%;
+}
+.link2{
+  max-width: 10%;
+  padding: 0.5rem 1rem;
+  box-sizing: border-box; 
+  display: inline;
+  float: right;
+  margin-right: 10%;
+}
+.link3{
+  max-width: 10%;
+  padding: 0.5rem 1rem;
+  box-sizing: border-box;
+  display: inline;float: left;
+  margin-left: 25%
+}
+
+.textfooter{
+  color: white; 
+  margin-left: 43%; 
+  margin-right:25%; 
+  font-size: large;
+}
+
+
 /* current day in future weather forecast*/
 .weather-forecast-item-current-day {
   background-color: rgba(69, 66, 66, 0.75);
   backdrop-filter: blur(16px) saturate(180%);
   -webkit-backdrop-filter: blur(16px) saturate(180%);
+
 }
+
