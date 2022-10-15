@@ -40,6 +40,7 @@ body {
 /* Card */
 
 .card {
+  margin: 20px 0;
   position: relative;
   top: 1rem;
   background: #000000d0;
@@ -418,21 +419,6 @@ footer{
   }
 }
 
-@media only screen and (max-width: 576px) {
-  .weather-forecast {
-    grid-template-columns: auto auto;
-  }
-
-  .card {
-    padding: 7px;
-    height: 460px;
-  }
-
-  .weather {
-    padding: 10px;
-  }
-}
-
 .checkbox {
   opacity: 0;
   position: absolute;
@@ -486,7 +472,7 @@ footer{
 
 
 .link1{
-  max-width: 10%;
+  max-width: max(10%, 60px);
    padding: 0.5rem 1rem;
    box-sizing: border-box; 
    display: inline;
@@ -494,7 +480,7 @@ footer{
   margin-right: 25%;
 }
 .link2{
-  max-width: 10%;
+  max-width: max(10%, 60px);
   padding: 0.5rem 1rem;
   box-sizing: border-box; 
   display: inline;
@@ -502,7 +488,7 @@ footer{
   margin-right: 10%;
 }
 .link3{
-  max-width: 10%;
+  max-width: max(10%, 60px);
   padding: 0.5rem 1rem;
   box-sizing: border-box;
   display: inline;float: left;
@@ -525,3 +511,27 @@ footer{
 
 }
 
+@media only screen and (max-width: 576px) {
+  .weather-forecast {
+    grid-template-columns: auto auto;
+  }
+
+  .card {
+    padding: 7px;
+    height: 460px;
+  }
+
+  .weather {
+    padding: 10px;
+  }
+
+  .link1{
+    margin: 0px 72px 0px 20px;
+  }
+  .link2{
+    margin: 0px 10px 0px;
+  }
+  .link3{
+    margin: 0px 10px 0px 62px;
+  }
+}
