@@ -1,7 +1,7 @@
 body {
   justify-content: center;
   align-items: center;
-  height: 100vh;
+  height: 90vh;
   margin: 0;
   font-family: "Open Sans", sans-serif;
   background: #222;
@@ -11,6 +11,7 @@ body {
   background-attachment: fixed;
   background-position: 50% 50%;
   overflow-y: scroll;
+  z-index:-1;
   /* Scroll is required to see full info */
 }
 
@@ -486,7 +487,8 @@ footer{
 
 
 .link1{
-  max-width: 10%;
+  max-width: 7%;
+  max-height:7%;
    padding: 0.5rem 1rem;
    box-sizing: border-box; 
    display: inline;
@@ -494,15 +496,18 @@ footer{
   margin-right: 25%;
 }
 .link2{
-  max-width: 10%;
+  max-width: 7%;
+  max-height:7%;
   padding: 0.5rem 1rem;
   box-sizing: border-box; 
   display: inline;
   float: right;
-  margin-right: 10%;
+  margin-right: 15%;
+  /* margin-left:10%; */
 }
 .link3{
-  max-width: 10%;
+  max-width: 7%;
+  max-height:7%;
   padding: 0.5rem 1rem;
   box-sizing: border-box;
   display: inline;float: left;
@@ -511,12 +516,17 @@ footer{
 
 .textfooter{
   color: white; 
-  margin-left: 43%; 
-  margin-right:25%; 
-  font-size: large;
+  margin-left: 40%; 
+  margin-right:20%; 
+  font-size: x-large;
+  z-index:auto;  
 }
 
-
+footer{
+   background-color: #000000d0;  
+   margin-top:55px;
+   height:150px;
+}
 /* current day in future weather forecast*/
 .weather-forecast-item-current-day {
   background-color: rgba(69, 66, 66, 0.75);
