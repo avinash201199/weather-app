@@ -8,8 +8,9 @@
   <meta name="description"
     content="A Beautiful weather app displaying a weekly weather forecast for the selected location" />
   <title>Weather App</title>
-  <link rel="preconnect" href="https://fonts.gstatic.com">
-  <link href="https://fonts.googleapis.com/css2?family=Open+Sans&display=swap" rel="stylesheet">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@200;300;400&family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet">
   <!-- favicon -->
   <link rel="shortcut icon" type="image/jpg" href="./assets/weather-icon.png" />
   <link rel="stylesheet" href="./assets/css/bootstrap.min.css">
@@ -21,9 +22,9 @@
 
 <body id="body">
   <h2 class="header-text" style="text-align: center; width: 55%; margin: 5px auto 10px;">Today is <span id='date-time'></h2>
-  <nav class="navbar ">
+  <nav class="navbar temp">
     <a class="navbar-brand" href="#">
-      <div class="col-auto" style="margin: 10px 20px;">
+      <div class="col-auto">
         <input type="checkbox" id="unit" class="checkbox">
         <label for="checkbox" class="label">
             <span class="celcius">C°</span>
@@ -132,9 +133,9 @@
 
   <footer>
     <div>
-    <p class="textfooter">
+    <h2 class="textfooter">
         Made with 💝 by Avinash
-    </p>
+    </h2>
     
     <div>
     <ul style="display: inline;color: white;">
