@@ -18,6 +18,8 @@
   <link rel="icon" href="assets/favicon.ico">
   <!-- jquery CDN -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
+  <!--Font Awesome CDN-->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css">
 </head>
 
 <body id="body">
@@ -132,25 +134,25 @@
   <script type="module" src="./assets/js/script.js"></script>
 
   <footer>
-    <div>
+    <div >
     <h2 class="textfooter">
         Made with 💝 by Avinash
     </h2>
     
-    <div>
-    <ul style="display: inline;color: white;">
+    <div class="footerSection">
+    <ul style="list-style: none;margin:0;padding:0;color: white; display: inline-flex;">
       
-      <li style="display: inline;">
+      <li>
           <a  href="https://github.com/avinash201199">
-          <img class="link1" src="./assets/icons/github.png"  ></a>
+          <i class="fa-brands fa-github fa-3x link1"></i>
       </li>
-      <li style="display: inline;">
+      <li>
           <a  href="https://www.linkedin.com/in/avinash-singh-071b79175/">
-          <img class="link2" src="./assets/icons/linkedin.png"  ></a>
+          <i class="fa-brands fa-linkedin fa-3x link2"></i>
       </li>
-      <li style="display: inline;">
+      <li>
           <a  href="https://www.instagram.com/lets__code/">
-          <img class="link3"  src="./assets/icons/instagram.png"  ></a>
+          <i class="fa-brands fa-instagram fa-3x link3"></i>
       </li>
       
     </ul>
@@ -169,8 +171,8 @@
   var weekday = ['Sunday', 'Monday', 'Tuesday',
     'Wednesday', 'Thursday', 'Friday', 'Saturday'
   ];
-  document.write("Today is : " + weekday[myDay]);
-  document.write("<br/>");
+  // document.write("Today is : " + weekday[myDay]);
+  // document.write("<br/>");
   document.getElementById('date-time').innerHTML = myDate;
 </script>
 
