@@ -337,6 +337,10 @@ footer{
   text-emphasis-style: bold;
 }
 
+.col-auto{
+  margin: 10px 20px;
+}
+
 @-webkit-keyframes fadein {
   from {
     bottom: 0;
@@ -415,6 +419,10 @@ footer{
 
     right: 50%;
     transform: translateX(50%);
+  }
+
+  .navbar{
+    margin: 1rem 0.15rem;
   }
 }
 
