@@ -3,7 +3,7 @@ body {
   align-items: center;
   height: 100vh;
   margin: 0;
-  font-family: "Open Sans", sans-serif;
+  font-family: "Poppins", sans-serif;
   background: #222;
   background-image: url("https://source.unsplash.com/1600x900/?landscape");
   background-repeat: no-repeat;
@@ -129,16 +129,15 @@ button:focus {
 #temp {
   margin-left: 21%;
   margin-top: 15px;
-  margin-bottom: 10px;
+  margin-bottom: 15px;
   width: 57%;
   font-size: 2.8rem;
   font-weight: bold;
-  font-family: "Lucida Sans", "Lucida Sans Regular", "Lucida Grande",
-    "Lucida Sans Unicode", Geneva, Verdana, sans-serif;
-  text-shadow: 3px 6px 3px black;
+  font-family: "Inter", sans-serif;
+  text-shadow: 3px 6px 3px rgba(0, 0, 0, 0.5);
   background-color: rgba(219, 228, 228, 0.32);
-  border-radius: 16px;
-  padding: 2px 5px;
+  border-radius: 32px;
+  padding: 5px;
 }
 
 .weather {
@@ -216,6 +215,7 @@ button:focus {
   grid-template-columns: auto auto auto auto auto auto;
   grid-gap: 0.6rem;
   align-items: center;
+  font-family: 'Inter', sans-serif;
 }
 
 .weather-forecast-item {
