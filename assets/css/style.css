@@ -496,6 +496,9 @@ footer{
   align-items: center;
   text-decoration-color: white;
   text-emphasis-style: bold;
+  background-color: rgba(53, 50, 50, 0.8);
+  margin-top: 3rem;
+  height: auto;
 }
 
 .social-links{
