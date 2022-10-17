@@ -544,6 +544,7 @@ footer{
 }
 
 /* scroll btn css */
+/* resolved css conflicts */
 html{
   scroll-behavior: unset !important;
 }
