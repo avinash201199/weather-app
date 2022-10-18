@@ -11,7 +11,7 @@ body {
   background-attachment: fixed;
   background-position: 50% 50%;
   overflow-y: scroll;
-  z-index:-1;
+  z-index: -1;
   /* Scroll is required to see full info */
 }
 
@@ -216,7 +216,7 @@ button:focus {
   grid-template-columns: auto auto auto auto auto auto;
   grid-gap: 0.6rem;
   align-items: center;
-  font-family: 'Inter', sans-serif;
+  font-family: "Inter", sans-serif;
 }
 
 .weather-forecast-item {
@@ -327,10 +327,9 @@ button:focus {
   visibility: visible;
 }
 
-footer{
-
+footer {
   height: 300px;
-  display: flex; 
+  display: flex;
 
   justify-content: center;
   align-items: center;
@@ -338,7 +337,7 @@ footer{
   text-emphasis-style: bold;
 }
 
-.col-auto{
+.col-auto {
   margin: 10px 20px;
 }
 
@@ -422,7 +421,7 @@ footer{
     transform: translateX(50%);
   }
 
-  .navbar{
+  .navbar {
     margin: 1rem 0.15rem;
   }
 }
@@ -493,59 +492,60 @@ footer{
   height: 0px;
 }
 
-
-.link1{
-  max-width: 7%;
-  max-height:7%;
-   padding: 0.5rem 1rem;
-   box-sizing: border-box; 
-   display: inline;
-   float: right;
-  margin-right: 25%;
-}
-.link2{
-  max-width: 7%;
-  max-height:7%;
-  padding: 0.5rem 1rem;
-  box-sizing: border-box; 
-  display: inline;
-  float: right;
-  margin-right: 15%;
-  /* margin-left:10%; */
-}
-.link3{
-  max-width: 7%;
-  max-height:7%;
-  padding: 0.5rem 1rem;
-  box-sizing: border-box;
-  display: inline;float: left;
-  margin-left: 25%
+.social-media {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 10px;
+  padding: 0;
+  height: 65px;
+  flex-direction: row-reverse;
 }
 
-.textfooter{
-  color: white; 
-  margin-left: 40%; 
-  margin-right:20%; 
+.social-media li {
+  list-style: none;
+  width: 100%;
+  height: 100%;
+  text-align: center;
+}
+
+.link1,
+.link2,
+.link3 {
+  width: 80px;
+}
+
+/* Changed GitHub icon color from black to white */
+.link1 {
+  filter: invert(1);
+}
+
+.textfooter {
+  color: white;
   font-size: x-large;
-  z-index:auto;  
+  z-index: auto;
+  text-align: center;
 }
 
-footer{
-   background-color: #000000d0;  
-   margin-top:55px;
-   height:150px;
+footer {
+  background-color: #000000d0;
+  margin-top: 55px;
+  height: 150px;
+}
+
+.footer-container {
+  width: 100%;
 }
 /* current day in future weather forecast*/
 .weather-forecast-item-current-day {
   background-color: rgba(69, 66, 66, 0.75);
   backdrop-filter: blur(16px) saturate(180%);
   -webkit-backdrop-filter: blur(16px) saturate(180%);
-
 }
 
 /* scroll btn css */
 /* resolved css conflicts */
-html{
+html {
   scroll-behavior: unset !important;
 }
 
@@ -562,7 +562,6 @@ html body #scroll-btn {
   border-radius: 50%;
   font: bold 20px monospace;
   transition: opacity 0.5s, transform 0.5s;
-
 }
 
 #scroll-btn.show {
@@ -570,4 +569,10 @@ html body #scroll-btn {
   transition: opacity 1s, transform 1s;
 }
 
-
+@media only screen and (max-width: 500px) {
+  .link1,
+  .link2,
+  .link3 {
+    width: 45%;
+  }
+}
