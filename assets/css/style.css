@@ -496,7 +496,8 @@ footer {
   display: flex;
   justify-content: center;
   align-items: center;
-  margin: 10px;
+  margin: 10px auto;
+  width: 50%;
   padding: 0;
   height: 65px;
   flex-direction: row-reverse;
@@ -569,7 +570,11 @@ html body #scroll-btn {
   transition: opacity 1s, transform 1s;
 }
 
-@media only screen and (max-width: 500px) {
+@media only screen and (max-width: 550px) {
+  .social-media {
+    width: 100%;
+  }
+
   .link1,
   .link2,
   .link3 {
