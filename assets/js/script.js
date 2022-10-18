@@ -17,6 +17,7 @@ for (var i in CITY) {
   option.text = CITY[i];
   place.appendChild(option);
 }
+
 function formatAMPM(date) {
   return date.toLocaleString(translations[userLang].formattingLocale, {
     hour: "numeric",
@@ -120,6 +121,7 @@ let weather = {
         this.displayWeather(data);
       });
   },
+
   displayWeather: function (data) {
     //console.log(data);
     const { name } = data;
@@ -355,3 +357,32 @@ setInterval(() => {
     document.getElementById('date-time').innerHTML = time;
 }, 1000);
 
+
+ 
+ // scrollTop functionality
+ const scrollTop = function () {
+  // create HTML button element
+  const scrollBtn = document.createElement("button");
+  scrollBtn.innerHTML = "&#8679";
+  scrollBtn.setAttribute("id", "scroll-btn");
+  document.body.appendChild(scrollBtn);
+  // hide/show button based on scroll distance
+  const scrollBtnDisplay = function () {
+  window.scrollY > window.innerHeight
+  ? scrollBtn.classList.add("show")
+  : scrollBtn.classList.remove("show");
+  };
+  window.addEventListener("scroll", scrollBtnDisplay);
+  // scroll to top when button clicked
+  const scrollWindow = function () {
+  if (window.scrollY != 0) {
+  setTimeout(function () {
+  window.scrollTo(0, window.scrollY - 50);
+  window.scroll({top: 0, behavior: "smooth"})
+  scrollWindow();
+  }, 10);
+  }
+  };
+  scrollBtn.addEventListener("click", scrollWindow);
+};
+scrollTop();
