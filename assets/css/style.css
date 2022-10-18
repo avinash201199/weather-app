@@ -41,6 +41,7 @@ body {
 /* Card */
 
 .card {
+  margin: 20px 0;
   position: relative;
   top: 1rem;
   background: #000000d0;
@@ -327,21 +328,6 @@ button:focus {
   visibility: visible;
 }
 
-footer{
-
-  height: 300px;
-  display: flex; 
-
-  justify-content: center;
-  align-items: center;
-  text-decoration-color: white;
-  text-emphasis-style: bold;
-}
-
-.col-auto{
-  margin: 10px 20px;
-}
-
 @-webkit-keyframes fadein {
   from {
     bottom: 0;
@@ -427,21 +413,6 @@ footer{
   }
 }
 
-@media only screen and (max-width: 576px) {
-  .weather-forecast {
-    grid-template-columns: auto auto;
-  }
-
-  .card {
-    padding: 7px;
-    height: 460px;
-  }
-
-  .weather {
-    padding: 10px;
-  }
-}
-
 .checkbox {
   opacity: 0;
   position: absolute;
@@ -493,54 +464,68 @@ footer{
   height: 0px;
 }
 
-
-.link1{
-  max-width: 7%;
-  max-height:7%;
-   padding: 0.5rem 1rem;
-   box-sizing: border-box; 
-   display: inline;
-   float: right;
-  margin-right: 25%;
-}
-.link2{
-  max-width: 7%;
-  max-height:7%;
-  padding: 0.5rem 1rem;
-  box-sizing: border-box; 
-  display: inline;
-  float: right;
-  margin-right: 15%;
-  /* margin-left:10%; */
-}
-.link3{
-  max-width: 7%;
-  max-height:7%;
-  padding: 0.5rem 1rem;
-  box-sizing: border-box;
-  display: inline;float: left;
-  margin-left: 25%
-}
-
-.textfooter{
-  color: white; 
-  margin-left: 40%; 
-  margin-right:20%; 
-  font-size: x-large;
-  z-index:auto;  
-}
-
-footer{
-   background-color: #000000d0;  
-   margin-top:55px;
-   height:150px;
-}
 /* current day in future weather forecast*/
 .weather-forecast-item-current-day {
   background-color: rgba(69, 66, 66, 0.75);
   backdrop-filter: blur(16px) saturate(180%);
   -webkit-backdrop-filter: blur(16px) saturate(180%);
 
+}
+
+@media only screen and (max-width: 576px) {
+  .weather-forecast {
+    grid-template-columns: auto auto;
+  }
+
+  .card {
+    padding: 7px;
+    height: 460px;
+  }
+
+  .weather {
+    padding: 10px;
+  }
+}
+
+
+footer{
+  height: 250px;
+  display: flex !important; 
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-decoration-color: white;
+  text-emphasis-style: bold;
+  background-color: rgba(53, 50, 50, 0.8);
+  margin-top: 3rem;
+  height: auto;
+}
+
+.social-links{
+  display: flex !important;
+  justify-content: center;
+  align-items: center;
+  padding: 0px;
+}
+
+li{
+  width: max(5vw, 2.5rem);
+  height: max(5vw, 2.5rem);
+  list-style: none;
+  margin: 10px;
+}
+
+.link{
+  width: 100%;
+  height: 100%;
+  display: flex !important;
+  justify-content: center;
+  align-items: center;
+  border-radius: 50%;
+  background-color: #fff;
+  color: #000;
+  font-size: 20px;
+  transition: all 0.5s ease;
 }
 
 /* scroll btn css */
@@ -569,5 +554,3 @@ html body #scroll-btn {
   opacity: 1;
   transition: opacity 1s, transform 1s;
 }
-
-
