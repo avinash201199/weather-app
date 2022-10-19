@@ -41,6 +41,7 @@ body {
 /* Card */
 
 .card {
+  margin: 20px 0;
   position: relative;
   top: 1rem;
   background: #000000d0;
@@ -426,21 +427,6 @@ footer {
   }
 }
 
-@media only screen and (max-width: 576px) {
-  .weather-forecast {
-    grid-template-columns: auto auto;
-  }
-
-  .card {
-    padding: 7px;
-    height: 460px;
-  }
-
-  .weather {
-    padding: 10px;
-  }
-}
-
 .checkbox {
   opacity: 0;
   position: absolute;
@@ -510,17 +496,6 @@ footer {
   text-align: center;
 }
 
-.link1,
-.link2,
-.link3 {
-  width: 80px;
-}
-
-/* Changed GitHub icon color from black to white */
-.link1 {
-  filter: invert(1);
-}
-
 .textfooter {
   color: white;
   font-size: x-large;
@@ -542,6 +517,36 @@ footer {
   background-color: rgba(69, 66, 66, 0.75);
   backdrop-filter: blur(16px) saturate(180%);
   -webkit-backdrop-filter: blur(16px) saturate(180%);
+}
+
+@media only screen and (max-width: 576px) {
+  .weather-forecast {
+    grid-template-columns: auto auto;
+  }
+
+  .card {
+    padding: 7px;
+    height: 460px;
+  }
+
+  .weather {
+    padding: 10px;
+  }
+}
+
+footer {
+  text-decoration-color: white;
+  text-emphasis-style: bold;
+  background-color: rgba(53, 50, 50, 0.8);
+  margin: 3rem auto;
+}
+
+.link {
+  width: 80px;
+  border-radius: 50%;
+  background-color: #fff;
+  border: none;
+  outline: none;
 }
 
 /* scroll btn css */
@@ -575,9 +580,7 @@ html body #scroll-btn {
     width: 100%;
   }
 
-  .link1,
-  .link2,
-  .link3 {
+  .link {
     width: 45%;
   }
 }

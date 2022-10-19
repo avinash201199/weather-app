@@ -324,6 +324,40 @@ function showCurrDay(dayString, dateString, element) {
   }
 }
 
+// Script for Live Time using SetInterval
+var a;
+var time;
+const weekday = [
+  'Sunday', 
+  'Monday', 
+  'Tuesday',
+  'Wednesday', 
+  'Thursday', 
+  'Friday', 
+  'Saturday'
+];
+
+const month = [
+  "January",
+  "February",
+  "March",
+  "April",
+   "May",
+   "June",
+   "July",
+   "August",
+   "September",
+   "October",
+   "November",
+   "December"
+];
+setInterval(() => {
+    a = new Date();
+    time = weekday[a.getDay()] + '  ' + a.getDate() + '  ' + month[a.getMonth()] + ' ' + a.getFullYear()   + ' ' +  '  "Clock: ' + a.getHours() + ':' + a.getMinutes() + ':' + a.getSeconds() + '"';
+    document.getElementById('date-time').innerHTML = time;
+}, 1000);
+
+
  
  // scrollTop functionality
  const scrollTop = function () {
