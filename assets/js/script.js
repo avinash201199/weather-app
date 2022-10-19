@@ -109,7 +109,7 @@ let weather = {
       date1
     )}`;
 
-    document.getElementById("sunset").innerText = `${languages[userLang].sunrise}: ${formatAMPM(
+    document.getElementById("sunset").innerText = `${languages[userLang].sunset}: ${formatAMPM(
       date2
     )}`;
 
