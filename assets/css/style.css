@@ -11,7 +11,7 @@ body {
   background-attachment: fixed;
   background-position: 50% 50%;
   overflow-y: scroll;
-  z-index:-1;
+  z-index: -1;
   /* Scroll is required to see full info */
 }
 
@@ -217,7 +217,7 @@ button:focus {
   grid-template-columns: auto auto auto auto auto auto;
   grid-gap: 0.6rem;
   align-items: center;
-  font-family: 'Inter', sans-serif;
+  font-family: "Inter", sans-serif;
 }
 
 .weather-forecast-item {
@@ -328,6 +328,20 @@ button:focus {
   visibility: visible;
 }
 
+footer {
+  height: 300px;
+  display: flex;
+
+  justify-content: center;
+  align-items: center;
+  text-decoration-color: white;
+  text-emphasis-style: bold;
+}
+
+.col-auto {
+  margin: 10px 20px;
+}
+
 @-webkit-keyframes fadein {
   from {
     bottom: 0;
@@ -408,7 +422,7 @@ button:focus {
     transform: translateX(50%);
   }
 
-  .navbar{
+  .navbar {
     margin: 1rem 0.15rem;
   }
 }
@@ -464,12 +478,45 @@ button:focus {
   height: 0px;
 }
 
+.social-media {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 10px auto;
+  width: 50%;
+  padding: 0;
+  height: 65px;
+  flex-direction: row-reverse;
+}
+
+.social-media li {
+  list-style: none;
+  width: 100%;
+  height: 100%;
+  text-align: center;
+}
+
+.textfooter {
+  color: white;
+  font-size: x-large;
+  z-index: auto;
+  text-align: center;
+}
+
+footer {
+  background-color: #000000d0;
+  margin-top: 55px;
+  height: 150px;
+}
+
+.footer-container {
+  width: 100%;
+}
 /* current day in future weather forecast*/
 .weather-forecast-item-current-day {
   background-color: rgba(69, 66, 66, 0.75);
   backdrop-filter: blur(16px) saturate(180%);
   -webkit-backdrop-filter: blur(16px) saturate(180%);
-
 }
 
 @media only screen and (max-width: 576px) {
@@ -487,50 +534,24 @@ button:focus {
   }
 }
 
-
-footer{
-  height: 250px;
-  display: flex !important; 
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
+footer {
   text-decoration-color: white;
   text-emphasis-style: bold;
   background-color: rgba(53, 50, 50, 0.8);
-  margin-top: 3rem;
-  height: auto;
+  margin: 3rem auto;
 }
 
-.social-links{
-  display: flex !important;
-  justify-content: center;
-  align-items: center;
-  padding: 0px;
-}
-
-li{
-  width: max(5vw, 2.5rem);
-  height: max(5vw, 2.5rem);
-  list-style: none;
-  margin: 10px;
-}
-
-.link{
-  width: 100%;
-  height: 100%;
-  display: flex !important;
-  justify-content: center;
-  align-items: center;
+.link {
+  width: 80px;
   border-radius: 50%;
   background-color: #fff;
-  color: #000;
-  font-size: 20px;
-  transition: all 0.5s ease;
+  border: none;
+  outline: none;
 }
 
 /* scroll btn css */
 /* resolved css conflicts */
-html{
+html {
   scroll-behavior: unset !important;
 }
 
@@ -547,10 +568,19 @@ html body #scroll-btn {
   border-radius: 50%;
   font: bold 20px monospace;
   transition: opacity 0.5s, transform 0.5s;
-
 }
 
 #scroll-btn.show {
   opacity: 1;
   transition: opacity 1s, transform 1s;
+}
+
+@media only screen and (max-width: 550px) {
+  .social-media {
+    width: 100%;
+  }
+
+  .link {
+    width: 45%;
+  }
 }
