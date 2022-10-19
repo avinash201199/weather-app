@@ -380,7 +380,45 @@ button:focus {
   font-size: 40px;
   color: #47d764;
 }
+/* --Scroll Bar-- */
 
+
+/* width */
+
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+
+/* Track */
+
+::-webkit-scrollbar-track {
+  box-shadow: inset 0 0 5px grey;
+  border-radius: 5px;
+  background-clip: content-box;
+}
+
+
+/* Handle */
+
+::-webkit-scrollbar-thumb {
+  background: #171717;
+  border-radius: 5px;
+}
+
+
+/* Handle on hover */
+
+::-webkit-scrollbar-thumb:hover {
+  background: #171717;
+}
+
+
+/* --End Of Scroll Bar-- */
+.footerSection{
+  margin-top: 20px;
+  margin-bottom: 0;
+}
 /* Responsive */
 
 @media only screen and (min-width: 1200px) {
@@ -501,6 +539,10 @@ footer{
   height: auto;
 }
 
+.textfooter{
+  color:#000000;
+}
+
 .social-links{
   display: flex !important;
   justify-content: center;
@@ -526,6 +568,43 @@ li{
   color: #000;
   font-size: 20px;
   transition: all 0.5s ease;
+}
+
+.link1{
+  padding: 0.5rem 2rem;
+  box-sizing: border-box; 
+  margin-right: 50px;
+  color:#750cf5;
+  transition-property: scale();
+  transition-duration: 0.5s;
+}
+.link1:hover{
+ transform: scale(1.2,1.2);
+ transition-timing-function: linear;
+ color: #3607f6;
+}
+.link2{
+ padding: 0.5rem 4rem;
+ box-sizing: border-box; 
+ transition-property: scale();
+ transition-duration: 0.5s;
+}
+.link2:hover{
+ transform: scale(1.2,1.2);
+ transition-timing-function: linear;
+}
+.link3{
+ padding: 0.5rem 3rem;
+ box-sizing: border-box;
+ margin-left: 50px;
+ color:rgb(224, 27, 60);
+ transition-property: scale();
+ transition-duration: 0.5s;
+}
+.link3:hover{
+ transform: scale(1.2,1.2);
+ transition-timing-function: linear;
+ color:rgb(247, 8, 48);
 }
 
 /* scroll btn css */
