@@ -171,7 +171,7 @@ let weather = {
     }: ${formatAMPM(date1)}`;
 
     document.getElementById("sunset").innerText = `${
-      translations[userLang].sunrise
+      translations[userLang].sunset
     }: ${formatAMPM(date2)}`;
 
     let url = `https://api.openweathermap.org/data/2.5/onecall?lat=${lat}&lon=${lon}&units=metric&appid=${config.API_KEY}`;
