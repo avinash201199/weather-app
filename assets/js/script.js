@@ -26,24 +26,10 @@ function formatAMPM(date) {
 }
 
 let isCelcius = true;
-
-$(".checkbox").change(function() {
-  if(this.checked) {
-      isCelcius = false;
-      fetch("https://ipapi.co/json/")
-      .then((response) => response.json())
-      .then((data) => {
-        weather.fetchWeather(data.city);
-      });
-  }
-  else{
-      isCelcius = true;
-      fetch("https://ipapi.co/json/")
-      .then((response) => response.json())
-      .then((data) => {
-        weather.fetchWeather(data.city);
-      });
-  }
+let selectedCity;
+$(".checkbox").change( function() {
+  isCelcius = !this.checked;
+  weather.fetchWeather(selectedCity);
 });
 
 
@@ -179,7 +165,8 @@ let weather = {
   },
   search: function () {
     if (document.querySelector(".search-bar").value != "") {
-      this.fetchWeather(document.querySelector(".search-bar").value);
+      selectedCity=document.querySelector(".search-bar").value;
+      this.fetchWeather(selectedCity);
       document.querySelector(".search-bar").value = "";
     } else {
       toastFunction(translations[userLang].pleaseAddLocation);
@@ -299,6 +286,7 @@ document
 fetch("https://ipapi.co/json/")
   .then((response) => response.json())
   .then((data) => {
+    selectedCity = data.city;
     weather.fetchWeather(data.city);
   });
 
