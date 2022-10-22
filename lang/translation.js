@@ -122,6 +122,34 @@ export const translations = {
     day: "Tag",
     night: "Nacht"
   },
+  "fr-FR": {
+    apiLang: "fr",
+    formattingLocale: "fr-FR",
+    airQuality: "Qualité de l'air",
+    good: "Bien",
+    satisfactory: "Satisfaisant",
+    sensitive: "Sensible",
+    unhealthy: "Mauvais pour la santé",
+    veryUnhealthy: "Très malsain",
+    hazardous: "Hasardeux",
+    weatherIn: "Météo à",
+    humidity: "Humidité",
+    windSpeed: "Vitesse du vent",
+    sunrise: "Lever du soleil",
+    sunset: "Le coucher du soleil",
+    noWeatherFound: "Aucune météo trouvée.",
+    search: "Chercher",
+    pleaseAddLocation: "Veuillez ajouter un emplacement.",
+    monday: "Lundi",
+    tuesday: "Mardi",
+    wednesday: "Mercredi",
+    thursday: "Jeudi",
+    friday: "Vendredi",
+    saturday: "Samedi",
+    sunday: "Dimanche",
+    day: "Jour",
+    night: "Nuit"
+  }
 };
 
 // en-US is valid, but "en" only too
@@ -130,3 +158,4 @@ export const translations = {
 translations["en"] = translations["en-US"];
 translations["pt"] = translations["pt-BR"];
 translations["de"] = translations["de-DE"];
+translations["fr"] = translations["fr-FR"];
