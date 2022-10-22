@@ -496,10 +496,7 @@ footer {
   text-align: center;
 }
 
-.social-media li:hover {
-  transform: translateY(-6px);
-  transition: 0.3s;
-}
+
 
 .textfooter {
   color: white;
@@ -547,11 +544,17 @@ footer {
 }
 
 .link {
-  width: 80px;
+  width: 50px;
   border-radius: 50%;
   background-color: #fff;
   border: none;
   outline: none;
+}
+
+.link:hover{
+  transition: 1s;
+  width: 70px;
+  transform: translateY(-6px);
 }
 
 /* scroll btn css */
