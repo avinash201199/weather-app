@@ -146,7 +146,7 @@ button:focus {
 
 /* weather section */
 
-.AQI {
+.weather-component__AQI {
   width: max-content;
   display: flex;
   flex-direction: row;
@@ -166,11 +166,11 @@ button:focus {
   padding: 5px;
 }
 
-.weather {
+.weather-component__data {
   padding: 16px;
 }
 
-.weather-desc {
+.weather-component__desc-primary {
   display: flex;
   flex-direction: row;
   align-items: center;
@@ -178,7 +178,7 @@ button:focus {
   margin-bottom: 10px;
 }
 
-.weather-icn {
+.weather-component__icn {
   height: 50px;
   margin-bottom: 0;
   display: flex;
@@ -186,7 +186,7 @@ button:focus {
   align-items: center;
 }
 
-.weather-icn img {
+.weather-component__icn img {
   width: 50px;
   height: 50px;
 }
@@ -296,13 +296,13 @@ button:focus {
   margin: 0 10px 0 0px;
 }
 
-.city-name {
+.weather-component__city-name {
   text-align: center;
   font-size: 2rem;
   text-shadow: 2px 4px rgba(0, 0, 0, 0.885), 2px 4px rgba(0, 0, 0, 0.885);
 }
 
-.city-temperature {
+.weather-component__city-temperature {
   text-align: center;
 }
 
