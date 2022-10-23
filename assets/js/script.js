@@ -164,10 +164,10 @@ let weather = {
     getWeatherWeekly(url);
   },
   search: function () {
-    if (document.querySelector(".search-bar").value != "") {
-      selectedCity=document.querySelector(".search-bar").value;
+    if (document.querySelector(".weather-component__search-bar").value != "") {
+      selectedCity=document.querySelector(".weather-component__search-bar").value;
       this.fetchWeather(selectedCity);
-      document.querySelector(".search-bar").value = "";
+      document.querySelector(".weather-component__search-bar").value = "";
     } else {
       toastFunction(translations[userLang].pleaseAddLocation);
     }
@@ -189,7 +189,7 @@ function generateWeatherItem(
   dayTemperature
 ) {
   let container = document.createElement("div");
-  container.className = "weather-forecast-item rounded text-center";
+  container.className = "forecast-component__item rounded text-center";
 
   let day = document.createElement("div");
   day.innerText = dayString;
@@ -308,7 +308,7 @@ function showCurrDay(dayString, dateString, element) {
   const dayName = days[date.getDay()];
   const dayNumber = date.getDate();
   if (dayString == dayName && dateString == dayNumber) {
-    element.classList.add("weather-forecast-item-current-day")
+    element.classList.add("forecast-component__item-current-day")
   }
 }
 

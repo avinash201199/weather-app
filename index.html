@@ -22,9 +22,9 @@
 
 <body id="body">
   <h2 class="header-text" style="text-align: center; width: 55%; margin: 5px auto 10px;">Today is <span id='date-time'></h2>
-  <nav class="navbar nav-component temp">
-    <a class="navbar-brand  nav-component__anchor" href="#">
-      <div class="col-auto nav-component__celcius-block">
+  <nav class="nav-component navbar temp">
+    <a class=" nav-component__anchor navbar-brand" href="#">
+      <div class="nav-component__celcius-block col-auto">
         <input type="checkbox" id="unit" class="checkbox">
         <label for="checkbox" class="label">
           <span class="farenheit">F°</span>
@@ -32,7 +32,6 @@
           <div class='ball'>
         </label>
     </div>
-    Hello i am here
     </a>
   </nav>
 
@@ -96,9 +95,9 @@
 
     </div>
   </div>
-  <div class="future-forecast p-2 overflow-hidden text-white w-100">
-    <div class="weather-forecast transition overflow-hidden " id="weather-forecast">
-      <div class="weather-forecast-item rounded text-center" id="weather-forecast-item">
+  <div class="forecast-component p-2 overflow-hidden text-white w-100">
+    <div class="forecast-component__items-wrapper transition overflow-hidden " id="weather-forecast">
+      <div class="forecast-component__item rounded text-center" id="weather-forecast-item">
         <div>Mon</div>
         <figure class="forecast-img">
           <img src="http://openweathermap.org/img/wn/10d@2x.png" alt="weather icon">
@@ -118,8 +117,8 @@
 
 
   <!-- toast -->
-  <div id="toast">
-    <div class="checkicon"><i class="fas fa-check-square"></i></div>
+  <div id="toast" class="toast-component">
+    <div class="toast-component__checkicon"><i class="fas fa-check-square"></i></div>
   </div>
 
   <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>

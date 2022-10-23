@@ -220,7 +220,7 @@ button:focus {
 }
 
 /* Forecast */
-.future-forecast {
+.forecast-component {
   position: relative;
   top: 2.5rem;
 }
@@ -236,7 +236,7 @@ button:focus {
   object-fit: contain;
 }
 
-.weather-forecast {
+.forecast-component__items-wrapper {
   display: grid;
   grid-template-columns: auto auto auto auto auto auto;
   grid-gap: 0.6rem;
@@ -244,7 +244,7 @@ button:focus {
   font-family: 'Inter', sans-serif;
 }
 
-.weather-forecast-item {
+.forecast-component__item {
   border: 1px solid rgb(35, 35, 35);
   background: rgba(0, 0, 0, 0.8);
   padding: 12px;
@@ -254,12 +254,12 @@ button:focus {
   min-width: max-content;
 }
 
-.weather-forecast-item img {
+.forecast-component__item img {
   width: 50px;
   height: 50px;
 }
 
-.weather-forecast-item:hover {
+.forecast-component__item:hover {
   backdrop-filter: blur(16px) saturate(180%);
   -webkit-backdrop-filter: blur(16px) saturate(180%);
   background-color: rgba(69, 66, 66, 0.75);
@@ -414,7 +414,7 @@ footer {
   }
 }
 
-.checkicon i {
+.toast-component__checkicon i {
   font-size: 40px;
   color: #47d764;
 }
@@ -422,19 +422,19 @@ footer {
 /* Responsive */
 
 @media only screen and (min-width: 1200px) {
-  .weather-forecast {
+  .forecast-component__items-wrapper {
     grid-template-columns: auto auto auto auto;
   }
 }
 
 @media only screen and (max-width: 992px) {
-  .weather-forecast {
+  .forecast-component__items-wrapper {
     grid-template-columns: auto auto auto auto;
   }
 }
 
 @media only screen and (max-width: 768px) {
-  .weather-forecast {
+  .forecast-component__items-wrapper {
     grid-template-columns: auto auto auto;
   }
 
@@ -540,23 +540,23 @@ footer {
   width: 100%;
 }
 /* current day in future weather forecast*/
-.weather-forecast-item-current-day {
+.forecast-component__item-current-day {
   background-color: rgba(69, 66, 66, 0.75);
   backdrop-filter: blur(16px) saturate(180%);
   -webkit-backdrop-filter: blur(16px) saturate(180%);
 }
 
 @media only screen and (max-width: 576px) {
-  .weather-forecast {
+  .forecast-component__items-wrapper {
     grid-template-columns: auto auto;
   }
 
-  .card {
+  .weather-component__card {
     padding: 7px;
     height: 460px;
   }
 
-  .weather {
+  .weather-component {
     padding: 10px;
   }
 }
