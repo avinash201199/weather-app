@@ -38,6 +38,30 @@ body {
   /* width: fit-content; */
 }
 
+/* nav BEM Conevntion * -------/
+
+/* Block */
+.nav-component{
+    height: 0px;   
+}
+/*   element*/
+ .nav-component__anchor{
+   text-decoration: none;
+} 
+
+.nav-component__celcius-block{
+  margin: 10px 20px; /* replced from line 358 */
+}
+
+/* .nav-component__checkbox{
+  opacity: 0;
+  position: absolute;
+  z-index: 10;
+  height: 2rem;
+  width: 4rem;
+  cursor: pointer;
+} */
+
 /* Card */
 
 .card {
@@ -338,9 +362,9 @@ footer {
   text-emphasis-style: bold;
 }
 
-.col-auto {
+/* .col-auto {
   margin: 10px 20px;
-}
+}  */
 
 @-webkit-keyframes fadein {
   from {
@@ -474,9 +498,7 @@ footer {
   font-size: 15px;
 }
 
-.navbar {
-  height: 0px;
-}
+
 
 .social-media {
   display: flex;
