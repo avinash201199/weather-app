@@ -64,7 +64,7 @@ body {
 
 /* Card */
 
-.card {
+.weather-component__card{
   margin: 20px 0;
   position: relative;
   top: 1rem;
@@ -76,11 +76,11 @@ body {
   backdrop-filter: blur(8px);
 }
 
-.search {
+.weather-component__search {
   display: flex;
   justify-content: center;
 }
-.searchbar h1 {
+.weather-component__searchbar h1 {
   overflow: hidden;
   border-right: 1px solid;
   margin: 0 auto;
@@ -89,7 +89,7 @@ body {
   animation-iteration-count: infinite;
 }
 
-input.search-bar {
+input.weather-component__search-bar {
   border: none;
   outline: none;
   padding: 0.3em 1em;
@@ -102,12 +102,12 @@ input.search-bar {
   caret-color: white;
 }
 
-.search {
+.weather-component__search {
   display: flex;
   justify-content: center;
 }
 
-.search-bar {
+.weather-component__search-bar {
   border-radius: 30px;
 }
 
@@ -116,14 +116,14 @@ option:hover,
   background-color: lightblue;
 }
 
-input.search-bar:focus {
+input.weather-component__search-bar:focus {
   transition: 700ms;
   box-shadow: 0px 0px 10px rgb(255 255 255 / 50%);
   border-radius: 0;
   border-radius: 30px;
 }
 
-button {
+.weather-component__button {
   margin: 0.5em;
   margin-left: -3.2rem;
   border-radius: 50%;

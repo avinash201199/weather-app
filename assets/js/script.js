@@ -267,14 +267,14 @@ function toastFunction(val) {
     x.className = x.className.replace("show", "");
   }, 3000);
 }
-document.querySelector(".search button").addEventListener("click", function () {
+document.querySelector(".weather-component__search button").addEventListener("click", function () {
   weather.search();
 });
 
 
 
 document
-  .querySelector(".search-bar")
+  .querySelector(".weather-component__search-bar")
   .addEventListener("keyup", function (event) {
     if (event.key == "Enter") {
       weather.search();
