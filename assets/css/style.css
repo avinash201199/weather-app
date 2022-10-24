@@ -27,7 +27,7 @@ body {
 }
 
 /* Header Text */
-.header-text {
+.header-component {
   padding: 5px 20px;
   border-radius: 15px;
   text-align: center;
@@ -500,7 +500,7 @@ footer {
 
 
 
-.social-media {
+.footer-component__social-media {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -511,19 +511,19 @@ footer {
   flex-direction: row-reverse;
 }
 
-.social-media li {
+.footer-component__social-media li {
   list-style: none;
   width: 100%;
   height: 100%;
   text-align: center;
 }
 
-.social-media li:hover {
+.footer-component__social-media li:hover {
   transform: translateY(-6px);
   transition: 0.3s;
 }
 
-.textfooter {
+.footer-component__author-label {
   color: white;
   font-size: x-large;
   z-index: auto;
@@ -536,7 +536,7 @@ footer {
   height: 150px;
 }
 
-.footer-container {
+.footer-component {
   width: 100%;
 }
 /* current day in future weather forecast*/
@@ -603,7 +603,7 @@ html body #scroll-btn {
 }
 
 @media only screen and (max-width: 550px) {
-  .social-media {
+  .footer-component__social-media {
     width: 100%;
   }
 
