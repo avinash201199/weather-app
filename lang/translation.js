@@ -149,6 +149,34 @@ export const translations = {
     sunday: "Dimanche",
     day: "Jour",
     night: "Nuit"
+  },
+  "id-ID": {
+    apiLang: "id",
+    formattingLocale: "id-ID",
+    airQuality: "Kualitas Udara",
+    good: "Baik",
+    satisfactory: "Memuaskan",
+    sensitive: "Sensitif",
+    unhealthy: "Tidak Sehat",
+    veryUnhealthy: "Sangat Tidak Sehat",
+    hazardous: "Berbahaya",
+    weatherIn: "Cuaca di",
+    humidity: "Kelembaban",
+    windSpeed: "Kecepatan Angin",
+    sunrise: "Matahari terbit",
+    sunset: "Matahari terbenam",
+    noWeatherFound: "Data cuaca tidak ditemukan.",
+    search: "Pencarian",
+    pleaseAddLocation: "Silahkan tambahkan lokasi.",
+    monday: "Senin",
+    tuesday: "Selasa",
+    wednesday: "Rabu",
+    thursday: "Kamis",
+    friday: "Jumat",
+    saturday: "Sabtu",
+    sunday: "Minggu",
+    day: "Siang",
+    night: "Malam"
   }
 };
 
@@ -159,3 +187,4 @@ translations["en"] = translations["en-US"];
 translations["pt"] = translations["pt-BR"];
 translations["de"] = translations["de-DE"];
 translations["fr"] = translations["fr-FR"];
+translations["id"] = translations["id-ID"];
