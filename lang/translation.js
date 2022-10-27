@@ -177,6 +177,34 @@ export const translations = {
     sunday: "Minggu",
     day: "Siang",
     night: "Malam"
+  },
+  "el-GR": {
+    apiLang: "el",
+    formattingLocale: "el-GR",
+    airQuality: "Ποιότητα αέρα",
+    good: "Καλός",
+    satisfactory: "Ικανοποιητικός",
+    sensitive: "Ευαίσθητος",
+    unhealthy: "Ανθυγιεινός",
+    veryUnhealthy: "Πολύ Ανθυγιεινός",
+    hazardous: "Επικίνδυνος",
+    weatherIn: "Καιρός στο",
+    humidity: "Υγρασία",
+    windSpeed: "Ταχύτητα Αέρα",
+    sunrise: "Ανατολή ήλιου",
+    sunset: "Δυση του ήλιου",
+    noWeatherFound: "Δεν βρέθηκε καιρός.",
+    search: "Αναζήτηση",
+    pleaseAddLocation: "Προσθέστε μια τοποθεσία.",
+    monday: "Δευτέρα",
+    tuesday: "Τρίτη",
+    wednesday: "Τετάρτη",
+    thursday: "Πέμπτη",
+    friday: "Παρασκευή",
+    saturday: "Σάββατο",
+    sunday: "Κυριακή",
+    day: "Mέρα",
+    night: "Νύχτα"
   }
 };
 
@@ -188,3 +216,4 @@ translations["pt"] = translations["pt-BR"];
 translations["de"] = translations["de-DE"];
 translations["fr"] = translations["fr-FR"];
 translations["id"] = translations["id-ID"];
+translations["el"] = translations["el-GR"];
