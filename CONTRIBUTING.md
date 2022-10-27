@@ -5,16 +5,16 @@ We love your input! We want to make contributing to this project as easy and tra
 - Discussing the current state of the code
 - Submitting a fix
 - Proposing new features
-- If you are beginner then you can contribute by improving the structure or the layout or any mistakes in the repository.
+- If you are a beginner then you can contribute by improving the structure or the layout or any mistakes in the repository.
 
 ## We Develop with Github
-We use github to host code, to track issues and feature requests, as well as accept pull requests.
+We use GitHub to host code, track issues, and feature requests, as well as accept pull requests.
 
 ## We Use [Github Flow](https://guides.github.com/introduction/flow/index.html), So All Code Changes Happen Through Pull Requests
 Pull requests are the best way to propose changes to the codebase (we use [Github Flow](https://guides.github.com/introduction/flow/index.html)). We actively welcome your pull requests:
 
 1. Star this repository.
-2. Create an issue with description and wait for approval.
+2. Create an issue with a description and wait for the approval.
 2. Fork the repo and create your branch from `main`.
 3. If you've added code that should be tested, add tests.
 4. If you've changed APIs, update the documentation.
@@ -51,3 +51,5 @@ By contributing, you agree that your contributions will be licensed under its GN
 This document was adapted from the open-source contribution guidelines for [Facebook's Draft](https://github.com/facebook/draft-js/blob/a9316a723f9e918afde44dea68b5f9f39b7d9b00/CONTRIBUTING.md)
 
 #### Note- Before contributing please create an issue first so that I can assign you and you can start working on it.
+
+
