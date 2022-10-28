@@ -167,7 +167,6 @@ let weather = {
     if (document.querySelector(".weather-component__search-bar").value != "") {
       selectedCity=document.querySelector(".weather-component__search-bar").value;
       this.fetchWeather(selectedCity);
-      document.querySelector(".weather-component__search-bar").value = "";
     } else {
       toastFunction(translations[userLang].pleaseAddLocation);
     }
