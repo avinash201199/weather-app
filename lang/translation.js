@@ -177,6 +177,62 @@ export const translations = {
     sunday: "Minggu",
     day: "Siang",
     night: "Malam"
+  },
+  "el-GR": {
+    apiLang: "el",
+    formattingLocale: "el-GR",
+    airQuality: "Ποιότητα αέρα",
+    good: "Καλός",
+    satisfactory: "Ικανοποιητικός",
+    sensitive: "Ευαίσθητος",
+    unhealthy: "Ανθυγιεινός",
+    veryUnhealthy: "Πολύ Ανθυγιεινός",
+    hazardous: "Επικίνδυνος",
+    weatherIn: "Καιρός στο",
+    humidity: "Υγρασία",
+    windSpeed: "Ταχύτητα Αέρα",
+    sunrise: "Ανατολή ήλιου",
+    sunset: "Δυση του ήλιου",
+    noWeatherFound: "Δεν βρέθηκε καιρός.",
+    search: "Αναζήτηση",
+    pleaseAddLocation: "Προσθέστε μια τοποθεσία.",
+    monday: "Δευτέρα",
+    tuesday: "Τρίτη",
+    wednesday: "Τετάρτη",
+    thursday: "Πέμπτη",
+    friday: "Παρασκευή",
+    saturday: "Σάββατο",
+    sunday: "Κυριακή",
+    day: "Mέρα",
+    night: "Νύχτα"
+  },
+  "ja_JP": {
+    apiLang: "ja",
+    formattingLocale: "ja-JP",
+    airQuality: "空気の質",
+    good: "良い",
+    satisfactory: "満足",
+    sensitive: "センシティブ",
+    unhealthy: "不健康",
+    veryUnhealthy: "非常に不健康",
+    hazardous: "危険な",
+    weatherIn: "天気",
+    humidity: "湿度",
+    windSpeed: "風速",
+    sunrise: "日の出",
+    sunset: "日没",
+    noWeatherFound: "天気が見つかりません.",
+    search: "探す",
+    pleaseAddLocation: "場所を追加してください.",
+    monday: "月曜日",
+    tuesday: "火曜日",
+    wednesday: "水曜日",
+    thursday: "木曜日",
+    friday: "金曜日",
+    saturday: "土曜日",
+    sunday: "日曜日",
+    day: "日",
+    night: "夜"
   }
 };
 
@@ -188,3 +244,5 @@ translations["pt"] = translations["pt-BR"];
 translations["de"] = translations["de-DE"];
 translations["fr"] = translations["fr-FR"];
 translations["id"] = translations["id-ID"];
+translations["el"] = translations["el-GR"];
+translations["ja"] = translations["ja-JP"];
