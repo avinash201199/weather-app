@@ -233,6 +233,34 @@ export const translations = {
     sunday: "日曜日",
     day: "日",
     night: "夜"
+  },
+   "sq_AL": {
+    apiLang: "sq",
+    formattingLocale: "sq_AL",
+    airQuality: "Cilësia e ajrit",
+    good: "Mirë",
+    satisfactory: "E kënaqshme",
+    sensitive: "I ndjeshëm",
+    unhealthy: "E pashëndetshme",
+    veryUnhealthy: "Shumë i pashëndetshëm",
+    hazardous: "E rrezikshme",
+    weatherIn: "Moti në",
+    humidity: "Lagështia",
+    windSpeed: "Shpejtesia e eres",
+    sunrise: "Lindja e diellit",
+    sunset: "Perëndimi i diellit",
+    noWeatherFound: "Nuk u gjet mot.",
+    search: "Kërko",
+    pleaseAddLocation: "Ju lutemi shtoni një vendndodhje.",
+    monday: "e hënë",
+    tuesday: "e martë",
+    wednesday: "e mërkurë",
+    thursday: "e enjte",
+    friday: "e premte",
+    saturday: "e shtunë",
+    sunday: "të dielën",
+    day: "Dita",
+    night: "Natën"
   }
 };
 
@@ -246,3 +274,4 @@ translations["fr"] = translations["fr-FR"];
 translations["id"] = translations["id-ID"];
 translations["el"] = translations["el-GR"];
 translations["ja"] = translations["ja-JP"];
+translations["sq"] = translations["sq_AL"];
