@@ -6,6 +6,33 @@ Building a Weather app with JavaScript is an excellent project for beginners. It
 
 This is a simple javascript project made with the help of HTML, CSS and OpenWeather API . We used weather API to fetch data and display according to the city entered in the search bar.
 
+# Naming Conventions to follow for HTML, CSS - BEM Methodology:
+
+Reference :- 
+1. [BEM - for html css](https://css-tricks.com/bem-101/)
+2. [BEM - for html sass](https://css-tricks.com/using-sass-control-scope-bem-naming/)
+
+```html
+<div class="component">
+  <div class="component__child-element"></div>
+</div>
+<div class="component">
+  <div class="component__child-element"></div>
+</div>
+```
+
+```css
+/* Block component */
+.btn {}
+
+/* Element that depends upon the block */ 
+.btn__price {}
+
+/* Modifier that changes the style of the block */
+.btn--orange {} 
+.btn--big {}
+```
+
 # Demo of App
 
 
