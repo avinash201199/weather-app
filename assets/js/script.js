@@ -78,13 +78,13 @@ const element = document.querySelector('.status');
 window.addEventListener('online',()=>{
     // console.log('online');
     document.getElementById('onorof').innerHTML='online';
-    element.style.setProperity('--statusc','rgb(0, 255, 0)');
+    // element.style.setProperity('--statusc','rgb(0, 255, 0)');
 
 });
 window.addEventListener('offline',()=>{
     // console.log('offline'); 
     document.getElementById('onorof').innerHTML='offline';
-    element.style.setProperity('--statusc','#ff0000');
+    // element.style.setProperity('--statusc','#ff0000');
 });
 
 let weather = {
@@ -192,10 +192,9 @@ let weather = {
     getWeatherWeekly(url);
   },
   search: function () {
-    if (document.querySelector(".search-bar").value != "") {
-      selectedCity=document.querySelector(".search-bar").value;
+    if (document.querySelector(".weather-component__search-bar").value != "") {
+      selectedCity=document.querySelector(".weather-component__search-bar").value;
       this.fetchWeather(selectedCity);
-      document.querySelector(".search-bar").value = "";
     } else {
       toastFunction(translations[userLang].pleaseAddLocation);
     }
@@ -223,7 +222,7 @@ function generateWeatherItem(
   dayTemperature
 ) {
   let container = document.createElement("div");
-  container.className = "weather-forecast-item rounded text-center";
+  container.className = "forecast-component__item rounded text-center";
 
   let day = document.createElement("div");
   day.innerText = dayString;
@@ -301,14 +300,14 @@ function toastFunction(val) {
     x.className = x.className.replace("show", "");
   }, 3000);
 }
-document.querySelector(".search button").addEventListener("click", function () {
+document.querySelector(".weather-component__search button").addEventListener("click", function () {
   weather.search();
 });
 
 
 
 document
-  .querySelector(".search-bar")
+  .querySelector(".weather-component__search-bar")
   .addEventListener("keyup", function (event) {
     if (event.key == "Enter") {
       weather.search();
@@ -342,7 +341,7 @@ function showCurrDay(dayString, dateString, element) {
   const dayName = days[date.getDay()];
   const dayNumber = date.getDate();
   if (dayString == dayName && dateString == dayNumber) {
-    element.classList.add("weather-forecast-item-current-day")
+    element.classList.add("forecast-component__item-current-day")
   }
 }
 
