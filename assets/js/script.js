@@ -74,6 +74,19 @@ const AirQuality = (log, lat) => {
     });
 };
 
+const element = document.querySelector('.status');
+window.addEventListener('online',()=>{
+    // console.log('online');
+    document.getElementById('onorof').innerHTML='online';
+    element.style.setProperity('--statusc','rgb(0, 255, 0)');
+
+});
+window.addEventListener('offline',()=>{
+    // console.log('offline'); 
+    document.getElementById('onorof').innerHTML='offline';
+    element.style.setProperity('--statusc','#ff0000');
+});
+
 let weather = {
   fetchWeather: function (city) {
     let isCountry = false;

@@ -5,5 +5,6 @@
 "cert": "C:\\Users\\PAVAN RAJESH\\pavanocta.crt", //full path of the certificate  
 "key": "C:\\Users\\PAVAN RAJESH\\pavanocta.key", //full path of the private key  
 "passphrase": "12345"  
-}  
+},
+"liveServer.settings.port": 5501
 }

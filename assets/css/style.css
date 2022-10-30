@@ -1,3 +1,10 @@
+:root{
+  --statusc:rgb(0, 255, 0);
+  
+}
+
+
+
 body {
   justify-content: center;
   align-items: center;
@@ -36,7 +43,46 @@ body {
   font-size: 1em;
   font-weight: 700;
   /* width: fit-content; */
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
+
+
+.light{
+  width:100px;
+  height:28px;
+  background-color: black;
+  position:absolute;
+  left:100px;
+  border-radius: 10px;
+  padding-left:5px;
+}
+.status{
+  font-size:20px;
+  font-weight: 400;
+  color:white;
+}
+
+.status::before{
+  content: '';
+  position: absolute;
+  width:15px;
+  height:15px;
+  border-radius: 50%;
+  background-color: var(--statusc);
+  top:7px;
+  left:75px;
+  filter: blur(2px);
+}
+
+
+
+
+
+
+
+
 
 /* Card */
 
