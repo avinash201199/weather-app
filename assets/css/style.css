@@ -511,23 +511,40 @@ footer {
   flex-direction: row-reverse;
 }
 
-.footer-component__social-media li {
-  list-style: none;
-  width: 100%;
-  height: 100%;
-  text-align: center;
+.footer-component__social-icons>a>img{
+  border-radius: 50%;
+  height: 40px;
+  width: 40px;
+  margin: 10px;
 }
 
-.footer-component__social-media li:hover {
+.footer-component__social-icons a:hover {
   transform: translateY(-6px);
   transition: 0.3s;
 }
 
 .footer-component__author-label {
-  color: white;
-  font-size: x-large;
+  color: rgb(4, 7, 10);
+  font-size: large;
   z-index: auto;
   text-align: center;
+}
+
+.footer-component__follow-label {
+  color: black;
+  font-size: 22px;
+  z-index: auto;
+  text-align: center;
+  line-height: 1.3;
+  font-weight: 600;
+}
+
+.social-info{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  text-align: center;
+  margin: 15px;
 }
 
 footer {
