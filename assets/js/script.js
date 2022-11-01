@@ -10,7 +10,6 @@ window.onload = function() {
 
 const userLang = getUserLanguage() || "en-US";
 const place = document.querySelector("#place");
-
 for (var i in CITY) {
   var option = document.createElement("option");
   option.value = CITY[i];
@@ -75,6 +74,19 @@ const AirQuality = (log, lat) => {
     });
 };
 
+const element = document.querySelector('.status');
+window.addEventListener('online',()=>{
+    // console.log('online');
+    document.getElementById('onorof').innerHTML='online';
+    // element.style.setProperity('--statusc','rgb(0, 255, 0)');
+
+});
+window.addEventListener('offline',()=>{
+    // console.log('offline'); 
+    document.getElementById('onorof').innerHTML='offline';
+    // element.style.setProperity('--statusc','#ff0000');
+});
+
 let weather = {
   fetchWeather: function (city) {
     let isCountry = false;
@@ -90,7 +102,7 @@ let weather = {
       city = Capitals[index].city;
     }
     fetch(
-      "https://api.openweathermap.org/data/2.5/weather?q=" +
+        "https://api.openweathermap.org/data/2.5/weather?q=" +
         city +
         "&units=metric&appid=" +
         config.API_KEY +
@@ -110,16 +122,32 @@ let weather = {
 
   displayWeather: function (data) {
     //console.log(data);
-    const { name } = data;
+    const {
+      name
+    } = data;
     //console.log(name);
-    const { icon, description } = data.weather[0];
-    const { temp, humidity } = data.main;
-    const { speed } = data.wind;
-    const { sunrise, sunset } = data.sys;
+    const {
+      icon,
+      description
+    } = data.weather[0];
+    const {
+      temp,
+      humidity
+    } = data.main;
+    const {
+      speed
+    } = data.wind;
+    const {
+      sunrise,
+      sunset
+    } = data.sys;
     let date1 = new Date(sunrise * 1000);
     let date2 = new Date(sunset * 1000);
     //console.log(formatAMPM(date));
-    const { lat, lon } = data.coord;
+    const {
+      lat,
+      lon
+    } = data.coord;
     const airIndex = AirQuality(lon, lat);
 
     document.getElementById("city").innerText =
@@ -170,8 +198,13 @@ let weather = {
     } else {
       toastFunction(translations[userLang].pleaseAddLocation);
     }
-  },
+  }
 };
+
+
+
+
+
 
 async function getWeatherWeekly(url) {
   fetch(url)
@@ -179,6 +212,7 @@ async function getWeatherWeekly(url) {
     .then((data) => {
       showWeatherData(data);
     });
+    
 }
 
 function generateWeatherItem(
