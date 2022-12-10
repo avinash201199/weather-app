@@ -22,8 +22,10 @@ body::-webkit-scrollbar {
 
 /* Hide scrollbar for IE, Edge and Firefox */
 body {
-  -ms-overflow-style: none; /* IE and Edge */
-  scrollbar-width: none; /* Firefox */
+  -ms-overflow-style: none;
+  /* IE and Edge */
+  scrollbar-width: none;
+  /* Firefox */
 }
 
 /* Header Text */
@@ -41,16 +43,18 @@ body {
 /* nav BEM Conevntion * -------/
 
 /* Block */
-.nav-component{
-    height: 0px;   
+.nav-component {
+  height: 0px;
 }
-/*   element*/
- .nav-component__anchor{
-   text-decoration: none;
-} 
 
-.nav-component__celcius-block{
-  margin: 10px 20px; /* replced from line 358 */
+/*   element*/
+.nav-component__anchor {
+  text-decoration: none;
+}
+
+.nav-component__celcius-block {
+  margin: 10px 20px;
+  /* replced from line 358 */
 }
 
 /* .nav-component__checkbox{
@@ -64,7 +68,7 @@ body {
 
 /* Card */
 
-.weather-component__card{
+.weather-component__card {
   margin: 20px 0;
   position: relative;
   top: 1rem;
@@ -80,6 +84,7 @@ body {
   display: flex;
   justify-content: center;
 }
+
 .weather-component__searchbar h1 {
   overflow: hidden;
   border-right: 1px solid;
@@ -511,7 +516,7 @@ footer {
   flex-direction: row-reverse;
 }
 
-.footer-component__social-icons>a>img{
+.footer-component__social-icons > a > img {
   border-radius: 50%;
   height: 40px;
   width: 40px;
@@ -539,7 +544,7 @@ footer {
   font-weight: 600;
 }
 
-.social-info{
+.social-info {
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -556,6 +561,7 @@ footer {
 .footer-component {
   width: 100%;
 }
+
 /* current day in future weather forecast*/
 .forecast-component__item-current-day {
   background-color: rgba(69, 66, 66, 0.75);
@@ -591,12 +597,11 @@ footer {
   background-color: #fff;
   border: none;
   outline: none;
+  transition: .5s;
 }
 
-.link:hover{
-  transition: 1s;
-  width: 70px;
-  transform: translateY(-6px);
+.link:hover {
+  transform: translateY(-6px) scale(1.1);
 }
 
 /* scroll btn css */
