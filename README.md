@@ -20,4 +20,4 @@ You can contribute in this project by adding some new features or anything in yo
 [Check for getting started](https://github.com/avinash201199/weather-app/blob/main/CONTRIBUTING.md)
 
 <br> 
-For any query, dm https://www.instagram.com/lets__code/
+For any query dm on [Linkedin](https://www.linkedin.com/in/avinash-singh-071b79175/)
