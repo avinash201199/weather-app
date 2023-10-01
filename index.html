@@ -19,6 +19,13 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
    <!-- fontawesome CDN -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+
+<style>
+  .Myclass{
+    border-radius: 2rem;
+  }
+</style>
+
 </head>
 
 <body id="body">
@@ -38,7 +45,7 @@
 
 
   <div class="weather-component container d-flex justify-content-center align-items-center flex-column">
-    <div class="weather-component__card text-white rounded">
+    <div class="weather-component__card text-white Myclass">
       <div class="weather-component__search">
         <input type="text" class="weather-component__search-bar" name="search-bar"   list="place" placeholder="Search" autocomplete="address-level2" />
           <datalist id="place" class="weather-component__datalist">
