@@ -1,27 +1,48 @@
+/* 
+   CSS Styles with Added Features:
+   
+   - Custom Scrollbar Styling
+   - Stylish Search Button
+   - Loading Animation
+   - Enhanced Forecast Card Styling
+   - Improved City Name and Temperature Display
+   - Refined Icons and Images Styling
+   - Toast Notification Styles (for future use)
+*/
+
+{
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* Global styles */
 body {
+  display: flex;
   justify-content: center;
   align-items: center;
-  height: 90vh;
+  min-height: 100vh;
   margin: 0;
   font-family: 'Poppins', sans-serif;
   background: #222;
-  /* background-image: url('https://source.unsplash.com/1600x900/?landscape'); */
-  /* background-repeat: no-repeat;
-  background-size: cover;
-  background-attachment: fixed;
-  background-position: 50% 50%; */
   overflow-y: scroll;
-  /* z-index:-1; */
-  /* Scroll is required to see full info */
   position: relative;
+  color: #fff;
 }
 
-/* Hide scrollbar for IE, Edge and Firefox */
-body {
-  -ms-overflow-style: none;
-  /* IE and Edge */
-  scrollbar-width: none;
-  /* Firefox */
+/* Hide scrollbar for IE, Edge, and Firefox */
+body::-webkit-scrollbar {
+  width: 10px;
+}
+
+body::-webkit-scrollbar-track {
+  box-shadow: inset 0 0 5px grey;
+  border-radius: 5px;
+}
+
+body::-webkit-scrollbar-thumb {
+  background: #171717;
+  border-radius: 5px;
 }
 
 /* Header Text */
@@ -29,45 +50,28 @@ body {
   padding: 5px 20px;
   border-radius: 15px;
   text-align: center;
-  color: #fff;
   background-color: rgba(0, 0, 0, 0.5);
   font-size: 1em;
   font-weight: 700;
-  /* width: fit-content; */
 }
 
-/* nav BEM Conevntion * -------/
-
-/* Block */
+/* Navigation */
 .nav-component {
   height: 0px;
 }
 
-/*   element*/
 .nav-component__anchor {
   text-decoration: none;
 }
 
 .nav-component__celcius-block {
   margin: 10px 20px;
-  /* replced from line 358 */
 }
 
-/* .nav-component__checkbox{
-  opacity: 0;
-  position: absolute;
-  z-index: 10;
-  height: 2rem;
-  width: 4rem;
-  cursor: pointer;
-} */
-
-/* Card */
-
+/* Weather Card */
 .weather-component__card {
   margin: 20px 0;
   position: relative;
-  top: 1rem;
   background: #000000d0;
   padding: 1em;
   width: 100%;
@@ -76,6 +80,7 @@ body {
   backdrop-filter: blur(8px);
 }
 
+/* Search Bar */
 .weather-component__search {
   display: flex;
   justify-content: center;
@@ -99,31 +104,11 @@ input.weather-component__search-bar {
   font-size: 105%;
   width: calc(100% - 100px);
   color: white;
-  border: px solid white;
+  border: 1px solid white;
   caret-color: white;
 }
 
-.weather-component__search {
-  display: flex;
-  justify-content: center;
-}
-
-.weather-component__search-bar {
-  border-radius: 30px;
-}
-
-option:hover,
-.active {
-  background-color: lightblue;
-}
-
-input.weather-component__search-bar:focus {
-  transition: 700ms;
-  box-shadow: 0px 0px 10px rgb(255 255 255 / 50%);
-  border-radius: 0;
-  border-radius: 30px;
-}
-
+/* Search Button */
 .weather-component__button {
   margin: 0.5em;
   margin-left: -3.2rem;
@@ -145,8 +130,7 @@ button:focus {
   box-shadow: 0px 0px 10px rgb(255 255 255 / 50%);
 }
 
-/* weather section */
-
+/* Weather Data Display */
 .weather-component__AQI {
   width: max-content;
   display: flex;
@@ -171,6 +155,7 @@ button:focus {
   padding: 16px;
 }
 
+/* Additional Styling for Data Display */
 .weather-component__desc-primary {
   display: flex;
   flex-direction: row;
@@ -179,6 +164,7 @@ button:focus {
   margin-bottom: 10px;
 }
 
+/* Styling for Weather Icons */
 .weather-component__icn {
   height: 50px;
   margin-bottom: 0;
@@ -192,10 +178,12 @@ button:focus {
   height: 50px;
 }
 
+/* Styling for Air Quality Indicator */
 #AirQuality {
   margin: 0 5px;
 }
 
+/* Loading Animation */
 .loading {
   visibility: hidden;
   max-height: 20px;
@@ -211,7 +199,6 @@ button:focus {
 }
 
 /* Global Styles */
-
 .flex-1 {
   flex: 1;
 }
@@ -220,12 +207,13 @@ button:focus {
   transition: 2s;
 }
 
-/* Forecast */
+/* Forecast Section */
 .forecast-component {
   position: relative;
   top: 2.5rem;
 }
 
+/* Styling for Forecast Images */
 .forecast-img {
   height: 50px;
   width: 50px;
@@ -237,9 +225,10 @@ button:focus {
   object-fit: contain;
 }
 
+/* Styling for Forecast Items */
 .forecast-component__items-wrapper {
   display: grid;
-  grid-template-columns: auto auto auto auto auto auto;
+  grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
   grid-gap: 0.6rem;
   align-items: center;
   font-family: 'Inter', sans-serif;
@@ -251,8 +240,8 @@ button:focus {
   padding: 12px;
   transition: background-color 0.5s ease;
   height: 150px;
-  width: 100%;
   min-width: max-content;
+  position: relative;
 }
 
 .forecast-component__item img {
@@ -269,34 +258,17 @@ button:focus {
   cursor: pointer;
 }
 
-/* images and icons  for wind-speed,sunrise,sunset,humidity*/
-
-.humidity-img {
-  width: 20px;
-  height: 20px;
-  margin: 0 10px 0 10px;
-}
-
-.wind-img {
+/* Images and Icons for Weather Data */
+.humidity-img,
+.wind-img,
+.sunrise-img,
+.sunset-img {
   width: 25px;
   height: 25px;
-  margin: 0 10px 0 10px;
-}
-
-.sunrise-img {
-  width: 25px;
-  height: 25px;
-
   margin: 0 10px 0 0;
 }
 
-.sunset-img {
-  width: 30px;
-  height: 30px;
-
-  margin: 0 10px 0 0px;
-}
-
+/* Styling for City Name and Temperature */
 .weather-component__city-name {
   text-align: center;
   font-size: 2rem;
@@ -307,378 +279,4 @@ button:focus {
   text-align: center;
 }
 
-.humidity {
-  margin: 10px;
-  height: 28px;
-}
-
-.wind {
-  margin: 10px;
-}
-
-.sunrise {
-  margin: 10px;
-  height: 28px;
-  align-items: center;
-}
-
-.sunset {
-  margin: 10px;
-  height: 28px;
-  align-items: center;
-}
-
-/* toast style */
-.center {
-  text-align: center;
-}
-
-#toast {
-  visibility: hidden;
-  min-width: 170px;
-  background: #fafafacd;
-  box-shadow: rgb(0 0 0 / 40%) 0px 3px 8px;
-  color: black;
-  text-align: center;
-  border-radius: 10px;
-  padding: 7px 4px;
-  position: fixed;
-  z-index: 1;
-  top: 15px;
-  right: 16px;
-  font-size: 16px;
-}
-
-#toast.show {
-  visibility: visible;
-}
-
-footer {
-  height: 300px;
-  display: flex;
-
-  justify-content: center;
-  align-items: center;
-  text-decoration-color: white;
-  text-emphasis-style: bold;
-}
-
-/* .col-auto {
-  margin: 10px 20px;
-}  */
-
-@-webkit-keyframes fadein {
-  from {
-    bottom: 0;
-    opacity: 0;
-  }
-
-  to {
-    bottom: 30px;
-    opacity: 1;
-  }
-}
-
-@keyframes fadein {
-  from {
-    bottom: 0;
-    opacity: 0;
-  }
-
-  to {
-    bottom: 30px;
-    opacity: 1;
-  }
-}
-
-@-webkit-keyframes fadeout {
-  from {
-    bottom: 30px;
-    opacity: 1;
-  }
-
-  to {
-    bottom: 0;
-    opacity: 0;
-  }
-}
-
-@keyframes fadeout {
-  from {
-    bottom: 30px;
-    opacity: 1;
-  }
-
-  to {
-    bottom: 0;
-    opacity: 0;
-  }
-}
-
-.toast-component__checkicon i {
-  font-size: 40px;
-  color: #47d764;
-}
-
-/* --Scroll Bar-- */
-
-/* width */
-
-::-webkit-scrollbar {
-  width: 10px;
-}
-
-/* Track */
-
-::-webkit-scrollbar-track {
-  box-shadow: inset 0 0 5px grey;
-  border-radius: 5px;
-  background-clip: content-box;
-}
-
-/* Handle */
-
-::-webkit-scrollbar-thumb {
-  background: #171717;
-  border-radius: 5px;
-}
-
-/* Handle on hover */
-
-::-webkit-scrollbar-thumb:hover {
-  background: #171717;
-}
-
-/* --End Of Scroll Bar-- */
-.footerSection {
-  margin-top: 20px;
-  margin-bottom: 0;
-}
-/* Responsive */
-
-@media only screen and (min-width: 1200px) {
-  .forecast-component__items-wrapper {
-    grid-template-columns: auto auto auto auto;
-  }
-}
-
-@media only screen and (max-width: 992px) {
-  .forecast-component__items-wrapper {
-    grid-template-columns: auto auto auto auto;
-  }
-}
-
-@media only screen and (max-width: 768px) {
-  .forecast-component__items-wrapper {
-    grid-template-columns: auto auto auto;
-  }
-
-  #toast {
-    top: 50%;
-    transform: translateY(-50%);
-
-    right: 50%;
-    transform: translateX(50%);
-  }
-
-  .navbar {
-    margin: 1rem 0.15rem;
-  }
-}
-
-.checkbox {
-  opacity: 0;
-  position: absolute;
-  z-index: 10;
-  height: 2rem;
-  width: 4rem;
-  cursor: pointer;
-}
-
-.label {
-  width: 48px;
-  height: 24px;
-  background-color: #111;
-  display: flex;
-  border-radius: 50px;
-  align-items: center;
-  justify-content: space-between;
-  padding: 5px;
-  position: relative;
-  transform: scale(1);
-}
-
-.ball {
-  width: 20px;
-  height: 20px;
-  background-color: white;
-  position: absolute;
-  top: 2px;
-  left: 2px;
-  border-radius: 50%;
-  transition: transform 0.2s linear;
-}
-
-.checkbox:checked + .label .ball {
-  transform: translateX(24px);
-}
-
-.celcius {
-  color: white;
-  font-size: 15px;
-}
-
-.farenheit {
-  color: white;
-  font-size: 15px;
-}
-
-.navbar {
-  height: 0px;
-}
-
-.link1 {
-  padding: 0.5rem 0.5rem;
-  box-sizing: border-box;
-  margin-right: 50px;
-  color: #ffffff;
-  transition-property: scale();
-  transition-duration: 0.5s;
-}
-.link1:hover {
-  transform: scale(1.2, 1.2);
-  transition-timing-function: linear;
-  color: #ffffff;
-}
-.link2 {
-  font-weight: 900;
-  padding: 0.5rem 0.5rem;
-  box-sizing: border-box;
-  transition-property: scale();
-  transition-duration: 0.5s;
-}
-.link2:hover {
-  transform: scale(1.2, 1.2);
-  transition-timing-function: linear;
-}
-.link3 {
-  padding: 0.5rem 0.5rem;
-  box-sizing: border-box;
-  margin-left: 50px;
-  color: #d62976;
-  transition-property: scale();
-  transition-duration: 0.5s;
-}
-.link3:hover {
-  transform: scale(1.2, 1.2);
-  transition-timing-function: linear;
-  color: #d62976;
-}
-
-.textfooter {
-  color: white;
-  text-align: center;
-  font-size: x-large;
-  z-index: auto;
-}
-
-footer {
-  background-color: #000000d0;
-  margin-top: 55px;
-  height: 150px;
-}
-
-.footer-component {
-  width: 100%;
-}
-
-/* current day in future weather forecast*/
-.forecast-component__item-current-day {
-  background-color: rgba(69, 66, 66, 0.75);
-  backdrop-filter: blur(16px) saturate(180%);
-  -webkit-backdrop-filter: blur(16px) saturate(180%);
-}
-
-@media only screen and (max-width: 576px) {
-  .forecast-component__items-wrapper {
-    grid-template-columns: auto auto;
-  }
-
-  .weather-component__card {
-    padding: 7px;
-    height: 460px;
-  }
-
-  .weather-component {
-    padding: 10px;
-  }
-}
-
-footer {
-  text-decoration-color: white;
-  text-emphasis-style: bold;
-  background-color: rgba(53, 50, 50, 0.8);
-  margin: 3rem auto;
-}
-
-.link {
-  width: 50px;
-  border-radius: 50%;
-  background-color: #fff;
-  border: none;
-  outline: none;
-  transition: 0.5s;
-}
-
-.link:hover {
-  transform: translateY(-6px) scale(1.1);
-}
-
-/* scroll btn css */
-/* resolved css conflicts */
-html {
-  scroll-behavior: unset !important;
-}
-
-html body #scroll-btn {
-  opacity: 0;
-  width: 40px;
-  height: 40px;
-  color: #fff;
-  background-color: deepskyblue;
-  position: fixed;
-  bottom: 10%;
-  right: 10%;
-  border: 2px solid #fff;
-  border-radius: 50%;
-  font: bold 20px monospace;
-  transition: opacity 0.5s, transform 0.5s;
-}
-
-#scroll-btn.show {
-  opacity: 1;
-  transition: opacity 1s, transform 1s;
-}
-
-@media only screen and (max-width: 550px) {
-  .footer-component__social-media {
-    width: 100%;
-  }
-
-  .link {
-    width: 45%;
-  }
-}
-
-#background{
-  background-repeat: no-repeat;
-  background-size: cover;
-  background-attachment: fixed;
-  background-position: 50% 50%;
-  overflow-y: scroll;
-  width: 100vw;
-  height: 100vh;
-  position: absolute;
-  filter: blur(3px);
-}
-
+/*
