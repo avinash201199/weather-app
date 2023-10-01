@@ -17,6 +17,7 @@ for (var i in CITY) {
   option.text = CITY[i];
   place.appendChild(option);
 }
+
 function formatAMPM(date) {
   return date.toLocaleString(translations[userLang].formattingLocale, {
     hour: "numeric",
@@ -25,24 +26,10 @@ function formatAMPM(date) {
 }
 
 let isCelcius = true;
-
-$(".checkbox").change(function() {
-  if(this.checked) {
-      isCelcius = false;
-      fetch("https://ipapi.co/json/")
-      .then((response) => response.json())
-      .then((data) => {
-        weather.fetchWeather(data.city);
-      });
-  }
-  else{
-      isCelcius = true;
-      fetch("https://ipapi.co/json/")
-      .then((response) => response.json())
-      .then((data) => {
-        weather.fetchWeather(data.city);
-      });
-  }
+let selectedCity;
+$(".checkbox").change( function() {
+  isCelcius = !this.checked;
+  weather.fetchWeather(selectedCity);
 });
 
 
@@ -120,6 +107,7 @@ let weather = {
         this.displayWeather(data);
       });
   },
+
   displayWeather: function (data) {
     //console.log(data);
     const { name } = data;
@@ -169,16 +157,16 @@ let weather = {
     }: ${formatAMPM(date1)}`;
 
     document.getElementById("sunset").innerText = `${
-      translations[userLang].sunrise
+      translations[userLang].sunset
     }: ${formatAMPM(date2)}`;
 
     let url = `https://api.openweathermap.org/data/2.5/onecall?lat=${lat}&lon=${lon}&units=metric&appid=${config.API_KEY}`;
     getWeatherWeekly(url);
   },
   search: function () {
-    if (document.querySelector(".search-bar").value != "") {
-      this.fetchWeather(document.querySelector(".search-bar").value);
-      document.querySelector(".search-bar").value = "";
+    if (document.querySelector(".weather-component__search-bar").value != "") {
+      selectedCity=document.querySelector(".weather-component__search-bar").value;
+      this.fetchWeather(selectedCity);
     } else {
       toastFunction(translations[userLang].pleaseAddLocation);
     }
@@ -200,7 +188,7 @@ function generateWeatherItem(
   dayTemperature
 ) {
   let container = document.createElement("div");
-  container.className = "weather-forecast-item rounded text-center";
+  container.className = "forecast-component__item rounded text-center";
 
   let day = document.createElement("div");
   day.innerText = dayString;
@@ -278,14 +266,14 @@ function toastFunction(val) {
     x.className = x.className.replace("show", "");
   }, 3000);
 }
-document.querySelector(".search button").addEventListener("click", function () {
+document.querySelector(".weather-component__search button").addEventListener("click", function () {
   weather.search();
 });
 
 
 
 document
-  .querySelector(".search-bar")
+  .querySelector(".weather-component__search-bar")
   .addEventListener("keyup", function (event) {
     if (event.key == "Enter") {
       weather.search();
@@ -297,6 +285,7 @@ document
 fetch("https://ipapi.co/json/")
   .then((response) => response.json())
   .then((data) => {
+    selectedCity = data.city;
     weather.fetchWeather(data.city);
   });
 
@@ -318,6 +307,69 @@ function showCurrDay(dayString, dateString, element) {
   const dayName = days[date.getDay()];
   const dayNumber = date.getDate();
   if (dayString == dayName && dateString == dayNumber) {
-    element.classList.add("weather-forecast-item-current-day")
+    element.classList.add("forecast-component__item-current-day")
   }
 }
+
+// Script for Live Time using SetInterval
+var a;
+var time;
+const weekday = [
+  'Sunday', 
+  'Monday', 
+  'Tuesday',
+  'Wednesday', 
+  'Thursday', 
+  'Friday', 
+  'Saturday'
+];
+
+const month = [
+  "January",
+  "February",
+  "March",
+  "April",
+   "May",
+   "June",
+   "July",
+   "August",
+   "September",
+   "October",
+   "November",
+   "December"
+];
+setInterval(() => {
+    a = new Date();
+    time = weekday[a.getDay()] + '  ' + a.getDate() + '  ' + month[a.getMonth()] + ' ' + a.getFullYear()   + ' ' +  '  "Clock: ' + a.getHours() + ':' + a.getMinutes() + ':' + a.getSeconds() + '"';
+    document.getElementById('date-time').innerHTML = time;
+}, 1000);
+
+
+ 
+ // scrollTop functionality
+ const scrollTop = function () {
+  // create HTML button element
+  const scrollBtn = document.createElement("button");
+  scrollBtn.innerHTML = "&#8679";
+  scrollBtn.setAttribute("id", "scroll-btn");
+  document.body.appendChild(scrollBtn);
+  // hide/show button based on scroll distance
+  const scrollBtnDisplay = function () {
+  window.scrollY > window.innerHeight
+  ? scrollBtn.classList.add("show")
+  : scrollBtn.classList.remove("show");
+  };
+  window.addEventListener("scroll", scrollBtnDisplay);
+  // scroll to top when button clicked
+  const scrollWindow = function () {
+  if (window.scrollY != 0) {
+  setTimeout(function () {
+  window.scrollTo(0, window.scrollY - 50);
+  window.scroll({top: 0, behavior: "smooth"})
+  scrollWindow();
+  }, 10);
+  }
+  };
+  scrollBtn.addEventListener("click", scrollWindow);
+};
+scrollTop();
