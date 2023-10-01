@@ -6,6 +6,9 @@ import config from "./../../config/config.js";
 // focus the search input as the DOM loads
 window.onload = function() {
   document.getElementsByName("search-bar")[0].focus();
+
+  // fetch background
+  fetchNewBackground()
 }
 
 const userLang = getUserLanguage() || "en-US";
@@ -373,3 +376,13 @@ setInterval(() => {
   scrollBtn.addEventListener("click", scrollWindow);
 };
 scrollTop();
+
+const fetchNewBackground = ()=>{
+  let isMobile = window.innerWidth < 768 ? true : false;
+  let url = "https://source.unsplash.com/1600x900/?landscape";
+  if(isMobile){
+    url = "https://source.unsplash.com/720x1280/?landscape"
+  }
+  const bgElement = document.getElementById("background");
+  bgElement.style.backgroundImage = `url(${url})`;
+}

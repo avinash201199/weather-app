@@ -5,14 +5,15 @@ body {
   margin: 0;
   font-family: 'Poppins', sans-serif;
   background: #222;
-  background-image: url('https://source.unsplash.com/1600x900/?landscape');
-  background-repeat: no-repeat;
+  /* background-image: url('https://source.unsplash.com/1600x900/?landscape'); */
+  /* background-repeat: no-repeat;
   background-size: cover;
   background-attachment: fixed;
-  background-position: 50% 50%;
+  background-position: 50% 50%; */
   overflow-y: scroll;
   /* z-index:-1; */
   /* Scroll is required to see full info */
+  position: relative;
 }
 
 /* Hide scrollbar for IE, Edge and Firefox */
@@ -668,3 +669,16 @@ html body #scroll-btn {
     width: 45%;
   }
 }
+
+#background{
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-attachment: fixed;
+  background-position: 50% 50%;
+  overflow-y: scroll;
+  width: 100vw;
+  height: 100vh;
+  position: absolute;
+  filter: blur(3px);
+}
+
