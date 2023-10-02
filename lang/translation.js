@@ -36,7 +36,8 @@ export const translations = {
     saturday: "Saturday",
     sunday: "Sunday",
     day: "Day",
-    night: "Night"
+    night: "Night",
+    notAvailable: "Not Available"
   },
   "pt-BR": {
     apiLang: "pt_br",
@@ -64,7 +65,8 @@ export const translations = {
     saturday: "Sábado",
     sunday: "Domingo",
     day: "Dia",
-    night: "Noite"
+    night: "Noite",
+    notAvailable: "Indisponível"
   },
   "es-MX": {
     apiLang: "es",
@@ -92,7 +94,8 @@ export const translations = {
     saturday: "Sabado",
     sunday: "Domingo",
     day: "Día",
-    night: "Noche"
+    night: "Noche",
+    notAvailable: "No disponible"
   },
   "de-DE": {
     apiLang: "de",
@@ -120,7 +123,8 @@ export const translations = {
     saturday: "Samstag",
     sunday: "Sonntag",
     day: "Tag",
-    night: "Nacht"
+    night: "Nacht",
+    notAvailable: "Nicht verfügbar"
   },
   "fr-FR": {
     apiLang: "fr",
@@ -148,7 +152,8 @@ export const translations = {
     saturday: "Samedi",
     sunday: "Dimanche",
     day: "Jour",
-    night: "Nuit"
+    night: "Nuit",
+    notAvailable: "Non disponible"
   },
   "id-ID": {
     apiLang: "id",
@@ -176,7 +181,8 @@ export const translations = {
     saturday: "Sabtu",
     sunday: "Minggu",
     day: "Siang",
-    night: "Malam"
+    night: "Malam",
+    notAvailable: "Tidak Tersedia"
   },
   "el-GR": {
     apiLang: "el",
@@ -204,7 +210,8 @@ export const translations = {
     saturday: "Σάββατο",
     sunday: "Κυριακή",
     day: "Mέρα",
-    night: "Νύχτα"
+    night: "Νύχτα",
+    notAvailable: "Μη διαθέσιμο"
   },
   "ja_JP": {
     apiLang: "ja",
@@ -232,7 +239,8 @@ export const translations = {
     saturday: "土曜日",
     sunday: "日曜日",
     day: "日",
-    night: "夜"
+    night: "夜",
+    notAvailable: "利用不可"
   },
    "sq_AL": {
     apiLang: "sq",
@@ -260,7 +268,8 @@ export const translations = {
     saturday: "e shtunë",
     sunday: "të dielën",
     day: "Dita",
-    night: "Natën"
+    night: "Natën",
+    notAvailable: "Në dispozicion"
   }
 };
 
