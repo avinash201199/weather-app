@@ -740,3 +740,10 @@ html body #scroll-btn {
 .not-available {
   color: gray;
 }
+
+.whatsapp img{
+  width: 7rem;
+  margin-left: -2.2rem;
+  margin-top: 1.5rem;
+  cursor: pointer;
+}
