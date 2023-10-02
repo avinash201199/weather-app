@@ -14,8 +14,8 @@ window.onload = function() {
 const userLang = getUserLanguage() || "en-US";
 const place = document.querySelector("#place");
 
-for (var i in CITY) {
-  var option = document.createElement("option");
+for (let i in CITY) {
+  let option = document.createElement("option");
   option.value = CITY[i];
   option.text = CITY[i];
   place.appendChild(option);
@@ -36,46 +36,77 @@ $(".checkbox").change( function() {
 });
 
 
-const AirQuality = (log, lat) => {
-  fetch(`https://api.waqi.info/feed/geo:${lat};${log}/?token=${config.AIR_KEY}`)
-    .then((res) => res.json())
-    .then((res) => {
-      let aqi = res.data.aqi;
-      document.querySelector(
-        "#AirQuality"
-      ).innerText = `${translations[userLang].airQuality}: ${aqi}`;
+const AirQuality = (city) => {
+  fetchAirQuality(city)
+    .then((aqi) => updateAirQuality(aqi))
+    .catch((error) => console.error(error));
+};
 
-      if (aqi >= 0 && aqi <= 50) {
-        document.querySelector(
-          ".ml-0"
-        ).innerText = `(${translations[userLang].good})`;
+const fetchAirQuality = (city) => {
+  const url = `https://api.waqi.info/v2/search/?token=${config.AIR_KEY}&keyword=${city}`;
+
+  return fetch(url)
+    .then((res) => {
+      if (!res.ok) {
+        throw new Error(`Failed to fetch air quality data for ${city}`);
       }
-      if (aqi > 50 && aqi <= 100) {
-        document.querySelector(
-          ".ml-0"
-        ).innerText = `(${translations[userLang].satisfactory})`;
-      }
-      if (aqi > 100 && aqi <= 150) {
-        document.querySelector(
-          ".ml-0"
-        ).innerText = `(${translations[userLang].sensitive})`;
-      }
-      if (aqi > 150 && aqi <= 200) {
-        document.querySelector(
-          ".ml-0"
-        ).innerText = `(${translations[userLang].unhealthy})`;
-      }
-      if (aqi > 200 && aqi <= 300) {
-        document.querySelector(
-          ".ml-0"
-        ).innerText = `(${translations[userLang].veryUnhealthy})`;
-      }
-      if (aqi > 300) {
-        document.querySelector(
-          ".ml-0"
-        ).innerText = `(${translations[userLang].hazardous})`;
-      }
+      return res.json();
+    })
+    .then((data) => {
+      const relevantLocation = data.data[0];
+      return relevantLocation.aqi;
     });
+};
+
+const updateAirQuality = (aqi) => {
+  const airQualityElement = document.querySelector("#AirQuality");
+  const aqiText = translations[userLang].airQuality;
+  airQualityElement.innerText = `${aqiText}: ${aqi}`;
+
+  const airQuality = getAirQualityDescription(aqi, userLang);
+  const textClass = getAirQualityClass(aqi);
+  const qualityDescriptionElement = document.querySelector(".air-quality-label");
+
+  qualityDescriptionElement.innerText = airQuality;
+  qualityDescriptionElement.classList.add(textClass);
+};
+
+const getAirQualityDescription = (aqi, userLang) => {
+  switch (true) {
+    case aqi >= 0 && aqi <= 50:
+      return `(${translations[userLang].good})`;
+    case aqi > 50 && aqi <= 100:
+      return `(${translations[userLang].satisfactory})`;
+    case aqi > 100 && aqi <= 150:
+      return `(${translations[userLang].sensitive})`;
+    case aqi > 150 && aqi <= 200:
+      return `(${translations[userLang].unhealthy})`;
+    case aqi > 200 && aqi <= 300:
+      return `(${translations[userLang].veryUnhealthy})`;
+    case aqi > 300:
+      return `(${translations[userLang].hazardous})`;
+    default:
+      return `(${translations[userLang].notAvailable})`
+  }
+};
+
+const getAirQualityClass = (aqi) => {
+  switch (true) {
+    case aqi >= 0 && aqi <= 50:
+      return "good-quality";
+    case aqi > 50 && aqi <= 100:
+      return "satisfactory-quality";
+    case aqi > 100 && aqi <= 150:
+      return "sensitive-quality";
+    case aqi > 150 && aqi <= 200:
+      return "unhealthy-quality";
+    case aqi > 200 && aqi <= 300:
+      return "very-unhealthy-quality";
+    case aqi > 300:
+      return "hazardous-quality";
+    default:
+      return "not-available";
+  }
 };
 
 let weather = {
@@ -107,23 +138,20 @@ let weather = {
         return response.json();
       })
       .then((data) => {
-        this.displayWeather(data);
+        this.displayWeather(data, city);
       });
   },
 
-  displayWeather: function (data) {
-    //console.log(data);
+  displayWeather: function (data, city) {
     const { name } = data;
-    //console.log(name);
     const { icon, description } = data.weather[0];
     const { temp, humidity } = data.main;
     const { speed } = data.wind;
     const { sunrise, sunset } = data.sys;
     let date1 = new Date(sunrise * 1000);
     let date2 = new Date(sunset * 1000);
-    //console.log(formatAMPM(date));
     const { lat, lon } = data.coord;
-    const airIndex = AirQuality(lon, lat);
+    AirQuality(city);
 
     document.getElementById("city").innerText =
       `${translations[userLang].weatherIn} ` + name;
@@ -318,12 +346,12 @@ function showCurrDay(dayString, dateString, element) {
 var a;
 var time;
 const weekday = [
-  'Sunday', 
-  'Monday', 
+  'Sunday',
+  'Monday',
   'Tuesday',
-  'Wednesday', 
-  'Thursday', 
-  'Friday', 
+  'Wednesday',
+  'Thursday',
+  'Friday',
   'Saturday'
 ];
 
@@ -348,7 +376,7 @@ setInterval(() => {
 }, 1000);
 
 
- 
+
  // scrollTop functionality
  const scrollTop = function () {
   // create HTML button element
