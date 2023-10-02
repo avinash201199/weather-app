@@ -15,7 +15,17 @@ body {
   /* Scroll is required to see full info */
   position: relative;
 }
+.logo {
+  position: fixed;
+  top: 20px;
+  left: 20px;
+  z-index: 999;
+}
 
+.logo-img {
+  max-width: 100px; /* Adjust the maximum width */
+  max-height: 60px; /* Adjust the maximum height */
+}
 /* Hide scrollbar for IE, Edge and Firefox */
 body {
   -ms-overflow-style: none;
