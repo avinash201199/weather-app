@@ -169,7 +169,7 @@ button:focus {
   flex-direction: row;
 }
 
-#temp {
+.weather-component__city-temperature{
   margin-left: 21%;
   margin-top: 15px;
   margin-bottom: 15px;
@@ -625,6 +625,7 @@ footer {
   .weather-component__card {
     padding: 7px;
     height: 460px;
+    
   }
 
   .weather-component {
@@ -685,6 +686,18 @@ html body #scroll-btn {
 
   .link {
     width: 45%;
+  }
+
+  .weather-component__city-name{
+    font-size: 1.5rem;
+  }
+
+  .weather-component__city-temperature{
+    font-size: 1.5rem;
+  }
+
+  .weather-component__AQI{
+    flex-direction: column;
   }
 }
 
