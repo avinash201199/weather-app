@@ -682,3 +682,30 @@ html body #scroll-btn {
   filter: blur(3px);
 }
 
+.good-quality {
+  color: #009966;
+}
+
+.satisfactory-quality {
+  color: #ffde33;
+}
+
+.sensitive-quality {
+  color: #ff9933;
+}
+
+.unhealthy-quality {
+  color: #cc0033;
+}
+
+.very-unhealthy-quality {
+  color: #660099;
+}
+
+.hazardous-quality {
+  color: #7e0023;
+}
+
+.not-available {
+  color: gray;
+}
