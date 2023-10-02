@@ -1,15 +1,15 @@
 import Capitals from "./Capitals.js";
 import CITY from "./City.js";
-import {translations, getUserLanguage} from "../../lang/translation.js";
+import { translations, getUserLanguage } from "../../lang/translation.js";
 import config from "./../../config/config.js";
 
 // focus the search input as the DOM loads
-window.onload = function() {
+window.onload = function () {
   document.getElementsByName("search-bar")[0].focus();
 
   // fetch background
-  fetchNewBackground()
-}
+  fetchNewBackground();
+};
 
 const userLang = getUserLanguage() || "en-US";
 const place = document.querySelector("#place");
@@ -30,11 +30,10 @@ function formatAMPM(date) {
 
 let isCelcius = true;
 let selectedCity;
-$(".checkbox").change( function() {
+$(".checkbox").change(function () {
   isCelcius = !this.checked;
   weather.fetchWeather(selectedCity);
 });
-
 
 const AirQuality = (city) => {
   fetchAirQuality(city)
@@ -65,7 +64,8 @@ const updateAirQuality = (aqi) => {
 
   const airQuality = getAirQualityDescription(aqi, userLang);
   const textClass = getAirQualityClass(aqi);
-  const qualityDescriptionElement = document.querySelector(".air-quality-label");
+  const qualityDescriptionElement =
+    document.querySelector(".air-quality-label");
 
   qualityDescriptionElement.innerText = airQuality;
   qualityDescriptionElement.classList = "air-quality-label ml-0 " + textClass;
@@ -86,7 +86,7 @@ const getAirQualityDescription = (aqi, userLang) => {
     case aqi > 300:
       return `(${translations[userLang].hazardous})`;
     default:
-      return `(${translations[userLang].notAvailable})`
+      return `(${translations[userLang].notAvailable})`;
   }
 };
 
@@ -125,10 +125,10 @@ let weather = {
     }
     fetch(
       "https://api.openweathermap.org/data/2.5/weather?q=" +
-      city +
-      "&units=metric&appid=" +
-      config.API_KEY +
-      `&lang=${translations[userLang].apiLang}`
+        city +
+        "&units=metric&appid=" +
+        config.API_KEY +
+        `&lang=${translations[userLang].apiLang}`,
     )
       .then((response) => {
         if (!response.ok) {
@@ -154,70 +154,96 @@ let weather = {
     AirQuality(city);
 
     document.getElementById("dynamic").innerText =
-    `${translations[userLang].weatherIn} ` + name;
-    
+      `${translations[userLang].weatherIn} ` + name;
+
     document.getElementById("city").innerText =
       `${translations[userLang].weatherIn} ` + name;
 
     document.getElementById(
-      "icon"
+      "icon",
     ).src = `https://openweathermap.org/img/wn/${icon}.png`;
 
     document.getElementById("description").innerText = description;
 
     let temperature = temp;
 
-    if(!isCelcius){
-      temperature = (temperature*(9/5))+32;
+    if (!isCelcius) {
+      temperature = temperature * (9 / 5) + 32;
       temperature = (Math.round(temperature * 100) / 100).toFixed(2);
-      temperature = temperature + "°F"
-    }
-    else {
-      temperature = temperature + "°C"
+      temperature = temperature + "°F";
+    } else {
+      temperature = temperature + "°C";
     }
     document.getElementById("temp").innerText = temperature;
 
     document.getElementById(
-      "humidity"
+      "humidity",
     ).innerText = `${translations[userLang].humidity}: ${humidity}%`;
 
     document.getElementById(
-      "wind"
+      "wind",
     ).innerText = `${translations[userLang].windSpeed}: ${speed}km/h`;
 
     document.getElementById("weather").classList.remove("loading");
 
     document.getElementById("sunrise").innerText = `${
       translations[userLang].sunrise
-      }: ${formatAMPM(date1)}`;
+    }: ${formatAMPM(date1)}`;
 
     document.getElementById("sunset").innerText = `${
       translations[userLang].sunset
-      }: ${formatAMPM(date2)}`;
+    }: ${formatAMPM(date2)}`;
 
     let url = `https://api.openweathermap.org/data/2.5/onecall?lat=${lat}&lon=${lon}&units=metric&appid=${config.API_KEY}`;
     getWeatherWeekly(url);
 
-    document.getElementById("whatsapp-button").addEventListener("click", function () {
-      const message = `Weather in ${name} today
+    document
+      .getElementById("whatsapp-button")
+      .addEventListener("click", function () {
+        const message = `Weather in ${name} today
       Temperature: ${temperature}, 
       Humidity: ${humidity}%,
       Wind Speed: ${speed}km/hr, 
       Sunrise: ${formatAMPM(date1)}, 
       Sunset: ${formatAMPM(date2)}.`;
-      // console.log(message)
+        // console.log(message)
 
-      // Create the WhatsApp share URL
-      const whatsappUrl = `https://api.whatsapp.com/send?text=${encodeURIComponent(message)}`;
+        // Create the WhatsApp share URL
+        const whatsappUrl = `https://api.whatsapp.com/send?text=${encodeURIComponent(
+          message,
+        )}`;
 
-      // Open WhatsApp in a new tab to share the message
-      window.open(whatsappUrl, "_blank");
-    });
+        // Open WhatsApp in a new tab to share the message
+        window.open(whatsappUrl, "_blank");
+      });
   },
   search: function () {
     if (document.querySelector(".weather-component__search-bar").value != "") {
-      selectedCity=document.querySelector(".weather-component__search-bar").value;
+      selectedCity = document.querySelector(
+        ".weather-component__search-bar",
+      ).value;
       this.fetchWeather(selectedCity);
+      const apiKey = "OOjKyciq4Sk0Kla7riLuR2j8C9FwThFzKIKIHrpq7c27KvrCul5rVxJj";
+      const apiUrl = "https://api.pexels.com/v1/search?query=" + selectedCity;
+
+      fetch(apiUrl, {
+        method: "GET",
+        headers: {
+          Authorization: apiKey,
+        },
+      })
+        .then((response) => response.json())
+        .then((data) => {
+          const randomIndex = Math.floor(Math.random() * 10);
+          const url = data.photos[randomIndex].src.original;
+          document.getElementById(
+            "background",
+          ).style.backgroundImage = `url(${url})`;
+        })
+        .catch((error) => {
+          console.error(error);
+        });
+      url = "";
     } else {
       toastFunction(translations[userLang].pleaseAddLocation);
     }
@@ -236,7 +262,7 @@ function generateWeatherItem(
   dayString,
   iconName,
   nightTemperature,
-  dayTemperature
+  dayTemperature,
 ) {
   let container = document.createElement("div");
   container.className = "forecast-component__item rounded text-center";
@@ -257,31 +283,29 @@ function generateWeatherItem(
 
   let dayTemp = document.createElement("div");
   dayTemp.classList.add("weather-forecast-day");
-  if(!isCelcius){
-    dayTemperature = (dayTemperature*(9/5))+35;
+  if (!isCelcius) {
+    dayTemperature = dayTemperature * (9 / 5) + 35;
     dayTemperature = (Math.round(dayTemperature * 100) / 100).toFixed(2);
     dayTemp.innerHTML = `${translations[userLang].day} ${dayTemperature}&#176;F`;
-  }
-  else{
+  } else {
     dayTemp.innerHTML = `${translations[userLang].day} ${dayTemperature}&#176;C`;
   }
-  dayTemp.style.fontFamily="Inter"
-  dayTemp.style.fontWeight="bolder"
-  dayTemp.style.textTransform="uppercase"
+  dayTemp.style.fontFamily = "Inter";
+  dayTemp.style.fontWeight = "bolder";
+  dayTemp.style.textTransform = "uppercase";
 
   let nightTemp = document.createElement("div");
-  if(!isCelcius){
-    nightTemperature = (nightTemperature*(9/5))+35;
+  if (!isCelcius) {
+    nightTemperature = nightTemperature * (9 / 5) + 35;
     nightTemperature = (Math.round(nightTemperature * 100) / 100).toFixed(2);
     nightTemp.innerHTML = `${translations[userLang].night} ${nightTemperature}&#176;F`;
-  }
-  else{
+  } else {
     nightTemp.innerHTML = `${translations[userLang].night} ${nightTemperature}&#176;C`;
   }
-  nightTemp.style.color="#00dcff"
-  nightTemp.style.fontFamily="Inter"
-  nightTemp.style.fontWeight="bolder"
-  nightTemp.style.textTransform="uppercase"
+  nightTemp.style.color = "#00dcff";
+  nightTemp.style.fontFamily = "Inter";
+  nightTemp.style.fontWeight = "bolder";
+  nightTemp.style.textTransform = "uppercase";
 
   container.appendChild(day);
   container.appendChild(newDiv);
@@ -301,7 +325,7 @@ function showWeatherData(data) {
       translations[userLang][dayString.toLowerCase()],
       day.weather[0].icon,
       day.temp.night,
-      day.temp.day
+      day.temp.day,
     );
     showCurrDay(dayString, parseInt(dateString), element);
     container.appendChild(element);
@@ -317,11 +341,11 @@ function toastFunction(val) {
     x.className = x.className.replace("show", "");
   }, 3000);
 }
-document.querySelector(".weather-component__search button").addEventListener("click", function () {
-  weather.search();
-});
-
-
+document
+  .querySelector(".weather-component__search button")
+  .addEventListener("click", function () {
+    weather.search();
+  });
 
 document
   .querySelector(".weather-component__search-bar")
@@ -358,7 +382,7 @@ function showCurrDay(dayString, dateString, element) {
   const dayName = days[date.getDay()];
   const dayNumber = date.getDate();
   if (dayString == dayName && dateString == dayNumber) {
-    element.classList.add("forecast-component__item-current-day")
+    element.classList.add("forecast-component__item-current-day");
   }
 }
 
@@ -366,13 +390,13 @@ function showCurrDay(dayString, dateString, element) {
 var a;
 var time;
 const weekday = [
-  'Sunday',
-  'Monday',
-  'Tuesday',
-  'Wednesday',
-  'Thursday',
-  'Friday',
-  'Saturday'
+  "Sunday",
+  "Monday",
+  "Tuesday",
+  "Wednesday",
+  "Thursday",
+  "Friday",
+  "Saturday",
 ];
 
 const month = [
@@ -387,15 +411,28 @@ const month = [
   "September",
   "October",
   "November",
-  "December"
+  "December",
 ];
 setInterval(() => {
   a = new Date();
-    time = weekday[a.getDay()] + '  ' + a.getDate() + '  ' + month[a.getMonth()] + ' ' + a.getFullYear()   + ' ' +  '  "Clock: ' + a.getHours() + ':' + a.getMinutes() + ':' + a.getSeconds() + '"';
-  document.getElementById('date-time').innerHTML = time;
+  time =
+    weekday[a.getDay()] +
+    "  " +
+    a.getDate() +
+    "  " +
+    month[a.getMonth()] +
+    " " +
+    a.getFullYear() +
+    " " +
+    '  "Clock: ' +
+    a.getHours() +
+    ":" +
+    a.getMinutes() +
+    ":" +
+    a.getSeconds() +
+    '"';
+  document.getElementById("date-time").innerHTML = time;
 }, 1000);
-
-
 
 // scrollTop functionality
 const scrollTop = function () {
@@ -416,7 +453,7 @@ const scrollTop = function () {
     if (window.scrollY != 0) {
       setTimeout(function () {
         window.scrollTo(0, window.scrollY - 50);
-  window.scroll({top: 0, behavior: "smooth"})
+        window.scroll({ top: 0, behavior: "smooth" });
         scrollWindow();
       }, 10);
     }
@@ -425,12 +462,12 @@ const scrollTop = function () {
 };
 scrollTop();
 
-const fetchNewBackground = ()=>{
+const fetchNewBackground = () => {
   let isMobile = window.innerWidth < 768 ? true : false;
   let url = "https://source.unsplash.com/1600x900/?landscape";
-  if(isMobile){
-    url = "https://source.unsplash.com/720x1280/?landscape"
+  if (isMobile) {
+    url = "https://source.unsplash.com/720x1280/?landscape";
   }
   const bgElement = document.getElementById("background");
   bgElement.style.backgroundImage = `url(${url})`;
-}
+};
