@@ -68,7 +68,7 @@ const updateAirQuality = (aqi) => {
   const qualityDescriptionElement = document.querySelector(".air-quality-label");
 
   qualityDescriptionElement.innerText = airQuality;
-  qualityDescriptionElement.classList.add(textClass);
+  qualityDescriptionElement.classList = "air-quality-label ml-0 " + textClass;
 };
 
 const getAirQualityDescription = (aqi, userLang) => {
