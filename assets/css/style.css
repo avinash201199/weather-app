@@ -40,7 +40,8 @@ body {
   border-radius: 15px;
   text-align: center;
   color: #fff;
-  background-color: rgba(0, 0, 0, 0.5);
+  background: linear-gradient(112.1deg, rgb(32, 38, 57) 11.4%, rgb(63, 76, 119) 70.2%);
+  ;
   font-size: 1em;
   font-weight: 700;
   /* width: fit-content; */
@@ -83,7 +84,7 @@ body {
   margin: 20px 0;
   position: relative;
   top: 1rem;
-  background: #000000d0;
+  background: linear-gradient(to top, #09203f 0%, #537895 100%);
   padding: 1em;
   width: 100%;
   max-width: 500px;
@@ -109,13 +110,13 @@ input.weather-component__search-bar {
   border: none;
   outline: none;
   padding: 0.3em 1em;
-  background: #7c7c7c2b;
+  background: #fff;
   font-family: inherit;
   font-size: 105%;
   width: calc(100% - 100px);
-  color: white;
+  color: black;
   border: px solid white;
-  caret-color: white;
+  caret-color: black;
 }
 
 .weather-component__search {
@@ -253,6 +254,7 @@ button:focus {
 }
 
 .forecast-component__items-wrapper {
+  
   display: grid;
   grid-template-columns: auto auto auto auto auto auto;
   grid-gap: 0.6rem;
@@ -261,8 +263,9 @@ button:focus {
 }
 
 .forecast-component__item {
+  
   border: 1px solid rgb(35, 35, 35);
-  background: rgba(0, 0, 0, 0.8);
+  background: linear-gradient(102.1deg, rgb(32, 38, 57,0.5) 41.4%, rgb(32, 38, 57,0.1) 60.2%);;
   padding: 12px;
   transition: background-color 0.5s ease;
   height: 150px;
@@ -278,8 +281,8 @@ button:focus {
 .forecast-component__item:hover {
   backdrop-filter: blur(16px) saturate(180%);
   -webkit-backdrop-filter: blur(16px) saturate(180%);
-  background-color: rgba(69, 66, 66, 0.75);
-  border: 1px solid white;
+  background-color: rgb(9, 32, 63 ,0.75);
+ 
   border-radius: 12px;
   cursor: pointer;
 }
@@ -534,7 +537,7 @@ footer {
   transition: transform 0.2s linear;
 }
 
-.checkbox:checked + .label .ball {
+.checkbox:checked+.label .ball {
   transform: translateX(24px);
 }
 
@@ -609,7 +612,7 @@ footer {
 
 /* current day in future weather forecast*/
 .forecast-component__item-current-day {
-  background-color: rgba(69, 66, 66, 0.75);
+  background-color: rgb(9, 32, 63 ,0.75);
   backdrop-filter: blur(16px) saturate(180%);
   -webkit-backdrop-filter: blur(16px) saturate(180%);
 }
@@ -632,7 +635,7 @@ footer {
 footer {
   text-decoration-color: white;
   text-emphasis-style: bold;
-  background-color: rgba(53, 50, 50, 0.8);
+  background-color:rgb(9, 32, 63 ,0.6);
   margin: 3rem auto;
 }
 
