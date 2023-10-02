@@ -125,10 +125,10 @@ let weather = {
     }
     fetch(
       "https://api.openweathermap.org/data/2.5/weather?q=" +
-        city +
-        "&units=metric&appid=" +
-        config.API_KEY +
-        `&lang=${translations[userLang].apiLang}`
+      city +
+      "&units=metric&appid=" +
+      config.API_KEY +
+      `&lang=${translations[userLang].apiLang}`
     )
       .then((response) => {
         if (!response.ok) {
@@ -170,11 +170,12 @@ let weather = {
     if(!isCelcius){
       temperature = (temperature*(9/5))+32;
       temperature = (Math.round(temperature * 100) / 100).toFixed(2);
-      document.getElementById("temp").innerText = temperature + "°F";
+      temperature = temperature + "°F"
     }
-    else{
-      document.getElementById("temp").innerText = temperature + "°C";
+    else {
+      temperature = temperature + "°C"
     }
+    document.getElementById("temp").innerText = temperature;
 
     document.getElementById(
       "humidity"
@@ -188,14 +189,30 @@ let weather = {
 
     document.getElementById("sunrise").innerText = `${
       translations[userLang].sunrise
-    }: ${formatAMPM(date1)}`;
+      }: ${formatAMPM(date1)}`;
 
     document.getElementById("sunset").innerText = `${
       translations[userLang].sunset
-    }: ${formatAMPM(date2)}`;
+      }: ${formatAMPM(date2)}`;
 
     let url = `https://api.openweathermap.org/data/2.5/onecall?lat=${lat}&lon=${lon}&units=metric&appid=${config.API_KEY}`;
     getWeatherWeekly(url);
+
+    document.getElementById("whatsapp-button").addEventListener("click", function () {
+      const message = `Weather in ${name} today
+      Temperature: ${temperature}, 
+      Humidity: ${humidity}%,
+      Wind Speed: ${speed}km/hr, 
+      Sunrise: ${formatAMPM(date1)}, 
+      Sunset: ${formatAMPM(date2)}.`;
+      // console.log(message)
+
+      // Create the WhatsApp share URL
+      const whatsappUrl = `https://api.whatsapp.com/send?text=${encodeURIComponent(message)}`;
+
+      // Open WhatsApp in a new tab to share the message
+      window.open(whatsappUrl, "_blank");
+    });
   },
   search: function () {
     if (document.querySelector(".weather-component__search-bar").value != "") {
@@ -363,25 +380,25 @@ const month = [
   "February",
   "March",
   "April",
-   "May",
-   "June",
-   "July",
-   "August",
-   "September",
-   "October",
-   "November",
-   "December"
+  "May",
+  "June",
+  "July",
+  "August",
+  "September",
+  "October",
+  "November",
+  "December"
 ];
 setInterval(() => {
-    a = new Date();
+  a = new Date();
     time = weekday[a.getDay()] + '  ' + a.getDate() + '  ' + month[a.getMonth()] + ' ' + a.getFullYear()   + ' ' +  '  "Clock: ' + a.getHours() + ':' + a.getMinutes() + ':' + a.getSeconds() + '"';
-    document.getElementById('date-time').innerHTML = time;
+  document.getElementById('date-time').innerHTML = time;
 }, 1000);
 
 
 
- // scrollTop functionality
- const scrollTop = function () {
+// scrollTop functionality
+const scrollTop = function () {
   // create HTML button element
   const scrollBtn = document.createElement("button");
   scrollBtn.innerHTML = "&#8679";
@@ -389,20 +406,20 @@ setInterval(() => {
   document.body.appendChild(scrollBtn);
   // hide/show button based on scroll distance
   const scrollBtnDisplay = function () {
-  window.scrollY > window.innerHeight
-  ? scrollBtn.classList.add("show")
-  : scrollBtn.classList.remove("show");
+    window.scrollY > window.innerHeight
+      ? scrollBtn.classList.add("show")
+      : scrollBtn.classList.remove("show");
   };
   window.addEventListener("scroll", scrollBtnDisplay);
   // scroll to top when button clicked
   const scrollWindow = function () {
-  if (window.scrollY != 0) {
-  setTimeout(function () {
-  window.scrollTo(0, window.scrollY - 50);
+    if (window.scrollY != 0) {
+      setTimeout(function () {
+        window.scrollTo(0, window.scrollY - 50);
   window.scroll({top: 0, behavior: "smooth"})
-  scrollWindow();
-  }, 10);
-  }
+        scrollWindow();
+      }, 10);
+    }
   };
   scrollBtn.addEventListener("click", scrollWindow);
 };
