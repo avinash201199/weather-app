@@ -6,7 +6,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <meta name="description"
     content="A Beautiful weather app displaying a weekly weather forecast for the selected location" />
-  <title>Weather App</title>
+  <title id="dynamic">Weather App</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@200;300;400&family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet">
@@ -15,6 +15,8 @@
   <link rel="stylesheet" href="./assets/css/bootstrap.min.css">
   <link rel="stylesheet" href="./assets/css/style.css">
   <link rel="icon" href="assets/favicon.ico">
+  <!-- <link rel="logo" href="assets/icons/logo.png"> -->
+
   <!-- jquery CDN -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
    <!-- fontawesome CDN -->
@@ -23,9 +25,23 @@
 
 <body id="body">
   <div id="background"></div>
+  <!-- <img class="logo"src="assets/icons/logo.png"  alt="logo"> -->
   <h2 class="header-component" style="text-align: center; width: 55%; margin: 5px auto 10px;"> <span id='date-time'></span></h2>
   <nav class="nav-component navbar temp">
     <a class=" nav-component__anchor navbar-brand" href="#">
+      <div class="container">
+        <div class="row">
+            <div class="col-md-2">
+              <div class="logo">
+                <img src="./assets/icons/logo.png" alt="Logo" class="img-fluid logo-img">
+              </div>
+            </div>
+            <div class="col-md-10">
+                <!-- Other content goes here -->
+            </div>
+        </div>
+    </div>
+    
       <div class="nav-component__celcius-block col-auto">
         <input type="checkbox" id="unit" class="checkbox">
             <label for="unit" class="label">

@@ -125,6 +125,9 @@ let weather = {
     const { lat, lon } = data.coord;
     const airIndex = AirQuality(lon, lat);
 
+    document.getElementById("dynamic").innerText =
+    `${translations[userLang].weatherIn} ` + name;
+    
     document.getElementById("city").innerText =
       `${translations[userLang].weatherIn} ` + name;
 
