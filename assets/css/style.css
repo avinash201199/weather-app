@@ -762,4 +762,5 @@ html body #scroll-btn {
   margin-left: -2.2rem;
   margin-top: 2rem;
   cursor: pointer;
+  position: fixed;
 }
