@@ -128,7 +128,7 @@ let weather = {
         city +
         "&units=metric&appid=" +
         config.API_KEY +
-        `&lang=${translations[userLang].apiLang}`,
+        `&lang=${translations[userLang].apiLang}`
     )
       .then((response) => {
         if (!response.ok) {
@@ -160,7 +160,7 @@ let weather = {
       `${translations[userLang].weatherIn} ` + name;
 
     document.getElementById(
-      "icon",
+      "icon"
     ).src = `https://openweathermap.org/img/wn/${icon}.png`;
 
     document.getElementById("description").innerText = description;
@@ -177,11 +177,11 @@ let weather = {
     document.getElementById("temp").innerText = temperature;
 
     document.getElementById(
-      "humidity",
+      "humidity"
     ).innerText = `${translations[userLang].humidity}: ${humidity}%`;
 
     document.getElementById(
-      "wind",
+      "wind"
     ).innerText = `${translations[userLang].windSpeed}: ${speed}km/h`;
 
     document.getElementById("weather").classList.remove("loading");
@@ -196,7 +196,7 @@ let weather = {
 
     let url = `https://api.openweathermap.org/data/2.5/onecall?lat=${lat}&lon=${lon}&units=metric&appid=${config.API_KEY}`;
     getWeatherWeekly(url);
-
+    document.getElementById("whatsapp-button").replaceWith(document.getElementById("whatsapp-button").cloneNode(true));
     document
       .getElementById("whatsapp-button")
       .addEventListener("click", function () {
@@ -210,9 +210,8 @@ let weather = {
 
         // Create the WhatsApp share URL
         const whatsappUrl = `https://api.whatsapp.com/send?text=${encodeURIComponent(
-          message,
+          message
         )}`;
-
         // Open WhatsApp in a new tab to share the message
         window.open(whatsappUrl, "_blank");
       });
@@ -220,7 +219,7 @@ let weather = {
   search: function () {
     if (document.querySelector(".weather-component__search-bar").value != "") {
       selectedCity = document.querySelector(
-        ".weather-component__search-bar",
+        ".weather-component__search-bar"
       ).value;
       this.fetchWeather(selectedCity);
       const apiKey = "OOjKyciq4Sk0Kla7riLuR2j8C9FwThFzKIKIHrpq7c27KvrCul5rVxJj";
@@ -235,15 +234,15 @@ let weather = {
         .then((response) => response.json())
         .then((data) => {
           const randomIndex = Math.floor(Math.random() * 10);
-          const url = data.photos[randomIndex].src.original;
+          const url = data.photos[randomIndex].src.large2x;
           document.getElementById(
-            "background",
+            "background"
           ).style.backgroundImage = `url(${url})`;
         })
         .catch((error) => {
           console.error(error);
         });
-      url = "";
+      //url = "";
     } else {
       toastFunction(translations[userLang].pleaseAddLocation);
     }
@@ -262,7 +261,7 @@ function generateWeatherItem(
   dayString,
   iconName,
   nightTemperature,
-  dayTemperature,
+  dayTemperature
 ) {
   let container = document.createElement("div");
   container.className = "forecast-component__item rounded text-center";
@@ -325,7 +324,7 @@ function showWeatherData(data) {
       translations[userLang][dayString.toLowerCase()],
       day.weather[0].icon,
       day.temp.night,
-      day.temp.day,
+      day.temp.day
     );
     showCurrDay(dayString, parseInt(dateString), element);
     container.appendChild(element);
