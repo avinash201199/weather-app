@@ -50,6 +50,11 @@ body {
 /* nav BEM Conevntion * -------/
 
 /* Block */
+
+.navbar {
+  height: 0px;
+}
+
 .nav-component {
   height: 0px;
 }
@@ -500,7 +505,22 @@ footer {
   }
 
   .navbar {
-    margin: 1rem 0.15rem;
+    height: fit-content;
+    /* border: 2px solid red; */
+    margin: 1rem 0.15rem 0rem 0.15rem;
+  }
+  .nav-component {
+    height: fit-content;
+  }
+  .whatsapp img{
+    margin-top:20px;
+  }
+  .weather-component__card {
+    padding: 7px;
+    height: 460px; 
+  }
+  .weather-component__card {
+    margin: 0; 
   }
 }
 
@@ -549,10 +569,6 @@ footer {
 .farenheit {
   color: white;
   font-size: 15px;
-}
-
-.navbar {
-  height: 0px;
 }
 
 .link1 {
@@ -744,7 +760,7 @@ html body #scroll-btn {
 .whatsapp img{
   width: 7rem;
   margin-left: -2.2rem;
-  margin-top: 1.5rem;
+  margin-top: 2rem;
   cursor: pointer;
   position: fixed;
 }
