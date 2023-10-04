@@ -3,17 +3,18 @@ import CITY from "./City.js";
 import { translations, getUserLanguage } from "../../lang/translation.js";
 import config from "./../../config/config.js";
 
-// focus the search input as the DOM loads
+// Focus the search input as the DOM loads
 window.onload = function () {
   document.getElementsByName("search-bar")[0].focus();
 
-  // fetch background
+  // Fetch background image
   fetchNewBackground();
 };
 
 const userLang = getUserLanguage() || "en-US";
 const place = document.querySelector("#place");
 
+// Populate the city selection dropdown
 for (let i in CITY) {
   let option = document.createElement("option");
   option.value = CITY[i];
@@ -21,6 +22,7 @@ for (let i in CITY) {
   place.appendChild(option);
 }
 
+// Function to format time in AM/PM
 function formatAMPM(date) {
   return date.toLocaleString(translations[userLang].formattingLocale, {
     hour: "numeric",
@@ -31,10 +33,12 @@ function formatAMPM(date) {
 let isCelcius = true;
 let selectedCity;
 $(".checkbox").change(function () {
+  // Toggle between Celsius and Fahrenheit
   isCelcius = !this.checked;
   weather.fetchWeather(selectedCity);
 });
 
+// Air Quality related functions
 const AirQuality = (city) => {
   fetchAirQuality(city)
     .then((aqi) => updateAirQuality(aqi))
@@ -71,6 +75,7 @@ const updateAirQuality = (aqi) => {
   qualityDescriptionElement.classList = "air-quality-label ml-0 " + textClass;
 };
 
+// Get air quality description based on AQI value
 const getAirQualityDescription = (aqi, userLang) => {
   switch (true) {
     case aqi >= 0 && aqi <= 50:
@@ -90,6 +95,7 @@ const getAirQualityDescription = (aqi, userLang) => {
   }
 };
 
+// Get CSS class for air quality based on AQI value
 const getAirQualityClass = (aqi) => {
   switch (true) {
     case aqi >= 0 && aqi <= 50:
@@ -113,6 +119,8 @@ let weather = {
   fetchWeather: function (city) {
     let isCountry = false;
     let index;
+
+    // Check if the input city is a country, if yes, convert to its capital city
     for (let i = 0; i < Capitals.length; i++) {
       if (Capitals[i].country.toUpperCase() === city.toUpperCase()) {
         isCountry = true;
@@ -120,9 +128,12 @@ let weather = {
         break;
       }
     }
+
     if (isCountry) {
       city = Capitals[index].city;
     }
+
+    // Fetch weather data for the selected city
     fetch(
       "https://api.openweathermap.org/data/2.5/weather?q=" +
         city +
@@ -153,6 +164,7 @@ let weather = {
     const { lat, lon } = data.coord;
     AirQuality(city);
 
+    // Update weather information in the DOM
     document.getElementById("dynamic").innerText =
       `${translations[userLang].weatherIn} ` + name;
 
@@ -208,7 +220,6 @@ let weather = {
       Wind Speed: ${speed}km/hr,
       Sunrise: ${formatAMPM(date1)},
       Sunset: ${formatAMPM(date2)}.`;
-        // console.log(message)
 
         // Create the WhatsApp share URL
         const whatsappUrl = `https://api.whatsapp.com/send?text=${encodeURIComponent(
@@ -218,6 +229,7 @@ let weather = {
         window.open(whatsappUrl, "_blank");
       });
   },
+
   search: function () {
     if (document.querySelector(".weather-component__search-bar").value != "") {
       selectedCity = document.querySelector(
@@ -244,13 +256,13 @@ let weather = {
         .catch((error) => {
           console.error(error);
         });
-      //url = "";
     } else {
       toastFunction(translations[userLang].pleaseAddLocation);
     }
   },
 };
 
+// Function to get weekly weather data
 async function getWeatherWeekly(url) {
   fetch(url)
     .then((res) => res.json())
@@ -259,6 +271,7 @@ async function getWeatherWeekly(url) {
     });
 }
 
+// Function to generate weather forecast items
 function generateWeatherItem(
   dayString,
   iconName,
@@ -316,6 +329,7 @@ function generateWeatherItem(
   return container;
 }
 
+// Function to display weather data
 function showWeatherData(data) {
   let container = document.getElementById("weather-forecast");
   container.innerHTML = "";
@@ -332,16 +346,17 @@ function showWeatherData(data) {
     container.appendChild(element);
   });
 }
-//toast function
+
+// Toast function to display messages
 function toastFunction(val) {
   var x = document.getElementById("toast");
   x.className = "show";
-  //change inner text
   document.getElementById("toast").innerText = val;
   setTimeout(function () {
     x.className = x.className.replace("show", "");
   }, 3000);
 }
+
 document
   .querySelector(".weather-component__search button")
   .addEventListener("click", function () {
@@ -356,8 +371,7 @@ document
     }
   });
 
-// get user city name via ip api
-
+// Get the user's city name via IP API
 fetch("https://ipapi.co/json/")
   .then((response) => response.json())
   .then((data) => {
@@ -368,7 +382,7 @@ fetch("https://ipapi.co/json/")
 document.getElementsByName("search-bar")[0].placeholder =
   translations[userLang].search;
 
-// SHOWS CURRENT DAY IN THE RENDERED DAYS
+// Function to highlight the current day in the forecast
 function showCurrDay(dayString, dateString, element) {
   const days = [
     "Sunday",
@@ -414,6 +428,8 @@ const month = [
   "November",
   "December",
 ];
+
+// Update the time every second
 setInterval(() => {
   a = new Date();
   time =
@@ -435,21 +451,21 @@ setInterval(() => {
   document.getElementById("date-time").innerHTML = time;
 }, 1000);
 
-// scrollTop functionality
+// Scroll to top functionality
 const scrollTop = function () {
-  // create HTML button element
+  // Create an HTML button element
   const scrollBtn = document.createElement("button");
   scrollBtn.innerHTML = "&#8679";
   scrollBtn.setAttribute("id", "scroll-btn");
   document.body.appendChild(scrollBtn);
-  // hide/show button based on scroll distance
+  // Hide/show button based on scroll distance
   const scrollBtnDisplay = function () {
     window.scrollY > window.innerHeight
       ? scrollBtn.classList.add("show")
       : scrollBtn.classList.remove("show");
   };
   window.addEventListener("scroll", scrollBtnDisplay);
-  // scroll to top when button clicked
+  // Scroll to top when the button is clicked
   const scrollWindow = function () {
     if (window.scrollY != 0) {
       setTimeout(function () {
@@ -463,6 +479,7 @@ const scrollTop = function () {
 };
 scrollTop();
 
+// Function to fetch a new background image
 const fetchNewBackground = () => {
   let isMobile = window.innerWidth < 768 ? true : false;
   let url = "https://source.unsplash.com/1600x900/?landscape";
@@ -472,6 +489,7 @@ const fetchNewBackground = () => {
   const bgElement = document.getElementById("background");
   bgElement.style.backgroundImage = `url(${url})`;
 };
+
 // Check if the browser supports the SpeechRecognition API
 if ("SpeechRecognition" in window || "webkitSpeechRecognition" in window) {
   const SpeechRecognition =
