@@ -1,16 +1,13 @@
 import Capitals from "./Capitals.js";
 import CITY from "./City.js";
-import {translations, getUserLanguage} from "../../lang/translation.js";
+import { translations, getUserLanguage } from "../../lang/translation.js";
 import config from "./../../config/config.js";
-
 // focus the search input as the DOM loads
-window.onload = function() {
+window.onload = function () {
   document.getElementsByName("search-bar")[0].focus();
-}
-
+};
 const userLang = getUserLanguage() || "en-US";
 const place = document.querySelector("#place");
-
 for (var i in CITY) {
   var option = document.createElement("option");
   option.value = CITY[i];
@@ -27,11 +24,10 @@ function formatAMPM(date) {
 
 let isCelcius = true;
 let selectedCity;
-$(".checkbox").change( function() {
+$(".checkbox").change(function () {
   isCelcius = !this.checked;
   weather.fetchWeather(selectedCity);
 });
-
 
 const AirQuality = (log, lat) => {
   fetch(`https://api.waqi.info/feed/geo:${lat};${log}/?token=${config.AIR_KEY}`)
@@ -133,12 +129,11 @@ let weather = {
 
     let temperature = temp;
 
-    if(!isCelcius){
-      temperature = (temperature*(9/5))+32;
+    if (!isCelcius) {
+      temperature = temperature * (9 / 5) + 32;
       temperature = (Math.round(temperature * 100) / 100).toFixed(2);
       document.getElementById("temp").innerText = temperature + "°F";
-    }
-    else{
+    } else {
       document.getElementById("temp").innerText = temperature + "°C";
     }
 
@@ -165,7 +160,9 @@ let weather = {
   },
   search: function () {
     if (document.querySelector(".weather-component__search-bar").value != "") {
-      selectedCity=document.querySelector(".weather-component__search-bar").value;
+      selectedCity = document.querySelector(
+        ".weather-component__search-bar"
+      ).value;
       this.fetchWeather(selectedCity);
     } else {
       toastFunction(translations[userLang].pleaseAddLocation);
@@ -206,31 +203,29 @@ function generateWeatherItem(
 
   let dayTemp = document.createElement("div");
   dayTemp.classList.add("weather-forecast-day");
-  if(!isCelcius){
-    dayTemperature = (dayTemperature*(9/5))+35;
+  if (!isCelcius) {
+    dayTemperature = dayTemperature * (9 / 5) + 35;
     dayTemperature = (Math.round(dayTemperature * 100) / 100).toFixed(2);
     dayTemp.innerHTML = `${translations[userLang].day} ${dayTemperature}&#176;F`;
-  }
-  else{
+  } else {
     dayTemp.innerHTML = `${translations[userLang].day} ${dayTemperature}&#176;C`;
   }
-  dayTemp.style.fontFamily="Inter"
-  dayTemp.style.fontWeight="bolder"
-  dayTemp.style.textTransform="uppercase"
+  dayTemp.style.fontFamily = "Inter";
+  dayTemp.style.fontWeight = "bolder";
+  dayTemp.style.textTransform = "uppercase";
 
   let nightTemp = document.createElement("div");
-  if(!isCelcius){
-    nightTemperature = (nightTemperature*(9/5))+35;
+  if (!isCelcius) {
+    nightTemperature = nightTemperature * (9 / 5) + 35;
     nightTemperature = (Math.round(nightTemperature * 100) / 100).toFixed(2);
     nightTemp.innerHTML = `${translations[userLang].night} ${nightTemperature}&#176;F`;
-  }
-  else{
+  } else {
     nightTemp.innerHTML = `${translations[userLang].night} ${nightTemperature}&#176;C`;
   }
-  nightTemp.style.color="#00dcff"
-  nightTemp.style.fontFamily="Inter"
-  nightTemp.style.fontWeight="bolder"
-  nightTemp.style.textTransform="uppercase"
+  nightTemp.style.color = "#00dcff";
+  nightTemp.style.fontFamily = "Inter";
+  nightTemp.style.fontWeight = "bolder";
+  nightTemp.style.textTransform = "uppercase";
 
   container.appendChild(day);
   container.appendChild(newDiv);
@@ -266,11 +261,11 @@ function toastFunction(val) {
     x.className = x.className.replace("show", "");
   }, 3000);
 }
-document.querySelector(".weather-component__search button").addEventListener("click", function () {
-  weather.search();
-});
-
-
+document
+  .querySelector(".weather-component__search button")
+  .addEventListener("click", function () {
+    weather.search();
+  });
 
 document
   .querySelector(".weather-component__search-bar")
@@ -307,7 +302,7 @@ function showCurrDay(dayString, dateString, element) {
   const dayName = days[date.getDay()];
   const dayNumber = date.getDate();
   if (dayString == dayName && dateString == dayNumber) {
-    element.classList.add("forecast-component__item-current-day")
+    element.classList.add("forecast-component__item-current-day");
   }
 }
 
@@ -315,13 +310,13 @@ function showCurrDay(dayString, dateString, element) {
 var a;
 var time;
 const weekday = [
-  'Sunday', 
-  'Monday', 
-  'Tuesday',
-  'Wednesday', 
-  'Thursday', 
-  'Friday', 
-  'Saturday'
+  "Sunday",
+  "Monday",
+  "Tuesday",
+  "Wednesday",
+  "Thursday",
+  "Friday",
+  "Saturday",
 ];
 
 const month = [
@@ -329,25 +324,38 @@ const month = [
   "February",
   "March",
   "April",
-   "May",
-   "June",
-   "July",
-   "August",
-   "September",
-   "October",
-   "November",
-   "December"
+  "May",
+  "June",
+  "July",
+  "August",
+  "September",
+  "October",
+  "November",
+  "December",
 ];
 setInterval(() => {
-    a = new Date();
-    time = weekday[a.getDay()] + '  ' + a.getDate() + '  ' + month[a.getMonth()] + ' ' + a.getFullYear()   + ' ' +  '  "Clock: ' + a.getHours() + ':' + a.getMinutes() + ':' + a.getSeconds() + '"';
-    document.getElementById('date-time').innerHTML = time;
+  a = new Date();
+  time =
+    weekday[a.getDay()] +
+    "  " +
+    a.getDate() +
+    "  " +
+    month[a.getMonth()] +
+    " " +
+    a.getFullYear() +
+    " " +
+    '  "Clock: ' +
+    a.getHours() +
+    ":" +
+    a.getMinutes() +
+    ":" +
+    a.getSeconds() +
+    '"';
+  document.getElementById("date-time").innerHTML = time;
 }, 1000);
 
-
- 
- // scrollTop functionality
- const scrollTop = function () {
+// scrollTop functionality
+const scrollTop = function () {
   // create HTML button element
   const scrollBtn = document.createElement("button");
   scrollBtn.innerHTML = "&#8679";
@@ -355,21 +363,54 @@ setInterval(() => {
   document.body.appendChild(scrollBtn);
   // hide/show button based on scroll distance
   const scrollBtnDisplay = function () {
-  window.scrollY > window.innerHeight
-  ? scrollBtn.classList.add("show")
-  : scrollBtn.classList.remove("show");
+    window.scrollY > window.innerHeight
+      ? scrollBtn.classList.add("show")
+      : scrollBtn.classList.remove("show");
   };
   window.addEventListener("scroll", scrollBtnDisplay);
   // scroll to top when button clicked
   const scrollWindow = function () {
-  if (window.scrollY != 0) {
-  setTimeout(function () {
-  window.scrollTo(0, window.scrollY - 50);
-  window.scroll({top: 0, behavior: "smooth"})
-  scrollWindow();
-  }, 10);
-  }
+    if (window.scrollY != 0) {
+      setTimeout(function () {
+        window.scrollTo(0, window.scrollY - 50);
+        window.scroll({ top: 0, behavior: "smooth" });
+        scrollWindow();
+      }, 10);
+    }
   };
   scrollBtn.addEventListener("click", scrollWindow);
 };
 scrollTop();
+
+// Check if the browser supports the SpeechRecognition API
+if ("SpeechRecognition" in window || "webkitSpeechRecognition" in window) {
+  const SpeechRecognition =
+    window.SpeechRecognition || window.webkitSpeechRecognition;
+  const recognition = new SpeechRecognition();
+
+  const microphoneButton = document.querySelector(
+    ".weather-component__button-microphone"
+  );
+  const searchBar = document.querySelector(".weather-component__search-bar");
+
+  // Add an event listener to the microphone button to start speech recognition
+  microphoneButton.addEventListener("click", () => {
+    recognition.start();
+  });
+
+  // Add an event listener for when speech recognition results are available
+  recognition.onresult = (event) => {
+    const transcript = event.results[0][0].transcript;
+
+    // Set the value of the search bar to the recognized speech
+    searchBar.value = transcript;
+  };
+
+  // Handle speech recognition errors
+  recognition.onerror = (event) => {
+    console.error("Speech recognition error:", event.error);
+  };
+} else {
+  // Handle the case where the browser does not support speech recognition
+  console.error("Speech recognition is not supported in this browser.");
+}
