@@ -33,6 +33,7 @@ body {
   scrollbar-width: none;
   /* Firefox */
 }
+/* Inside your CSS file (style.css) */
 
 /* Header Text */
 .header-component {
@@ -156,6 +157,15 @@ input.weather-component__search-bar:focus {
   background: #00dcffc2;
   cursor: pointer;
   transition: 0.2s ease-in-out;
+}
+.weather-component__button-microphone{
+  background:#00dcffc2;
+  border-radius: 50%;
+  margin: 0.5em;
+  outline: none;
+  
+
+
 }
 
 button:hover {

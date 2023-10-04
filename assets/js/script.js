@@ -196,7 +196,9 @@ let weather = {
 
     let url = `https://api.openweathermap.org/data/2.5/onecall?lat=${lat}&lon=${lon}&units=metric&appid=${config.API_KEY}`;
     getWeatherWeekly(url);
-    document.getElementById("whatsapp-button").replaceWith(document.getElementById("whatsapp-button").cloneNode(true));
+    document
+      .getElementById("whatsapp-button")
+      .replaceWith(document.getElementById("whatsapp-button").cloneNode(true));
     document
       .getElementById("whatsapp-button")
       .addEventListener("click", function () {
@@ -470,3 +472,38 @@ const fetchNewBackground = () => {
   const bgElement = document.getElementById("background");
   bgElement.style.backgroundImage = `url(${url})`;
 };
+// Check if the browser supports the SpeechRecognition API
+if ("SpeechRecognition" in window || "webkitSpeechRecognition" in window) {
+  const SpeechRecognition =
+    window.SpeechRecognition || window.webkitSpeechRecognition;
+  const recognition = new SpeechRecognition();
+
+  const microphoneButton = document.querySelector(
+    ".weather-component__button-microphone"
+  );
+  const searchBar = document.querySelector(".weather-component__search-bar");
+
+  // Add an event listener to the microphone button to start speech recognition
+  microphoneButton.addEventListener("click", () => {
+    recognition.start();
+  });
+
+  // Add an event listener for when speech recognition results are available
+  recognition.onresult = (event) => {
+    const transcript = event.results[0][0].transcript;
+
+    // Set the value of the search bar to the recognized speech
+    searchBar.value = transcript;
+
+    // Optionally, you can submit the form to perform the search
+    // searchBar.form.submit();
+  };
+
+  // Handle speech recognition errors
+  recognition.onerror = (event) => {
+    console.error("Speech recognition error:", event.error);
+  };
+} else {
+  // Handle the case where the browser does not support speech recognition
+  console.error("Speech recognition is not supported in this browser.");
+}
