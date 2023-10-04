@@ -42,10 +42,13 @@ body {
   text-align: center;
   color: #fff;
   background: linear-gradient(112.1deg, rgb(32, 38, 57) 11.4%, rgb(63, 76, 119) 70.2%);
-  ;
   font-size: 1em;
   font-weight: 700;
   /* width: fit-content; */
+  width: fit-content;
+  position: relative;
+  margin: 6px auto;
+  z-index: 9;
 }
 
 /* nav BEM Conevntion * -------/
@@ -163,7 +166,7 @@ input.weather-component__search-bar:focus {
   border-radius: 50%;
   margin: 0.5em;
   outline: none;
-  
+
 
 
 }
@@ -269,7 +272,7 @@ button:focus {
 }
 
 .forecast-component__items-wrapper {
-  
+
   display: grid;
   grid-template-columns: auto auto auto auto auto auto;
   grid-gap: 0.6rem;
@@ -278,7 +281,7 @@ button:focus {
 }
 
 .forecast-component__item {
-  
+
   border: 1px solid rgb(35, 35, 35);
   background: linear-gradient(102.1deg, rgb(32, 38, 57,0.5) 41.4%, rgb(32, 38, 57,0.1) 60.2%);;
   padding: 12px;
@@ -297,7 +300,7 @@ button:focus {
   backdrop-filter: blur(16px) saturate(180%);
   -webkit-backdrop-filter: blur(16px) saturate(180%);
   background-color: rgb(9, 32, 63 ,0.75);
- 
+
   border-radius: 12px;
   cursor: pointer;
 }
@@ -522,15 +525,15 @@ footer {
   .nav-component {
     height: fit-content;
   }
-  .whatsapp img{
+.whatsapp img{
     margin-top:20px;
   }
   .weather-component__card {
     padding: 7px;
-    height: 460px; 
+    height: 460px;
   }
   .weather-component__card {
-    margin: 0; 
+    margin: 0;
   }
 }
 
@@ -651,7 +654,7 @@ footer {
   .weather-component__card {
     padding: 7px;
     height: 460px;
-    
+
   }
 
   .weather-component {
@@ -735,8 +738,21 @@ html body #scroll-btn {
   overflow-y: scroll;
   width: 100vw;
   height: 100vh;
-  position: absolute;
+  position: fixed;
+  top: 0;
+  left: 0;
   filter: blur(3px);
+  z-index: -1;
+}
+
+#background::after {
+  content: "";
+  position: absolute;
+  top: 0px;
+  right: 0px;
+  bottom: 0px;
+  left: 0px;
+  background-color: rgba(0, 0, 0, 0.25);
 }
 
 .good-quality {

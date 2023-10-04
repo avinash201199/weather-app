@@ -203,10 +203,10 @@ let weather = {
       .getElementById("whatsapp-button")
       .addEventListener("click", function () {
         const message = `Weather in ${name} today
-      Temperature: ${temperature}, 
+      Temperature: ${temperature},
       Humidity: ${humidity}%,
-      Wind Speed: ${speed}km/hr, 
-      Sunrise: ${formatAMPM(date1)}, 
+      Wind Speed: ${speed}km/hr,
+      Sunrise: ${formatAMPM(date1)},
       Sunset: ${formatAMPM(date2)}.`;
         // console.log(message)
 
@@ -225,7 +225,7 @@ let weather = {
       ).value;
       this.fetchWeather(selectedCity);
       const apiKey = "OOjKyciq4Sk0Kla7riLuR2j8C9FwThFzKIKIHrpq7c27KvrCul5rVxJj";
-      const apiUrl = "https://api.pexels.com/v1/search?query=" + selectedCity;
+      const apiUrl = `https://api.pexels.com/v1/search?query=${selectedCity}&orientation=landscape`;
 
       fetch(apiUrl, {
         method: "GET",
