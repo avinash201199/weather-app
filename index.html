@@ -6,7 +6,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <meta name="description"
     content="A Beautiful weather app displaying a weekly weather forecast for the selected location" />
-  <title>Weather App</title>
+  <title id="dynamic">Weather App</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@200;300;400&family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet">
@@ -15,17 +15,42 @@
   <link rel="stylesheet" href="./assets/css/bootstrap.min.css">
   <link rel="stylesheet" href="./assets/css/style.css">
   <link rel="icon" href="assets/favicon.ico">
+  <!-- <link rel="logo" href="assets/icons/logo.png"> -->
+
+  <!-- jquery CDN -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
+   <!-- fontawesome CDN -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
 </head>
 
 <body id="body">
+  <div id="background"></div>
   <h2 class="header-component" style="text-align: center; width: 55%; margin: 5px auto 10px;"> <span id='date-time'></span></h2>
   <nav class="nav-component navbar temp">
+    <div id="whatsapp-button" class="nav-compoent__share-button col-auto">
+          <i class="whatsapp">
+            <img src="assets/Whatsapp-logo.svg" alt="whatsapp">
+          </i>
+    </div>
     <a class=" nav-component__anchor navbar-brand" href="#">
+      <div class="container">
+        <div class="row">
+            <div class="col-md-2">
+              <div class="logo">
+                <img src="./assets/icons/logo.png" alt="Logo" class="img-fluid logo-img">
+              </div>
+            </div>
+            <div class="col-md-10">
+                <!-- Other content goes here -->
+            </div>
+        </div>
+    </div>
+    
       <div class="nav-component__celcius-block col-auto">
         <input type="checkbox" id="unit" class="checkbox">
             <label for="unit" class="label">
             <span class="farenheit">F°</span>
-            <span class="celcius">C°</span>         
+            <span class="celcius">C°</span>
             <div class='ball'>
         </label>
       </div>
@@ -34,7 +59,7 @@
 
 
   <div class="weather-component container d-flex justify-content-center align-items-center flex-column">
-    <div class="weather-component__card text-white rounded">
+    <div class="weather-component__card text-white rounded-5">
       <div class="weather-component__search">
         <input type="text" class="weather-component__search-bar" name="search-bar"   list="place" placeholder="Search" autocomplete="address-level2" />
         <datalist id="place" class="weather-component__datalist">
@@ -65,7 +90,7 @@
               </figure>
               <div class="weather-component__AQI">
                 <div id="AirQuality"><a href="https://en.wikipedia.org/wiki/Thunderstorm">Air Quality</a>:75</div>
-                <div class="ml-0">(Satisfactory)</div>
+                <div class="air-quality-label ml-0">(Satisfactory)</div>
               </div>
             </div>
 
@@ -120,40 +145,45 @@
     <div class="toast-component__checkicon"><i class="fas fa-check-square"></i></div>
   </div>
 
-  <footer>
-    <div class="footer-component">
-    <div class="social-info">
-      <div>
-        <h2 class="footer-component__follow-label">Follow Us</h2>
-      </div>
-     <div class="footer-component__social-icons">
+<footer>
+    <div >
+      <h2 class="textfooter">
+        Made with 💝 by Avinash
+      </h2>
+
+    <div class="footerSection">
+      <ul style="list-style: none;margin:0;padding:0;color: white; display: inline-flex;">
+        <li>
             <a  href="https://github.com/avinash201199">
-            <img class="link" src="assets/icons/github.png"  ></a>
+            <i class="socialIcons fab fa-github fa-3x link1"></i>
+        </li>
+        <li>
             <a  href="https://www.linkedin.com/in/avinash-singh-071b79175/">
-            <img class="link" src="./assets/icons/linkedin.png"  ></a>
-           <a  href="https://www.instagram.com/lets__code/">
-           <img class="link"  src="./assets/icons/instagram.png" ></a>
-      </div>
+            <i class="fab fa-linkedin-in fa-3x link2"></i>
+        </li>
+        <li>
+            <a  href="https://www.instagram.com/lets__code/">
+            <i class="fab fa-instagram fa-3x link3"></i>
+        </li>
+      </ul>
     </div>
-     <h2 class="footer-component__author-label">
-    Made with 💝 by Avinash Singh
-</h2>
-</div>
+  </div>
 </footer>
+
   <!-- jquery CDN -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.1/jquery.slim.min.js" 
-          integrity="sha512-yBpuflZmP5lwMzZ03hiCLzA94N0K2vgBtJgqQ2E1meJzmIBfjbb7k4Y23k2i2c/rIeSUGc7jojyIY5waK3ZxCQ==" 
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.1/jquery.slim.min.js"
+          integrity="sha512-yBpuflZmP5lwMzZ03hiCLzA94N0K2vgBtJgqQ2E1meJzmIBfjbb7k4Y23k2i2c/rIeSUGc7jojyIY5waK3ZxCQ=="
           crossorigin="anonymous" referrerpolicy="no-referrer"></script>
   <!-- popper CDN -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" 
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
             integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
-  
+
   <!-- moment CDN -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js"
             integrity="sha512-qTXRIMyZIFb8iQcfjXWCO8+M5Tbc38Qi5WzdPOYZHIlZpzBHG3L3by84BBBOiRGiEb7KKtAOAs5qYdUiZiQNNQ=="
             crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-  
+
    <script type="module" src="./assets/js/script.js"></script>
-  
+
 </body>
 </html>

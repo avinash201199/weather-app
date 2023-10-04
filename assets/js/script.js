@@ -472,7 +472,6 @@ const fetchNewBackground = () => {
   const bgElement = document.getElementById("background");
   bgElement.style.backgroundImage = `url(${url})`;
 };
-
 // Check if the browser supports the SpeechRecognition API
 if ("SpeechRecognition" in window || "webkitSpeechRecognition" in window) {
   const SpeechRecognition =
@@ -495,6 +494,9 @@ if ("SpeechRecognition" in window || "webkitSpeechRecognition" in window) {
 
     // Set the value of the search bar to the recognized speech
     searchBar.value = transcript;
+
+    // Optionally, you can submit the form to perform the search
+    // searchBar.form.submit();
   };
 
   // Handle speech recognition errors
