@@ -2,14 +2,20 @@ import Capitals from "./Capitals.js";
 import CITY from "./City.js";
 import { translations, getUserLanguage } from "../../lang/translation.js";
 import config from "./../../config/config.js";
+
 // focus the search input as the DOM loads
 window.onload = function () {
   document.getElementsByName("search-bar")[0].focus();
+
+  // fetch background
+  fetchNewBackground();
 };
+
 const userLang = getUserLanguage() || "en-US";
 const place = document.querySelector("#place");
-for (var i in CITY) {
-  var option = document.createElement("option");
+
+for (let i in CITY) {
+  let option = document.createElement("option");
   option.value = CITY[i];
   option.text = CITY[i];
   place.appendChild(option);
@@ -29,46 +35,78 @@ $(".checkbox").change(function () {
   weather.fetchWeather(selectedCity);
 });
 
-const AirQuality = (log, lat) => {
-  fetch(`https://api.waqi.info/feed/geo:${lat};${log}/?token=${config.AIR_KEY}`)
-    .then((res) => res.json())
-    .then((res) => {
-      let aqi = res.data.aqi;
-      document.querySelector(
-        "#AirQuality"
-      ).innerText = `${translations[userLang].airQuality}: ${aqi}`;
+const AirQuality = (city) => {
+  fetchAirQuality(city)
+    .then((aqi) => updateAirQuality(aqi))
+    .catch((error) => console.error(error));
+};
 
-      if (aqi >= 0 && aqi <= 50) {
-        document.querySelector(
-          ".ml-0"
-        ).innerText = `(${translations[userLang].good})`;
+const fetchAirQuality = (city) => {
+  const url = `https://api.waqi.info/v2/search/?token=${config.AIR_KEY}&keyword=${city}`;
+
+  return fetch(url)
+    .then((res) => {
+      if (!res.ok) {
+        throw new Error(`Failed to fetch air quality data for ${city}`);
       }
-      if (aqi > 50 && aqi <= 100) {
-        document.querySelector(
-          ".ml-0"
-        ).innerText = `(${translations[userLang].satisfactory})`;
-      }
-      if (aqi > 100 && aqi <= 150) {
-        document.querySelector(
-          ".ml-0"
-        ).innerText = `(${translations[userLang].sensitive})`;
-      }
-      if (aqi > 150 && aqi <= 200) {
-        document.querySelector(
-          ".ml-0"
-        ).innerText = `(${translations[userLang].unhealthy})`;
-      }
-      if (aqi > 200 && aqi <= 300) {
-        document.querySelector(
-          ".ml-0"
-        ).innerText = `(${translations[userLang].veryUnhealthy})`;
-      }
-      if (aqi > 300) {
-        document.querySelector(
-          ".ml-0"
-        ).innerText = `(${translations[userLang].hazardous})`;
-      }
+      return res.json();
+    })
+    .then((data) => {
+      const relevantLocation = data.data[0];
+      return relevantLocation.aqi;
     });
+};
+
+const updateAirQuality = (aqi) => {
+  const airQualityElement = document.querySelector("#AirQuality");
+  const aqiText = translations[userLang].airQuality;
+  airQualityElement.innerText = `${aqiText}: ${aqi}`;
+
+  const airQuality = getAirQualityDescription(aqi, userLang);
+  const textClass = getAirQualityClass(aqi);
+  const qualityDescriptionElement =
+    document.querySelector(".air-quality-label");
+
+  qualityDescriptionElement.innerText = airQuality;
+  qualityDescriptionElement.classList = "air-quality-label ml-0 " + textClass;
+};
+
+const getAirQualityDescription = (aqi, userLang) => {
+  switch (true) {
+    case aqi >= 0 && aqi <= 50:
+      return `(${translations[userLang].good})`;
+    case aqi > 50 && aqi <= 100:
+      return `(${translations[userLang].satisfactory})`;
+    case aqi > 100 && aqi <= 150:
+      return `(${translations[userLang].sensitive})`;
+    case aqi > 150 && aqi <= 200:
+      return `(${translations[userLang].unhealthy})`;
+    case aqi > 200 && aqi <= 300:
+      return `(${translations[userLang].veryUnhealthy})`;
+    case aqi > 300:
+      return `(${translations[userLang].hazardous})`;
+    default:
+      return `(${translations[userLang].notAvailable})`;
+  }
+};
+
+const getAirQualityClass = (aqi) => {
+  switch (true) {
+    case aqi >= 0 && aqi <= 50:
+      return "good-quality";
+    case aqi > 50 && aqi <= 100:
+      return "satisfactory-quality";
+    case aqi > 100 && aqi <= 150:
+      return "sensitive-quality";
+    case aqi > 150 && aqi <= 200:
+      return "unhealthy-quality";
+    case aqi > 200 && aqi <= 300:
+      return "very-unhealthy-quality";
+    case aqi > 300:
+      return "hazardous-quality";
+    default:
+      return "not-available";
+  }
 };
 
 let weather = {
@@ -100,23 +138,23 @@ let weather = {
         return response.json();
       })
       .then((data) => {
-        this.displayWeather(data);
+        this.displayWeather(data, city);
       });
   },
 
-  displayWeather: function (data) {
-    //console.log(data);
+  displayWeather: function (data, city) {
     const { name } = data;
-    //console.log(name);
     const { icon, description } = data.weather[0];
     const { temp, humidity } = data.main;
     const { speed } = data.wind;
     const { sunrise, sunset } = data.sys;
     let date1 = new Date(sunrise * 1000);
     let date2 = new Date(sunset * 1000);
-    //console.log(formatAMPM(date));
     const { lat, lon } = data.coord;
-    const airIndex = AirQuality(lon, lat);
+    AirQuality(city);
+
+    document.getElementById("dynamic").innerText =
+      `${translations[userLang].weatherIn} ` + name;
 
     document.getElementById("city").innerText =
       `${translations[userLang].weatherIn} ` + name;
@@ -132,10 +170,11 @@ let weather = {
     if (!isCelcius) {
       temperature = temperature * (9 / 5) + 32;
       temperature = (Math.round(temperature * 100) / 100).toFixed(2);
-      document.getElementById("temp").innerText = temperature + "°F";
+      temperature = temperature + "°F";
     } else {
-      document.getElementById("temp").innerText = temperature + "°C";
+      temperature = temperature + "°C";
     }
+    document.getElementById("temp").innerText = temperature;
 
     document.getElementById(
       "humidity"
@@ -157,6 +196,27 @@ let weather = {
 
     let url = `https://api.openweathermap.org/data/2.5/onecall?lat=${lat}&lon=${lon}&units=metric&appid=${config.API_KEY}`;
     getWeatherWeekly(url);
+    document
+      .getElementById("whatsapp-button")
+      .replaceWith(document.getElementById("whatsapp-button").cloneNode(true));
+    document
+      .getElementById("whatsapp-button")
+      .addEventListener("click", function () {
+        const message = `Weather in ${name} today
+      Temperature: ${temperature}, 
+      Humidity: ${humidity}%,
+      Wind Speed: ${speed}km/hr, 
+      Sunrise: ${formatAMPM(date1)}, 
+      Sunset: ${formatAMPM(date2)}.`;
+        // console.log(message)
+
+        // Create the WhatsApp share URL
+        const whatsappUrl = `https://api.whatsapp.com/send?text=${encodeURIComponent(
+          message
+        )}`;
+        // Open WhatsApp in a new tab to share the message
+        window.open(whatsappUrl, "_blank");
+      });
   },
   search: function () {
     if (document.querySelector(".weather-component__search-bar").value != "") {
@@ -164,6 +224,27 @@ let weather = {
         ".weather-component__search-bar"
       ).value;
       this.fetchWeather(selectedCity);
+      const apiKey = "OOjKyciq4Sk0Kla7riLuR2j8C9FwThFzKIKIHrpq7c27KvrCul5rVxJj";
+      const apiUrl = "https://api.pexels.com/v1/search?query=" + selectedCity;
+
+      fetch(apiUrl, {
+        method: "GET",
+        headers: {
+          Authorization: apiKey,
+        },
+      })
+        .then((response) => response.json())
+        .then((data) => {
+          const randomIndex = Math.floor(Math.random() * 10);
+          const url = data.photos[randomIndex].src.large2x;
+          document.getElementById(
+            "background"
+          ).style.backgroundImage = `url(${url})`;
+        })
+        .catch((error) => {
+          console.error(error);
+        });
+      //url = "";
     } else {
       toastFunction(translations[userLang].pleaseAddLocation);
     }
@@ -381,6 +462,16 @@ const scrollTop = function () {
   scrollBtn.addEventListener("click", scrollWindow);
 };
 scrollTop();
+
+const fetchNewBackground = () => {
+  let isMobile = window.innerWidth < 768 ? true : false;
+  let url = "https://source.unsplash.com/1600x900/?landscape";
+  if (isMobile) {
+    url = "https://source.unsplash.com/720x1280/?landscape";
+  }
+  const bgElement = document.getElementById("background");
+  bgElement.style.backgroundImage = `url(${url})`;
+};
 
 // Check if the browser supports the SpeechRecognition API
 if ("SpeechRecognition" in window || "webkitSpeechRecognition" in window) {
