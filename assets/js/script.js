@@ -507,3 +507,14 @@ if ("SpeechRecognition" in window || "webkitSpeechRecognition" in window) {
   // Handle the case where the browser does not support speech recognition
   console.error("Speech recognition is not supported in this browser.");
 }
+
+let follower = document.getElementById("circle");
+
+window.addEventListener("mousemove", function (details) {
+  let y = details.clientY;
+  let x = details.clientX;
+  setTimeout(function () {
+    follower.style.top = `${y}px`;
+    follower.style.left = `${x}px`;
+  }, 50);
+});
