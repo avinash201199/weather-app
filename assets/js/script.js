@@ -3,21 +3,22 @@ import CITY from "./City.js";
 import { translations, getUserLanguage } from "../../lang/translation.js";
 import config from "./../../config/config.js";
 
-// focus the search input as the DOM loads
-window.onload = function () {
-  document.getElementsByName("search-bar")[0].focus();
+// Focus the search input as soon as the DOM loads
+document.addEventListener("DOMContentLoaded", function () {
+  document.querySelector(".weather-component__search-bar").focus();
 
-  // fetch background
+  // Fetch a new background image
   fetchNewBackground();
-};
+});
 
 const userLang = getUserLanguage() || "en-US";
 const place = document.querySelector("#place");
 
-for (let i in CITY) {
+// Use a for...of loop to iterate through CITY array
+for (const city of CITY) {
   let option = document.createElement("option");
-  option.value = CITY[i];
-  option.text = CITY[i];
+  option.value = city;
+  option.text = city;
   place.appendChild(option);
 }
 
@@ -30,9 +31,13 @@ function formatAMPM(date) {
 
 let isCelcius = true;
 let selectedCity;
-$(".checkbox").change(function () {
-  isCelcius = !this.checked;
-  weather.fetchWeather(selectedCity);
+
+// Use querySelectorAll and forEach to add event handlers to all elements with class "checkbox"
+document.querySelectorAll(".checkbox").forEach(function (checkbox) {
+  checkbox.addEventListener("change", function () {
+    isCelcius = !this.checked;
+    weather.fetchWeather(selectedCity);
+  });
 });
 
 const AirQuality = (city) => {
@@ -208,21 +213,16 @@ let weather = {
       Wind Speed: ${speed}km/hr,
       Sunrise: ${formatAMPM(date1)},
       Sunset: ${formatAMPM(date2)}.`;
-        // console.log(message)
-
-        // Create the WhatsApp share URL
         const whatsappUrl = `https://api.whatsapp.com/send?text=${encodeURIComponent(
           message
         )}`;
-        // Open WhatsApp in a new tab to share the message
         window.open(whatsappUrl, "_blank");
       });
   },
   search: function () {
-    if (document.querySelector(".weather-component__search-bar").value != "") {
-      selectedCity = document.querySelector(
-        ".weather-component__search-bar"
-      ).value;
+    const searchBar = document.querySelector(".weather-component__search-bar");
+    if (searchBar.value != "") {
+      selectedCity = searchBar.value;
       this.fetchWeather(selectedCity);
       const apiKey = "OOjKyciq4Sk0Kla7riLuR2j8C9FwThFzKIKIHrpq7c27KvrCul5rVxJj";
       const apiUrl = `https://api.pexels.com/v1/search?query=${selectedCity}&orientation=landscape`;
@@ -237,14 +237,11 @@ let weather = {
         .then((data) => {
           const randomIndex = Math.floor(Math.random() * 10);
           const url = data.photos[randomIndex].src.large2x;
-          document.getElementById(
-            "background"
-          ).style.backgroundImage = `url(${url})`;
+          document.getElementById("background").style.backgroundImage = `url(${url})`;
         })
         .catch((error) => {
           console.error(error);
         });
-      //url = "";
     } else {
       toastFunction(translations[userLang].pleaseAddLocation);
     }
@@ -332,16 +329,16 @@ function showWeatherData(data) {
     container.appendChild(element);
   });
 }
-//toast function
+
 function toastFunction(val) {
   var x = document.getElementById("toast");
   x.className = "show";
-  //change inner text
   document.getElementById("toast").innerText = val;
   setTimeout(function () {
     x.className = x.className.replace("show", "");
   }, 3000);
 }
+
 document
   .querySelector(".weather-component__search button")
   .addEventListener("click", function () {
@@ -356,8 +353,6 @@ document
     }
   });
 
-// get user city name via ip api
-
 fetch("https://ipapi.co/json/")
   .then((response) => response.json())
   .then((data) => {
@@ -365,10 +360,9 @@ fetch("https://ipapi.co/json/")
     weather.fetchWeather(data.city);
   });
 
-document.getElementsByName("search-bar")[0].placeholder =
+document.querySelector(".weather-component__search-bar").placeholder =
   translations[userLang].search;
 
-// SHOWS CURRENT DAY IN THE RENDERED DAYS
 function showCurrDay(dayString, dateString, element) {
   const days = [
     "Sunday",
@@ -387,36 +381,10 @@ function showCurrDay(dayString, dateString, element) {
   }
 }
 
-// Script for Live Time using SetInterval
-var a;
-var time;
-const weekday = [
-  "Sunday",
-  "Monday",
-  "Tuesday",
-  "Wednesday",
-  "Thursday",
-  "Friday",
-  "Saturday",
-];
-
-const month = [
-  "January",
-  "February",
-  "March",
-  "April",
-  "May",
-  "June",
-  "July",
-  "August",
-  "September",
-  "October",
-  "November",
-  "December",
-];
-setInterval(() => {
-  a = new Date();
-  time =
+// Function to update date and time
+function updateDateTime() {
+  const a = new Date();
+  const time =
     weekday[a.getDay()] +
     "  " +
     a.getDate() +
@@ -433,23 +401,25 @@ setInterval(() => {
     a.getSeconds() +
     '"';
   document.getElementById("date-time").innerHTML = time;
-}, 1000);
+}
 
-// scrollTop functionality
+// SetInterval to update date and time every second
+setInterval(updateDateTime, 1000);
+
+// Function to scroll to top of the page
 const scrollTop = function () {
-  // create HTML button element
   const scrollBtn = document.createElement("button");
   scrollBtn.innerHTML = "&#8679";
   scrollBtn.setAttribute("id", "scroll-btn");
   document.body.appendChild(scrollBtn);
-  // hide/show button based on scroll distance
+
   const scrollBtnDisplay = function () {
     window.scrollY > window.innerHeight
       ? scrollBtn.classList.add("show")
       : scrollBtn.classList.remove("show");
   };
   window.addEventListener("scroll", scrollBtnDisplay);
-  // scroll to top when button clicked
+
   const scrollWindow = function () {
     if (window.scrollY != 0) {
       setTimeout(function () {
@@ -464,7 +434,7 @@ const scrollTop = function () {
 scrollTop();
 
 const fetchNewBackground = () => {
-  let isMobile = window.innerWidth < 768 ? true : false;
+  const isMobile = window.innerWidth < 768 ? true : false;
   let url = "https://source.unsplash.com/1600x900/?landscape";
   if (isMobile) {
     url = "https://source.unsplash.com/720x1280/?landscape";
@@ -472,6 +442,7 @@ const fetchNewBackground = () => {
   const bgElement = document.getElementById("background");
   bgElement.style.backgroundImage = `url(${url})`;
 };
+
 // Check if the browser supports the SpeechRecognition API
 if ("SpeechRecognition" in window || "webkitSpeechRecognition" in window) {
   const SpeechRecognition =
