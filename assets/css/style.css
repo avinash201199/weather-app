@@ -798,3 +798,16 @@ html body #scroll-btn {
 .container{
   margin-top: 30px;
 }
+
+
+#circle {
+  position: absolute;
+  transform: translate(-50%, -50%);
+  border: 1px solid #fff;
+  background-color:rgb(177, 170, 161);
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  pointer-events: none;
+}
+
