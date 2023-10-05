@@ -790,3 +790,11 @@ html body #scroll-btn {
   cursor: pointer;
   position: fixed;
 }
+
+#whatsapp-button {
+  z-index: 100;
+}
+
+.container{
+  margin-top: 30px;
+}
