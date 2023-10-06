@@ -3,7 +3,7 @@ body {
   align-items: center;
   height: 90vh;
   margin: 0;
-  font-family: 'Poppins', sans-serif;
+  font-family: "Poppins", sans-serif;
   background: #222;
   /* background-image: url('https://source.unsplash.com/1600x900/?landscape'); */
   /* background-repeat: no-repeat;
@@ -15,16 +15,23 @@ body {
   /* Scroll is required to see full info */
   position: relative;
 }
-.logo {
+/* .logo {
   position: fixed;
   top: 20px;
   left: 20px;
   z-index: 999;
+} */
+.top-nav {
+  position: relative !important;
+  top: 0px;
+  right: 10px !important;
+  left: 10px;
+  z-index: 1030;
 }
 
 .logo-img {
-  max-width: 100px; /* Adjust the maximum width */
-  max-height: 60px; /* Adjust the maximum height */
+  max-width: 50px; /* Adjust the maximum width */
+  max-height: 50px; /* Adjust the maximum height */
 }
 /* Hide scrollbar for IE, Edge and Firefox */
 body {
@@ -69,7 +76,10 @@ body {
 }
 
 .nav-component__celcius-block {
+  top: 30px;
+  right: 30px;
   margin: 10px 20px;
+  /* position: fixed !important; */
   /* replced from line 358 */
 }
 
@@ -161,14 +171,11 @@ input.weather-component__search-bar:focus {
   cursor: pointer;
   transition: 0.2s ease-in-out;
 }
-.weather-component__button-microphone{
-  background:#00dcffc2;
+.weather-component__button-microphone {
+  background: #00dcffc2;
   border-radius: 50%;
   margin: 0.5em;
   outline: none;
-
-
-
 }
 
 button:hover {
@@ -187,14 +194,14 @@ button:focus {
   flex-direction: row;
 }
 
-.weather-component__city-temperature{
+.weather-component__city-temperature {
   margin-left: 21%;
   margin-top: 15px;
   margin-bottom: 15px;
   width: 57%;
   font-size: 2.8rem;
   font-weight: bold;
-  font-family: 'Inter', sans-serif;
+  font-family: "Inter", sans-serif;
   text-shadow: 3px 6px 3px rgba(0, 0, 0, 0.5);
   background-color: rgba(219, 228, 228, 0.32);
   border-radius: 32px;
@@ -237,11 +244,16 @@ button:focus {
 }
 
 .loading:after {
+  display: flex;
+  justify-content: center;
+  align-items: center;
   visibility: visible;
-  content: 'Loading...';
+  content: "Loading...";
   position: absolute;
-  top: 0;
-  left: 20px;
+  right: 50%;
+  top: 15px;
+  /* bottom: 50%; */
+  left: 50%;
 }
 
 /* Global Styles */
@@ -272,18 +284,16 @@ button:focus {
 }
 
 .forecast-component__items-wrapper {
-
   display: grid;
   grid-template-columns: auto auto auto auto auto auto;
   grid-gap: 0.6rem;
   align-items: center;
-  font-family: 'Inter', sans-serif;
+  font-family: "Inter", sans-serif;
 }
 
 .forecast-component__item {
-
   border: 1px solid rgb(35, 35, 35);
-  background: linear-gradient(102.1deg, rgb(32, 38, 57,0.5) 41.4%, rgb(32, 38, 57,0.1) 60.2%);;
+  background: linear-gradient(102.1deg, rgb(32, 38, 57, 0.5) 41.4%, rgb(32, 38, 57, 0.1) 60.2%);
   padding: 12px;
   transition: background-color 0.5s ease;
   height: 150px;
@@ -299,7 +309,7 @@ button:focus {
 .forecast-component__item:hover {
   backdrop-filter: blur(16px) saturate(180%);
   -webkit-backdrop-filter: blur(16px) saturate(180%);
-  background-color: rgb(9, 32, 63 ,0.75);
+  background-color: rgb(9, 32, 63, 0.75);
 
   border-radius: 12px;
   cursor: pointer;
@@ -392,7 +402,8 @@ button:focus {
 footer {
   height: 300px;
   display: flex;
-
+  position: relative;
+  top: 240px;
   justify-content: center;
   align-items: center;
   text-decoration-color: white;
@@ -525,8 +536,8 @@ footer {
   .nav-component {
     height: fit-content;
   }
-.whatsapp img{
-    margin-top:20px;
+  .whatsapp img {
+    /* margin-top: 20px; */
   }
   .weather-component__card {
     padding: 7px;
@@ -547,21 +558,21 @@ footer {
 }
 
 .label {
-  width: 48px;
-  height: 24px;
+  width: 85px;
+  height: 40px;
   background-color: #111;
   display: flex;
   border-radius: 50px;
   align-items: center;
   justify-content: space-between;
-  padding: 5px;
+  padding: 15px;
   position: relative;
   transform: scale(1);
 }
 
 .ball {
-  width: 20px;
-  height: 20px;
+  width: 35px;
+  height: 35px;
   background-color: white;
   position: absolute;
   top: 2px;
@@ -570,8 +581,8 @@ footer {
   transition: transform 0.2s linear;
 }
 
-.checkbox:checked+.label .ball {
-  transform: translateX(24px);
+.checkbox:checked + .label .ball {
+  transform: translateX(45px);
 }
 
 .celcius {
@@ -641,7 +652,7 @@ footer {
 
 /* current day in future weather forecast*/
 .forecast-component__item-current-day {
-  background-color: rgb(9, 32, 63 ,0.75);
+  background-color: rgb(9, 32, 63, 0.75);
   backdrop-filter: blur(16px) saturate(180%);
   -webkit-backdrop-filter: blur(16px) saturate(180%);
 }
@@ -654,7 +665,6 @@ footer {
   .weather-component__card {
     padding: 7px;
     height: 460px;
-
   }
 
   .weather-component {
@@ -665,7 +675,7 @@ footer {
 footer {
   text-decoration-color: white;
   text-emphasis-style: bold;
-  background-color:rgb(9, 32, 63 ,0.6);
+  background-color: rgb(9, 32, 63, 0.6);
   margin: 3rem auto;
 }
 
@@ -695,7 +705,7 @@ html body #scroll-btn {
   color: #fff;
   background-color: deepskyblue;
   position: fixed;
-  bottom: 10%;
+  bottom: 20%;
   right: 10%;
   border: 2px solid #fff;
   border-radius: 50%;
@@ -717,20 +727,20 @@ html body #scroll-btn {
     width: 45%;
   }
 
-  .weather-component__city-name{
+  .weather-component__city-name {
     font-size: 1.5rem;
   }
 
-  .weather-component__city-temperature{
+  .weather-component__city-temperature {
     font-size: 1.5rem;
   }
 
-  .weather-component__AQI{
+  .weather-component__AQI {
     flex-direction: column;
   }
 }
 
-#background{
+#background {
   background-repeat: no-repeat;
   background-size: cover;
   background-attachment: fixed;
@@ -783,31 +793,10 @@ html body #scroll-btn {
   color: gray;
 }
 
-.whatsapp img{
-  width: 7rem;
-  margin-left: -2.2rem;
-  margin-top: 2rem;
+.whatsapp img {
+  width: 90px;
+  /* margin-left: -2.2rem; */
+  /* margin-top: 2rem; */
   cursor: pointer;
-  position: fixed;
+  /* position: fixed; */
 }
-
-#whatsapp-button {
-  z-index: 100;
-}
-
-.container{
-  margin-top: 30px;
-}
-
-
-#circle {
-  position: absolute;
-  transform: translate(-50%, -50%);
-  border: 1px solid #fff;
-  background-color:rgb(177, 170, 161);
-  width: 14px;
-  height: 14px;
-  border-radius: 50%;
-  pointer-events: none;
-}
-
