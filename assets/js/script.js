@@ -11,6 +11,10 @@ window.onload = function () {
   fetchNewBackground();
 };
 
+function changeBackgroundImage() {
+  fetchNewBackground();
+}
+
 const userLang = getUserLanguage() || "en-US";
 const place = document.querySelector("#place");
 
@@ -152,6 +156,8 @@ let weather = {
     let date2 = new Date(sunset * 1000);
     const { lat, lon } = data.coord;
     AirQuality(city);
+
+    document.getElementById("icon").addEventListener("click", changeBackgroundImage);
 
     document.getElementById("dynamic").innerText =
       `${translations[userLang].weatherIn} ` + name;
