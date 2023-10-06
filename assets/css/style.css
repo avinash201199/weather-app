@@ -669,7 +669,7 @@ footer {
   }
 
   .weather-component__card {
-    padding: 7px;
+    padding: 30px 7px;
     height: 460px;
   }
 
