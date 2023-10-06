@@ -37,7 +37,7 @@ body {
 
 /* Header Text */
 .header-component {
-  padding: 5px 20px;
+  padding: 12px 20px;
   border-radius: 15px;
   text-align: center;
   color: #fff;
@@ -47,7 +47,7 @@ body {
   /* width: fit-content; */
   width: fit-content;
   position: relative;
-  margin: 6px auto;
+  margin: 16px auto;
   z-index: 9;
 }
 
@@ -98,7 +98,7 @@ body {
   width: 100%;
   max-width: 500px;
   height: 425px;
-  backdrop-filter: blur(8px);
+  /* backdrop-filter: blur(8px); */
 }
 
 .weather-component__search {
@@ -162,17 +162,20 @@ input.weather-component__search-bar:focus {
   transition: 0.2s ease-in-out;
 }
 .weather-component__button-microphone{
-  background:#00dcffc2;
+  background: white;
   border-radius: 50%;
   margin: 0.5em;
   outline: none;
+  border: none;
+}
 
-
-
+.microphone{
+  height: 35px;
+  width: 30px;
 }
 
 button:hover {
-  background: #7c7c7c6b;
+  background: #00dcffc2;
 }
 
 button:focus {
@@ -283,7 +286,7 @@ button:focus {
 .forecast-component__item {
 
   border: 1px solid rgb(35, 35, 35);
-  background: linear-gradient(102.1deg, rgb(32, 38, 57,0.5) 41.4%, rgb(32, 38, 57,0.1) 60.2%);;
+  background: linear-gradient(102.1deg, rgb(32, 38, 57,0.5) 41.4%, rgb(32, 38, 57,0.5) 60.2%);;
   padding: 12px;
   transition: background-color 0.5s ease;
   height: 150px;
@@ -665,7 +668,7 @@ footer {
 footer {
   text-decoration-color: white;
   text-emphasis-style: bold;
-  background-color:rgb(9, 32, 63 ,0.6);
+  background-color:rgba(9, 32, 63, 0.837);
   margin: 3rem auto;
 }
 

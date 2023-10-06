@@ -152,7 +152,7 @@ let weather = {
     let date2 = new Date(sunset * 1000);
     const { lat, lon } = data.coord;
     AirQuality(city);
-
+    
     document.getElementById("dynamic").innerText =
       `${translations[userLang].weatherIn} ` + name;
 
