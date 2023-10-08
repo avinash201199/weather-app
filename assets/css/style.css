@@ -11,6 +11,7 @@ body {
   background-attachment: fixed;
   background-position: 50% 50%; */
   overflow-y: scroll;
+  overflow-x: hidden;
   /* z-index:-1; */
   /* Scroll is required to see full info */
   position: relative;
@@ -394,15 +395,19 @@ button:focus {
   border-radius: 10px;
   padding: 7px 4px;
   position: fixed;
-  z-index: 1;
   top: 15px;
+  z-index: 3000;
   right: 16px;
   font-size: 16px;
+  transform: translateY(-100%); /* Start off the screen */
+  transition: transform 0.25s ease-in-out; /* Transition for sliding */
 }
 
 #toast.show {
   visibility: visible;
+  transform: translateY(0); /* Slide in from the top */
 }
+
 
 footer {
   height: 300px;
@@ -530,7 +535,9 @@ footer {
     transform: translateY(-50%);
 
     right: 50%;
-    transform: translateX(50%);
+    transform: translateX(50%) !important;
+    transform: none;
+    transition: none;
   }
 
   .navbar {
