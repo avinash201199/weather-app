@@ -56,6 +56,7 @@ const fetchAirQuality = (city) => {
       return res.json();
     })
     .then((data) => {
+      console.log("data",data)
       const relevantLocation = data.data[0];
       return relevantLocation.aqi;
     });
