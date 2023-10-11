@@ -1,0 +1,1 @@
+https://white-sand-0c48a9310.3.azurestaticapps.net/
