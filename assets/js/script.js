@@ -129,10 +129,10 @@ let weather = {
     }
     fetch(
       "https://api.openweathermap.org/data/2.5/weather?q=" +
-      city +
-      "&units=metric&appid=" +
-      config.API_KEY +
-      `&lang=${translations[userLang].apiLang}`
+        city +
+        "&units=metric&appid=" +
+        config.API_KEY +
+        `&lang=${translations[userLang].apiLang}`
     )
       .then((response) => {
         if (!response.ok) {
@@ -194,11 +194,13 @@ let weather = {
 
     document.getElementById("weather").classList.remove("loading");
 
-    document.getElementById("sunrise").innerText = `${translations[userLang].sunrise
-      }: ${formatAMPM(date1)}`;
+    document.getElementById("sunrise").innerText = `${
+      translations[userLang].sunrise
+    }: ${formatAMPM(date1)}`;
 
-    document.getElementById("sunset").innerText = `${translations[userLang].sunset
-      }: ${formatAMPM(date2)}`;
+    document.getElementById("sunset").innerText = `${
+      translations[userLang].sunset
+    }: ${formatAMPM(date2)}`;
 
     let url = `https://api.openweathermap.org/data/2.5/onecall?lat=${lat}&lon=${lon}&units=metric&appid=${config.API_KEY}`;
     getWeatherWeekly(url);
@@ -515,18 +517,12 @@ if ("SpeechRecognition" in window || "webkitSpeechRecognition" in window) {
 }
 
 let follower = document.getElementById("circle");
-let timer = null;
 
 window.addEventListener("mousemove", function (details) {
   let y = details.clientY;
   let x = details.clientX;
-  if (timer) {
-    clearTimeout(timer);
-  }
-  if (follower) {
-    timer = setTimeout(function () {
-      follower.style.top = `${y}px`;
-      follower.style.left = `${x}px`;
-    }, 50);
-  }
+  setTimeout(function () {
+    follower.style.top = `${y}px`;
+    follower.style.left = `${x}px`;
+  }, 50);
 });
