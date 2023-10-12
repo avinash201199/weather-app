@@ -432,7 +432,14 @@ setInterval(() => {
     month[a.getMonth()] +
     " " +
     a.getFullYear() +
-    " " +
+    " " ;
+  document.getElementById("date-only").innerHTML = time;
+}, 1000);
+
+setInterval(() => {
+  a = new Date();
+  time =
+    
     '  "Clock: ' +
     a.getHours() +
     ":" +
@@ -440,7 +447,7 @@ setInterval(() => {
     ":" +
     a.getSeconds() +
     '"';
-  document.getElementById("date-time").innerHTML = time;
+  document.getElementById("time-only").innerHTML = time;
 }, 1000);
 
 // scrollTop functionality
