@@ -5,11 +5,10 @@ const sync = require("browser-sync").create();
 function generateCSS(cb) {
   src("./sass/*.scss")
     .pipe(sass().on("error", sass.logError))
-    .pipe(dest("./assets/css"))
+    .pipe(dest("./assets/compiled-css"))
     .pipe(sync.stream());
   cb();
 }
-
 exports.css = generateCSS;
 
 function watchFiles(cb) {
@@ -26,5 +25,4 @@ function browserSync(cb) {
   watch("./sass/*.scss", generateCSS);
   watch("./*.html").on("change", sync.reload);
 }
-
 exports.sync = browserSync;
