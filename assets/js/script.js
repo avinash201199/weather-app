@@ -157,7 +157,9 @@ let weather = {
     const { lat, lon } = data.coord;
     AirQuality(city);
 
-    document.getElementById("icon").addEventListener("click", changeBackgroundImage);
+    document
+      .getElementById("icon")
+      .addEventListener("click", changeBackgroundImage);
 
     document.getElementById("dynamic").innerText =
       `${translations[userLang].weatherIn} ` + name;
@@ -515,12 +517,18 @@ if ("SpeechRecognition" in window || "webkitSpeechRecognition" in window) {
 }
 
 let follower = document.getElementById("circle");
+let timer = null;
 
 window.addEventListener("mousemove", function (details) {
   let y = details.clientY;
   let x = details.clientX;
-  setTimeout(function () {
-    follower.style.top = `${y}px`;
-    follower.style.left = `${x}px`;
-  }, 50);
+  if (timer) {
+    clearTimeout(timer);
+  }
+  if (follower) {
+    timer = setTimeout(function () {
+      follower.style.top = `${y}px`;
+      follower.style.left = `${x}px`;
+    }, 50);
+  }
 });

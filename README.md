@@ -4,7 +4,7 @@
 
 Building a Weather app with JavaScript is an excellent project for beginners. It helps to understand the core basics of the DOM and teaches how to use fetch API, to call and get data from a third-party service.<br>
 
-This is a simple javascript project made with the help of HTML, CSS and OpenWeather API . We used weather API to fetch data and display according to the city entered in the search bar.
+This is a simple javascript project made with the help of HTML, CSS, and OpenWeather API. We used weather API to fetch data and display it according to the city entered in the search bar.
 
 
 
@@ -16,7 +16,7 @@ This is a simple javascript project made with the help of HTML, CSS and OpenWeat
 # check out live 
 Web Url: https://avinash201199.github.io/weather-app/
 
-You can contribute in this project by adding some new features or anything in your mind to contribute <br>
+You can contribute to this project by adding some new features or anything in your mind to contribute <br>
 [Check for getting started](https://github.com/avinash201199/weather-app/blob/main/CONTRIBUTING.md)
 
 <br> 
