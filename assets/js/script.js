@@ -3,6 +3,41 @@ import CITY from "./City.js";
 import { translations, getUserLanguage } from "../../lang/translation.js";
 import config from "./../../config/config.js";
 
+function getCurrentLocationAndWeather() {
+  if ("geolocation" in navigator) {
+    navigator.geolocation.getCurrentPosition(function (position) {
+      const latitude = position.coords.latitude;
+      const longitude = position.coords.longitude;
+
+      // Use reverse geocoding to get the city name based on latitude and longitude
+      fetch(
+        `https://api.openweathermap.org/data/2.5/weather?lat=${latitude}&lon=${longitude}&appid=${config.API_KEY}&lang=${translations[userLang].apiLang}}`
+      )
+        .then((response) => response.json())
+        .then((data) => {
+          const cityName = data.name;
+          selectedCity = cityName;
+          // add this .weather-component__search-bar to the search bar
+
+          // Display the detected city in your UI
+          console.log("Detected city:", cityName);
+          // set this city as the selected city
+
+          const detectedLocationElement = document.getElementById("place");
+
+          detectedLocationElement.value = cityName;
+
+          // Fetch and display weather data for the detected city
+          selectedCity = cityName;
+          weather.fetchWeather(selectedCity);
+        })
+        .catch((error) => {
+          console.error("Error while fetching city name:", error);
+        });
+    });
+  }
+}
+
 // focus the search input as the DOM loads
 window.onload = function () {
   document.getElementsByName("search-bar")[0].focus();
@@ -532,3 +567,6 @@ window.addEventListener("mousemove", function (details) {
     }, 50);
   }
 });
+
+// onload detect user location
+getCurrentLocationAndWeather();
