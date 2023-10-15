@@ -168,7 +168,7 @@ input.weather-component__search-bar:focus {
   height: 40px;
   width: 40px;
   outline: none;
-  background: #00dcffc2;
+  background: black;
   cursor: pointer;
   transition: 0.2s ease-in-out;
 }
@@ -179,7 +179,7 @@ input.weather-component__search-bar:focus {
   height: 40px;
   width: 40px;
   outline: none;
-  background: #00dcffc2;
+  background: black;
   cursor: pointer;
   transition: 0.2s ease-in-out;
 }
