@@ -471,15 +471,14 @@ const scrollTop = function () {
 };
 scrollTop();
 
+
+//Fetching Random Landscape Background Image From Unsplash 
 const fetchNewBackground = () => {
-  let isMobile = window.innerWidth < 768 ? true : false;
-  let url = "https://source.unsplash.com/1600x900/?landscape";
-  if (isMobile) {
-    url = "https://source.unsplash.com/720x1280/?landscape";
-  }
+  let url = `https://source.unsplash.com/${window.innerWidth < 768 ? "720x1280" : "1600x900"}/?landscape`;
   const bgElement = document.getElementById("background");
   bgElement.style.backgroundImage = `url(${url})`;
 };
+
 // Check if the browser supports the SpeechRecognition API
 if ("SpeechRecognition" in window || "webkitSpeechRecognition" in window) {
   const SpeechRecognition =
