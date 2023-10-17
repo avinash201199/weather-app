@@ -644,6 +644,19 @@ footer {
   transition-timing-function: linear;
   color: #d62976;
 }
+.link4 {
+  padding: 0.5rem 0.5rem;
+  box-sizing: border-box;
+  margin-left: 50px;
+  color: #ffffff;
+  transition-property: scale();
+  transition-duration: 0.5s;
+}
+.link4:hover {
+  transform: scale(1.2, 1.2);
+  transition-timing-function: linear;
+  color: #ffffff;
+}
 
 .textfooter {
   color: white;
