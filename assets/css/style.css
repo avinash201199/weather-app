@@ -49,7 +49,11 @@ body {
   border-radius: 15px;
   text-align: center;
   color: #fff;
-  background: linear-gradient(112.1deg, rgb(32, 38, 57) 11.4%, rgb(63, 76, 119) 70.2%);
+  background: linear-gradient(
+    112.1deg,
+    rgb(32, 38, 57) 11.4%,
+    rgb(63, 76, 119) 70.2%
+  );
   font-size: 1em;
   font-weight: 700;
   /* width: fit-content; */
@@ -162,7 +166,7 @@ input.weather-component__search-bar:focus {
 
 .weather-component__button {
   margin: 0.5em;
-  margin-left: -7.0rem;
+  margin-left: -7rem;
   border-radius: 50%;
   border: none;
   height: 40px;
@@ -299,7 +303,11 @@ button:focus {
 
 .forecast-component__item {
   border: 1px solid rgb(35, 35, 35);
-  background: linear-gradient(102.1deg, rgb(32, 38, 57, 0.5) 41.4%, rgb(32, 38, 57, 0.1) 60.2%);
+  background: linear-gradient(
+    102.1deg,
+    rgb(32, 38, 57, 0.5) 41.4%,
+    rgb(32, 38, 57, 0.1) 60.2%
+  );
   padding: 12px;
   transition: background-color 0.5s ease;
   height: 150px;
@@ -407,7 +415,6 @@ button:focus {
   visibility: visible;
   transform: translateY(0); /* Slide in from the top */
 }
-
 
 footer {
   height: 300px;
@@ -776,33 +783,56 @@ html body #scroll-btn {
   left: 0px;
   background-color: rgba(0, 0, 0, 0.25);
 }
-
+.air-quality-label {
+  margin: auto 5px;
+  padding: 1px 5px;
+}
 .good-quality {
-  color: #009966;
+  background-color: #009966;
+  border-radius: 32px;
+  text-align: center;
+  color: white;
 }
 
 .satisfactory-quality {
-  color: #ffde33;
+  background-color: #ffde33;
+  border-radius: 32px;
+  color: #111;
 }
 
 .sensitive-quality {
-  color: #ff9933;
+  border-radius: 32px;
+  text-align: center;
+  color: white;
+  background-color: rgb(255, 102, 0);
 }
 
 .unhealthy-quality {
-  color: #cc0033;
+  border-radius: 32px;
+  text-align: center;
+  color: white;
+  background-color: #cc0033;
 }
 
 .very-unhealthy-quality {
-  color: #660099;
+  border-radius: 32px;
+  text-align: center;
+  color: white;
+  background-color:#550a55;
 }
 
 .hazardous-quality {
-  color: #7e0023;
+  background-color: #7e0023;
+  border-radius: 32px;
+  text-align: center;
+  color: white;
 }
 
 .not-available {
-  color: gray;
+  background-color: gray;
+  border-radius: 32px;
+  text-align: center;
+  color: white;
 }
 
 .whatsapp img {
