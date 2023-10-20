@@ -131,21 +131,24 @@ body {
 }
 
 input.weather-component__search-bar {
-  border: none;
+
   outline: none;
   padding: 0.3em 1em;
   background: #fff;
   font-family: inherit;
   font-size: 105%;
-  width: calc(100% - 100px);
+  width: calc(100% - 50px);
   color: black;
-  border: px solid white;
+  border: 1px solid white;
+  border-radius: 30px 0 0 30px;
   caret-color: black;
 }
 
 .weather-component__search {
   display: flex;
   justify-content: center;
+
+  border-radius: 30px;
 }
 
 .weather-component__search-bar {
@@ -160,19 +163,23 @@ option:hover,
 input.weather-component__search-bar:focus {
   transition: 700ms;
   box-shadow: 0px 0px 10px rgb(255 255 255 / 50%);
-  border-radius: 0;
-  border-radius: 30px;
+  
+  border-radius: 30px 0 0 30px;
 }
 
 .weather-component__button {
   margin: 0.5em;
+
   margin-left: -7rem;
+
+  /* margin-left: 7.0rem; */
+
   border-radius: 50%;
   border: none;
   height: 40px;
   width: 40px;
   outline: none;
-  background: #00dcffc2;
+  background: black;
   cursor: pointer;
   transition: 0.2s ease-in-out;
 }
@@ -183,9 +190,14 @@ input.weather-component__search-bar:focus {
   height: 40px;
   width: 40px;
   outline: none;
-  background: #00dcffc2;
+  background: black;
   cursor: pointer;
   transition: 0.2s ease-in-out;
+}
+.button_container{
+ background-color: white;
+  border-radius: 0 30px 30px 0;
+  display: flex;
 }
 
 button:hover {
@@ -650,6 +662,19 @@ footer {
   transform: scale(1.2, 1.2);
   transition-timing-function: linear;
   color: #d62976;
+}
+.link4 {
+  padding: 0.5rem 0.5rem;
+  box-sizing: border-box;
+  margin-left: 50px;
+  color: #ffffff;
+  transition-property: scale();
+  transition-duration: 0.5s;
+}
+.link4:hover {
+  transform: scale(1.2, 1.2);
+  transition-timing-function: linear;
+  color: #ffffff;
 }
 
 .textfooter {
