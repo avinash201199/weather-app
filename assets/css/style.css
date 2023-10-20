@@ -5,23 +5,69 @@ body {
   margin: 0;
   font-family: 'Rajdhani', sans-serif;;
   background: #222;
-  /* background-image: url('https://source.unsplash.com/1600x900/?landscape'); */
-  /* background-repeat: no-repeat;
-  background-size: cover;
-  background-attachment: fixed;
-  background-position: 50% 50%; */
   overflow-y: scroll;
   overflow-x: hidden;
-  /* z-index:-1; */
-  /* Scroll is required to see full info */
   position: relative;
+
+  /* Hide scrollbar for IE, Edge and Firefox */
+  -ms-overflow-style: none;
+  /* IE and Edge */
+  scrollbar-width: none;
+  /* Firefox */
 }
-/* .logo {
+
+#background {
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-attachment: fixed;
+  background-position: 50% 50%;
+  overflow-y: scroll;
+  width: 100vw;
+  height: 100vh;
   position: fixed;
-  top: 20px;
-  left: 20px;
-  z-index: 999;
-} */
+  top: 0;
+  left: 0;
+  filter: blur(3px);
+  z-index: -1;
+}
+
+#background::after {
+  content: "";
+  position: absolute;
+  top: 0px;
+  right: 0px;
+  bottom: 0px;
+  left: 0px;
+  background-color: rgba(0, 0, 0, 0.25);
+}
+
+/* scroll btn css */
+/* resolved css conflicts */
+html {
+  scroll-behavior: unset !important;
+}
+
+html body #scroll-btn {
+  opacity: 0;
+  width: 40px;
+  height: 40px;
+  color: #fff;
+  background-color: deepskyblue;
+  position: fixed;
+  bottom: 20%;
+  right: 10%;
+  border: 2px solid #fff;
+  border-radius: 50%;
+  font: bold 20px monospace;
+  transition: opacity 0.5s, transform 0.5s;
+}
+
+#scroll-btn.show {
+  opacity: 1;
+  transition: opacity 1s, transform 1s;
+}
+
+/**************************************** NAVBAR ******************************************/
 .top-nav {
   position: relative !important;
   top: 0px;
@@ -30,38 +76,6 @@ body {
   z-index: 1030;
 }
 
-.logo-img {
-  max-width: 50px; /* Adjust the maximum width */
-  max-height: 50px; /* Adjust the maximum height */
-}
-/* Hide scrollbar for IE, Edge and Firefox */
-body {
-  -ms-overflow-style: none;
-  /* IE and Edge */
-  scrollbar-width: none;
-  /* Firefox */
-}
-/* Inside your CSS file (style.css) */
-
-/* Header Text */
-.header-component {
-  padding: 20px 30px;
-  /* border-radius: 15px; */
-  text-align: center;
-  color: #fff;
-  background: rgba(0, 0, 0, 0.8);
-  font-size: 1.4em;
-  font-weight: 500;
-  /* width: fit-content; */
-  width: fit-content;
-  position: relative;
-  margin: 6px auto;
-  z-index: 9;
-}
-
-/* nav BEM Conevntion * -------/
-
-/* Block */
 
 .navbar {
   height: 0px;
@@ -89,16 +103,34 @@ body {
   border-color: white;
 }
 
-/* .nav-component__checkbox{
-  opacity: 0;
-  position: absolute;
-  z-index: 10;
-  height: 2rem;
-  width: 4rem;
-  cursor: pointer;
-} */
+.logo-img {
+  max-width: 50px; /* Adjust the maximum width */
+  max-height: 50px; /* Adjust the maximum height */
+}
 
-/* Card */
+.whatsapp img {
+  width: 90px;
+  cursor: pointer;
+}
+
+
+/************************************* DATE AND TIME **********************************/
+.header-component {
+  padding: 20px 30px;
+  /* border-radius: 15px; */
+  text-align: center;
+  color: #fff;
+  background: rgba(0, 0, 0, 0.8);
+  font-size: 1.4em;
+  font-weight: 500;
+  /* width: fit-content; */
+  width: fit-content;
+  position: relative;
+  margin: 6px auto;
+  z-index: 9;
+}
+
+/*************************************** CITY SEARCH CARD ************************************/
 
 .weather-component__card {
   margin: 20px 0;
@@ -119,7 +151,6 @@ body {
 
 .weather-component__searchbar h1 {
   overflow: hidden;
-  /* border-right: 1px solid; */
   margin: 0 auto;
   position: relative;
   animation: reza 4s steps(30, end);
@@ -138,11 +169,9 @@ input.weather-component__search-bar {
   color: white;
   outline: none;
   border: none;
-  /* border: 1px solid white; */
-  /* border-radius: 30px 0 0 30px; */
-  /* caret-color: white; */
 }
 
+/************* Styling for all kinds of placeholders ***********************/
 
 *::-webkit-input-placeholder {
   color: rgb(255, 255, 255, 0.8);
@@ -184,13 +213,10 @@ option:hover,
 input.weather-component__search-bar:focus {
   transition: 700ms;
   box-shadow: 0px 0px 10px rgb(255 255 255 / 50%);
-  
-  /* border-radius: 30px 0 0 30px; */
 }
 
 .weather-component__button {
   margin: 0.5em;
-  /* margin-left: 7.0rem; */
   border-radius: 50%;
   border: none;
   height: 40px;
@@ -211,9 +237,9 @@ input.weather-component__search-bar:focus {
   cursor: pointer;
   transition: 0.2s ease-in-out;
 }
+
 .button_container{
  background-color: rgb(255, 255, 255, 0.5);
-  /* border-radius: 0 30px 30px 0; */
   display: flex;
 }
 
@@ -225,27 +251,7 @@ button:focus {
   box-shadow: 0px 0px 10px rgb(255 255 255 / 50%);
 }
 
-/* weather section */
-
-.weather-component__AQI {
-  width: max-content;
-  display: flex;
-  flex-direction: column;
-}
-
-.weather-component__city-temperature {
-  /* margin-left: 21%; */
-  margin-top: 15px;
-  margin-bottom: 15px;
-  width: 57%;
-  font-size: 2.8rem;
-  font-weight: bold;
-  font-family: 'Rajdhani', sans-serif;
-  text-shadow: 3px 6px 3px rgba(0, 0, 0, 0.5);
-  background-color: rgba(0,0,0,0.5);
-  /* border-radius: 32px; */
-  padding: 5px;
-}
+/************************* WEATHER RESULT SECTION *********************************/
 
 .weather-component__data {
   padding: 16px 0;
@@ -254,6 +260,19 @@ button:focus {
   align-items: center;
   justify-content: center;
 }
+
+.weather-component__city-temperature {
+  margin-top: 15px;
+  margin-bottom: 20px;
+  width: 57%;
+  font-size: 2.8rem;
+  font-weight: bold;
+  font-family: 'Rajdhani', sans-serif;
+  text-shadow: 3px 6px 3px rgba(0, 0, 0, 0.5);
+  background-color: rgba(0,0,0,0.5);
+  padding: 5px;
+}
+
 
 weather-component__data-wrapper {
   display: flex;
@@ -267,11 +286,17 @@ weather-component__data-wrapper {
   font-size: 1.2rem;
   background-color: rgb(255, 255, 255, 0.2);
   align-items: center;
-  width: 80%;
+  width: 100%;
   color: white;
   font-weight: 600;
   justify-content: space-evenly;
   margin-bottom: 10px;
+}
+
+.weather-component__AQI {
+  width: max-content;
+  display: flex;
+  flex-direction: column;
 }
 
 .weather-component__icn {
@@ -306,26 +331,77 @@ weather-component__data-wrapper {
   position: absolute;
   right: 50%;
   top: 15px;
-  /* bottom: 50%; */
   left: 50%;
 }
 
 .weather-component__desc-secondary {
+  margin-top: 15px;
   font-size: 1.1rem;
-  width: 90%;
+  width: 100%;
 }
 
-/* Global Styles */
-
-.flex-1 {
-  flex: 1;
+.humidity-img {
+  width: 20px;
+  height: 20px;
+  margin: auto 10px auto 10px;
 }
 
-.transition {
-  transition: 2s;
+.wind-img {
+  width: 25px;
+  height: 25px;
+  margin: auto 10px auto 10px;
 }
 
-/* Forecast */
+.sunrise-img {
+  width: 25px;
+  height: 25px;
+
+  margin: 0 10px 0 0;
+}
+
+.sunset-img {
+  width: 30px;
+  height: 30px;
+
+  margin: 0 10px 0 0px;
+}
+
+.weather-component__city-name {
+  text-align: center;
+  font-size: 2rem;
+  text-shadow: 2px 4px rgba(0, 0, 0, 0.885), 2px 4px rgba(0, 0, 0, 0.885);
+}
+
+.weather-component__city-temperature {
+  text-align: center;
+}
+
+/* images and icons  for wind-speed,sunrise,sunset,humidity*/
+
+.humidity {
+  margin: 10px;
+  height: 28px;
+}
+
+.wind {
+  margin: 10px;
+}
+
+.sunrise {
+  margin: 10px;
+  height: 28px;
+  align-items: center;
+}
+
+.sunset {
+  margin: 10px;
+  height: 28px;
+  align-items: center;
+}
+
+
+/****************************** DAILY FORECAST COMPONENTS ******************************************/
+
 .forecast-component {
   position: relative;
   top: 2.5rem;
@@ -375,63 +451,41 @@ weather-component__data-wrapper {
   cursor: pointer;
 }
 
-/* images and icons  for wind-speed,sunrise,sunset,humidity*/
+/********************************* FOOTER *********************************************/
 
-.humidity-img {
-  width: 20px;
-  height: 20px;
-  margin: auto 10px auto 10px;
-}
-
-.wind-img {
-  width: 25px;
-  height: 25px;
-  margin: auto 10px auto 10px;
-}
-
-.sunrise-img {
-  width: 25px;
-  height: 25px;
-
-  margin: 0 10px 0 0;
-}
-
-.sunset-img {
-  width: 30px;
-  height: 30px;
-
-  margin: 0 10px 0 0px;
-}
-
-.weather-component__city-name {
-  text-align: center;
-  font-size: 2rem;
-  text-shadow: 2px 4px rgba(0, 0, 0, 0.885), 2px 4px rgba(0, 0, 0, 0.885);
-}
-
-.weather-component__city-temperature {
-  text-align: center;
-}
-
-.humidity {
-  margin: 10px;
-  height: 28px;
-}
-
-.wind {
-  margin: 10px;
-}
-
-.sunrise {
-  margin: 10px;
-  height: 28px;
+footer {
+  height: 150px;
+  display: flex;
+  position: relative;
+  top: 240px;
+  justify-content: center;
   align-items: center;
+  text-decoration-color: white;
+  text-emphasis-style: bold;
+  background-color: rgba(0, 0, 0, 0.5);
+  margin-top: 55px;
 }
 
-.sunset {
-  margin: 10px;
-  height: 28px;
-  align-items: center;
+.textfooter {
+  color: white;
+  text-align: center;
+  font-size: x-large;
+  z-index: auto;
+}
+
+.footer-component {
+  width: 100%;
+}
+
+
+/************************************* MISCELLANEOUS STYLES ****************************/
+
+.flex-1 {
+  flex: 1;
+}
+
+.transition {
+  transition: 2s;
 }
 
 /* toast style */
@@ -462,156 +516,9 @@ weather-component__data-wrapper {
   transform: translateY(0); /* Slide in from the top */
 }
 
-
-footer {
-  height: 300px;
-  display: flex;
-  position: relative;
-  top: 240px;
-  justify-content: center;
-  align-items: center;
-  text-decoration-color: white;
-  text-emphasis-style: bold;
-}
-
-/* .col-auto {
-  margin: 10px 20px;
-}  */
-
-@-webkit-keyframes fadein {
-  from {
-    bottom: 0;
-    opacity: 0;
-  }
-
-  to {
-    bottom: 30px;
-    opacity: 1;
-  }
-}
-
-@keyframes fadein {
-  from {
-    bottom: 0;
-    opacity: 0;
-  }
-
-  to {
-    bottom: 30px;
-    opacity: 1;
-  }
-}
-
-@-webkit-keyframes fadeout {
-  from {
-    bottom: 30px;
-    opacity: 1;
-  }
-
-  to {
-    bottom: 0;
-    opacity: 0;
-  }
-}
-
-@keyframes fadeout {
-  from {
-    bottom: 30px;
-    opacity: 1;
-  }
-
-  to {
-    bottom: 0;
-    opacity: 0;
-  }
-}
-
 .toast-component__checkicon i {
   font-size: 40px;
   color: #47d764;
-}
-
-/* --Scroll Bar-- */
-
-/* width */
-
-::-webkit-scrollbar {
-  width: 10px;
-}
-
-/* Track */
-
-::-webkit-scrollbar-track {
-  box-shadow: inset 0 0 5px grey;
-  border-radius: 5px;
-  background-clip: content-box;
-}
-
-/* Handle */
-
-::-webkit-scrollbar-thumb {
-  background: #171717;
-  border-radius: 5px;
-}
-
-/* Handle on hover */
-
-::-webkit-scrollbar-thumb:hover {
-  background: #171717;
-}
-
-/* --End Of Scroll Bar-- */
-.footerSection {
-  margin-top: 20px;
-  margin-bottom: 0;
-}
-/* Responsive */
-
-@media only screen and (min-width: 1200px) {
-  .forecast-component__items-wrapper {
-    grid-template-columns: auto auto auto auto;
-  }
-}
-
-@media only screen and (max-width: 992px) {
-  .forecast-component__items-wrapper {
-    grid-template-columns: auto auto auto auto;
-  }
-}
-
-@media only screen and (max-width: 768px) {
-  .forecast-component__items-wrapper {
-    grid-template-columns: auto auto auto;
-  }
-
-  #toast {
-    top: 50%;
-    transform: translateY(-50%);
-
-    right: 50%;
-    transform: translateX(50%) !important;
-    transform: none;
-    transition: none;
-  }
-
-  .navbar {
-    height: fit-content;
-    /* border: 2px solid red; */
-    margin: 1rem 0.15rem 0rem 0.15rem;
-  }
-  .nav-component {
-    height: fit-content;
-  }
-  .whatsapp img {
-    /* margin-top: 20px; */
-  }
-  .weather-component__card {
-    padding: 40px;
-    height: fit-content;
-  }
-  .weather-component__card {
-    margin: 0;
-  }
 }
 
 .checkbox {
@@ -661,6 +568,21 @@ footer {
   font-size: 15px;
 }
 
+/***************************************** LINKS **************************************/
+
+.link {
+  width: 50px;
+  border-radius: 50%;
+  background-color: #fff;
+  border: none;
+  outline: none;
+  transition: 0.5s;
+}
+
+.link:hover {
+  transform: translateY(-6px) scale(1.1);
+}
+
 .link1 {
   padding: 0.5rem 0.5rem;
   box-sizing: border-box;
@@ -669,11 +591,13 @@ footer {
   transition-property: scale();
   transition-duration: 0.5s;
 }
+
 .link1:hover {
   transform: scale(1.2, 1.2);
   transition-timing-function: linear;
   color: #ffffff;
 }
+
 .link2 {
   font-weight: 900;
   padding: 0.5rem 0.5rem;
@@ -681,10 +605,12 @@ footer {
   transition-property: scale();
   transition-duration: 0.5s;
 }
+
 .link2:hover {
   transform: scale(1.2, 1.2);
   transition-timing-function: linear;
 }
+
 .link3 {
   padding: 0.5rem 0.5rem;
   box-sizing: border-box;
@@ -693,11 +619,13 @@ footer {
   transition-property: scale();
   transition-duration: 0.5s;
 }
+
 .link3:hover {
   transform: scale(1.2, 1.2);
   transition-timing-function: linear;
   color: #d62976;
 }
+
 .link4 {
   padding: 0.5rem 0.5rem;
   box-sizing: border-box;
@@ -706,28 +634,149 @@ footer {
   transition-property: scale();
   transition-duration: 0.5s;
 }
+
 .link4:hover {
   transform: scale(1.2, 1.2);
   transition-timing-function: linear;
   color: #ffffff;
 }
 
-.textfooter {
-  color: white;
-  text-align: center;
-  font-size: x-large;
-  z-index: auto;
+/******************** ANIMATIONS ******************************/
+
+@-webkit-keyframes fadein {
+  from {
+    bottom: 0;
+    opacity: 0;
+  }
+
+  to {
+    bottom: 30px;
+    opacity: 1;
+  }
 }
 
-footer {
-  background-color: #000000d0;
-  margin-top: 55px;
-  height: 150px;
+@keyframes fadein {
+  from {
+    bottom: 0;
+    opacity: 0;
+  }
+
+  to {
+    bottom: 30px;
+    opacity: 1;
+  }
 }
 
-.footer-component {
-  width: 100%;
+@-webkit-keyframes fadeout {
+  from {
+    bottom: 30px;
+    opacity: 1;
+  }
+
+  to {
+    bottom: 0;
+    opacity: 0;
+  }
 }
+
+@keyframes fadeout {
+  from {
+    bottom: 30px;
+    opacity: 1;
+  }
+
+  to {
+    bottom: 0;
+    opacity: 0;
+  }
+}
+
+
+/*********************************** SCROLL BAR ************************************/
+
+/* width */
+
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+/* Track */
+
+::-webkit-scrollbar-track {
+  box-shadow: inset 0 0 5px grey;
+  border-radius: 5px;
+  background-clip: content-box;
+}
+
+/* Handle */
+
+::-webkit-scrollbar-thumb {
+  background: #171717;
+  border-radius: 5px;
+}
+
+/* Handle on hover */
+
+::-webkit-scrollbar-thumb:hover {
+  background: #171717;
+}
+
+/* --End Of Scroll Bar-- */
+.footerSection {
+  margin-top: 20px;
+  margin-bottom: 0;
+}
+
+/************************************* DIFFERENT SCREEN SIZES *******************************************88*/
+
+/* Big screen */
+@media only screen and (min-width: 1200px) {
+  .forecast-component__items-wrapper {
+    grid-template-columns: auto auto auto auto;
+  }
+}
+
+/* Mid screen */
+@media only screen and (max-width: 992px) {
+  .forecast-component__items-wrapper {
+    grid-template-columns: auto auto auto auto;
+  }
+}
+
+/* Small screen */
+@media only screen and (max-width: 768px) {
+  .forecast-component__items-wrapper {
+    grid-template-columns: auto auto auto;
+  }
+
+  #toast {
+    top: 50%;
+    transform: translateY(-50%);
+
+    right: 50%;
+    transform: translateX(50%) !important;
+    transform: none;
+    transition: none;
+  }
+
+  .navbar {
+    height: fit-content;
+    margin: 1rem 0.15rem 0rem 0.15rem;
+  }
+  .nav-component {
+    height: fit-content;
+  }
+  .whatsapp img {
+  }
+  .weather-component__card {
+    padding: 40px;
+    height: fit-content;
+  }
+  .weather-component__card {
+    margin: 0;
+  }
+}
+
 
 /* current day in future weather forecast*/
 .forecast-component__item-current-day {
@@ -736,6 +785,7 @@ footer {
   -webkit-backdrop-filter: blur(16px) saturate(180%);
 }
 
+/* Mobile Screen */
 @media only screen and (max-width: 576px) {
   .forecast-component__items-wrapper {
     grid-template-columns: auto auto;
@@ -753,55 +803,7 @@ footer {
   .weather-component__desc-primary {
     font-size: 1em;
   }
-}
 
-footer {
-  text-decoration-color: white;
-  text-emphasis-style: bold;
-  background-color: rgba(0, 0, 0, 0.5);
-  margin: 3rem auto;
-}
-
-.link {
-  width: 50px;
-  border-radius: 50%;
-  background-color: #fff;
-  border: none;
-  outline: none;
-  transition: 0.5s;
-}
-
-.link:hover {
-  transform: translateY(-6px) scale(1.1);
-}
-
-/* scroll btn css */
-/* resolved css conflicts */
-html {
-  scroll-behavior: unset !important;
-}
-
-html body #scroll-btn {
-  opacity: 0;
-  width: 40px;
-  height: 40px;
-  color: #fff;
-  background-color: deepskyblue;
-  position: fixed;
-  bottom: 20%;
-  right: 10%;
-  border: 2px solid #fff;
-  border-radius: 50%;
-  font: bold 20px monospace;
-  transition: opacity 0.5s, transform 0.5s;
-}
-
-#scroll-btn.show {
-  opacity: 1;
-  transition: opacity 1s, transform 1s;
-}
-
-@media only screen and (max-width: 550px) {
   .footer-component__social-media {
     width: 100%;
   }
@@ -823,30 +825,7 @@ html body #scroll-btn {
   }
 }
 
-#background {
-  background-repeat: no-repeat;
-  background-size: cover;
-  background-attachment: fixed;
-  background-position: 50% 50%;
-  overflow-y: scroll;
-  width: 100vw;
-  height: 100vh;
-  position: fixed;
-  top: 0;
-  left: 0;
-  filter: blur(3px);
-  z-index: -1;
-}
-
-#background::after {
-  content: "";
-  position: absolute;
-  top: 0px;
-  right: 0px;
-  bottom: 0px;
-  left: 0px;
-  background-color: rgba(0, 0, 0, 0.25);
-}
+/*********************************** AIR QUALITY TEXT COLORS ****************************************/
 
 .good-quality {
   color: #BEF992;
@@ -876,10 +855,3 @@ html body #scroll-btn {
   color: gray;
 }
 
-.whatsapp img {
-  width: 90px;
-  /* margin-left: -2.2rem; */
-  /* margin-top: 2rem; */
-  cursor: pointer;
-  /* position: fixed; */
-}
