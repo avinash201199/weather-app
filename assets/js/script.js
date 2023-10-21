@@ -150,13 +150,7 @@ let weather = {
         document.getElementById("temp").style.display = "block";
         document.querySelector(
           ".weather-component__data-wrapper"
-        ).style.display = "flex";
-        document.querySelector(
-          ".weather-component__data-wrapper"
-        ).style.flexDirection = "column";
-        document.querySelector(
-          ".weather-component__data-wrapper"
-        ).style.alignItems = "center";
+        ).style.display = "block";
         this.displayWeather(data, city);
       });
   },
@@ -289,12 +283,12 @@ function generateWeatherItem(
   dayTemperature
 ) {
   let container = document.createElement("div");
-  container.className = "forecast-component__item text-center";
+  container.className = "forecast-component__item rounded text-center";
 
   let day = document.createElement("div");
   day.innerText = dayString;
-  day.style.color = "#F4EEE0";
-  // day.style.fontFamily = "Inter";
+  day.style.color = "#00dcff";
+  day.style.fontFamily = "Inter";
   day.style.fontWeight = "bolder";
   day.style.textTransform = "uppercase";
   day.style.fontSize = "20px";
@@ -314,8 +308,8 @@ function generateWeatherItem(
   } else {
     dayTemp.innerHTML = `${translations[userLang].day} ${dayTemperature}&#176;C`;
   }
-  // dayTemp.style.fontFamily = "Inter";
-  dayTemp.style.fontWeight = "bold";
+  dayTemp.style.fontFamily = "Inter";
+  dayTemp.style.fontWeight = "bolder";
   dayTemp.style.textTransform = "uppercase";
 
   let nightTemp = document.createElement("div");
@@ -326,9 +320,9 @@ function generateWeatherItem(
   } else {
     nightTemp.innerHTML = `${translations[userLang].night} ${nightTemperature}&#176;C`;
   }
-  nightTemp.style.color = "#B9B4C7";
-  // nightTemp.style.fontFamily = "Inter";
-  nightTemp.style.fontWeight = "bold";
+  nightTemp.style.color = "#00dcff";
+  nightTemp.style.fontFamily = "Inter";
+  nightTemp.style.fontWeight = "bolder";
   nightTemp.style.textTransform = "uppercase";
 
   container.appendChild(day);
