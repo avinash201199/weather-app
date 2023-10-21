@@ -18,15 +18,16 @@
   <link rel="stylesheet" href="./assets/css/style.css">
   <link rel="stylesheet" href="./assets/compiled-css/styles.css">
   <link rel="icon" href="assets/favicon.ico">
+  <!-- <link rel="logo" href="assets/icons/logo.png"> -->
 
   <!-- jquery CDN -->
+  <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script> -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
   <!-- fontawesome CDN -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
-  <link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 </head>
 
 <body id="body">
@@ -69,7 +70,7 @@
       <div class="row g-4">
         <div class="col">
           <div class="weather-component container d-flex justify-content-center align-items-center flex-column">
-            <div class="weather-component__card text-white">
+            <div class="weather-component__card text-white rounded-5">
               <div class="weather-component__search">
                 <input type="text" class="weather-component__search-bar" name="search-bar" list="place"
                   placeholder="Search" autocomplete="address-level2" />
@@ -110,7 +111,7 @@
                     <div class="weather-component__AQI">
                       <div id="AirQuality">Air Quality: 75
                       </div>
-                      <div class="air-quality-label ml-0">Satisfactory</div>
+                      <div class="air-quality-label ml-0">(Satisfactory)</div>
                     </div>
                   </div>
 
@@ -121,11 +122,11 @@
                         <figcaption id="humidity"><a href="https://en.wikipedia.org/wiki/Humidity">Humidity</a>: 60%
                         </figcaption>
                       </figure>
-                      <figure class="d-flex flex-1 flex-row wind ms-0"><img src="./assets/icons/wind.png" alt="Wind Speed"
+                      <div class="d-flex flex-1 flex-row wind ms-0"><img src="./assets/icons/wind.png" alt="Wind Speed"
                           class="wind-img">
-                        <figcaption id="wind"><a href="https://en.wikipedia.org/wiki/Wind_speed">Wind speed</a>: 6.2 km/h
-                        </figcaption>
-                      </figure>
+                        <div id="wind"><a href="https://en.wikipedia.org/wiki/Wind_speed">Wind speed</a>: 6.2 km/h
+                        </div>
+                      </div>
                     </div>
                     <div class="d-flex flex-1 flex-column">
                       <figure class="d-flex flex-1 flex-row sunrise me-0 justify-content-end">
@@ -151,7 +152,7 @@
         <div class="col">
           <div class="forecast-component p-2 overflow-hidden text-white w-100">
             <div class="forecast-component__items-wrapper transition overflow-hidden " id="weather-forecast">
-              <div class="forecast-component__item text-center" id="weather-forecast-item">
+              <div class="forecast-component__item rounded text-center" id="weather-forecast-item">
                 <div>Mon</div>
                 <figure class="forecast-img">
                   <img src="http://openweathermap.org/img/wn/10d@2x.png" alt="weather icon">
