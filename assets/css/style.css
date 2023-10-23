@@ -16,6 +16,7 @@ body {
   /* Scroll is required to see full info */
   position: relative;
 }
+
 /* .logo {
   position: fixed;
   top: 20px;
@@ -31,9 +32,12 @@ body {
 }
 
 .logo-img {
-  max-width: 50px; /* Adjust the maximum width */
-  max-height: 50px; /* Adjust the maximum height */
+  max-width: 50px;
+  /* Adjust the maximum width */
+  max-height: 50px;
+  /* Adjust the maximum height */
 }
+
 /* Hide scrollbar for IE, Edge and Firefox */
 body {
   -ms-overflow-style: none;
@@ -41,6 +45,7 @@ body {
   scrollbar-width: none;
   /* Firefox */
 }
+
 /* Inside your CSS file (style.css) */
 
 /* Header Text */
@@ -159,7 +164,7 @@ option:hover,
 input.weather-component__search-bar:focus {
   transition: 700ms;
   box-shadow: 0px 0px 10px rgb(255 255 255 / 50%);
-  
+
   border-radius: 30px 0 0 30px;
 }
 
@@ -175,6 +180,7 @@ input.weather-component__search-bar:focus {
   cursor: pointer;
   transition: 0.2s ease-in-out;
 }
+
 .weather-component__button-microphone {
   margin: 0.5em;
   border-radius: 50%;
@@ -186,8 +192,9 @@ input.weather-component__search-bar:focus {
   cursor: pointer;
   transition: 0.2s ease-in-out;
 }
-.button_container{
- background-color: white;
+
+.button_container {
+  background-color: white;
   border-radius: 0 30px 30px 0;
   display: flex;
 }
@@ -407,13 +414,16 @@ button:focus {
   z-index: 3000;
   right: 16px;
   font-size: 16px;
-  transform: translateY(-100%); /* Start off the screen */
-  transition: transform 0.25s ease-in-out; /* Transition for sliding */
+  transform: translateY(-100%);
+  /* Start off the screen */
+  transition: transform 0.25s ease-in-out;
+  /* Transition for sliding */
 }
 
 #toast.show {
   visibility: visible;
-  transform: translateY(0); /* Slide in from the top */
+  transform: translateY(0);
+  /* Slide in from the top */
 }
 
 
@@ -519,6 +529,7 @@ footer {
   margin-top: 20px;
   margin-bottom: 0;
 }
+
 /* Responsive */
 
 @media only screen and (min-width: 1200px) {
@@ -553,16 +564,20 @@ footer {
     /* border: 2px solid red; */
     margin: 1rem 0.15rem 0rem 0.15rem;
   }
+
   .nav-component {
     height: fit-content;
   }
+
   .whatsapp img {
     /* margin-top: 20px; */
   }
+
   .weather-component__card {
     padding: 7px;
     height: 460px;
   }
+
   .weather-component__card {
     margin: 0;
   }
@@ -578,9 +593,9 @@ footer {
 }
 
 .label {
-  width: 85px;
-  height: 40px;
-  background-color: #111;
+  width: 70px;
+  height: 39px;
+  background-color: rgba(255, 255, 255, 0.5);
   display: flex;
   border-radius: 50px;
   align-items: center;
@@ -593,7 +608,7 @@ footer {
 .ball {
   width: 35px;
   height: 35px;
-  background-color: white;
+  background-color: #3b5b79;
   position: absolute;
   top: 2px;
   left: 2px;
@@ -601,18 +616,20 @@ footer {
   transition: transform 0.2s linear;
 }
 
-.checkbox:checked + .label .ball {
-  transform: translateX(45px);
+.checkbox:checked+.label .ball {
+  transform: translateX(30px);
 }
 
 .celcius {
-  color: white;
+  color: #3b5b79;
   font-size: 15px;
+  font-weight: bold;
 }
 
 .farenheit {
-  color: white;
+  color: #3b5b79;
   font-size: 15px;
+  font-weight: bold;
 }
 
 .link1 {
@@ -623,11 +640,13 @@ footer {
   transition-property: scale();
   transition-duration: 0.5s;
 }
+
 .link1:hover {
   transform: scale(1.2, 1.2);
   transition-timing-function: linear;
   color: #ffffff;
 }
+
 .link2 {
   font-weight: 900;
   padding: 0.5rem 0.5rem;
@@ -635,10 +654,12 @@ footer {
   transition-property: scale();
   transition-duration: 0.5s;
 }
+
 .link2:hover {
   transform: scale(1.2, 1.2);
   transition-timing-function: linear;
 }
+
 .link3 {
   padding: 0.5rem 0.5rem;
   box-sizing: border-box;
@@ -647,11 +668,13 @@ footer {
   transition-property: scale();
   transition-duration: 0.5s;
 }
+
 .link3:hover {
   transform: scale(1.2, 1.2);
   transition-timing-function: linear;
   color: #d62976;
 }
+
 .link4 {
   padding: 0.5rem 0.5rem;
   box-sizing: border-box;
@@ -660,6 +683,7 @@ footer {
   transition-property: scale();
   transition-duration: 0.5s;
 }
+
 .link4:hover {
   transform: scale(1.2, 1.2);
   transition-timing-function: linear;
