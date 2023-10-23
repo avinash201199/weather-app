@@ -78,19 +78,19 @@ const updateAirQuality = (aqi) => {
 const getAirQualityDescription = (aqi, userLang) => {
   switch (true) {
     case aqi >= 0 && aqi <= 50:
-      return `(${translations[userLang].good})`;
+      return `${translations[userLang].good}`;
     case aqi > 50 && aqi <= 100:
-      return `(${translations[userLang].satisfactory})`;
+      return `${translations[userLang].satisfactory}`;
     case aqi > 100 && aqi <= 150:
-      return `(${translations[userLang].sensitive})`;
+      return `${translations[userLang].sensitive}`;
     case aqi > 150 && aqi <= 200:
-      return `(${translations[userLang].unhealthy})`;
+      return `${translations[userLang].unhealthy}`;
     case aqi > 200 && aqi <= 300:
-      return `(${translations[userLang].veryUnhealthy})`;
+      return `${translations[userLang].veryUnhealthy}`;
     case aqi > 300:
-      return `(${translations[userLang].hazardous})`;
+      return `${translations[userLang].hazardous}`;
     default:
-      return `(${translations[userLang].notAvailable})`;
+      return `${translations[userLang].notAvailable}`;
   }
 };
 
