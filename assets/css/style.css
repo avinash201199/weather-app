@@ -867,3 +867,32 @@ html body #scroll-btn {
   cursor: pointer;
   /* position: fixed; */
 }
+
+.scroll-top {
+  position: absolute;
+  z-index: 5;
+  top: 0;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: #fff;
+  left: 50%;
+  -webkit-transform: translate(-50%, -50%);
+  -ms-transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%);
+  -webkit-box-shadow: 0 0px 10px 0px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 0px 10px 0px rgba(0, 0, 0, 0.1); 
+}
+
+.scroll-top > span {
+    position: absolute;
+    font-size: 2rem;
+    top: 50%;
+    left: 50%;
+    -webkit-transform: translate(-50%, -50%);
+    -ms-transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%);
+    color: #000 !important; 
+}
+
+  
