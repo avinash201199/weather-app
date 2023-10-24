@@ -3,7 +3,7 @@ body {
   align-items: center;
   height: 90vh;
   margin: 0;
-  font-family: "Roboto", sans-serif;
+  /* font-family: "Roboto", sans-serif; */
   background: #222;
   /* background-image: url('https://source.unsplash.com/1600x900/?landscape'); */
   /* background-repeat: no-repeat;
@@ -15,6 +15,8 @@ body {
   /* z-index:-1; */
   /* Scroll is required to see full info */
   position: relative;
+  font-family: 'Poppins', sans-serif;
+
 }
 /* .logo {
   position: fixed;
@@ -110,10 +112,11 @@ body {
   top: 1rem;
   background: linear-gradient(to top, #09203f 0%, #537895 100%);
   padding: 1em;
-  width: 100%;
-  max-width: 500px;
-  height: 425px;
+  /* width: 20rem; */
+  max-width: 700px;
+  height: 500px;
   backdrop-filter: blur(8px);
+
 }
 
 .weather-component__search {
@@ -140,19 +143,18 @@ input.weather-component__search-bar {
   width: calc(100% - 50px);
   color: black;
   border: 1px solid white;
-  border-radius: 30px 0 0 30px;
+  border-radius: 30px;
   caret-color: black;
 }
 
 .weather-component__search {
   display: flex;
   justify-content: center;
-
-  border-radius: 30px;
+  /* border-radius: 30px; */
 }
 
 .weather-component__search-bar {
-  border-radius: 30px;
+  /* border-radius: 30px; */
 }
 
 option:hover,
@@ -164,11 +166,11 @@ input.weather-component__search-bar:focus {
   transition: 700ms;
   box-shadow: 0px 0px 10px rgb(255 255 255 / 50%);
   
-  border-radius: 30px 0 0 30px;
+  border-radius: 30px;
 }
 
 .weather-component__button {
-  margin: 0.5em;
+  margin: 0.2rem 1rem;
 
   margin-left: -7rem;
 
@@ -184,7 +186,7 @@ input.weather-component__search-bar:focus {
   transition: 0.2s ease-in-out;
 }
 .weather-component__button-microphone {
-  margin: 0.5em;
+  margin: 0.5rem;
   border-radius: 50%;
   border: none;
   height: 40px;
@@ -201,7 +203,10 @@ input.weather-component__search-bar:focus {
 }
 
 button:hover {
-  background: #7c7c7c6b;
+  /* background: #7c7c7c6b; */
+  border: 1px solid black;
+  background-color: white;
+  color: #156569;
 }
 
 button:focus {
@@ -217,14 +222,14 @@ button:focus {
 }
 
 .weather-component__city-temperature {
-  margin-left: 21%;
-  margin-top: 15px;
+  margin-left: 10%;
+  margin-top: 10px;
   margin-bottom: 15px;
-  width: 57%;
+  width: 80%;
   font-size: 2.8rem;
-  font-weight: bold;
+  font-weight: 500;
   font-family: "Inter", sans-serif;
-  text-shadow: 3px 6px 3px rgba(0, 0, 0, 0.5);
+  /* text-shadow: 3px 6px 3px rgba(0, 0, 0, 0.5); */
   background-color: rgba(219, 228, 228, 0.32);
   border-radius: 32px;
   padding: 5px;
@@ -239,7 +244,14 @@ button:focus {
   flex-direction: row;
   align-items: center;
   justify-content: space-between;
+  gap: 5rem;
+  padding: 0 10px;
   margin-bottom: 10px;
+  background-color: rgba(219, 228, 228, 0.32);
+  border-radius: 32px;
+  height: 4rem;
+  width: 20rem;
+  margin: 20px 25px 15px 35px;
 }
 
 .weather-component__icn {
@@ -315,11 +327,7 @@ button:focus {
 
 .forecast-component__item {
   border: 1px solid rgb(35, 35, 35);
-  background: linear-gradient(
-    102.1deg,
-    rgb(32, 38, 57, 0.5) 41.4%,
-    rgb(32, 38, 57, 0.1) 60.2%
-  );
+    background: rgba(9, 80, 102, 0.7);
   padding: 12px;
   transition: background-color 0.5s ease;
   height: 150px;
@@ -365,14 +373,14 @@ button:focus {
 .sunset-img {
   width: 30px;
   height: 30px;
-
-  margin: 0 10px 0 0px;
+  margin: 0 8px 0 0px;
 }
 
 .weather-component__city-name {
   text-align: center;
   font-size: 2rem;
-  text-shadow: 2px 4px rgba(0, 0, 0, 0.885), 2px 4px rgba(0, 0, 0, 0.885);
+  font-weight: 100;
+  /* text-shadow: 2px 4px rgba(0, 0, 0, 0.885), 2px 4px rgba(0, 0, 0, 0.885); */
 }
 
 .weather-component__city-temperature {
