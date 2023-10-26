@@ -326,13 +326,27 @@ button:focus {
 }
 
 .forecast-component__item {
-  border: 1px solid rgb(35, 35, 35);
-    background: rgba(9, 80, 102, 0.7);
-  padding: 12px;
-  transition: background-color 0.5s ease;
-  height: 150px;
+  position: relative;
+  box-shadow: 20px 20px 50px rgba(0, 0, 0, 0.5);
+  border-radius: 20px;
+  background: rgba(255, 255, 255, 0.1);
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  border-top: 1px solid rgba(255, 255, 255, 0.5);
+  border-left: 1px solid rgba(255, 255, 255, 0.5);
+  backdrop-filter: blur(5px);
+  height: 210px;
   width: 100%;
   min-width: max-content;
+  margin: 1%;
+
+}
+
+.w-100{
+  width: 111%!important;
 }
 
 .forecast-component__item img {
