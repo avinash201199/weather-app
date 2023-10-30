@@ -58,11 +58,14 @@ body {
   );
   font-size: 1em;
   font-weight: 700;
-  /* width: fit-content; */
-  width: fit-content;
+  width: fit-content; 
   position: relative;
   margin: 6px auto;
   z-index: 9;
+}
+
+#date-time{
+ font-family:monospace;
 }
 
 /* nav BEM Conevntion * -------/

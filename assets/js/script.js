@@ -431,6 +431,10 @@ const month = [
   "November",
   "December",
 ];
+const formatLeadingZero=(value)=>{
+    //to add leading zeros if value is less than 10
+    return value.toString().padStart(2, '0');
+}
 setInterval(() => {
   a = new Date();
   time =
@@ -441,13 +445,13 @@ setInterval(() => {
     month[a.getMonth()] +
     " " +
     a.getFullYear() +
-    " " +
+    ", " +
     '  "Clock: ' +
-    a.getHours() +
+    formatLeadingZero(a.getHours()) +
     ":" +
-    a.getMinutes() +
+    formatLeadingZero(a.getMinutes()) +
     ":" +
-    a.getSeconds() +
+    formatLeadingZero(a.getSeconds()) +
     '"';
   document.getElementById("date-time").innerHTML = time;
 }, 1000);
