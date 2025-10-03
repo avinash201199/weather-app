@@ -219,9 +219,13 @@ button:focus {
 /* weather section */
 
 .weather-component__AQI {
-  width: max-content;
+  width: auto;
+  max-width: 120px;
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
+  flex-shrink: 1;
+  overflow: hidden;
+  text-align: center;
 }
 
 .weather-component__city-temperature {
@@ -247,7 +251,7 @@ button:focus {
   flex-direction: row;
   align-items: center;
   justify-content: space-between;
-  gap: 5rem;
+  gap: 1rem;
   padding: 0 10px;
   margin-bottom: 10px;
   background-color: rgba(219, 228, 228, 0.32);
@@ -255,6 +259,7 @@ button:focus {
   height: 4rem;
   width: 20rem;
   margin: 20px 25px 15px 35px;
+  overflow: hidden;
 }
 
 .weather-component__icn {
@@ -272,6 +277,17 @@ button:focus {
 
 #AirQuality {
   margin: 0 5px;
+  font-size: 0.9rem;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.air-quality-label {
+  font-size: 0.8rem;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .loading {
