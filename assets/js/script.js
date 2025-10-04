@@ -64,7 +64,7 @@ const fetchAirQuality = (city) => {
 const updateAirQuality = (aqi) => {
   const airQualityElement = document.querySelector("#AirQuality");
   const aqiText = translations[userLang].airQuality;
-  airQualityElement.innerText = `${aqiText}: ${aqi}`;
+  airQualityElement.innerText = `${aqi}`;
 
   const airQuality = getAirQualityDescription(aqi, userLang);
   const textClass = getAirQualityClass(aqi);
@@ -193,23 +193,17 @@ let weather = {
     }
     document.getElementById("temp").innerText = temperature;
 
-    document.getElementById(
-      "humidity"
-    ).innerText = `${translations[userLang].humidity}: ${humidity}%`;
+    document.getElementById("humidity").innerText = `${humidity}%`;
 
     document.getElementById(
       "wind"
-    ).innerText = `${translations[userLang].windSpeed}: ${speed}km/h`;
+    ).innerText = `${speed}km/h`;
 
     document.getElementById("weather").classList.remove("loading");
 
-    document.getElementById("sunrise").innerText = `${
-      translations[userLang].sunrise
-    }: ${formatAMPM(date1)}`;
+    document.getElementById("sunrise").innerText = `${formatAMPM(date1)}`;
 
-    document.getElementById("sunset").innerText = `${
-      translations[userLang].sunset
-    }: ${formatAMPM(date2)}`;
+    document.getElementById("sunset").innerText = `${formatAMPM(date2)}`;
 
     let url = `https://api.openweathermap.org/data/2.5/onecall?lat=${lat}&lon=${lon}&units=metric&appid=${config.API_KEY}`;
     getWeatherWeekly(url);
@@ -444,16 +438,21 @@ setInterval(() => {
     "  " +
     month[a.getMonth()] +
     " " +
-    a.getFullYear() +
-    ", " +
-    '  "Clock: ' +
+    a.getFullYear() 
+    ;
+  document.getElementById("date-time").innerHTML = time;
+}, 1000);
+
+setInterval(() => {
+  a = new Date();
+  time =
     formatLeadingZero(a.getHours()) +
     ":" +
     formatLeadingZero(a.getMinutes()) +
     ":" +
     formatLeadingZero(a.getSeconds()) +
-    '"';
-  document.getElementById("date-time").innerHTML = time;
+    '';
+  document.getElementById("date-time2").innerHTML = time;
 }, 1000);
 
 // scrollTop functionality
