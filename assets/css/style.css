@@ -18,12 +18,17 @@ body {
   font-family: 'Poppins', sans-serif;
 
 }
-/* .logo {
-  position: fixed;
-  top: 20px;
-  left: 20px;
-  z-index: 999;
-} */
+.logo {
+  display: flex;
+  align-items: center; 
+  gap: 10px;           
+}
+
+.logo-img {
+  height: 40px; 
+  width: auto;
+}
+
 .top-nav {
   position: relative !important;
   top: 0px;
@@ -32,9 +37,11 @@ body {
   z-index: 1030;
 }
 
-.logo-img {
-  max-width: 50px; /* Adjust the maximum width */
-  max-height: 50px; /* Adjust the maximum height */
+.logo h1 {
+  color: #2196f3;  
+  font-size: 24px;  
+  margin: 0;       
+  font-weight: 600;
 }
 /* Hide scrollbar for IE, Edge and Firefox */
 body {
