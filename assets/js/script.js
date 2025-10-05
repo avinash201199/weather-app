@@ -359,46 +359,63 @@ const getAirQualityClass = (aqi) => {
 };
 
 let weather = {
-  fetchWeather: function (city) {
-    let isCountry = false;
-    let index;
-    for (let i = 0; i < Capitals.length; i++) {
-      if (Capitals[i].country.toUpperCase() === city.toUpperCase()) {
-        isCountry = true;
-        index = i;
-        break;
+  fetchWeather: function (city = null, lat = null, lon = null) {
+    let url;
+
+    // Case 1: If latitude & longitude are provided (auto-location)
+    if (lat && lon) {
+      url =
+        "https://api.openweathermap.org/data/2.5/weather?lat=" +
+        lat +
+        "&lon=" +
+        lon +
+        "&units=metric&appid=" +
+        config.API_KEY +
+        `&lang=${translations[userLang].apiLang}`;
+    } else {
+      // Case 2: If user typed a city or country
+      let isCountry = false;
+      let index;
+      for (let i = 0; i < Capitals.length; i++) {
+        if (Capitals[i].country.toUpperCase() === city.toUpperCase()) {
+          isCountry = true;
+          index = i;
+          break;
+        }
       }
-    }
-    if (isCountry) {
-      city = Capitals[index].city;
-    }
-    fetch(
-      "https://api.openweathermap.org/data/2.5/weather?q=" +
+      if (isCountry) {
+        city = Capitals[index].city;
+      }
+
+      url =
+        "https://api.openweathermap.org/data/2.5/weather?q=" +
         city +
         "&units=metric&appid=" +
         config.API_KEY +
-        `&lang=${translations[userLang].apiLang}`
-    )
+        `&lang=${translations[userLang].apiLang}`;
+    }
+
+    // Fetch weather
+    fetch(url)
       .then((response) => {
         if (!response.ok) {
           toastFunction(`${translations[userLang].noWeatherFound}`);
           document.getElementById("city").innerHTML = "City not Found";
           document.getElementById("temp").style.display = "none";
-          document.querySelector(
-            ".weather-component__data-wrapper"
-          ).style.display = "none";
+          document.querySelector(".weather-component__data-wrapper").style.display =
+            "none";
           throw new Error(`${translations[userLang].noWeatherFound}`);
         }
         return response.json();
       })
       .then((data) => {
         document.getElementById("temp").style.display = "block";
-        document.querySelector(
-          ".weather-component__data-wrapper"
-        ).style.display = "block";
+        document.querySelector(".weather-component__data-wrapper").style.display =
+          "block";
         this.displayWeather(data, city);
       });
   },
+
 
   displayWeather: function (data, city) {
     const { name } = data;
@@ -617,14 +634,6 @@ document
     }
   });
 
-// get user city name via ip api
-
-fetch("https://ipapi.co/json/")
-  .then((response) => response.json())
-  .then((data) => {
-    selectedCity = data.city;
-    weather.fetchWeather(data.city);
-  });
 
 document.getElementsByName("search-bar")[0].placeholder =
   translations[userLang].search;
@@ -718,18 +727,49 @@ const scrollTop = function () {
       ? scrollBtn.classList.add("show")
       : scrollBtn.classList.remove("show");
   };
-  window.addEventListener("scroll", scrollBtnDisplay);
-  // scroll to top when button clicked
-  const scrollWindow = function () {
-    if (window.scrollY != 0) {
-      setTimeout(function () {
-        window.scrollTo(0, window.scrollY - 50);
-        window.scroll({ top: 0, behavior: "smooth" });
-        scrollWindow();
-      }, 10);
-    }
-  };
-  scrollBtn.addEventListener("click", scrollWindow);
+
+function initLocationAndWeather() {
+  if (navigator.geolocation) {
+    navigator.geolocation.getCurrentPosition(
+      (position) => {
+        // On success, get the coordinates and fetch weather
+        const lat = position.coords.latitude;
+        const lon = position.coords.longitude;
+        weather.fetchWeather(null, lat, lon);
+      },
+      (error) => {
+        
+        console.error("Geolocation error:", error);
+        let errorMessage;
+        if (error.code === error.PERMISSION_DENIED) {
+          errorMessage = `${translations[userLang].permissionDenied}`;
+        } else {
+          errorMessage = `${translations[userLang].locationError}`;
+        }
+        toastFunction(errorMessage);
+        
+        
+        weather.fetchWeather("London");
+      },
+      {
+        // Options to improve accuracy and performance
+        enableHighAccuracy: true,
+        timeout: 5000,
+        maximumAge: 0,
+      }
+    );
+  } else {
+    // If browser doesn't support geolocation at all
+    toastFunction(`${translations[userLang].notSupported}`);
+    weather.fetchWeather("London");
+  }
+}
+
+
+window.onload = function () {
+  document.getElementsByName("search-bar")[0].focus();
+  fetchNewBackground();
+  initLocationAndWeather(); // This is the single, clean call for the location feature
 };
 scrollTop();
 
@@ -794,3 +834,9 @@ window.addEventListener("mousemove", function (details) {
     }, 50);
   }
 });
+
+
+
+
+
+
