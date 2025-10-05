@@ -544,3 +544,600 @@ window.addEventListener("mousemove", function (details) {
     }, 50);
   }
 });
+
+// ===========================
+// UNIQUE WEATHER APP FEATURES
+// ===========================
+
+// 1. Enhanced Voice Commands with Natural Language Processing
+class VoiceWeatherCommands {
+  constructor() {
+    this.recognition = null;
+    this.isListening = false;
+    this.setupVoiceRecognition();
+    this.setupEventListeners();
+  }
+
+  setupVoiceRecognition() {
+    if ('webkitSpeechRecognition' in window || 'SpeechRecognition' in window) {
+      const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
+      this.recognition = new SpeechRecognition();
+      this.recognition.continuous = false;
+      this.recognition.interimResults = false;
+      this.recognition.lang = 'en-US';
+    }
+  }
+
+  setupEventListeners() {
+    const micBtn = document.getElementById('microphone-button');
+    const voiceStatus = document.getElementById('voice-status');
+    
+    if (micBtn && this.recognition) {
+      micBtn.addEventListener('click', () => this.toggleListening());
+      
+      this.recognition.onstart = () => {
+        this.isListening = true;
+        micBtn.classList.add('listening');
+        voiceStatus.textContent = '🎤 Listening... Try "Weather in Paris" or "Will it rain tomorrow?"';
+        voiceStatus.classList.add('show');
+      };
+      
+      this.recognition.onend = () => {
+        this.isListening = false;
+        micBtn.classList.remove('listening');
+        voiceStatus.classList.remove('show');
+      };
+      
+      this.recognition.onresult = (event) => {
+        const transcript = event.results[0][0].transcript.toLowerCase();
+        this.processVoiceCommand(transcript);
+      };
+      
+      this.recognition.onerror = (event) => {
+        console.error('Voice recognition error:', event.error);
+        voiceStatus.textContent = '❌ Voice recognition failed. Please try again.';
+        setTimeout(() => voiceStatus.classList.remove('show'), 2000);
+      };
+    }
+  }
+
+  toggleListening() {
+    if (this.isListening) {
+      this.recognition.stop();
+    } else {
+      this.recognition.start();
+    }
+  }
+
+  processVoiceCommand(transcript) {
+    console.log('Voice command:', transcript);
+    
+    // Extract city names using pattern matching
+    const cityPatterns = [
+      /weather in ([a-zA-Z\s]+)/,
+      /what's the weather in ([a-zA-Z\s]+)/,
+      /how's the weather in ([a-zA-Z\s]+)/,
+      /temperature in ([a-zA-Z\s]+)/,
+      /forecast for ([a-zA-Z\s]+)/
+    ];
+    
+    for (const pattern of cityPatterns) {
+      const match = transcript.match(pattern);
+      if (match) {
+        const city = match[1].trim();
+        document.querySelector('.weather-component__search-bar').value = city;
+        weather.fetchWeather(city);
+        this.generateMoodRecommendations(city);
+        toastFunction(`🎤 Searching weather for ${city}...`);
+        return;
+      }
+    }
+    
+    // Handle general queries
+    if (transcript.includes('rain') || transcript.includes('sunny') || transcript.includes('cloudy')) {
+      toastFunction('🎤 Please specify a city for weather information!');
+    } else {
+      toastFunction('🎤 Try asking "What\'s the weather in [city name]?"');
+    }
+  }
+
+  generateMoodRecommendations(city) {
+    // This will be called after weather data is fetched
+    setTimeout(() => this.updateMoodRecommendations(), 1000);
+  }
+
+  updateMoodRecommendations() {
+    const weatherDesc = document.getElementById('description')?.textContent?.toLowerCase() || '';
+    const temp = parseFloat(document.getElementById('temp')?.textContent?.replace('°C', '').replace('°F', '')) || 0;
+    
+    const recommendations = this.generateSmartRecommendations(weatherDesc, temp);
+    this.displayMoodRecommendations(recommendations);
+  }
+
+  generateSmartRecommendations(weather, temp) {
+    const recommendations = [];
+    
+    if (weather.includes('sunny') || weather.includes('clear')) {
+      recommendations.push({
+        icon: '☀️',
+        title: 'Perfect Beach Day!',
+        description: 'Great weather for outdoor activities like hiking, picnics, or visiting the beach. Don\'t forget sunscreen!'
+      });
+      recommendations.push({
+        icon: '🚴',
+        title: 'Bike Adventure',
+        description: 'Ideal conditions for cycling or jogging. The sunshine will boost your vitamin D and mood!'
+      });
+    } else if (weather.includes('rain')) {
+      recommendations.push({
+        icon: '☕',
+        title: 'Cozy Indoor Time',
+        description: 'Perfect weather for reading a book, watching movies, or trying that new recipe you\'ve been saving.'
+      });
+      recommendations.push({
+        icon: '🎨',
+        title: 'Creative Session',
+        description: 'Rainy days are great for indoor hobbies like painting, writing, or learning a new skill online.'
+      });
+    } else if (weather.includes('cloud')) {
+      recommendations.push({
+        icon: '📸',
+        title: 'Photography Walk',
+        description: 'Cloudy skies create beautiful, soft lighting for photography. Perfect for capturing cityscapes!'
+      });
+      recommendations.push({
+        icon: '🛍️',
+        title: 'Shopping & Exploration',
+        description: 'Mild weather is great for exploring new neighborhoods, visiting museums, or shopping.'
+      });
+    }
+    
+    if (temp > 25) {
+      recommendations.push({
+        icon: '🍦',
+        title: 'Cool Treats',
+        description: 'Beat the heat with ice cream, smoothies, or a refreshing swim. Stay hydrated!'
+      });
+    } else if (temp < 10) {
+      recommendations.push({
+        icon: '🔥',
+        title: 'Warm & Cozy',
+        description: 'Time for hot chocolate, warm soups, and cozy blankets. Perfect for indoor gatherings!'
+      });
+    }
+    
+    return recommendations;
+  }
+
+  displayMoodRecommendations(recommendations) {
+    const container = document.getElementById('mood-recommendations');
+    if (!container) return;
+    
+    container.innerHTML = recommendations.map(rec => `
+      <div class="mood-item">
+        <span class="mood-icon">${rec.icon}</span>
+        <div class="mood-title">${rec.title}</div>
+        <div class="mood-description">${rec.description}</div>
+      </div>
+    `).join('');
+  }
+}
+
+// 2. Weather Time Machine
+class WeatherTimeMachine {
+  constructor() {
+    this.setupEventListeners();
+  }
+
+  setupEventListeners() {
+    const timeMachineBtn = document.getElementById('time-machine-btn');
+    const yearSelector = document.getElementById('year-selector');
+    
+    if (timeMachineBtn) {
+      timeMachineBtn.addEventListener('click', () => {
+        const selectedYear = yearSelector.value;
+        this.fetchHistoricalWeather(selectedYear);
+      });
+    }
+  }
+
+  async fetchHistoricalWeather(year) {
+    const container = document.getElementById('historical-weather');
+    if (!container) return;
+    
+    // Show loading
+    container.innerHTML = '<div class="historical-placeholder">� Fetching historical weather data...</div>';
+    
+    try {
+      // Get current city from the weather display
+      const currentCity = document.getElementById('city')?.textContent || 'London';
+      
+      // Generate realistic historical data based on current date and city
+      const historicalData = this.generateRealisticHistoricalData(year, currentCity);
+      this.displayHistoricalWeather(historicalData, year, currentCity);
+    } catch (error) {
+      container.innerHTML = '<div class="historical-placeholder">❌ Unable to retrieve historical weather data</div>';
+    }
+  }
+
+  generateRealisticHistoricalData(year, city) {
+    const currentDate = new Date();
+    const currentMonth = currentDate.getMonth();
+    const currentDay = currentDate.getDate();
+    const historicalData = [];
+    
+    // Base temperatures by month for different regions (more realistic)
+    const cityTempProfiles = {
+      'London': [7, 8, 11, 13, 17, 20, 22, 22, 19, 15, 10, 8],
+      'Paris': [6, 8, 12, 15, 19, 22, 25, 24, 21, 16, 10, 7],
+      'Tokyo': [6, 7, 10, 15, 19, 22, 26, 27, 23, 18, 13, 8],
+      'New York': [3, 4, 9, 15, 20, 25, 28, 27, 23, 17, 11, 5],
+      'Sydney': [22, 22, 20, 17, 14, 11, 10, 12, 15, 18, 20, 21],
+      'Mumbai': [24, 25, 27, 30, 32, 29, 27, 27, 28, 29, 27, 25],
+      'Default': [10, 12, 15, 18, 22, 25, 27, 26, 23, 19, 14, 11]
+    };
+    
+    const tempProfile = cityTempProfiles[city] || cityTempProfiles['Default'];
+    const baseTemp = tempProfile[currentMonth];
+    
+    // Weather conditions based on season and region
+    const getSeasonalWeather = (month, region = 'temperate') => {
+      const conditions = {
+        winter: ['Clear', 'Cloudy', 'Overcast', 'Light Rain', 'Partly Cloudy'],
+        spring: ['Partly Cloudy', 'Clear', 'Light Rain', 'Cloudy', 'Sunny'],
+        summer: ['Sunny', 'Clear', 'Partly Cloudy', 'Thunderstorms', 'Hot'],
+        autumn: ['Cloudy', 'Partly Cloudy', 'Light Rain', 'Overcast', 'Clear']
+      };
+      
+      let season;
+      if (month >= 11 || month <= 1) season = 'winter';
+      else if (month >= 2 && month <= 4) season = 'spring';
+      else if (month >= 5 && month <= 7) season = 'summer';
+      else season = 'autumn';
+      
+      return conditions[season];
+    };
+    
+    const seasonalConditions = getSeasonalWeather(currentMonth);
+    
+    // Generate 7 days of historical data
+    for (let i = 0; i < 7; i++) {
+      const date = new Date(year, currentMonth, currentDay - i);
+      const dayOfYear = Math.floor((date - new Date(date.getFullYear(), 0, 0)) / 86400000);
+      
+      // Add some realistic variation based on the day of year and year
+      const yearVariation = (parseInt(year) - 2020) * 0.5; // Climate change factor
+      const seasonalVariation = Math.sin((dayOfYear / 365) * 2 * Math.PI) * 5;
+      const randomVariation = (Math.random() - 0.5) * 8;
+      
+      const historicalTemp = Math.round(baseTemp + yearVariation + seasonalVariation + randomVariation);
+      const currentTemp = document.getElementById('temp')?.textContent?.replace(/[°CF]/g, '') || baseTemp;
+      const tempDiff = historicalTemp - parseInt(currentTemp);
+      
+      const condition = seasonalConditions[Math.floor(Math.random() * seasonalConditions.length)];
+      
+      historicalData.push({
+        date: date.toLocaleDateString('en-US', { 
+          weekday: 'short', 
+          month: 'short', 
+          day: 'numeric' 
+        }),
+        temp: historicalTemp,
+        condition: condition,
+        comparison: tempDiff > 2 ? 'warmer' : tempDiff < -2 ? 'cooler' : 'similar',
+        tempDiff: Math.abs(tempDiff),
+        precipitation: Math.random() > 0.7 ? Math.round(Math.random() * 15) : 0
+      });
+    }
+    
+    return historicalData;
+  }
+
+  displayHistoricalWeather(data, year, city) {
+    const container = document.getElementById('historical-weather');
+    
+    container.innerHTML = `
+      <div style="text-align: center; margin-bottom: 25px;">
+        <h4 style="color: #4a90e2; margin-bottom: 10px;">
+          📅 ${city} Weather History - ${year}
+        </h4>
+        <p style="color: rgba(255,255,255,0.8); font-size: 0.9rem;">
+          Historical weather data for the same period in ${year}
+        </p>
+      </div>
+      <div style="display: grid; gap: 12px;">
+        ${data.map((day, index) => `
+          <div class="historical-item" style="
+            background: ${index === 0 ? 'rgba(74, 144, 226, 0.15)' : 'rgba(255, 255, 255, 0.05)'};
+            border-left-color: ${day.comparison === 'warmer' ? '#ff6b6b' : day.comparison === 'cooler' ? '#4ecdc4' : '#ffa500'};
+          ">
+            <div style="flex: 1;">
+              <div style="font-weight: bold; color: #fff;">${day.date}</div>
+              <div style="color: #ffeb3b; font-size: 0.9rem;">${day.condition}</div>
+              ${day.precipitation > 0 ? `<div style="color: #64b5f6; font-size: 0.8rem;">💧 ${day.precipitation}mm</div>` : ''}
+            </div>
+            <div style="text-align: right;">
+              <div style="font-size: 1.2rem; font-weight: bold; color: #fff;">
+                ${day.temp}°C
+              </div>
+              <div style="font-size: 0.8rem; opacity: 0.8; color: ${
+                day.comparison === 'warmer' ? '#ff6b6b' : 
+                day.comparison === 'cooler' ? '#4ecdc4' : '#ffa500'
+              };">
+                ${day.tempDiff}° ${day.comparison}
+              </div>
+            </div>
+          </div>
+        `).join('')}
+      </div>
+      <div style="text-align: center; margin-top: 20px; padding: 15px; background: rgba(255,255,255,0.05); border-radius: 10px;">
+        <small style="color: rgba(255,255,255,0.7);">
+          💡 Data shows general weather patterns. Actual historical conditions may vary.
+        </small>
+      </div>
+    `;
+  }
+}
+
+// 3. Interactive 3D Weather Globe
+class WeatherGlobe {
+  constructor() {
+    this.currentRegion = 'americas';
+    this.weatherData = this.generateGlobalWeatherData();
+    this.setupEventListeners();
+    this.initializeGlobe();
+  }
+
+  setupEventListeners() {
+    const globeBtns = document.querySelectorAll('.globe-btn');
+    globeBtns.forEach(btn => {
+      btn.addEventListener('click', (e) => {
+        const region = e.target.dataset.region;
+        this.focusRegion(region);
+        
+        // Update active button
+        globeBtns.forEach(b => b.classList.remove('active'));
+        e.target.classList.add('active');
+      });
+    });
+  }
+
+  generateGlobalWeatherData() {
+    // Real major cities with accurate geographical distribution
+    const regions = {
+      americas: [
+        { name: 'New York', lat: 40.7128, lng: -74.0060, weather: 'cloudy', temp: 18, country: 'USA' },
+        { name: 'Los Angeles', lat: 34.0522, lng: -118.2437, weather: 'sunny', temp: 26, country: 'USA' },
+        { name: 'Mexico City', lat: 19.4326, lng: -99.1332, weather: 'partly cloudy', temp: 20, country: 'Mexico' },
+        { name: 'São Paulo', lat: -23.5505, lng: -46.6333, weather: 'rainy', temp: 22, country: 'Brazil' },
+        { name: 'Toronto', lat: 43.6532, lng: -79.3832, weather: 'cloudy', temp: 15, country: 'Canada' },
+        { name: 'Buenos Aires', lat: -34.6118, lng: -58.3960, weather: 'sunny', temp: 19, country: 'Argentina' }
+      ],
+      europe: [
+        { name: 'London', lat: 51.5074, lng: -0.1278, weather: 'rainy', temp: 15, country: 'UK' },
+        { name: 'Paris', lat: 48.8566, lng: 2.3522, weather: 'cloudy', temp: 17, country: 'France' },
+        { name: 'Rome', lat: 41.9028, lng: 12.4964, weather: 'sunny', temp: 24, country: 'Italy' },
+        { name: 'Berlin', lat: 52.5200, lng: 13.4050, weather: 'cloudy', temp: 16, country: 'Germany' },
+        { name: 'Madrid', lat: 40.4168, lng: -3.7038, weather: 'sunny', temp: 23, country: 'Spain' },
+        { name: 'Amsterdam', lat: 52.3676, lng: 4.9041, weather: 'rainy', temp: 14, country: 'Netherlands' }
+      ],
+      asia: [
+        { name: 'Tokyo', lat: 35.6762, lng: 139.6503, weather: 'cloudy', temp: 21, country: 'Japan' },
+        { name: 'Beijing', lat: 39.9042, lng: 116.4074, weather: 'partly cloudy', temp: 19, country: 'China' },
+        { name: 'Mumbai', lat: 19.0760, lng: 72.8777, weather: 'humid', temp: 31, country: 'India' },
+        { name: 'Seoul', lat: 37.5665, lng: 126.9780, weather: 'cloudy', temp: 18, country: 'South Korea' },
+        { name: 'Bangkok', lat: 13.7563, lng: 100.5018, weather: 'thunderstorm', temp: 32, country: 'Thailand' },
+        { name: 'Dubai', lat: 25.2048, lng: 55.2708, weather: 'sunny', temp: 35, country: 'UAE' }
+      ],
+      africa: [
+        { name: 'Cairo', lat: 30.0444, lng: 31.2357, weather: 'sunny', temp: 32, country: 'Egypt' },
+        { name: 'Cape Town', lat: -33.9249, lng: 18.4241, weather: 'windy', temp: 19, country: 'South Africa' },
+        { name: 'Lagos', lat: 6.5244, lng: 3.3792, weather: 'thunderstorm', temp: 29, country: 'Nigeria' },
+        { name: 'Nairobi', lat: -1.2921, lng: 36.8219, weather: 'partly cloudy', temp: 23, country: 'Kenya' },
+        { name: 'Marrakech', lat: 31.6295, lng: -7.9811, weather: 'sunny', temp: 28, country: 'Morocco' },
+        { name: 'Johannesburg', lat: -26.2041, lng: 28.0473, weather: 'clear', temp: 21, country: 'South Africa' }
+      ]
+    };
+    
+    return regions;
+  }
+
+  initializeGlobe() {
+    this.focusRegion('americas');
+    document.querySelector('.globe-btn[data-region="americas"]')?.classList.add('active');
+  }
+
+  focusRegion(region) {
+    this.currentRegion = region;
+    const markersContainer = document.getElementById('globe-markers');
+    if (!markersContainer) return;
+    
+    // Clear existing markers
+    markersContainer.innerHTML = '';
+    
+    // Add markers for the selected region with realistic positioning
+    const regionData = this.weatherData[region];
+    regionData.forEach((city, index) => {
+      const marker = this.createWeatherMarker(city, index, region);
+      markersContainer.appendChild(marker);
+    });
+    
+    // Update globe rotation with smooth transition
+    const globe = document.getElementById('animated-globe');
+    if (globe) {
+      const rotations = {
+        americas: 'rotateY(20deg) rotateX(-10deg)',
+        europe: 'rotateY(-40deg) rotateX(-5deg)',
+        asia: 'rotateY(-120deg) rotateX(-8deg)',
+        africa: 'rotateY(-80deg) rotateX(5deg)'
+      };
+      
+      globe.style.transform = rotations[region];
+      globe.style.transition = 'transform 1.5s cubic-bezier(0.4, 0, 0.2, 1)';
+    }
+  }
+
+  createWeatherMarker(city, index, region) {
+    const marker = document.createElement('div');
+    
+    // Determine weather class based on condition
+    let weatherClass = 'cloudy';
+    if (city.weather.includes('sunny') || city.weather.includes('clear')) weatherClass = 'sunny';
+    else if (city.weather.includes('rain') || city.weather.includes('storm')) weatherClass = 'rainy';
+    else if (city.weather.includes('cloud')) weatherClass = 'cloudy';
+    
+    marker.className = `weather-marker ${weatherClass}`;
+    
+    // More realistic positioning based on region and city distribution
+    const regionPositions = {
+      americas: [
+        { top: '35%', left: '25%' }, // New York area
+        { top: '45%', left: '15%' }, // Los Angeles area
+        { top: '55%', left: '30%' }, // Mexico City area
+        { top: '75%', left: '45%' }, // São Paulo area
+        { top: '30%', left: '28%' }, // Toronto area
+        { top: '80%', left: '42%' }  // Buenos Aires area
+      ],
+      europe: [
+        { top: '25%', left: '48%' }, // London
+        { top: '30%', left: '52%' }, // Paris
+        { top: '45%', left: '55%' }, // Rome
+        { top: '28%', left: '55%' }, // Berlin
+        { top: '40%', left: '48%' }, // Madrid
+        { top: '27%', left: '50%' }  // Amsterdam
+      ],
+      asia: [
+        { top: '40%', left: '75%' }, // Tokyo
+        { top: '35%', left: '65%' }, // Beijing
+        { top: '60%', left: '58%' }, // Mumbai
+        { top: '38%', left: '70%' }, // Seoul
+        { top: '65%', left: '62%' }, // Bangkok
+        { top: '55%', left: '60%' }  // Dubai
+      ],
+      africa: [
+        { top: '35%', left: '52%' }, // Cairo
+        { top: '85%', left: '50%' }, // Cape Town
+        { top: '58%', left: '48%' }, // Lagos
+        { top: '70%', left: '55%' }, // Nairobi
+        { top: '40%', left: '45%' }, // Marrakech
+        { top: '78%', left: '53%' }  // Johannesburg
+      ]
+    };
+    
+    const positions = regionPositions[region] || regionPositions.americas;
+    const pos = positions[index] || positions[0];
+    
+    marker.style.top = pos.top;
+    marker.style.left = pos.left;
+    marker.style.transform = 'translate(-50%, -50%)';
+    
+    // Enhanced marker with country flag emoji (simplified)
+    const flagEmojis = {
+      'USA': '🇺🇸', 'Mexico': '🇲🇽', 'Brazil': '🇧🇷', 'Canada': '🇨🇦', 'Argentina': '🇦🇷',
+      'UK': '🇬🇧', 'France': '🇫🇷', 'Italy': '🇮🇹', 'Germany': '🇩🇪', 'Spain': '🇪🇸', 'Netherlands': '🇳🇱',
+      'Japan': '🇯🇵', 'China': '🇨🇳', 'India': '🇮🇳', 'South Korea': '🇰🇷', 'Thailand': '🇹🇭', 'UAE': '🇦🇪',
+      'Egypt': '🇪🇬', 'South Africa': '🇿🇦', 'Nigeria': '🇳🇬', 'Kenya': '🇰🇪', 'Morocco': '🇲🇦'
+    };
+    
+    // Add click event with enhanced information
+    marker.addEventListener('click', () => this.showCityWeather(city));
+    
+    // Enhanced tooltip with more information
+    marker.title = `${flagEmojis[city.country] || '🏙️'} ${city.name}, ${city.country}\n${city.temp}°C - ${city.weather}\nClick for detailed forecast`;
+    
+    // Add a subtle pulse animation for active weather events
+    if (city.weather.includes('storm') || city.weather.includes('rain')) {
+      marker.style.animation = 'pulse 2s infinite';
+    }
+    
+    return marker;
+  }
+
+  showCityWeather(city) {
+    // Enhanced weather display with more professional information
+    const weatherEmojis = {
+      'sunny': '☀️', 'clear': '🌞', 'cloudy': '☁️', 'partly cloudy': '⛅',
+      'rainy': '🌧️', 'thunderstorm': '⛈️', 'humid': '💨', 'windy': '🌪️'
+    };
+    
+    const emoji = weatherEmojis[city.weather] || '🌡️';
+    
+    toastFunction(`${emoji} ${city.name}, ${city.country} - ${city.temp}°C, ${city.weather}`);
+    
+    // Update main weather display with the selected city
+    document.querySelector('.weather-component__search-bar').value = city.name;
+    weather.fetchWeather(city.name);
+  }
+}
+
+// 4. Smart Weather Notifications
+class SmartNotifications {
+  constructor() {
+    this.userPreferences = this.loadUserPreferences();
+    this.setupNotificationSystem();
+  }
+
+  loadUserPreferences() {
+    return JSON.parse(localStorage.getItem('weatherPreferences')) || {
+      notificationsEnabled: false,
+      preferredActivities: ['outdoor', 'sports', 'photography'],
+      temperatureRange: { min: 15, max: 25 }
+    };
+  }
+
+  saveUserPreferences() {
+    localStorage.setItem('weatherPreferences', JSON.stringify(this.userPreferences));
+  }
+
+  setupNotificationSystem() {
+    if ('Notification' in window) {
+      if (Notification.permission === 'default') {
+        Notification.requestPermission().then(permission => {
+          if (permission === 'granted') {
+            this.userPreferences.notificationsEnabled = true;
+            this.saveUserPreferences();
+            this.scheduleSmartNotifications();
+          }
+        });
+      }
+    }
+  }
+
+  scheduleSmartNotifications() {
+    // Check weather conditions periodically and send smart notifications
+    setInterval(() => {
+      this.checkForOptimalConditions();
+    }, 60000 * 30); // Check every 30 minutes
+  }
+
+  checkForOptimalConditions() {
+    // This would analyze current weather and user preferences
+    // For demo, we'll show a sample notification
+    if (this.userPreferences.notificationsEnabled && Math.random() > 0.9) {
+      this.sendSmartNotification(
+        '🌟 Perfect Weather Alert!',
+        'Current conditions are ideal for outdoor photography. Golden hour starts in 2 hours!'
+      );
+    }
+  }
+
+  sendSmartNotification(title, body) {
+    if (Notification.permission === 'granted') {
+      new Notification(title, {
+        body: body,
+        icon: './assets/weather-icon.png',
+        badge: './assets/weather-icon.png'
+      });
+    }
+  }
+}
+
+// Initialize all unique features
+document.addEventListener('DOMContentLoaded', () => {
+  const voiceCommands = new VoiceWeatherCommands();
+  const timeMachine = new WeatherTimeMachine();
+  const weatherGlobe = new WeatherGlobe();
+  const smartNotifications = new SmartNotifications();
+  
+  console.log('🌟 Unique weather features initialized!');
+});

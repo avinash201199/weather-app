@@ -105,7 +105,7 @@
                     </path>
                   </svg>
                 </button>
-                <button class="weather-component__button-microphone" aria-label="speak" id="microphone-button">
+                <button class="weather-component__button-microphone voice-command-btn" aria-label="speak" id="microphone-button" title="Ask me about weather!">
                   <svg style="color: white" xmlns="http://www.w3.org/2000/svg" width="20" height="20"
                     fill="#ffffff" class="bi bi-mic" viewBox="0 0 16 16">
                     <path
@@ -115,6 +115,7 @@
                       fill="#ffffff"></path>
                   </svg>
                 </button>
+                <div class="voice-status" id="voice-status"></div>
 </div>
               </div>
               <div id="weather" class="weather-component__data loading">
@@ -287,6 +288,82 @@
             </div>
           </div>
         </div> -->
+  </section>
+
+  <!-- Weather Mood Recommendations Section -->
+  <section class="mood-section pt-4">
+    <div class="container">
+      <div class="row justify-content-center">
+        <div class="col-12 col-md-10 col-lg-8">
+          <div class="mood-recommendations-card text-white rounded-5">
+            <h3 class="text-center mb-3">🌟 Weather Mood & Activity Suggestions</h3>
+            <div id="mood-recommendations" class="mood-content">
+              <div class="mood-loading">Analyzing weather conditions for personalized suggestions...</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  
+  <!-- Weather Time Machine Section -->
+  <section class="time-machine-section pt-4">
+    <div class="container">
+      <div class="row justify-content-center">
+        <div class="col-12 col-md-10 col-lg-8">
+          <div class="time-machine-card text-white rounded-5">
+            <h3 class="text-center mb-3">⏰ Weather Time Machine</h3>
+            <div class="time-machine-controls text-center mb-3">
+              <button id="time-machine-btn" class="btn btn-primary me-2">View This Day in History</button>
+              <select id="year-selector" class="form-select d-inline-block w-auto">
+                <option value="2024">2024</option>
+                <option value="2023">2023</option>
+                <option value="2022">2022</option>
+                <option value="2021">2021</option>
+                <option value="2020">2020</option>
+                <option value="2019">2019</option>
+                <option value="2018">2018</option>
+                <option value="2017">2017</option>
+                <option value="2016">2016</option>
+                <option value="2015">2015</option>
+              </select>
+            </div>
+            <div id="historical-weather" class="historical-content">
+              <div class="historical-placeholder">Select a year to explore weather history!</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  
+  <!-- Interactive Weather Globe Section -->
+  <section class="globe-section pt-4">
+    <div class="container">
+      <div class="row justify-content-center">
+        <div class="col-12 col-md-10 col-lg-8">
+          <div class="globe-card text-white rounded-5">
+            <h3 class="text-center mb-3">🌍 Interactive Weather Globe</h3>
+            <div id="weather-globe" class="globe-container">
+              <div class="globe-wrapper">
+                <div class="globe" id="animated-globe">
+                  <div class="globe-sphere"></div>
+                  <div class="globe-markers" id="globe-markers">
+                    <!-- Weather markers will be added dynamically -->
+                  </div>
+                </div>
+                <div class="globe-controls">
+                  <button class="globe-btn" data-region="americas">🌎 Americas</button>
+                  <button class="globe-btn" data-region="europe">🌍 Europe</button>
+                  <button class="globe-btn" data-region="asia">🌏 Asia</button>
+                  <button class="globe-btn" data-region="africa">🌍 Africa</button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
   </section>
 
 
