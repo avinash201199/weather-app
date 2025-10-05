@@ -8,6 +8,7 @@ Users can search for any city and view up-to-date weather information in a sleek
 
 ![Screenshot (20)](https://user-images.githubusercontent.com/90332218/194750372-b524eec3-5ef9-4f0c-b82b-770ec8850fc1.png)
 
+---
 
 ## 🌐 Live Demo  
 Check out the live version of the app here → [**Weather App**](https://avinash201199.github.io/weather-app/)
