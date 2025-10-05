@@ -1,22 +1,43 @@
 body {
+  background-color: var(--primary-color);
+  color: var(--text-color);
+  transition: background-color 0.3s, color 0.3s;
   justify-content: center;
   align-items: center;
   height: 90vh;
   margin: 0;
-  /* font-family: "Roboto", sans-serif; */
-  background: #222;
-  /* background-image: url('https://source.unsplash.com/1600x900/?landscape'); */
-  /* background-repeat: no-repeat;
-  background-size: cover;
-  background-attachment: fixed;
-  background-position: 50% 50%; */
   overflow-y: scroll;
   overflow-x: hidden;
-  /* z-index:-1; */
-  /* Scroll is required to see full info */
   position: relative;
   font-family: 'Poppins', sans-serif;
+}
 
+.weather-component__card {
+  background: var(--secondary-color);
+  color: var(--text-color);
+  border: 1px solid var(--accent-color);
+}
+
+.forecast-component__item {
+  background: var(--secondary-color);
+  color: var(--text-color);
+  border-top: 1px solid var(--accent-color);
+  border-left: 1px solid var(--accent-color);
+}
+
+input.weather-component__search-bar {
+  background: var(--primary-color);
+  color: var(--text-color);
+  border: 1px solid var(--text-color);
+}
+
+.weather-component__button {
+  background: var(--accent-color);
+  color: var(--primary-color);
+}
+.weather-component__button-microphone {
+  background: var(--accent-color);
+  color: var(--primary-color);
 }
 /* .logo {
   position: fixed;
@@ -981,3 +1002,90 @@ html body #scroll-btn {
 }
 
   
+  /* ===================== */
+  /* Advanced UI Enhancers */
+  /* ===================== */
+
+  /* Theme variables */
+  :root {
+    --bg: #0f1115;
+    --card-bg: rgba(255, 255, 255, 0.08);
+    --text: #e7ecf3;
+    --muted: #a7b1c2;
+    --accent: #00dcff;
+    --accent-2: #7c5cff;
+    --ring: rgba(255, 255, 255, 0.35);
+  }
+
+  [data-theme="light"] {
+    --bg: #f6f7fb;
+    --card-bg: rgba(0, 0, 0, 0.06);
+    --text: #0b1220;
+    --muted: #334155;
+    --accent: #2563eb;
+    --accent-2: #14b8a6;
+    --ring: rgba(0, 0, 0, 0.2);
+  }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+  }
+
+  /* Glassmorphic card override */
+  .weather-component__card {
+    background: var(--card-bg) !important;
+    border: 1px solid var(--ring);
+  }
+
+  /* Search input polish */
+  input.weather-component__search-bar {
+    background: rgba(255, 255, 255, 0.9) !important;
+    border: 1px solid var(--ring) !important;
+    color: #0b1220 !important;
+  }
+  input.weather-component__search-bar:focus {
+    box-shadow: 0 0 0 3px var(--ring) !important;
+  }
+
+  /* Round icon buttons */
+  .weather-component__button,
+  .weather-component__button-microphone {
+    background: rgba(255, 255, 255, 0.1) !important;
+    color: var(--text) !important;
+    border: 1px solid var(--ring);
+  }
+  .weather-component__button:hover,
+  .weather-component__button-microphone:hover {
+    transform: translateY(-1px) scale(1.03);
+  }
+
+  /* Forecast items */
+  .forecast-component__item {
+    background: var(--card-bg) !important;
+  }
+
+  /* Nav actions alignment */
+  .nav-actions {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+
+  /* Aurora animated background layer */
+  .aurora {
+    pointer-events: none;
+    position: fixed;
+    inset: 0;
+    z-index: -1;
+    background:
+      radial-gradient(60% 40% at 10% 10%, rgba(124,92,255,0.28), transparent 60%),
+      radial-gradient(50% 35% at 85% 15%, rgba(0,220,255,0.22), transparent 60%),
+      radial-gradient(55% 40% at 30% 85%, rgba(20,184,166,0.18), transparent 60%);
+    filter: blur(50px) saturate(120%);
+    opacity: 0.7;
+  }
+
+  /* Theme toggle minor spacing */
+  .theme-toggle { margin-right: 6px; }
+

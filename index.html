@@ -47,6 +47,12 @@
       <img src="./assets/icons/logo.png" alt="Logo" class="img-fluid logo-img">
     </div>
   <div class="nav-actions">
+      <button class="weather-component__button theme-toggle" id="theme-toggle" title="Toggle theme" aria-label="toggle theme">
+        <span class="theme-icon" data-theme-icon="light"><i class="fas fa-sun"></i></span>
+        <span class="theme-icon" data-theme-icon="dark"><i class="fas fa-moon"></i></span>
+      </button>
+        <i class="fa-solid fa-moon" id="theme-toggle-icon"></i>
+      </button>
       <i class="whatsapp" id="whatsapp-button">
         <img src="assets/Whatsapp-logo.svg" alt="whatsapp">
       </i>
@@ -66,7 +72,11 @@
   </nav>
 
   <div id="background"></div>
-
+  <div class="aurora-container">
+    <div class="aurora" aria-hidden="true"></div>
+    <div class="aurora" aria-hidden="true"></div>
+    <div class="aurora" aria-hidden="true"></div>
+  </div>
 
   <h2 class="header-component"> 
     <div id="date-time-container">

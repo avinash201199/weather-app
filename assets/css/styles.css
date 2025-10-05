@@ -294,3 +294,65 @@ figure.weather-component__icn {
     /* half screen */
   }
 }
+
+:root {
+    --primary-color: #ffffff;
+    --secondary-color: #f1f1f1;
+    --text-color: #333333;
+    --accent-color: #007bff;
+    --aurora-opacity: 0.1;
+}
+
+[data-theme="dark"] {
+    --primary-color: #121212;
+    --secondary-color: #1e1e1e;
+    --text-color: #ffffff;
+    --accent-color: #00aaff;
+    --aurora-opacity: 0.3;
+}
+
+.aurora-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+    overflow: hidden;
+    opacity: var(--aurora-opacity);
+}
+
+.aurora {
+    position: absolute;
+    width: 200%;
+    height: 200%;
+    background: radial-gradient(circle, rgba(0,123,255,0.6) 0%, rgba(0,170,255,0) 70%);
+    animation: aurora-animation 20s infinite linear;
+}
+
+.aurora:nth-child(2) {
+    background: radial-gradient(circle, rgba(255,0,150,0.6) 0%, rgba(255,105,180,0) 70%);
+    animation-delay: 5s;
+}
+
+.aurora:nth-child(3) {
+    background: radial-gradient(circle, rgba(0,255,150,0.6) 0%, rgba(50,205,50,0) 70%);
+    animation-delay: 10s;
+}
+
+@keyframes aurora-animation {
+    0% { transform: translate(-50%, -50%) rotate(0deg); }
+    100% { transform: translate(-50%, -50%) rotate(360deg); }
+}
+
+.theme-toggle .theme-icon {
+    display: none;
+}
+
+[data-theme="light"] .theme-toggle .theme-icon[data-theme-icon="light"] {
+    display: inline-block;
+}
+
+[data-theme="dark"] .theme-toggle .theme-icon[data-theme-icon="dark"] {
+    display: inline-block;
+}
