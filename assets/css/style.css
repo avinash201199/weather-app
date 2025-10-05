@@ -118,14 +118,39 @@ body {
   /* width: 20rem; */
   max-width: 700px;
   height: 500px;
+  -webkit-backdrop-filter: blur(8px);
   backdrop-filter: blur(8px);
 
 }
 
+/* favorites star on card */
+.favorite-toggle {
+  position: absolute;
+  right: 20px;
+  top: 60px;
+}
+
+/* geolocation button spacing */
+.geo-button {
+  margin-top: 0.5rem;
+}
+
 .weather-component__search {
   display: flex;
+  align-items: center;
   justify-content: center;
+  gap: 8px;
+  max-width: 560px;
+  margin: 0 auto;
+  width: 100%;
 }
+
+/* utility spacing */
+.ml-1 { margin-left: 1rem; }
+.mt-05 { margin-top: 0.5rem; }
+.mr-n01 { margin-right: -0.1rem; }
+.pad-top-50 { padding-top: 50px; }
+.nav-actions { display: flex; }
 
 .weather-component__searchbar h1 {
   overflow: hidden;
@@ -137,17 +162,18 @@ body {
 }
 
 input.weather-component__search-bar {
-
   outline: none;
-  padding: 0.3em 1em;
+  padding: 0.6em 1em;
   background: #fff;
   font-family: inherit;
   font-size: 105%;
-  width: calc(100% - 50px);
+  width: 100%;
+  max-width: 460px;
   color: black;
   border: 1px solid white;
   border-radius: 30px;
   caret-color: black;
+  flex: 1 1 auto;
 }
 
 .weather-component__search {
@@ -156,9 +182,7 @@ input.weather-component__search-bar {
   /* border-radius: 30px; */
 }
 
-.weather-component__search-bar {
-  /* border-radius: 30px; */
-}
+/* .weather-component__search-bar had only commented rules, removed to satisfy linter */
 
 option:hover,
 .active {
@@ -173,12 +197,7 @@ input.weather-component__search-bar:focus {
 }
 
 .weather-component__button {
-  margin: 0.2rem 1rem;
-
-  margin-left: -7rem;
-
-  /* margin-left: 7.0rem; */
-
+  margin: 0.2rem 0.25rem;
   border-radius: 50%;
   border: none;
   height: 40px;
@@ -189,7 +208,7 @@ input.weather-component__search-bar:focus {
   transition: 0.2s ease-in-out;
 }
 .weather-component__button-microphone {
-  margin: 0.5rem;
+  margin: 0.2rem 0.25rem;
   border-radius: 50%;
   border: none;
   height: 40px;
@@ -200,9 +219,11 @@ input.weather-component__search-bar:focus {
   transition: 0.2s ease-in-out;
 }
 .button_container{
- background-color: white;
-  border-radius: 0 30px 30px 0;
+  background-color: transparent;
+  border-radius: 0;
   display: flex;
+  align-items: center;
+  gap: 8px;
 }
 
 button:hover {
@@ -240,6 +261,35 @@ button:focus {
 
 .weather-component__data {
   padding: 16px;
+}
+
+/* Favorites bar */
+#favorites.favorites-bar {
+  display: none;
+  gap: 8px;
+  flex-wrap: wrap;
+  margin: 12px 16px 0 16px;
+}
+
+.favorite-pill {
+  border: 1px solid rgba(255,255,255,0.4);
+  background: rgba(255,255,255,0.08);
+  color: #fff;
+  padding: 4px 10px;
+  border-radius: 999px;
+  cursor: pointer;
+  font-size: 0.85rem;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.favorite-pill__remove {
+  opacity: 0.8;
+}
+
+.favorite-pill__remove:hover {
+  opacity: 1;
 }
 
 .weather-component__desc-primary {
@@ -309,6 +359,8 @@ button:focus {
   top: 2.5rem;
 }
 
+.forecast-col { margin-top: 3.5rem; }
+
 .forecast-img {
   height: 50px;
   width: 50px;
@@ -340,6 +392,7 @@ button:focus {
   align-items: center;
   border-top: 1px solid rgba(255, 255, 255, 0.5);
   border-left: 1px solid rgba(255, 255, 255, 0.5);
+  -webkit-backdrop-filter: blur(5px);
   backdrop-filter: blur(5px);
   height: 210px;
   width: 100%;
@@ -358,8 +411,8 @@ button:focus {
 }
 
 .forecast-component__item:hover {
-  backdrop-filter: blur(16px) saturate(180%);
   -webkit-backdrop-filter: blur(16px) saturate(180%);
+  backdrop-filter: blur(16px) saturate(180%);
   background-color: rgb(9, 32, 63, 0.75);
 
   border-radius: 12px;
@@ -592,9 +645,7 @@ footer {
   .nav-component {
     height: fit-content;
   }
-  .whatsapp img {
-    /* margin-top: 20px; */
-  }
+  /* removed empty whatsapp img rule to satisfy linter */
   .weather-component__card {
     padding: 7px;
     height: 460px;
@@ -642,12 +693,12 @@ footer {
 }
 
 .celcius {
-  color: white;
+  color: rgb(235, 235, 80);
   font-size: 15px;
 }
 
 .farenheit {
-  color: white;
+  color: rgb(77, 158, 183);
   font-size: 15px;
 }
 
@@ -719,11 +770,20 @@ footer {
   width: 100%;
 }
 
+.footer-links {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  color: white;
+  display: inline-flex;
+  gap: 12px;
+}
+
 /* current day in future weather forecast*/
 .forecast-component__item-current-day {
   background-color: rgb(9, 32, 63, 0.75);
-  backdrop-filter: blur(16px) saturate(180%);
   -webkit-backdrop-filter: blur(16px) saturate(180%);
+  backdrop-filter: blur(16px) saturate(180%);
 }
 
 @media only screen and (max-width: 576px) {

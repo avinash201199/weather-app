@@ -21,3 +21,15 @@ You can contribute to this project by adding some new features or anything in yo
 
 <br> 
 For any query dm on  [Linkedin](https://www.linkedin.com/in/avinash-singh-071b79175)
+
+## Enhancements added
+
+- Geolocation: fetch weather for your current location via the crosshair button.
+- Favorites: star the current city to save it; click pills to switch quickly; stored in localStorage.
+- 7‑day forecast: visible under the main card with daily icons and temps.
+- Unit toggle persistence: °C/°F and wind (km/h ↔ mph) preference saved between visits.
+
+### New controls
+- Use my location: near the WhatsApp icon in the navbar.
+- Favorites: star icon on the weather card; favorites bar shows below the card.
+- Units: °F/°C toggle in the navbar.
