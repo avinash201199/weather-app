@@ -1,23 +1,59 @@
-# <h1 align="center">Weather App</h1>
+# 🌦️ Weather App
 
-<br>
+A lightweight Weather App built with **JavaScript**, **HTML**, and **CSS**, utilizing the **OpenWeather API** to fetch real-time weather data.
 
-Building a Weather app with JavaScript is an excellent project for beginners. It helps to understand the core basics of the DOM and teaches how to use fetch API, to call and get data from a third-party service.<br>
+Users can search for any city and view up-to-date weather information in a sleek, responsive design.
 
-This is a simple javascript project made with the help of HTML, CSS, and OpenWeather API. We used weather API to fetch data and display it according to the city entered in the search bar.
-
-
-
-# Demo of App
+## 🚀 Demo 
 
 ![Screenshot (20)](https://user-images.githubusercontent.com/90332218/194750372-b524eec3-5ef9-4f0c-b82b-770ec8850fc1.png)
 
 
-# check out live 
-Web Url: https://avinash201199.github.io/weather-app/
+## 🌐 Live Demo  
+Check out the live version of the app here → [**Weather App**](https://avinash201199.github.io/weather-app/)
 
-You can contribute to this project by adding some new features or anything in your mind to contribute <br>
-[Check for getting started](https://github.com/avinash201199/weather-app/blob/main/CONTRIBUTING.md)
 
-<br> 
-For any query dm on  [Linkedin](https://www.linkedin.com/in/avinash-singh-071b79175)
+
+## 🧠 Features
+
+✅ Fetches real-time weather data using the OpenWeather API
+
+✅ Displays temperature, humidity, and weather conditions dynamically
+
+✅ Responsive and user-friendly interface
+
+✅ Simple search functionality to find any city’s weather
+
+✅ Clean and beginner-friendly JavaScript code
+
+
+## 🧩 Tech Stack
+
+**HTML5** – Structure of the app
+
+**CSS3** – For styling and responsiveness
+
+**JavaScript (ES6)** – For logic and dynamic updates
+
+**OpenWeather API** – For real-time weather data
+
+## 🤝 Contributing
+
+Contributions are welcome! You can:
+
+ - Add new features
+
+ - Improve UI design
+
+ - Enhance API handling or code readability
+
+ - Or anything in your mind to contribute
+   
+
+
+## 📬 Contact  
+
+Interested in contributing? Check out the [Contribution Guide](https://github.com/avinash201199/weather-app/blob/main/CONTRIBUTING.md).  
+
+For any queries or collaborations, connect with me on [**LinkedIn**](https://www.linkedin.com/in/avinash-singh-071b79175) — always happy to chat! 🤝  
+
