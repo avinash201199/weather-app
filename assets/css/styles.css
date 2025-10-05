@@ -5,3 +5,292 @@
 .demo2 {
   color: aquamarine;
 }
+
+.header-component{
+  background-color: red;
+}
+
+.header-component {
+  width: 240px;
+  height: 100px;
+  background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(19px);
+    -webkit-backdrop-filter: blur(19px);
+    border-radius: 20px;
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    box-shadow:
+      0 8px 32px rgba(0, 0, 0, 0.1),
+      inset 0 1px 0 rgba(255, 255, 255, 0.5),
+      inset 0 -1px 0 rgba(255, 255, 255, 0.1),
+      inset 0 0 8px 4px rgba(255, 255, 255, 0.4);
+    position: relative;
+    overflow: hidden;
+  padding: 20px;
+}
+
+.header-component::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(255, 255, 255, 0.8),
+    transparent
+  );
+}
+
+.header-component::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 1px;
+  height: 100%;
+  background: linear-gradient(
+    180deg,
+    rgba(255, 255, 255, 0.8),
+    transparent,
+    rgba(255, 255, 255, 0.3)
+  );
+}
+
+#date-time-container{
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+#date-time{
+  font-family:Arial, Helvetica, sans-serif;
+}
+
+#date-time2{
+  font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+  font-size: x-large;
+  font-weight: 100;
+}
+
+.weather-component__card{
+  background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(19px);
+    -webkit-backdrop-filter: blur(19px);
+    border-radius: 20px;
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    box-shadow:
+      0 8px 32px rgba(0, 0, 0, 0.1),
+      inset 0 1px 0 rgba(255, 255, 255, 0.5),
+      inset 0 -1px 0 rgba(255, 255, 255, 0.1),
+      inset 0 0 8px 4px rgba(255, 255, 255, 0.4);
+    position: relative;
+    overflow: hidden;
+    width: 400px;
+    height: 70vh;
+}
+
+.weather-component__card::before{
+  content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 1px;
+    background: linear-gradient(90deg,
+        transparent,
+        rgba(255, 255, 255, 0.8),
+        transparent);
+}
+
+.weather-component__card::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 1px;
+  height: 100%;
+  background: linear-gradient(180deg,
+      rgba(255, 255, 255, 0.8),
+      transparent,
+      rgba(255, 255, 255, 0.3));
+}
+
+input.weather-component__search-bar{
+  color: white;
+  background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(19px);
+    -webkit-backdrop-filter: blur(19px);
+    border-radius: 17px;
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    box-shadow:
+      0 8px 32px rgba(0, 0, 0, 0.1),
+      inset 0 1px 0 rgba(255, 255, 255, 0.5),
+      inset 0 -1px 0 rgba(255, 255, 255, 0.1),
+      inset 0 0 8px 4px rgba(255, 255, 255, 0.4);
+    position: relative;
+    overflow: hidden;
+}
+
+.weather-component__button, .weather-component__button-microphone{
+  color: white;
+  background: rgba(255, 255, 255, 0);
+    backdrop-filter: blur(19px);
+    -webkit-backdrop-filter: blur(19px);
+    border-radius: 100%;
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    box-shadow:
+      0 8px 32px rgba(0, 0, 0, 0.1),
+      inset 0 1px 0 rgba(255, 255, 255, 0.5),
+      inset 0 -1px 0 rgba(255, 255, 255, 0.1),
+      inset 0 0 8px 4px rgba(255, 255, 255, 0.4);
+    position: relative;
+    overflow: hidden;
+}
+
+#city{
+  font-size: large;
+  font-weight: 100;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+#temp{
+  background: none;
+  font-weight: lighter;
+  font-size: 3.8rem;
+}
+
+.weather-component__data-wrapper{
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+
+
+figure.weather-component__icn {
+  font-size: x-small;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(255, 255, 255, 0.1);
+  border-radius:15px ;
+  width: 150px;
+  height: 40px;
+  margin: auto;
+}
+
+.weather-component__icn img {
+  width: 30px;
+  height: 30px;
+}
+
+/* 2x2 grid layout */
+.weather-component__grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1rem;
+  /* space between items */
+  margin-top: 1rem;
+}
+
+.grid-item {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  background: rgba(255, 255, 255, 0.1);
+  /* frosted-glass feel */
+  padding: 0.75rem;
+  border-radius: 12px;
+  font-size: 0.9rem;
+  height: 90px;
+}
+
+.grid-item img {
+  width: 15px;
+  height: 15px;
+  margin-right: 0.5rem;
+  margin-bottom: 0.25rem;
+}
+
+/* Optional: make sunrise/sunset stacked neatly */
+.grid-item:last-child span {
+  display: block;
+}
+
+.grid-item .heading{
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+}
+
+.grid-item .heading h6{
+  font-size: x-small;
+}
+
+.grid-item-air-quality{
+  display: flex;
+    flex-direction: column;
+    gap: 0px;
+    align-items: flex-start;
+    background: rgba(255, 255, 255, 0.1);
+    /* frosted-glass feel */
+    padding: 0.75rem;
+    border-radius: 12px;
+    font-size: 0.9rem;
+    height: 90px;
+}
+
+.grid-item-air-quality .heading{
+  width: 100%;
+    display: flex;
+    justify-content: space-between;
+}
+
+.grid-item-air-quality .heading h6{
+  font-size: x-small;
+  margin-bottom: 0px;
+}
+
+.grid-item-sun{
+  
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      background: rgba(255, 255, 255, 0.1);
+      /* frosted-glass feel */
+      padding: 0rem;
+      border-radius: 12px;
+      font-size: 0.9rem;
+      height: 90px;
+}
+
+.sunset, .sunrise{
+  width: 137px;
+  margin-bottom: 0px;
+}
+
+.grid-item-sun .sunrise .heading , .grid-item-sun .sunset .heading{
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+}
+
+.grid-item-sun .heading h6{
+  font-size: x-small;
+  padding-bottom: 0%;
+  margin-bottom: 0rem;
+}
+
+
+@media (max-width: 550px) {
+
+  /* tablets and up */
+  .card {
+    width: 50%;
+    /* half screen */
+  }
+}
