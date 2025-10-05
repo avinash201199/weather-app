@@ -18,6 +18,7 @@ body {
   font-family: 'Poppins', sans-serif;
 
 }
+
 /* .logo {
   position: fixed;
   top: 20px;
@@ -33,9 +34,12 @@ body {
 }
 
 .logo-img {
-  max-width: 50px; /* Adjust the maximum width */
-  max-height: 50px; /* Adjust the maximum height */
+  max-width: 50px;
+  /* Adjust the maximum width */
+  max-height: 50px;
+  /* Adjust the maximum height */
 }
+
 /* Hide scrollbar for IE, Edge and Firefox */
 body {
   -ms-overflow-style: none;
@@ -43,6 +47,7 @@ body {
   scrollbar-width: none;
   /* Firefox */
 }
+
 /* Inside your CSS file (style.css) */
 
 /* Header Text */
@@ -51,21 +56,19 @@ body {
   border-radius: 15px;
   text-align: center;
   color: #fff;
-  background: linear-gradient(
-    112.1deg,
-    rgb(32, 38, 57) 11.4%,
-    rgb(63, 76, 119) 70.2%
-  );
+  background: linear-gradient(112.1deg,
+      rgb(32, 38, 57) 11.4%,
+      rgb(63, 76, 119) 70.2%);
   font-size: 1em;
   font-weight: 700;
-  width: fit-content; 
+  width: fit-content;
   position: relative;
   margin: 6px auto;
   z-index: 9;
 }
 
-#date-time{
- font-family:monospace;
+#date-time {
+  font-family: monospace;
 }
 
 /* nav BEM Conevntion * -------/
@@ -168,7 +171,7 @@ option:hover,
 input.weather-component__search-bar:focus {
   transition: 700ms;
   box-shadow: 0px 0px 10px rgb(255 255 255 / 50%);
-  
+
   border-radius: 30px;
 }
 
@@ -188,6 +191,7 @@ input.weather-component__search-bar:focus {
   cursor: pointer;
   transition: 0.2s ease-in-out;
 }
+
 .weather-component__button-microphone {
   margin: 0.5rem;
   border-radius: 50%;
@@ -199,8 +203,9 @@ input.weather-component__search-bar:focus {
   cursor: pointer;
   transition: 0.2s ease-in-out;
 }
-.button_container{
- background-color: white;
+
+.button_container {
+  background-color: white;
   border-radius: 0 30px 30px 0;
   display: flex;
 }
@@ -348,8 +353,8 @@ button:focus {
 
 }
 
-.w-100{
-  width: 111%!important;
+.w-100 {
+  width: 111% !important;
 }
 
 .forecast-component__item img {
@@ -444,13 +449,16 @@ button:focus {
   z-index: 3000;
   right: 16px;
   font-size: 16px;
-  transform: translateY(-100%); /* Start off the screen */
-  transition: transform 0.25s ease-in-out; /* Transition for sliding */
+  transform: translateY(-100%);
+  /* Start off the screen */
+  transition: transform 0.25s ease-in-out;
+  /* Transition for sliding */
 }
 
 #toast.show {
   visibility: visible;
-  transform: translateY(0); /* Slide in from the top */
+  transform: translateY(0);
+  /* Slide in from the top */
 }
 
 footer {
@@ -555,6 +563,7 @@ footer {
   margin-top: 20px;
   margin-bottom: 0;
 }
+
 /* Responsive */
 
 @media only screen and (min-width: 1200px) {
@@ -589,16 +598,25 @@ footer {
     /* border: 2px solid red; */
     margin: 1rem 0.15rem 0rem 0.15rem;
   }
+
   .nav-component {
     height: fit-content;
   }
+
   .whatsapp img {
     /* margin-top: 20px; */
   }
+
+  #whatsapp-button:hover {
+    transform: scale(1.1);
+    transition: 0.3s ease;
+  }
+
   .weather-component__card {
     padding: 7px;
     height: 460px;
   }
+
   .weather-component__card {
     margin: 0;
   }
@@ -637,7 +655,7 @@ footer {
   transition: transform 0.2s linear;
 }
 
-.checkbox:checked + .label .ball {
+.checkbox:checked+.label .ball {
   transform: translateX(45px);
 }
 
@@ -659,11 +677,13 @@ footer {
   transition-property: scale();
   transition-duration: 0.5s;
 }
+
 .link1:hover {
   transform: scale(1.2, 1.2);
   transition-timing-function: linear;
   color: #ffffff;
 }
+
 .link2 {
   font-weight: 900;
   padding: 0.5rem 0.5rem;
@@ -671,10 +691,12 @@ footer {
   transition-property: scale();
   transition-duration: 0.5s;
 }
+
 .link2:hover {
   transform: scale(1.2, 1.2);
   transition-timing-function: linear;
 }
+
 .link3 {
   padding: 0.5rem 0.5rem;
   box-sizing: border-box;
@@ -683,11 +705,13 @@ footer {
   transition-property: scale();
   transition-duration: 0.5s;
 }
+
 .link3:hover {
   transform: scale(1.2, 1.2);
   transition-timing-function: linear;
   color: #d62976;
 }
+
 .link4 {
   padding: 0.5rem 0.5rem;
   box-sizing: border-box;
@@ -696,6 +720,7 @@ footer {
   transition-property: scale();
   transition-duration: 0.5s;
 }
+
 .link4:hover {
   transform: scale(1.2, 1.2);
   transition-timing-function: linear;
@@ -833,10 +858,12 @@ html body #scroll-btn {
   left: 0px;
   background-color: rgba(0, 0, 0, 0.25);
 }
+
 .air-quality-label {
   margin: auto 5px;
   padding: 1px 5px;
 }
+
 .good-quality {
   background-color: #009966;
   border-radius: 32px;
@@ -868,7 +895,7 @@ html body #scroll-btn {
   border-radius: 32px;
   text-align: center;
   color: white;
-  background-color:#550a55;
+  background-color: #550a55;
 }
 
 .hazardous-quality {
@@ -906,18 +933,16 @@ html body #scroll-btn {
   -ms-transform: translate(-50%, -50%);
   transform: translate(-50%, -50%);
   -webkit-box-shadow: 0 0px 10px 0px rgba(0, 0, 0, 0.1);
-  box-shadow: 0 0px 10px 0px rgba(0, 0, 0, 0.1); 
+  box-shadow: 0 0px 10px 0px rgba(0, 0, 0, 0.1);
 }
 
-.scroll-top > span {
-    position: absolute;
-    font-size: 2rem;
-    top: 50%;
-    left: 50%;
-    -webkit-transform: translate(-50%, -50%);
-    -ms-transform: translate(-50%, -50%);
-    transform: translate(-50%, -50%);
-    color: #000 !important; 
+.scroll-top>span {
+  position: absolute;
+  font-size: 2rem;
+  top: 50%;
+  left: 50%;
+  -webkit-transform: translate(-50%, -50%);
+  -ms-transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%);
+  color: #000 !important;
 }
-
-  
