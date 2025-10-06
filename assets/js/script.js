@@ -3,7 +3,67 @@ import CITY from "./City.js";
 import { translations, getUserLanguage } from "../../lang/translation.js";
 import config from "./../../config/config.js";
 
-// Weather Alerts System
+class ThemeManager {
+  constructor() {
+    this.themeToggle = document.getElementById('theme-toggle');
+    this.themeIcon = document.getElementById('theme-icon');
+    this.currentTheme = this.getStoredTheme();
+    
+    this.init();
+  }
+
+  init() {
+    this.applyTheme(this.currentTheme);
+    this.setupEventListeners();
+  }
+
+  getStoredTheme() {
+    const storedTheme = localStorage.getItem('theme');
+    if (storedTheme) {
+      return storedTheme;
+    }
+    
+    const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+    return prefersDark ? 'dark' : 'light';
+  }
+
+  applyTheme(theme) {
+    if (theme === 'light') {
+      document.documentElement.setAttribute('data-theme', 'light');
+      this.themeIcon.textContent = '☀️';
+    } else {
+      document.documentElement.removeAttribute('data-theme');
+      this.themeIcon.textContent = '🌙';
+    }
+    this.currentTheme = theme;
+    localStorage.setItem('theme', theme);
+  }
+
+  toggleTheme() {
+    const newTheme = this.currentTheme === 'dark' ? 'light' : 'dark';
+    this.applyTheme(newTheme);
+  }
+
+  setupEventListeners() {
+    this.themeToggle.addEventListener('click', () => this.toggleTheme());
+    
+    this.themeToggle.addEventListener('keydown', (e) => {
+      if (e.key === 'Enter' || e.key === ' ') {
+        e.preventDefault();
+        this.toggleTheme();
+      }
+    });
+
+    window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', (e) => {
+      if (!localStorage.getItem('theme')) {
+        this.applyTheme(e.matches ? 'dark' : 'light');
+      }
+    });
+  }
+}
+
+const themeManager = new ThemeManager();
+
 class WeatherAlerts {
   constructor() {
     this.alertsContainer = document.getElementById('weather-alerts');
