@@ -788,6 +788,7 @@ const scrollTop = function () {
       : scrollBtn.classList.remove("show");
   };
 
+} 
 function initLocationAndWeather() {
   if (navigator.geolocation) {
     navigator.geolocation.getCurrentPosition(
@@ -894,9 +895,3 @@ window.addEventListener("mousemove", function (details) {
     }, 50);
   }
 });
-
-
-
-
-
-
