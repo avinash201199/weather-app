@@ -36,6 +36,13 @@ body {
   max-width: 50px; /* Adjust the maximum width */
   max-height: 50px; /* Adjust the maximum height */
 }
+/* Title beside logo */
+.logo-title {
+  color: #fff;
+  font-weight: 700;
+  font-size: 1.1rem;
+  letter-spacing: 0.5px;
+}
 /* Weather Alerts Styles */
 .weather-alerts-container {
   position: fixed;

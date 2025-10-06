@@ -4,7 +4,12 @@
   "description": "<br>",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "css": "gulp css",
+    "watch": "gulp watch",
+    "dev": "gulp sync",
+    "start": "npm run dev",
+    "build": "gulp css"
   },
   "repository": {
     "type": "git",

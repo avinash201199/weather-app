@@ -729,6 +729,8 @@ const scrollTop = function () {
   };
 
 function initLocationAndWeather() {
+  // Always show something immediately
+  weather.fetchWeather("London");
   if (navigator.geolocation) {
     navigator.geolocation.getCurrentPosition(
       (position) => {
@@ -749,7 +751,7 @@ function initLocationAndWeather() {
         toastFunction(errorMessage);
         
         
-        weather.fetchWeather("London");
+        // We already loaded fallback above; keep UI responsive
       },
       {
         // Options to improve accuracy and performance
