@@ -1,23 +1,65 @@
-# <h1 align="center">Weather App</h1>
+# 🌦️ Weather App  
 
-<br>
+<p align="center">
+  <img src="./assets/Screenshot%202025-10-04%20083219.png" width="600">
+</p>
 
-Building a Weather app with JavaScript is an excellent project for beginners. It helps to understand the core basics of the DOM and teaches how to use fetch API, to call and get data from a third-party service.<br>
+---
 
-This is a simple javascript project made with the help of HTML, CSS, and OpenWeather API. We used weather API to fetch data and display it according to the city entered in the search bar.
+## 📌 Overview  
+Building a **Weather App with JavaScript** is an awesome beginner-friendly project 🎯.  
+It helps you understand:  
+- 🌐 **DOM Manipulation**  
+- 🔗 **Fetch API** to call third-party services  
+- ☁️ **Working with APIs** (OpenWeather API in this case)  
 
+This simple app is made using **HTML, CSS, and JavaScript**. The weather data is fetched from **OpenWeather API** and displayed according to the city entered in the search bar.  
 
+---
 
-# Demo of App
+## 🛠️ Tech Stack  
 
-![Screenshot (20)](https://user-images.githubusercontent.com/90332218/194750372-b524eec3-5ef9-4f0c-b82b-770ec8850fc1.png)
+<p align="center">
+  <img src="https://img.shields.io/badge/HTML5-E34F26?style=for-the-badge&logo=html5&logoColor=white" />
+  <img src="https://img.shields.io/badge/CSS3-1572B6?style=for-the-badge&logo=css3&logoColor=white" />
+  <img src="https://img.shields.io/badge/JavaScript-F7DF1E?style=for-the-badge&logo=javascript&logoColor=black" />
+  <img src="https://img.shields.io/badge/OpenWeather%20API-1E90FF?style=for-the-badge&logo=cloud&logoColor=white" />
+</p>  
 
+---
 
-# check out live 
-Web Url: https://avinash201199.github.io/weather-app/
+## 🎥 Demo of the App  
 
-You can contribute to this project by adding some new features or anything in your mind to contribute <br>
-[Check for getting started](https://github.com/avinash201199/weather-app/blob/main/CONTRIBUTING.md)
+### 🖼️ Screenshots  
+![Screenshot 1](./assets/Screenshot%202025-10-04%20083219.png)  
+![Screenshot 2](./assets/Screenshot%202025-10-04%20083053.png)  
 
-<br> 
-For any query dm on  [Linkedin](https://www.linkedin.com/in/avinash-singh-071b79175)
+### 📽️ Video Demo  
+[▶️ Watch the Demo](./assets/recording-2025-10-04-083200_mQAgUq3D.mp4)  
+
+---
+
+## 🌍 Live Demo  
+👉 Check it out here: [Weather App](https://avinash201199.github.io/weather-app/)  
+
+---
+
+## 🤝 Contribution  
+You are welcome to contribute ✨.  
+Some ideas:  
+- 📍 Add **geolocation support**  
+- 🎨 Enhance **UI/UX**  
+- 🌈 Add **themes** (light/dark mode)  
+- 📊 Show **hourly / weekly forecast**  
+
+For details, see the [Contributing Guide](https://github.com/avinash201199/weather-app/blob/main/CONTRIBUTING.md).  
+
+---
+
+## 📬 Contact  
+💬 For any queries, feel free to DM me on **[LinkedIn](https://www.linkedin.com/in/avinash-singh-071b79175)**.  
+
+---
+
+⭐ If you like this project, don’t forget to **star the repo**! ⭐
+

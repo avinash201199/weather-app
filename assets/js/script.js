@@ -3,6 +3,251 @@ import CITY from "./City.js";
 import { translations, getUserLanguage } from "../../lang/translation.js";
 import config from "./../../config/config.js";
 
+// Weather Alerts System
+class WeatherAlerts {
+  constructor() {
+    this.alertsContainer = document.getElementById('weather-alerts');
+    this.safetyModal = document.getElementById('safety-modal-overlay');
+    this.safetyModalContent = document.getElementById('safety-modal-content');
+    this.closeModalBtn = document.getElementById('close-safety-modal');
+    
+    this.setupEventListeners();
+  }
+
+  setupEventListeners() {
+    this.closeModalBtn.addEventListener('click', () => this.closeSafetyModal());
+    this.safetyModal.addEventListener('click', (e) => {
+      if (e.target === this.safetyModal) this.closeSafetyModal();
+    });
+  }
+
+  checkWeatherConditions(weatherData) {
+    const alerts = [];
+    const { main, wind } = weatherData;
+    const temp = isCelcius ? main.temp : (main.temp * 9/5) + 32;
+    const humidity = main.humidity;
+    const windSpeed = wind.speed;
+    
+    // Get current air quality from the existing system
+    const airQualityElement = document.querySelector("#AirQuality");
+    const aqi = airQualityElement ? parseInt(airQualityElement.innerText) : null;
+
+    // Temperature alerts
+    if (isCelcius) {
+      if (temp > 40) {
+        alerts.push({
+          type: 'critical',
+          icon: '🔥',
+          title: 'Extreme Heat Warning',
+          message: `Temperature: ${temp.toFixed(1)}°C - Stay indoors and hydrate frequently`,
+          value: temp.toFixed(1) + '°C'
+        });
+      } else if (temp > 35) {
+        alerts.push({
+          type: 'warning',
+          icon: '🌡️',
+          title: 'High Temperature Alert',
+          message: `Temperature: ${temp.toFixed(1)}°C - Limit outdoor activities`,
+          value: temp.toFixed(1) + '°C'
+        });
+      } else if (temp < -10) {
+        alerts.push({
+          type: 'critical',
+          icon: '🥶',
+          title: 'Extreme Cold Warning',
+          message: `Temperature: ${temp.toFixed(1)}°C - Risk of frostbite`,
+          value: temp.toFixed(1) + '°C'
+        });
+      }
+    } else {
+      if (temp > 104) {
+        alerts.push({
+          type: 'critical',
+          icon: '🔥',
+          title: 'Extreme Heat Warning',
+          message: `Temperature: ${temp.toFixed(1)}°F - Stay indoors and hydrate frequently`,
+          value: temp.toFixed(1) + '°F'
+        });
+      } else if (temp > 95) {
+        alerts.push({
+          type: 'warning',
+          icon: '🌡️',
+          title: 'High Temperature Alert',
+          message: `Temperature: ${temp.toFixed(1)}°F - Limit outdoor activities`,
+          value: temp.toFixed(1) + '°F'
+        });
+      } else if (temp < 14) {
+        alerts.push({
+          type: 'critical',
+          icon: '🥶',
+          title: 'Extreme Cold Warning',
+          message: `Temperature: ${temp.toFixed(1)}°F - Risk of frostbite`,
+          value: temp.toFixed(1) + '°F'
+        });
+      }
+    }
+
+    // Wind speed alerts
+    if (windSpeed > 20) {
+      alerts.push({
+        type: 'critical',
+        icon: '💨',
+        title: 'High Wind Warning',
+        message: `Wind Speed: ${windSpeed} km/h - Avoid outdoor activities`,
+        value: windSpeed + ' km/h'
+      });
+    } else if (windSpeed > 15) {
+      alerts.push({
+        type: 'warning',
+        icon: '🌬️',
+        title: 'Moderate Wind Alert',
+        message: `Wind Speed: ${windSpeed} km/h - Exercise caution outdoors`,
+        value: windSpeed + ' km/h'
+      });
+    }
+
+    // Air quality alerts
+    if (aqi) {
+      if (aqi > 200) {
+        alerts.push({
+          type: 'critical',
+          icon: '🏭',
+          title: 'Poor Air Quality',
+          message: `AQI: ${aqi} - Stay indoors, avoid outdoor exercise`,
+          value: aqi.toString()
+        });
+      } else if (aqi > 150) {
+        alerts.push({
+          type: 'warning',
+          icon: '😷',
+          title: 'Unhealthy Air Quality',
+          message: `AQI: ${aqi} - Consider wearing a mask outdoors`,
+          value: aqi.toString()
+        });
+      } else if (aqi > 100) {
+        alerts.push({
+          type: 'moderate',
+          icon: '⚠️',
+          title: 'Moderate Air Quality',
+          message: `AQI: ${aqi} - Sensitive individuals should limit outdoor activities`,
+          value: aqi.toString()
+        });
+      }
+    }
+
+    // Humidity alerts
+    if (humidity > 80) {
+      alerts.push({
+        type: 'moderate',
+        icon: '💧',
+        title: 'High Humidity',
+        message: `Humidity: ${humidity}% - May feel uncomfortable`,
+        value: humidity + '%'
+      });
+    }
+
+    this.displayAlerts(alerts);
+  }
+
+  displayAlerts(alerts) {
+    this.alertsContainer.innerHTML = '';
+    
+    alerts.forEach((alert, index) => {
+      const alertElement = document.createElement('div');
+      alertElement.className = `weather-alert ${alert.type}`;
+      alertElement.innerHTML = `
+        <div class="alert-header">
+          <span class="alert-icon">${alert.icon}</span>
+          <span>${alert.title}</span>
+        </div>
+        <div class="alert-message">
+          ${alert.message}
+        </div>
+      `;
+      
+      // Add click event to show safety tips
+      alertElement.addEventListener('click', () => this.showSafetyTips(alert.type));
+      
+      // Animate appearance
+      setTimeout(() => {
+        this.alertsContainer.appendChild(alertElement);
+      }, index * 200);
+    });
+  }
+
+  showSafetyTips(alertType) {
+    const tips = this.getSafetyTips(alertType);
+    this.safetyModalContent.innerHTML = tips.map(tip => `
+      <div class="safety-tip">
+        <div class="safety-tip-title">${tip.title}</div>
+        <div class="safety-tip-text">${tip.text}</div>
+      </div>
+    `).join('');
+    
+    this.safetyModal.style.display = 'flex';
+  }
+
+  getSafetyTips(alertType) {
+    const tipsByType = {
+      critical: [
+        {
+          title: "🏠 Stay Indoors",
+          text: "Avoid prolonged outdoor exposure during extreme weather conditions."
+        },
+        {
+          title: "💧 Stay Hydrated",
+          text: "Drink plenty of water even if you don't feel thirsty."
+        },
+        {
+          title: "👕 Appropriate Clothing",
+          text: "Wear light-colored, loose-fitting clothes in heat or layer up in cold."
+        },
+        {
+          title: "📱 Emergency Contacts",
+          text: "Keep emergency numbers handy and inform someone of your whereabouts."
+        }
+      ],
+      warning: [
+        {
+          title: "⏰ Limit Outdoor Time",
+          text: "Reduce time spent outdoors, especially during peak hours."
+        },
+        {
+          title: "🧴 Use Protection",
+          text: "Apply sunscreen, wear protective clothing, or use appropriate gear."
+        },
+        {
+          title: "🚗 Safe Travel",
+          text: "Exercise extra caution when driving or walking outdoors."
+        }
+      ],
+      moderate: [
+        {
+          title: "👂 Stay Informed",
+          text: "Monitor weather conditions and be prepared for changes."
+        },
+        {
+          title: "🩺 Health Awareness",
+          text: "Pay attention to how you feel and take breaks as needed."
+        },
+        {
+          title: "📋 Plan Ahead",
+          text: "Adjust outdoor plans based on current conditions."
+        }
+      ]
+    };
+
+    return tipsByType[alertType] || tipsByType.moderate;
+  }
+
+  closeSafetyModal() {
+    this.safetyModal.style.display = 'none';
+  }
+}
+
+// Initialize weather alerts system
+const weatherAlerts = new WeatherAlerts();
+
 // focus the search input as the DOM loads
 window.onload = function () {
   document.getElementsByName("search-bar")[0].focus();
@@ -114,46 +359,63 @@ const getAirQualityClass = (aqi) => {
 };
 
 let weather = {
-  fetchWeather: function (city) {
-    let isCountry = false;
-    let index;
-    for (let i = 0; i < Capitals.length; i++) {
-      if (Capitals[i].country.toUpperCase() === city.toUpperCase()) {
-        isCountry = true;
-        index = i;
-        break;
+  fetchWeather: function (city = null, lat = null, lon = null) {
+    let url;
+
+    // Case 1: If latitude & longitude are provided (auto-location)
+    if (lat && lon) {
+      url =
+        "https://api.openweathermap.org/data/2.5/weather?lat=" +
+        lat +
+        "&lon=" +
+        lon +
+        "&units=metric&appid=" +
+        config.API_KEY +
+        `&lang=${translations[userLang].apiLang}`;
+    } else {
+      // Case 2: If user typed a city or country
+      let isCountry = false;
+      let index;
+      for (let i = 0; i < Capitals.length; i++) {
+        if (Capitals[i].country.toUpperCase() === city.toUpperCase()) {
+          isCountry = true;
+          index = i;
+          break;
+        }
       }
-    }
-    if (isCountry) {
-      city = Capitals[index].city;
-    }
-    fetch(
-      "https://api.openweathermap.org/data/2.5/weather?q=" +
+      if (isCountry) {
+        city = Capitals[index].city;
+      }
+
+      url =
+        "https://api.openweathermap.org/data/2.5/weather?q=" +
         city +
         "&units=metric&appid=" +
         config.API_KEY +
-        `&lang=${translations[userLang].apiLang}`
-    )
+        `&lang=${translations[userLang].apiLang}`;
+    }
+
+    // Fetch weather
+    fetch(url)
       .then((response) => {
         if (!response.ok) {
           toastFunction(`${translations[userLang].noWeatherFound}`);
           document.getElementById("city").innerHTML = "City not Found";
           document.getElementById("temp").style.display = "none";
-          document.querySelector(
-            ".weather-component__data-wrapper"
-          ).style.display = "none";
+          document.querySelector(".weather-component__data-wrapper").style.display =
+            "none";
           throw new Error(`${translations[userLang].noWeatherFound}`);
         }
         return response.json();
       })
       .then((data) => {
         document.getElementById("temp").style.display = "block";
-        document.querySelector(
-          ".weather-component__data-wrapper"
-        ).style.display = "block";
+        document.querySelector(".weather-component__data-wrapper").style.display =
+          "block";
         this.displayWeather(data, city);
       });
   },
+
 
   displayWeather: function (data, city) {
     const { name } = data;
@@ -165,6 +427,11 @@ let weather = {
     let date2 = new Date(sunset * 1000);
     const { lat, lon } = data.coord;
     AirQuality(city);
+
+    // Check weather conditions for alerts
+    setTimeout(() => {
+      weatherAlerts.checkWeatherConditions(data);
+    }, 1000); // Delay to ensure air quality data is loaded
 
     document
       .getElementById("icon")
@@ -367,14 +634,6 @@ document
     }
   });
 
-// get user city name via ip api
-
-fetch("https://ipapi.co/json/")
-  .then((response) => response.json())
-  .then((data) => {
-    selectedCity = data.city;
-    weather.fetchWeather(data.city);
-  });
 
 document.getElementsByName("search-bar")[0].placeholder =
   translations[userLang].search;
@@ -468,18 +727,49 @@ const scrollTop = function () {
       ? scrollBtn.classList.add("show")
       : scrollBtn.classList.remove("show");
   };
-  window.addEventListener("scroll", scrollBtnDisplay);
-  // scroll to top when button clicked
-  const scrollWindow = function () {
-    if (window.scrollY != 0) {
-      setTimeout(function () {
-        window.scrollTo(0, window.scrollY - 50);
-        window.scroll({ top: 0, behavior: "smooth" });
-        scrollWindow();
-      }, 10);
-    }
-  };
-  scrollBtn.addEventListener("click", scrollWindow);
+
+function initLocationAndWeather() {
+  if (navigator.geolocation) {
+    navigator.geolocation.getCurrentPosition(
+      (position) => {
+        // On success, get the coordinates and fetch weather
+        const lat = position.coords.latitude;
+        const lon = position.coords.longitude;
+        weather.fetchWeather(null, lat, lon);
+      },
+      (error) => {
+        
+        console.error("Geolocation error:", error);
+        let errorMessage;
+        if (error.code === error.PERMISSION_DENIED) {
+          errorMessage = `${translations[userLang].permissionDenied}`;
+        } else {
+          errorMessage = `${translations[userLang].locationError}`;
+        }
+        toastFunction(errorMessage);
+        
+        
+        weather.fetchWeather("London");
+      },
+      {
+        // Options to improve accuracy and performance
+        enableHighAccuracy: true,
+        timeout: 5000,
+        maximumAge: 0,
+      }
+    );
+  } else {
+    // If browser doesn't support geolocation at all
+    toastFunction(`${translations[userLang].notSupported}`);
+    weather.fetchWeather("London");
+  }
+}
+
+
+window.onload = function () {
+  document.getElementsByName("search-bar")[0].focus();
+  fetchNewBackground();
+  initLocationAndWeather(); // This is the single, clean call for the location feature
 };
 scrollTop();
 
