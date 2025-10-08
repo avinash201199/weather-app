@@ -1,43 +1,22 @@
 body {
-  background-color: var(--primary-color);
-  color: var(--text-color);
-  transition: background-color 0.3s, color 0.3s;
   justify-content: center;
   align-items: center;
   height: 90vh;
   margin: 0;
+  /* font-family: "Roboto", sans-serif; */
+  background: #222;
+  /* background-image: url('https://source.unsplash.com/1600x900/?landscape'); */
+  /* background-repeat: no-repeat;
+  background-size: cover;
+  background-attachment: fixed;
+  background-position: 50% 50%; */
   overflow-y: scroll;
   overflow-x: hidden;
+  /* z-index:-1; */
+  /* Scroll is required to see full info */
   position: relative;
   font-family: 'Poppins', sans-serif;
-}
 
-.weather-component__card {
-  background: var(--secondary-color);
-  color: var(--text-color);
-  border: 1px solid var(--accent-color);
-}
-
-.forecast-component__item {
-  background: var(--secondary-color);
-  color: var(--text-color);
-  border-top: 1px solid var(--accent-color);
-  border-left: 1px solid var(--accent-color);
-}
-
-input.weather-component__search-bar {
-  background: var(--primary-color);
-  color: var(--text-color);
-  border: 1px solid var(--text-color);
-}
-
-.weather-component__button {
-  background: var(--accent-color);
-  color: var(--primary-color);
-}
-.weather-component__button-microphone {
-  background: var(--accent-color);
-  color: var(--primary-color);
 }
 /* .logo {
   position: fixed;
@@ -339,39 +318,14 @@ body {
   /* width: 20rem; */
   max-width: 700px;
   height: 500px;
-  -webkit-backdrop-filter: blur(8px);
   backdrop-filter: blur(8px);
 
 }
 
-/* favorites star on card */
-.favorite-toggle {
-  position: absolute;
-  right: 20px;
-  top: 60px;
-}
-
-/* geolocation button spacing */
-.geo-button {
-  margin-top: 0.5rem;
-}
-
 .weather-component__search {
   display: flex;
-  align-items: center;
   justify-content: center;
-  gap: 8px;
-  max-width: 560px;
-  margin: 0 auto;
-  width: 100%;
 }
-
-/* utility spacing */
-.ml-1 { margin-left: 1rem; }
-.mt-05 { margin-top: 0.5rem; }
-.mr-n01 { margin-right: -0.1rem; }
-.pad-top-50 { padding-top: 50px; }
-.nav-actions { display: flex; }
 
 .weather-component__searchbar h1 {
   overflow: hidden;
@@ -383,18 +337,17 @@ body {
 }
 
 input.weather-component__search-bar {
+
   outline: none;
-  padding: 0.6em 1em;
+  padding: 0.3em 1em;
   background: #fff;
   font-family: inherit;
   font-size: 105%;
-  width: 100%;
-  max-width: 460px;
+  width: calc(100% - 50px);
   color: black;
   border: 1px solid white;
   border-radius: 30px;
   caret-color: black;
-  flex: 1 1 auto;
 }
 
 .weather-component__search {
@@ -403,7 +356,9 @@ input.weather-component__search-bar {
   /* border-radius: 30px; */
 }
 
-/* .weather-component__search-bar had only commented rules, removed to satisfy linter */
+.weather-component__search-bar {
+  /* border-radius: 30px; */
+}
 
 option:hover,
 .active {
@@ -418,7 +373,12 @@ input.weather-component__search-bar:focus {
 }
 
 .weather-component__button {
-  margin: 0.2rem 0.25rem;
+  margin: 0.2rem 1rem;
+
+  margin-left: -7rem;
+
+  /* margin-left: 7.0rem; */
+
   border-radius: 50%;
   border: none;
   height: 40px;
@@ -429,7 +389,7 @@ input.weather-component__search-bar:focus {
   transition: 0.2s ease-in-out;
 }
 .weather-component__button-microphone {
-  margin: 0.2rem 0.25rem;
+  margin: 0.5rem;
   border-radius: 50%;
   border: none;
   height: 40px;
@@ -440,11 +400,9 @@ input.weather-component__search-bar:focus {
   transition: 0.2s ease-in-out;
 }
 .button_container{
-  background-color: transparent;
-  border-radius: 0;
+ background-color: white;
+  border-radius: 0 30px 30px 0;
   display: flex;
-  align-items: center;
-  gap: 8px;
 }
 
 button:hover {
@@ -482,35 +440,6 @@ button:focus {
 
 .weather-component__data {
   padding: 16px;
-}
-
-/* Favorites bar */
-#favorites.favorites-bar {
-  display: none;
-  gap: 8px;
-  flex-wrap: wrap;
-  margin: 12px 16px 0 16px;
-}
-
-.favorite-pill {
-  border: 1px solid rgba(255,255,255,0.4);
-  background: rgba(255,255,255,0.08);
-  color: #fff;
-  padding: 4px 10px;
-  border-radius: 999px;
-  cursor: pointer;
-  font-size: 0.85rem;
-  display: inline-flex;
-  align-items: center;
-  gap: 6px;
-}
-
-.favorite-pill__remove {
-  opacity: 0.8;
-}
-
-.favorite-pill__remove:hover {
-  opacity: 1;
 }
 
 .weather-component__desc-primary {
@@ -580,8 +509,6 @@ button:focus {
   top: 2.5rem;
 }
 
-.forecast-col { margin-top: 3.5rem; }
-
 .forecast-img {
   height: 50px;
   width: 50px;
@@ -613,7 +540,6 @@ button:focus {
   align-items: center;
   border-top: 1px solid rgba(255, 255, 255, 0.5);
   border-left: 1px solid rgba(255, 255, 255, 0.5);
-  -webkit-backdrop-filter: blur(5px);
   backdrop-filter: blur(5px);
   height: 210px;
   width: 100%;
@@ -632,8 +558,8 @@ button:focus {
 }
 
 .forecast-component__item:hover {
-  -webkit-backdrop-filter: blur(16px) saturate(180%);
   backdrop-filter: blur(16px) saturate(180%);
+  -webkit-backdrop-filter: blur(16px) saturate(180%);
   background-color: rgb(9, 32, 63, 0.75);
 
   border-radius: 12px;
@@ -866,7 +792,9 @@ footer {
   .nav-component {
     height: fit-content;
   }
-  /* removed empty whatsapp img rule to satisfy linter */
+  .whatsapp img {
+    /* margin-top: 20px; */
+  }
   .weather-component__card {
     padding: 7px;
     height: 460px;
@@ -914,12 +842,12 @@ footer {
 }
 
 .celcius {
-  color: rgb(235, 235, 80);
+  color: white;
   font-size: 15px;
 }
 
 .farenheit {
-  color: rgb(77, 158, 183);
+  color: white;
   font-size: 15px;
 }
 
@@ -991,20 +919,11 @@ footer {
   width: 100%;
 }
 
-.footer-links {
-  list-style: none;
-  margin: 0;
-  padding: 0;
-  color: white;
-  display: inline-flex;
-  gap: 12px;
-}
-
 /* current day in future weather forecast*/
 .forecast-component__item-current-day {
   background-color: rgb(9, 32, 63, 0.75);
-  -webkit-backdrop-filter: blur(16px) saturate(180%);
   backdrop-filter: blur(16px) saturate(180%);
+  -webkit-backdrop-filter: blur(16px) saturate(180%);
 }
 
 @media only screen and (max-width: 576px) {
@@ -1202,90 +1121,3 @@ html body #scroll-btn {
 }
 
   
-  /* ===================== */
-  /* Advanced UI Enhancers */
-  /* ===================== */
-
-  /* Theme variables */
-  :root {
-    --bg: #0f1115;
-    --card-bg: rgba(255, 255, 255, 0.08);
-    --text: #e7ecf3;
-    --muted: #a7b1c2;
-    --accent: #00dcff;
-    --accent-2: #7c5cff;
-    --ring: rgba(255, 255, 255, 0.35);
-  }
-
-  [data-theme="light"] {
-    --bg: #f6f7fb;
-    --card-bg: rgba(0, 0, 0, 0.06);
-    --text: #0b1220;
-    --muted: #334155;
-    --accent: #2563eb;
-    --accent-2: #14b8a6;
-    --ring: rgba(0, 0, 0, 0.2);
-  }
-
-  body {
-    background: var(--bg);
-    color: var(--text);
-  }
-
-  /* Glassmorphic card override */
-  .weather-component__card {
-    background: var(--card-bg) !important;
-    border: 1px solid var(--ring);
-  }
-
-  /* Search input polish */
-  input.weather-component__search-bar {
-    background: rgba(255, 255, 255, 0.9) !important;
-    border: 1px solid var(--ring) !important;
-    color: #0b1220 !important;
-  }
-  input.weather-component__search-bar:focus {
-    box-shadow: 0 0 0 3px var(--ring) !important;
-  }
-
-  /* Round icon buttons */
-  .weather-component__button,
-  .weather-component__button-microphone {
-    background: rgba(255, 255, 255, 0.1) !important;
-    color: var(--text) !important;
-    border: 1px solid var(--ring);
-  }
-  .weather-component__button:hover,
-  .weather-component__button-microphone:hover {
-    transform: translateY(-1px) scale(1.03);
-  }
-
-  /* Forecast items */
-  .forecast-component__item {
-    background: var(--card-bg) !important;
-  }
-
-  /* Nav actions alignment */
-  .nav-actions {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-  }
-
-  /* Aurora animated background layer */
-  .aurora {
-    pointer-events: none;
-    position: fixed;
-    inset: 0;
-    z-index: -1;
-    background:
-      radial-gradient(60% 40% at 10% 10%, rgba(124,92,255,0.28), transparent 60%),
-      radial-gradient(50% 35% at 85% 15%, rgba(0,220,255,0.22), transparent 60%),
-      radial-gradient(55% 40% at 30% 85%, rgba(20,184,166,0.18), transparent 60%);
-    filter: blur(50px) saturate(120%);
-    opacity: 0.7;
-  }
-
-  /* Theme toggle minor spacing */
-  .theme-toggle { margin-right: 6px; }
-
