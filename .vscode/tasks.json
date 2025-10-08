@@ -1,0 +1,19 @@
+{
+	"version": "2.0.0",
+	"tasks": [
+		{
+			"label": "Start local dev server (BrowserSync)",
+			"type": "shell",
+			"command": "npx gulp sync",
+			"isBackground": true,
+			"group": "build"
+		},
+		{
+			"label": "Start local dev server (BrowserSync)",
+			"type": "shell",
+			"command": "npx gulp sync",
+			"isBackground": true,
+			"group": "build"
+		}
+	]
+}
