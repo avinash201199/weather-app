@@ -2,370 +2,180 @@
 <html lang="en">
 
 <head>
+  <!-- Meta & SEO -->
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="description"
-    content="A Beautiful weather app displaying a weekly weather forecast for the selected location" />
-  <title id="dynamic">Weather-App</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Belanosima&family=Chivo+Mono:ital,wght@1,300;1,400&family=Josefin+Sans:ital@1&family=Poppins:ital,wght@1,200;1,300&family=Raleway:wght@300&display=swap" rel="stylesheet">
-  <link
-    href="https://fonts.googleapis.com/css2?family=Inter:wght@200;300;400&family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap"
-    rel="stylesheet">
-  <!-- favicon -->
-  <link rel="shortcut icon" type="image/jpg" href="./assets/weather-icon.png" />
-  <link rel="stylesheet" href="./assets/css/bootstrap.min.css">
-  <link rel="stylesheet" href="./assets/css/style.css">
-  
-  <link rel="icon" href="assets/favicon.ico">
-  <!-- <link rel="logo" href="assets/icons/logo.png"> -->
+  <meta name="description" content="A beautiful, fast, and accurate weather app with live forecasts, air quality index, and safety tips." />
+  <meta name="keywords" content="Weather, Forecast, Temperature, Air Quality, Weather App, Climate" />
+  <meta name="author" content="Avinash Singh" />
 
-  <link rel="stylesheet" href="fonts/icomoon/style.css">
+  <title>Weather App - Live Forecasts & Safety Alerts</title>
 
-  <!-- jquery CDN -->
-  <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script> -->
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-  <!-- fontawesome CDN -->
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="./assets/css/styles.css">
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Work+Sans:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css" integrity="sha512-2SwdPD6INVrV/lHTZbO2nodKhrnDdJK9/kg2XD1r9uGqPo1cUbujc+IYdlYdEErWNu69gVcYgdxlmVmzTWnetw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <!-- Favicon -->
+  <link rel="icon" href="./assets/weather-icon.png" type="image/png" />
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700&family=Work+Sans:wght@400;600&display=swap" rel="stylesheet" />
+
+  <!-- CSS Libraries -->
+  <link rel="stylesheet" href="./assets/css/bootstrap.min.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css" integrity="sha512-2SwdPD6INVrV/lHTZbO2nodKhrnDdJK9/kg2XD1r9uGqPo1cUbujc+IYdlYdEErWNu69gVcYgdxlmVmzTWnetw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+  <!-- Custom CSS -->
+  <link rel="stylesheet" href="./assets/css/style.css" />
+
+  <style>
+    html {
+      scroll-behavior: smooth;
+    }
+  </style>
 </head>
 
 <body id="body">
-  <nav class="navbar top-nav">
-    <div class="logo">
-      <img src="./assets/icons/logo.png" alt="Logo" class="img-fluid logo-img">
-    </div>
-    <div style="display: flex;">
-      <i class="whatsapp" id="whatsapp-button">
-        <img src="assets/Whatsapp-logo.svg" alt="whatsapp">
-      </i>
-      <div class="nav-component__celcius-block col-auto">
-        <input type="checkbox" id="unit" class="checkbox">
-        <label for="unit" class="label">
-          <span class="farenheit" style="color:rgb(77, 158, 183);">°F</span>
-          <span class="celcius" style="color: rgb(235, 235, 80);">°C</span>
-          <div class='ball'>
-        </label>
+  <!-- Header / Navbar -->
+  <header>
+    <nav class="navbar top-nav d-flex justify-content-between align-items-center px-3">
+      <div class="logo">
+        <img src="./assets/icons/logo.png" alt="Weather App Logo" class="img-fluid logo-img" />
       </div>
-    </div>
-  </nav>
 
+      <div class="d-flex align-items-center gap-3">
+        <!-- WhatsApp Icon -->
+        <button id="whatsapp-button" class="btn p-0 border-0 bg-transparent" aria-label="Open WhatsApp Chat">
+          <img src="assets/Whatsapp-logo.svg" alt="WhatsApp" width="32" height="32" />
+        </button>
+
+        <!-- Unit Toggle -->
+        <div class="nav-component__celcius-block">
+          <input type="checkbox" id="unit" class="checkbox" />
+          <label for="unit" class="label d-flex align-items-center">
+            <span class="farenheit text-primary">°F</span>
+            <span class="celcius text-warning">°C</span>
+            <div class="ball"></div>
+          </label>
+        </div>
+      </div>
+    </nav>
+  </header>
+
+  <!-- Background -->
   <div id="background"></div>
 
-
-  <h2 class="header-component"> 
-    <div id="date-time-container">
-    <span id='date-time'></span>
-    <span id='date-time2'></span>
-  </div>
-  </h2>
-  <section>
-    <div class="container">
-      <div class="row g-4">
-        <div class="col">
-
-        </div>
-        <div class="col">
-
-    </div>
-
-
+  <!-- Date and Time -->
+  <section class="text-center py-3">
+    <h2 class="header-component">
+      <div id="date-time-container">
+        <span id="date-time"></span>
+        <span id="date-time2"></span>
+      </div>
+    </h2>
   </section>
 
-  <section class="pt-4 card-grid">
+  <!-- Main Weather Section -->
+  <main class="pt-4 card-grid">
     <div class="container">
       <div class="row justify-content-center">
         <div class="col-12 col-md-10 col-lg-8">
-          <div class="weather-component container d-flex justify-content-center align-items-center flex-column">
-            <div class="weather-component__card text-white rounded-5" style="padding-top: 50px;">
-              <div class="weather-component__search" style="margin-left: 1rem;">
-                <input type="text" class="weather-component__search-bar" name="search-bar" list="place"
-                  placeholder="Search" autocomplete="address-level2" />
-                <datalist id="place" class="weather-component__datalist">
-                  <!-- Content will be generated By Javascript  -->
-                </datalist>
-            <div class="button_container" style="margin-left: 1rem;">
-                <button class="weather-component__button text-white rounded-circl"
-                  aria-label="click here to search class" style="margin-top: 0.5rem; margin-right: -0.1rem;">
-                  <svg stroke="currentColor" fill="#ffffff" stroke-width="0" viewBox="0 0 1024 1024" height="1.5em"
-                    width="1.5em" xmlns="http://www.w3.org/2000/svg">
-                    <path
-                      d="M909.6 854.5L649.9 594.8C690.2 542.7 712 479 712 412c0-80.2-31.3-155.4-87.9-212.1-56.6-56.7-132-87.9-212.1-87.9s-155.5 31.3-212.1 87.9C143.2 256.5 112 331.8 112 412c0 80.1 31.3 155.5 87.9 212.1C256.5 680.8 331.8 712 412 712c67 0 130.6-21.8 182.7-62l259.7 259.6a8.2 8.2 0 0 0 11.6 0l43.6-43.5a8.2 8.2 0 0 0 0-11.6zM570.4 570.4C528 612.7 471.8 636 412 636s-116-23.3-158.4-65.6C211.3 528 188 471.8 188 412s23.3-116.1 65.6-158.4C296 211.3 352.2 188 412 188s116.1 23.2 158.4 65.6S636 352.2 636 412s-23.3 116.1-65.6 158.4z">
-                    </path>
-                  </svg>
-                </button>
-                <button class="weather-component__button-microphone" aria-label="speak" id="microphone-button">
-                  <svg style="color: white" xmlns="http://www.w3.org/2000/svg" width="20" height="20"
-                    fill="#ffffff" class="bi bi-mic" viewBox="0 0 16 16">
-                    <path
-                      d="M3.5 6.5A.5.5 0 0 1 4 7v1a4 4 0 0 0 8 0V7a.5.5 0 0 1 1 0v1a5 5 0 0 1-4.5 4.975V15h3a.5.5 0 0 1 0 1h-7a.5.5 0 0 1 0-1h3v-2.025A5 5 0 0 1 3 8V7a.5.5 0 0 1 .5-.5z"
-                      fill="#ffffff"></path>
-                    <path d="M10 8a2 2 0 1 1-4 0V3a2 2 0 1 1 4 0v5zM8 0a3 3 0 0 0-3 3v5a3 3 0 0 0 6 0V3a3 3 0 0 0-3-3z"
-                      fill="#ffffff"></path>
-                  </svg>
-                </button>
-</div>
-              </div>
-              <div id="weather" class="weather-component__data loading">
-                <h1 id="city" class="weather-component__city-name fw-bold">___</h1>
+          <div class="weather-component container text-center text-white rounded-5 py-5 px-3 shadow-lg">
+            <!-- Search Bar -->
+            <div class="weather-component__search d-flex justify-content-center align-items-center gap-2 mb-4">
+              <input type="text" class="weather-component__search-bar form-control w-50" name="search-bar" list="place" placeholder="Search location..." autocomplete="address-level2" />
+              <datalist id="place"></datalist>
 
-                <h2 id="temp" class="weather-component__city-temperature fw-bold display-1">32°C</h2>
+              <!-- Buttons -->
+              <button class="btn btn-primary rounded-circle weather-component__button" aria-label="Search Weather">
+                <i class="fas fa-search"></i>
+              </button>
+              <button class="btn btn-outline-light rounded-circle weather-component__button-microphone" id="microphone-button" aria-label="Voice Search">
+                <i class="fas fa-microphone"></i>
+              </button>
+            </div>
 
-                <div class="weather-component__data-wrapper">
+            <!-- Weather Data -->
+            <div id="weather" class="weather-component__data">
+              <h1 id="city" class="fw-bold mb-2">---</h1>
+              <h2 id="temp" class="fw-bold display-4 mb-3">32°C</h2>
 
-                
-                <!-- weather icon + description -->
+              <figure class="weather-component__icn mx-auto">
+                <img id="icon" src="https://openweathermap.org/img/wn/04n.png" alt="Weather Icon" class="img-fluid" />
+                <figcaption id="description" class="text-uppercase mt-2">---</figcaption>
+              </figure>
 
-
-                <figure class="weather-component__icn">
-                  <img class="icon" src="https://openweathermap.org/img/wn/04n.png" alt="Partly Cloudy" id="icon" />
-                  <figcaption class="text-uppercase text-wrap" id="description">___</figcaption>
-                </figure>
-
-                <!-- 2x2 grid  -->
-
-                <div class="weather-component__grid">
-                  <!-- Humidity -->
-                  <div class="grid-item">
-                    <div class="heading">
-                      <h6>Humidity</h6>
-                      <i class="fa-solid fa-droplet"></i>
-            
-                    </div>
-                    <div class="data">
-                      <span id="humidity">
-                        <a href="https://en.wikipedia.org/wiki/Humidity"></a>: 60%
-                      </span>
-                    </div>
-                    
-                    
-                  </div>
-              
-                  <!-- Wind -->
-                  <div class="grid-item">
-                    <div class="heading">
-                      <h6>Wind Speed</h6>
-                      <i class="fa-solid fa-flag"></i>
-                      
-                    </div>
-                    <div class="data">
-                      <span id="wind">
-                        <a href="https://en.wikipedia.org/wiki/Wind_speed">Wind speed</a>: 6.2 km/h
-                      </span>
-                    </div>
-                    
-                    
-                  </div>
-              
-                  <!-- Air Quality -->
-                  <div class="grid-item-air-quality">
-                    <div class="heading">
-                      <h6>Air Quality</h6>
-                      <i class="fa-solid fa-wind"></i>
-                    </div>
-                                   
-                    <span id="AirQuality">Air Quality: 75</span>
-                    <span class="air-quality-label">Satisfactory</span>
-                  </div>
-              
-                  <!-- Sunrise & Sunset -->
-                  <div class="grid-item-sun">
-                    <div class="sunrise">
-                      <div class="heading">
-                        <h6>Sunrise</h6>
-                        <i class="fa-solid fa-sun"></i>
-                      </div>
-                      <span id="sunrise">
-                        <a href="https://en.wikipedia.org/wiki/Sunrise">Sunrise</a>: 5:00 AM
-                      </span>
-                    </div>
-                    <div class="sunset">
-                      <div class="heading">
-                        <h6>Sunset</h6>
-                      </div>
-                      
-                      <span id="sunset">
-                        <a href="https://en.wikipedia.org/wiki/Sunset">Sunset</a>: 6:00 PM
-                      </span>
-                    </div>
-                    
-                  </div>
+              <!-- Weather Stats Grid -->
+              <div class="weather-component__grid mt-4">
+                <div class="grid-item">
+                  <h6><i class="fa-solid fa-droplet me-2"></i>Humidity</h6>
+                  <span id="humidity">60%</span>
                 </div>
 
+                <div class="grid-item">
+                  <h6><i class="fa-solid fa-flag me-2"></i>Wind Speed</h6>
+                  <span id="wind">6.2 km/h</span>
+                </div>
+
+                <div class="grid-item-air-quality">
+                  <h6><i class="fa-solid fa-wind me-2"></i>Air Quality</h6>
+                  <span id="AirQuality">75</span>
+                  <span class="air-quality-label">Satisfactory</span>
+                </div>
+
+                <div class="grid-item-sun">
+                  <h6><i class="fa-solid fa-sun me-2"></i>Sunrise</h6>
+                  <span id="sunrise">5:00 AM</span>
+                  <h6 class="mt-3"><i class="fa-solid fa-moon me-2"></i>Sunset</h6>
+                  <span id="sunset">6:00 PM</span>
+                </div>
               </div>
-
-
-
-
-
-
-                <!-- <div class="weather-component__data-wrapper">
-                  <div class="weather-component__desc-primary">
-                    
-
-                  <div class="weather-component__desc-secondary d-flex ">
-                    <div class="d-flex flex-1 flex-column" style="margin-top: 10px;">
-                      <figure class="d-flex flex-1 flex-row humidity ms-0">
-                        <img src="./assets/icons/humidity.png" alt="Humidity" class="humidity-img">
-                        <figcaption id="humidity"><a href="https://en.wikipedia.org/wiki/Humidity">Humidity</a>: 60%
-                        </figcaption>
-                      </figure>
-
-
-
-                      <div class="d-flex flex-1 flex-row wind ms-0"><img src="./assets/icons/wind.png" alt="Wind Speed"
-                          class="wind-img">
-                        <div id="wind"><a href="https://en.wikipedia.org/wiki/Wind_speed">Wind speed</a>: 6.2 km/h
-                        </div>
-                      </div>
-
-
-                      
-                    </div>
-
-
-
-                     <div class="d-flex flex-1 flex-column">
-                      <div class="class 1">
-                        <div class="weather-component__AQI" style="display: flex; flex-direction: column;">
-                          <div id="AirQuality">Air Quality: 75
-                          </div>
-                          <div class="air-quality-label ml-0">Satisfactory</div>
-                        </div>
-                      </div>
-                      </div>
-                      <div class="class2"> 
-
-                        <figure class="d-flex flex-1 flex-row sunrise me-0 justify-content-end">
-                          <img src="./assets/icons/sunrise (2).png" alt="Sunrise" class="sunrise-img">
-                          <figcaption id="sunrise"><a href="https://en.wikipedia.org/wiki/Sunrise">Sunrise</a>:5:00AM
-                          </figcaption>
-                        </figure> 
-
-
-                        <figure class="d-flex flex-1 flex-row sunset me-0 justify-content-end"><img
-                            src="./assets/icons/sunset (1).png" alt="Sunset" class="sunset-img">
-                          <figcaption id="sunset" style="margin-right: 0.65rem;"><a href="https://en.wikipedia.org/wiki/Sunset">Sunset</a>:6:00AM
-                          </figcaption>
-                        </figure> 
-                      </div>
-                      
-                    </div>
-                  </div>
-
-                </div> -->
-
-              </div>
-
             </div>
           </div>
         </div>
-        <!-- Commenting out the Forecast cards since they were not visible in the final site as well. will incorporate them seperately in future builds -->
-        <!-- <div class="col" style="margin-top: 3.5rem;">
-          <div class="forecast-component p-2 overflow-hidden text-white w-100">
-            <div class="forecast-component__items-wrapper transition overflow-hidden " id="weather-forecast">
-              <div class="forecast-component__item rounded text-center" id="weather-forecast-item">
-                <div>Mon</div>
-                <figure class="forecast-img">
-                  <img src="http://openweathermap.org/img/wn/10d@2x.png" alt="weather icon">
-                </figure>
-                <div>Day - 35.6&#176; C</div>
-                <div>Night - 25.6&#176; C</div>
-                <div>view more</div>
-              </div>
-            </div>
-          </div>
-        </div> -->
-  </section>
+      </div>
+    </div>
+  </main>
 
+  <!-- Weather Alerts -->
+  <section class="weather-alerts-container mt-4" id="weather-alerts"></section>
 
-
-
-
-  <!-- Weather Alerts Section -->
-  <div class="weather-alerts-container" id="weather-alerts">
-    <!-- Dynamic weather alerts will be inserted here -->
-  </div>
-
-  <!-- Weather Safety Tips Modal -->
+  <!-- Modal for Safety Tips -->
   <div class="modal-overlay" id="safety-modal-overlay" style="display: none;">
     <div class="safety-modal">
       <div class="modal-header">
         <h3>⚠️ Weather Safety Tips</h3>
         <button class="close-modal" id="close-safety-modal">&times;</button>
       </div>
-      <div class="modal-content" id="safety-modal-content">
-        <!-- Dynamic safety tips will be inserted here -->
-      </div>
+      <div class="modal-content" id="safety-modal-content"></div>
     </div>
   </div>
 
-  <!-- toast -->
+  <!-- Toast -->
   <div class="toast-component" id="toast">
     <div class="toast-component__checkicon"><i class="fas fa-check-square"></i></div>
   </div>
 
-  <footer>
-
-    <a href="#top" class="smoothscroll scroll-top">
-      <span class="icon-keyboard_arrow_up"></span>
+  <!-- Footer -->
+  <footer class="text-center mt-5 py-4 text-white">
+    <a href="#top" class="scroll-top d-inline-block mb-3">
+      <i class="fas fa-arrow-up fa-2x"></i>
     </a>
 
-    <div>
-      <h2 class="textfooter">
-        Made with 💝 Avinash Singh
-      </h2>
-
-      <div class="footerSection">
-        <ul style="list-style: none;margin:0;padding:0;color: white; display: inline-flex;">
-          <li>
-            <a href="https://github.com/avinash201199" target="_blank">
-              <i class="socialIcons fab fa-github fa-3x link1"></i>
-          </li>
-          <li>
-            <a href="https://www.linkedin.com/in/avinash-singh-bb0b8a371/" target="_blank">
-              <i class="fab fa-linkedin-in fa-3x link2"></i>
-          </li>
-          <li>
-            <a href="https://www.instagram.com/lets__code/" target="_blank">
-              <i class="fab fa-instagram fa-3x link3"></i>
-          </li>
-          <li>
-            <a href="https://twitter.com/Lets__Code/" target="_blank">
-              <i class="fa-brands fa-x-twitter fa-3x link4"></i>          
-            </li>
-        </ul>
-      </div>
+    <h2 class="mb-3">Made with 💝 by Avinash Singh</h2>
+    <div class="footerSection">
+      <ul class="list-inline mb-0">
+        <li class="list-inline-item"><a href="https://github.com/avinash201199" target="_blank"><i class="fab fa-github fa-2x"></i></a></li>
+        <li class="list-inline-item"><a href="https://linkedin.com/in/avinash-singh-bb0b8a371" target="_blank"><i class="fab fa-linkedin fa-2x"></i></a></li>
+        <li class="list-inline-item"><a href="https://instagram.com/lets__code" target="_blank"><i class="fab fa-instagram fa-2x"></i></a></li>
+        <li class="list-inline-item"><a href="https://twitter.com/Lets__Code" target="_blank"><i class="fab fa-x-twitter fa-2x"></i></a></li>
+      </ul>
     </div>
   </footer>
 
-  <!-- jquery CDN -->
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.1/jquery.slim.min.js"
-    integrity="sha512-yBpuflZmP5lwMzZ03hiCLzA94N0K2vgBtJgqQ2E1meJzmIBfjbb7k4Y23k2i2c/rIeSUGc7jojyIY5waK3ZxCQ=="
-    crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-  <!-- popper CDN -->
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
-    integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
-    crossorigin="anonymous"></script>
-
-  <!-- moment CDN -->
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js"
-    integrity="sha512-qTXRIMyZIFb8iQcfjXWCO8+M5Tbc38Qi5WzdPOYZHIlZpzBHG3L3by84BBBOiRGiEb7KKtAOAs5qYdUiZiQNNQ=="
-    crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-
-  <script type="module" src="./assets/js/script.js"></script>
-
+  <!-- Scripts -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.1/jquery.slim.min.js" defer></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" defer></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js" defer></script>
+  <script type="module" src="./assets/js/script.js" defer></script>
 </body>
-
 </html>
+
