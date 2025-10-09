@@ -727,6 +727,12 @@ const scrollTop = function () {
       ? scrollBtn.classList.add("show")
       : scrollBtn.classList.remove("show");
   };
+  // attach listeners
+  window.addEventListener("scroll", scrollBtnDisplay);
+  scrollBtn.addEventListener("click", function () {
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  });
+};
 
 function initLocationAndWeather() {
   // Always show something immediately
