@@ -502,13 +502,12 @@ let weather = {
         ".weather-component__search-bar"
       ).value;
       this.fetchWeather(selectedCity);
-      const apiKey = "OOjKyciq4Sk0Kla7riLuR2j8C9FwThFzKIKIHrpq7c27KvrCul5rVxJj";
       const apiUrl = `https://api.pexels.com/v1/search?query=${selectedCity}&orientation=landscape`;
 
       fetch(apiUrl, {
         method: "GET",
         headers: {
-          Authorization: apiKey,
+          Authorization: config.PEXELS_API_KEY,
         },
       })
         .then((response) => response.json())
@@ -728,115 +727,109 @@ const scrollTop = function () {
       : scrollBtn.classList.remove("show");
   };
 
-function initLocationAndWeather() {
-  if (navigator.geolocation) {
-    navigator.geolocation.getCurrentPosition(
-      (position) => {
-        // On success, get the coordinates and fetch weather
-        const lat = position.coords.latitude;
-        const lon = position.coords.longitude;
-        weather.fetchWeather(null, lat, lon);
-      },
-      (error) => {
+  function initLocationAndWeather() {
+    if (navigator.geolocation) {
+      navigator.geolocation.getCurrentPosition(
+        (position) => {
+          // On success, get the coordinates and fetch weather
+          const lat = position.coords.latitude;
+          const lon = position.coords.longitude;
+          weather.fetchWeather(null, lat, lon);
+        },
+        (error) => {
         
-        console.error("Geolocation error:", error);
-        let errorMessage;
-        if (error.code === error.PERMISSION_DENIED) {
-          errorMessage = `${translations[userLang].permissionDenied}`;
-        } else {
-          errorMessage = `${translations[userLang].locationError}`;
+          console.error("Geolocation error:", error);
+          let errorMessage;
+          if (error.code === error.PERMISSION_DENIED) {
+            errorMessage = `${translations[userLang].permissionDenied}`;
+          } else {
+            errorMessage = `${translations[userLang].locationError}`;
+          }
+          toastFunction(errorMessage);
+        
+        
+          weather.fetchWeather("London");
+        },
+        {
+          // Options to improve accuracy and performance
+          enableHighAccuracy: true,
+          timeout: 5000,
+          maximumAge: 0,
         }
-        toastFunction(errorMessage);
-        
-        
-        weather.fetchWeather("London");
-      },
-      {
-        // Options to improve accuracy and performance
-        enableHighAccuracy: true,
-        timeout: 5000,
-        maximumAge: 0,
-      }
+      );
+    } else {
+      // If browser doesn't support geolocation at all
+      toastFunction(`${translations[userLang].notSupported}`);
+      weather.fetchWeather("London");
+    }
+  }
+
+
+  window.onload = function () {
+    document.getElementsByName("search-bar")[0].focus();
+    fetchNewBackground();
+    initLocationAndWeather(); // This is the single, clean call for the location feature
+  };
+  scrollTop();
+
+  //Fetching Random Landscape Background Image From Unsplash
+  const fetchNewBackground = () => {
+    let url = `https://source.unsplash.com/${window.innerWidth < 768 ? "720x1280" : "1600x900"
+      }/?landscape`;
+    const bgElement = document.getElementById("background");
+    bgElement.style.backgroundImage = `url(${url})`;
+  };
+
+  // Check if the browser supports the SpeechRecognition API
+  if ("SpeechRecognition" in window || "webkitSpeechRecognition" in window) {
+    const SpeechRecognition =
+      window.SpeechRecognition || window.webkitSpeechRecognition;
+    const recognition = new SpeechRecognition();
+
+    const microphoneButton = document.querySelector(
+      ".weather-component__button-microphone"
     );
+    const searchBar = document.querySelector(".weather-component__search-bar");
+
+    // Add an event listener to the microphone button to start speech recognition
+    microphoneButton.addEventListener("click", () => {
+      recognition.start();
+    });
+
+    // Add an event listener for when speech recognition results are available
+    recognition.onresult = (event) => {
+      const transcript = event.results[0][0].transcript;
+
+      // Set the value of the search bar to the recognized speech
+      searchBar.value = transcript;
+
+      // Optionally, you can submit the form to perform the search
+      // searchBar.form.submit();
+    };
+
+    // Handle speech recognition errors
+    recognition.onerror = (event) => {
+      console.error("Speech recognition error:", event.error);
+    };
   } else {
-    // If browser doesn't support geolocation at all
-    toastFunction(`${translations[userLang].notSupported}`);
-    weather.fetchWeather("London");
+    // Handle the case where the browser does not support speech recognition
+    console.error("Speech recognition is not supported in this browser.");
   }
-}
 
+  let follower = document.getElementById("circle");
+  let timer = null;
 
-window.onload = function () {
-  document.getElementsByName("search-bar")[0].focus();
-  fetchNewBackground();
-  initLocationAndWeather(); // This is the single, clean call for the location feature
-};
-scrollTop();
-
-//Fetching Random Landscape Background Image From Unsplash
-const fetchNewBackground = () => {
-  let url = `https://source.unsplash.com/${
-    window.innerWidth < 768 ? "720x1280" : "1600x900"
-  }/?landscape`;
-  const bgElement = document.getElementById("background");
-  bgElement.style.backgroundImage = `url(${url})`;
-};
-
-// Check if the browser supports the SpeechRecognition API
-if ("SpeechRecognition" in window || "webkitSpeechRecognition" in window) {
-  const SpeechRecognition =
-    window.SpeechRecognition || window.webkitSpeechRecognition;
-  const recognition = new SpeechRecognition();
-
-  const microphoneButton = document.querySelector(
-    ".weather-component__button-microphone"
-  );
-  const searchBar = document.querySelector(".weather-component__search-bar");
-
-  // Add an event listener to the microphone button to start speech recognition
-  microphoneButton.addEventListener("click", () => {
-    recognition.start();
+  window.addEventListener("mousemove", function (details) {
+    let y = details.clientY;
+    let x = details.clientX;
+    if (timer) {
+      clearTimeout(timer);
+    }
+    if (follower) {
+      timer = setTimeout(function () {
+        follower.style.top = `${y}px`;
+        follower.style.left = `${x}px`;
+      }, 50);
+    }
   });
-
-  // Add an event listener for when speech recognition results are available
-  recognition.onresult = (event) => {
-    const transcript = event.results[0][0].transcript;
-
-    // Set the value of the search bar to the recognized speech
-    searchBar.value = transcript;
-
-    // Optionally, you can submit the form to perform the search
-    // searchBar.form.submit();
-  };
-
-  // Handle speech recognition errors
-  recognition.onerror = (event) => {
-    console.error("Speech recognition error:", event.error);
-  };
-} else {
-  // Handle the case where the browser does not support speech recognition
-  console.error("Speech recognition is not supported in this browser.");
 }
-
-let follower = document.getElementById("circle");
-let timer = null;
-
-window.addEventListener("mousemove", function (details) {
-  let y = details.clientY;
-  let x = details.clientX;
-  if (timer) {
-    clearTimeout(timer);
-  }
-  if (follower) {
-    timer = setTimeout(function () {
-      follower.style.top = `${y}px`;
-      follower.style.left = `${x}px`;
-    }, 50);
-  }
-});
-
-
-
-
-
-
