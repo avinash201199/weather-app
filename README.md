@@ -27,6 +27,8 @@ Check out the live version of the app here → [**Weather App**](https://avinash
 
 ✅ Clean and beginner-friendly JavaScript code
 
+✅ NEW: Interactive city map under the search bar (Leaflet + Esri World Imagery) that auto-centers, zooms, and drops a marker for the searched/geolocated city
+
 
 ## 🧩 Tech Stack
 
@@ -58,3 +60,4 @@ Interested in contributing? Check out the [Contribution Guide](https://github.co
 
 For any queries or collaborations, connect with me on [**LinkedIn**](https://www.linkedin.com/in/avinash-singh-071b79175) — always happy to chat! 🤝  
 
+---
