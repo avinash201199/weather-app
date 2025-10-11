@@ -284,6 +284,52 @@ $(".checkbox").change(function () {
   weather.fetchWeather(selectedCity);
 });
 
+// Leaflet map integration (Esri World Imagery)
+let _weatherMap = null;
+let _weatherMapMarker = null;
+function initLeafletMap() {
+  if (_weatherMap) return;
+  const el = document.getElementById('weather-map');
+  if (!el || typeof L === 'undefined') return;
+  _weatherMap = L.map('weather-map', {
+    zoomControl: true,
+    attributionControl: false,
+    scrollWheelZoom: true
+  });
+  // Ensure the map renders immediately
+  _weatherMap.setView([20, 0], 2);
+  const primaryUrl = 'https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}';
+  const fallbackUrl = 'https://services.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}';
+  const layer = L.tileLayer(primaryUrl, { maxZoom: 19 }).addTo(_weatherMap);
+  layer.on('tileerror', () => {
+    // If a tile fails, swap to fallback endpoint once
+    if (!_weatherMap.__esriFallback) {
+      _weatherMap.__esriFallback = true;
+      L.tileLayer(fallbackUrl, { maxZoom: 19 }).addTo(_weatherMap);
+    }
+  });
+  // Invalidate size after the current frame to fix hidden container sizing
+  setTimeout(() => { try { _weatherMap.invalidateSize(false); } catch(e){} }, 50);
+}
+function updateMapView(lat, lon, cityLabel) {
+  try {
+    initLeafletMap();
+    if (!_weatherMap) return;
+    const target = [lat, lon];
+    if (!_weatherMapMarker) {
+      _weatherMapMarker = L.marker(target).addTo(_weatherMap);
+    } else {
+      _weatherMapMarker.setLatLng(target);
+    }
+    const zoomLevel = 13;
+    _weatherMap.flyTo(target, zoomLevel, { duration: 1.15 });
+    const labelEl = document.getElementById('map-city-label');
+    if (labelEl) labelEl.textContent = cityLabel || '';
+  } catch (e) {
+    console.error('Map update error:', e);
+  }
+}
+
 const AirQuality = (city) => {
   fetchAirQuality(city)
     .then((aqi) => updateAirQuality(aqi))
@@ -442,6 +488,9 @@ let weather = {
 
     document.getElementById("city").innerText =
       `${translations[userLang].weatherIn} ` + name;
+
+    // Update interactive map view
+    updateMapView(lat, lon, name);
 
     document.getElementById(
       "icon"
@@ -726,6 +775,12 @@ const scrollTop = function () {
       ? scrollBtn.classList.add("show")
       : scrollBtn.classList.remove("show");
   };
+  // attach listeners
+  window.addEventListener("scroll", scrollBtnDisplay);
+  scrollBtn.addEventListener("click", function () {
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  });
+};
 
   function initLocationAndWeather() {
     if (navigator.geolocation) {

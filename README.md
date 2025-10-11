@@ -1,65 +1,63 @@
-# 🌦️ Weather App  
+# 🌦️ Weather App
 
-<p align="center">
-  <img src="./assets/Screenshot%202025-10-04%20083219.png" width="600">
-</p>
+A lightweight Weather App built with **JavaScript**, **HTML**, and **CSS**, utilizing the **OpenWeather API** to fetch real-time weather data.
 
----
+Users can search for any city and view up-to-date weather information in a sleek, responsive design.
 
-## 📌 Overview  
-Building a **Weather App with JavaScript** is an awesome beginner-friendly project 🎯.  
-It helps you understand:  
-- 🌐 **DOM Manipulation**  
-- 🔗 **Fetch API** to call third-party services  
-- ☁️ **Working with APIs** (OpenWeather API in this case)  
+## 🚀 Demo 
 
-This simple app is made using **HTML, CSS, and JavaScript**. The weather data is fetched from **OpenWeather API** and displayed according to the city entered in the search bar.  
+![Screenshot (20)](https://user-images.githubusercontent.com/90332218/194750372-b524eec3-5ef9-4f0c-b82b-770ec8850fc1.png)
 
 ---
 
-## 🛠️ Tech Stack  
+## 🌐 Live Demo  
+Check out the live version of the app here → [**Weather App**](https://avinash201199.github.io/weather-app/)
 
-<p align="center">
-  <img src="https://img.shields.io/badge/HTML5-E34F26?style=for-the-badge&logo=html5&logoColor=white" />
-  <img src="https://img.shields.io/badge/CSS3-1572B6?style=for-the-badge&logo=css3&logoColor=white" />
-  <img src="https://img.shields.io/badge/JavaScript-F7DF1E?style=for-the-badge&logo=javascript&logoColor=black" />
-  <img src="https://img.shields.io/badge/OpenWeather%20API-1E90FF?style=for-the-badge&logo=cloud&logoColor=white" />
-</p>  
 
----
 
-## 🎥 Demo of the App  
+## 🧠 Features
 
-### 🖼️ Screenshots  
-![Screenshot 1](./assets/Screenshot%202025-10-04%20083219.png)  
-![Screenshot 2](./assets/Screenshot%202025-10-04%20083053.png)  
+✅ Fetches real-time weather data using the OpenWeather API
 
-### 📽️ Video Demo  
-[▶️ Watch the Demo](./assets/recording-2025-10-04-083200_mQAgUq3D.mp4)  
+✅ Displays temperature, humidity, and weather conditions dynamically
 
----
+✅ Responsive and user-friendly interface
 
-## 🌍 Live Demo  
-👉 Check it out here: [Weather App](https://avinash201199.github.io/weather-app/)  
+✅ Simple search functionality to find any city’s weather
 
----
+✅ Clean and beginner-friendly JavaScript code
 
-## 🤝 Contribution  
-You are welcome to contribute ✨.  
-Some ideas:  
-- 📍 Add **geolocation support**  
-- 🎨 Enhance **UI/UX**  
-- 🌈 Add **themes** (light/dark mode)  
-- 📊 Show **hourly / weekly forecast**  
+✅ NEW: Interactive city map under the search bar (Leaflet + Esri World Imagery) that auto-centers, zooms, and drops a marker for the searched/geolocated city
 
-For details, see the [Contributing Guide](https://github.com/avinash201199/weather-app/blob/main/CONTRIBUTING.md).  
 
----
+## 🧩 Tech Stack
+
+**HTML5** – Structure of the app
+
+**CSS3** – For styling and responsiveness
+
+**JavaScript (ES6)** – For logic and dynamic updates
+
+**OpenWeather API** – For real-time weather data
+
+## 🤝 Contributing
+
+Contributions are welcome! You can:
+
+ - Add new features
+
+ - Improve UI design
+
+ - Enhance API handling or code readability
+
+ - Or anything in your mind to contribute
+   
+
 
 ## 📬 Contact  
-💬 For any queries, feel free to DM me on **[LinkedIn](https://www.linkedin.com/in/avinash-singh-071b79175)**.  
+
+Interested in contributing? Check out the [Contribution Guide](https://github.com/avinash201199/weather-app/blob/main/CONTRIBUTING.md).  
+
+For any queries or collaborations, connect with me on [**LinkedIn**](https://www.linkedin.com/in/avinash-singh-071b79175) — always happy to chat! 🤝  
 
 ---
-
-⭐ If you like this project, don’t forget to **star the repo**! ⭐
-
