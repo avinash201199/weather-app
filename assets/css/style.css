@@ -1127,4 +1127,125 @@ html body #scroll-btn {
     color: #000 !important; 
 }
 
+/* Weather Tips Styles */
+.weather-tip-container {
+  display: flex;
+  justify-content: center;
+  margin-top: 1rem;
+  margin-bottom: 1rem;
+}
+
+.weather-tip {
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0.05));
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 20px;
+  padding: 1rem 1.5rem;
+  max-width: 600px;
+  width: 100%;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s ease;
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.weather-tip:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.15);
+  border-color: rgba(255, 255, 255, 0.3);
+}
+
+.tip-content {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  color: #fff;
+  font-family: 'Poppins', sans-serif;
+}
+
+.tip-icon {
+  font-size: 1.5rem;
+  flex-shrink: 0;
+  animation: gentle-bounce 2s ease-in-out infinite;
+}
+
+.tip-text {
+  font-size: 1rem;
+  font-weight: 500;
+  line-height: 1.4;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+}
+
+/* Priority-based styling */
+.weather-tip[data-priority="critical"] {
+  background: linear-gradient(135deg, rgba(220, 53, 69, 0.2), rgba(255, 255, 255, 0.05));
+  border-color: rgba(220, 53, 69, 0.3);
+  animation: pulse-critical 2s ease-in-out infinite;
+}
+
+.weather-tip[data-priority="high"] {
+  background: linear-gradient(135deg, rgba(255, 193, 7, 0.2), rgba(255, 255, 255, 0.05));
+  border-color: rgba(255, 193, 7, 0.3);
+}
+
+.weather-tip[data-priority="medium"] {
+  background: linear-gradient(135deg, rgba(253, 126, 20, 0.2), rgba(255, 255, 255, 0.05));
+  border-color: rgba(253, 126, 20, 0.3);
+}
+
+.weather-tip[data-priority="low"] {
+  background: linear-gradient(135deg, rgba(40, 167, 69, 0.2), rgba(255, 255, 255, 0.05));
+  border-color: rgba(40, 167, 69, 0.3);
+}
+
+/* Animations */
+@keyframes gentle-bounce {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-3px);
+  }
+}
+
+@keyframes pulse-critical {
+  0%, 100% {
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+  }
+  50% {
+    box-shadow: 0 8px 32px rgba(220, 53, 69, 0.3);
+  }
+}
+
+/* Responsive design for tips */
+@media (max-width: 768px) {
+  .weather-tip {
+    padding: 0.75rem 1rem;
+    margin: 0 1rem;
+  }
+  
+  .tip-content {
+    gap: 0.5rem;
+  }
+  
+  .tip-icon {
+    font-size: 1.25rem;
+  }
+  
+  .tip-text {
+    font-size: 0.9rem;
+  }
+}
+
+@media (max-width: 576px) {
+  .weather-tip {
+    padding: 0.5rem 0.75rem;
+    margin: 0 0.5rem;
+  }
+  
+  .tip-text {
+    font-size: 0.85rem;
+  }
+}
+
   

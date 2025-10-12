@@ -2,6 +2,7 @@ import Capitals from "./Capitals.js";
 import CITY from "./City.js";
 import { translations, getUserLanguage } from "../../lang/translation.js";
 import config from "./../../config/config.js";
+import { getWeatherTip, displayWeatherTip } from "./weather-tips.js";
 
 // Weather Alerts System
 class WeatherAlerts {
@@ -432,6 +433,18 @@ let weather = {
     setTimeout(() => {
       weatherAlerts.checkWeatherConditions(data);
     }, 1000); // Delay to ensure air quality data is loaded
+
+    // Display weather tip
+    setTimeout(() => {
+      const tip = getWeatherTip(data);
+      displayWeatherTip(tip);
+      
+      // Add priority class for styling
+      const tipElement = document.getElementById('weather-tip');
+      if (tipElement) {
+        tipElement.setAttribute('data-priority', tip.priority);
+      }
+    }, 1500); // Delay to ensure air quality data is loaded
 
     document
       .getElementById("icon")
