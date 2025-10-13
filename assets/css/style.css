@@ -1127,4 +1127,18 @@ html body #scroll-btn {
     color: #000 !important; 
 }
 
-  
+/* === Weather search error message === */
+.error-message[hidden] {
+  display: none !important;
+}
+
+.error-message {
+  margin-top: 8px;
+  padding: 10px 12px;
+  border-radius: 10px;
+  background: #fee2e2;      /* soft red */
+  color: #7f1d1d;            /* dark red text */
+  border: 1px solid #fecaca; /* red border */
+  font-size: 0.95rem;
+  line-height: 1.35;
+}

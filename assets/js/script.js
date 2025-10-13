@@ -3,6 +3,49 @@ import CITY from "./City.js";
 import { translations, getUserLanguage } from "../../lang/translation.js";
 import config from "./../../config/config.js";
 
+// ===== Error handling helpers (top of script.js) =====
+const errorEl = document.getElementById('error-message');
+
+function setError(message) {
+  if (!errorEl) return;
+  if (!message) {
+    errorEl.textContent = '';
+    errorEl.hidden = true;
+  } else {
+    errorEl.textContent = message;
+    errorEl.hidden = false;
+  }
+}
+
+// ===== Wire search events (once) =====
+const searchInput = document.querySelector('.weather-component__search-bar');
+const searchBtn   = document.querySelector('.weather-component__button');
+
+if (searchBtn && searchInput) {
+  // Click button
+  searchBtn.addEventListener('click', () => {
+    const city = (searchInput.value || '').trim();
+    if (!city) {
+      setError('Please enter a city name.');
+      return;
+    }
+    safeFetchWeather(city);
+  });
+
+  // Press Enter in input
+  searchInput.addEventListener('keydown', (e) => {
+    if (e.key === 'Enter') {
+      const city = (searchInput.value || '').trim();
+      if (!city) {
+        setError('Please enter a city name.');
+        return;
+      }
+      safeFetchWeather(city);
+    }
+  });
+}
+
+
 // Weather Alerts System
 class WeatherAlerts {
   constructor() {
