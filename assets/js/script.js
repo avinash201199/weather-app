@@ -329,7 +329,32 @@ function updateMapView(lat, lon, cityLabel) {
     console.error('Map update error:', e);
   }
 }
+function initMap() {
+            const mapEl = document.getElementById('weather-map');
+            // In a real application, you would initialize Leaflet or Google Maps here
+            // e.g., const map = L.map('weather-map').setView([51.505, -0.09], 13);
+            console.log('Map initialized in placeholder.');
+        }
 
+        // The logic to update the label text
+        function updateMapLabel(cityLabel) {
+            try {
+                const labelEl = document.getElementById('map-city-label');
+                if (labelEl) {
+                    // Set the content of the label
+                    labelEl.textContent = cityLabel || '';
+                }
+            } catch (e) {
+                console.error('Map update error:', e);
+            }
+        }
+
+        // Example usage: Set the label after the "map" loads
+        window.onload = function() {
+            initMap();
+            // Simulate receiving the city data
+            updateMapLabel("Currently Viewing: Tokyo, Japan");
+        };
 const AirQuality = (city) => {
   fetchAirQuality(city)
     .then((aqi) => updateAirQuality(aqi))
