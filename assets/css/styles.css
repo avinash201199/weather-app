@@ -257,7 +257,7 @@ figure.weather-component__icn {
 }
 
 .grid-item-sun{
-  
+
       display: flex;
       flex-direction: column;
       align-items: flex-start;
@@ -466,13 +466,13 @@ figure.weather-component__icn {
     width: 100%;
     height: 100%;
     border-radius: 50%;
-    background: 
+    background:
         linear-gradient(45deg, #1a1a2e 0%, #16213e 25%, #0f3460 50%, #533483 75%, #1a1a2e 100%),
         radial-gradient(circle at 20% 30%, rgba(70, 130, 180, 0.3) 0%, transparent 50%),
         radial-gradient(circle at 80% 20%, rgba(100, 149, 237, 0.2) 0%, transparent 40%),
         radial-gradient(circle at 60% 80%, rgba(25, 25, 112, 0.4) 0%, transparent 30%);
     animation: globeRotate 30s linear infinite;
-    box-shadow: 
+    box-shadow:
         inset -40px -40px 80px rgba(0, 0, 0, 0.6),
         inset 20px 20px 40px rgba(100, 149, 237, 0.1),
         0 0 60px rgba(70, 130, 180, 0.4),
@@ -486,7 +486,7 @@ figure.weather-component__icn {
     width: 100%;
     height: 100%;
     border-radius: 50%;
-    background: 
+    background:
         /* Latitude lines */
         repeating-linear-gradient(
             0deg,
@@ -603,34 +603,61 @@ figure.weather-component__icn {
     background: rgba(255, 255, 255, 0.05);
     border-radius: 10px;
 }
+ .map-box {
+            width: 100%;
+            max-width: 900px; /* Constrain size for desktop viewing */
+            margin: 0 auto;
+            background-color: #374151; /* Card background */
+            padding: 20px;
+            border-radius: 20px;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.4);
+        }
 
-/* Map styles */
-.map-box {
-  position: relative;
-  width: 100%;
-  margin: 12px 0 16px 0;
-}
-#weather-map {
-  width: 100%;
-  height: 360px;
-  min-height: 360px;
-  border-radius: 16px;
-  overflow: hidden;
-}
-#weather-map .leaflet-container,
-.leaflet-container {
-  background: #000 !important; /* match app tone while tiles load */
-}
-.map-header {
-  position: absolute;
-  top: -14px;
-  left: 12px;
-  color: #fff;
-  background: rgba(0, 0, 0, 0.35);
-  padding: 6px 12px;
-  border-radius: 12px;
-  backdrop-filter: blur(8px);
-}
+        #weather-map {
+            /* Keep the dimensions for the map placeholder */
+            width: 100%;
+            height: 360px;
+            min-height: 360px;
+            border-radius: 12px;
+            overflow: hidden;
+            margin-top: 30px;
+            background: #000; /* Placeholder color, simulating map */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: #ccc;
+            font-size: 1.25rem;
+            font-weight: 600;
+        }
+
+        /* NEW STYLE: Centered label below the map */
+        .map-city-label {
+            /* Remove position: absolute */
+            display: block; /* Ensure it takes up full width for centering */
+            text-align: center; /* Center the text content */
+            margin-top: 16px; /* Spacing below the map */
+            color: #f3f4f6;
+            background: rgba(255, 255, 255, 0.1);
+            padding: 8px 20px;
+            border-radius: 10px;
+            font-size: 1rem;
+            font-weight: 500;
+            backdrop-filter: blur(4px);
+            transition: background 0.3s;
+        }
+
+        .map-city-label:empty {
+            /* Hide the container if there is no text content */
+            display: none;
+        }
+
+        /* Added some responsive padding for small screens */
+        @media (max-width: 640px) {
+            .map-box {
+                padding: 12px;
+                border-radius: 16px;
+            }
+        }
 /* Hide default Leaflet attribution */
 .leaflet-control-attribution { display: none !important; }
 
@@ -639,16 +666,16 @@ figure.weather-component__icn {
     .mood-content {
         grid-template-columns: 1fr;
     }
-    
+
     .globe-wrapper {
         width: 250px;
         height: 250px;
     }
-    
+
     .time-machine-controls {
         flex-direction: column;
     }
-    
+
     .globe-controls {
         flex-direction: column;
         align-items: center;
