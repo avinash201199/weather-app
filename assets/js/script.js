@@ -680,7 +680,7 @@ function generateWeatherItem(
   let dayTemp = document.createElement("div");
   dayTemp.classList.add("weather-forecast-day");
   if (!isCelcius) {
-    dayTemperature = dayTemperature * (9 / 5) + 35;
+    dayTemperature = dayTemperature * (9 / 5) + 32;
     dayTemperature = (Math.round(dayTemperature * 100) / 100).toFixed(2);
     dayTemp.innerHTML = `${translations[userLang].day} ${dayTemperature}&#176;F`;
   } else {
@@ -692,7 +692,7 @@ function generateWeatherItem(
 
   let nightTemp = document.createElement("div");
   if (!isCelcius) {
-    nightTemperature = nightTemperature * (9 / 5) + 35;
+    nightTemperature = nightTemperature * (9 / 5) + 32;
     nightTemperature = (Math.round(nightTemperature * 100) / 100).toFixed(2);
     nightTemp.innerHTML = `${translations[userLang].night} ${nightTemperature}&#176;F`;
   } else {
