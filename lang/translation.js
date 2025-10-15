@@ -37,7 +37,15 @@ export const translations = {
     sunday: "Sunday",
     day: "Day",
     night: "Night",
-    notAvailable: "Not Available"
+    notAvailable: "Not Available",
+    loading: "Loading weather data...",
+    apiKeyInvalid: "Invalid API key. Please check configuration.",
+    rateLimitExceeded: "Too many requests. Please try again later.",
+    serverError: "Weather service temporarily unavailable. Please try again.",
+    networkError: "Network error. Please check your connection.",
+    requestTimeout: "Request timed out. Please check your connection.",
+    invalidData: "Received invalid weather data. Please try again.",
+    weeklyForecastError: "Weekly forecast temporarily unavailable"
   },
   "pt-BR": {
     apiLang: "pt_br",

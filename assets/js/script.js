@@ -248,6 +248,61 @@ class WeatherAlerts {
 // Initialize weather alerts system
 const weatherAlerts = new WeatherAlerts();
 
+// Network Status Monitoring
+class NetworkMonitor {
+  constructor() {
+    this.isOnline = navigator.onLine;
+    this.setupEventListeners();
+    this.createNetworkStatusIndicator();
+  }
+
+  setupEventListeners() {
+    window.addEventListener('online', () => {
+      this.isOnline = true;
+      this.hideNetworkStatus();
+      console.log('Network connection restored');
+    });
+
+    window.addEventListener('offline', () => {
+      this.isOnline = false;
+      this.showNetworkStatus();
+      console.log('Network connection lost');
+    });
+  }
+
+  createNetworkStatusIndicator() {
+    const indicator = document.createElement('div');
+    indicator.id = 'network-status';
+    indicator.className = 'network-status';
+    indicator.innerHTML = `
+      <i class="fas fa-wifi"></i>
+      <span>No internet connection</span>
+    `;
+    document.body.appendChild(indicator);
+  }
+
+  showNetworkStatus() {
+    const indicator = document.getElementById('network-status');
+    if (indicator) {
+      indicator.classList.add('show');
+    }
+  }
+
+  hideNetworkStatus() {
+    const indicator = document.getElementById('network-status');
+    if (indicator) {
+      indicator.classList.remove('show');
+    }
+  }
+
+  isConnected() {
+    return this.isOnline;
+  }
+}
+
+// Initialize network monitoring
+const networkMonitor = new NetworkMonitor();
+
 // focus the search input as the DOM loads
 window.onload = function () {
   document.getElementsByName("search-bar")[0].focus();
@@ -358,23 +413,74 @@ function initMap() {
 const AirQuality = (city) => {
   fetchAirQuality(city)
     .then((aqi) => updateAirQuality(aqi))
-    .catch((error) => console.error(error));
+    .catch((error) => handleAirQualityError(error, city));
 };
 
 const fetchAirQuality = (city) => {
   const url = `https://api.waqi.info/v2/search/?token=${config.AIR_KEY}&keyword=${city}`;
+  
+  // Add timeout for air quality API
+  const controller = new AbortController();
+  const timeoutId = setTimeout(() => controller.abort(), 8000); // 8 second timeout
 
-  return fetch(url)
+  return fetch(url, { 
+    signal: controller.signal,
+    headers: {
+      'Accept': 'application/json'
+    }
+  })
     .then((res) => {
+      clearTimeout(timeoutId);
+      
       if (!res.ok) {
-        throw new Error(`Failed to fetch air quality data for ${city}`);
+        switch (res.status) {
+          case 401:
+            throw new Error('AQI_API_KEY_INVALID');
+          case 404:
+            throw new Error('AQI_LOCATION_NOT_FOUND');
+          case 429:
+            throw new Error('AQI_RATE_LIMIT');
+          default:
+            throw new Error('AQI_NETWORK_ERROR');
+        }
       }
       return res.json();
     })
     .then((data) => {
+      // Validate air quality data
+      if (!data || !data.data || !Array.isArray(data.data) || data.data.length === 0) {
+        throw new Error('AQI_NO_DATA');
+      }
+      
       const relevantLocation = data.data[0];
+      if (!relevantLocation || typeof relevantLocation.aqi !== 'number') {
+        throw new Error('AQI_INVALID_DATA');
+      }
+      
       return relevantLocation.aqi;
+    })
+    .catch((error) => {
+      clearTimeout(timeoutId);
+      throw error;
     });
+};
+
+const handleAirQualityError = (error, city) => {
+  const airQualityElement = document.querySelector("#AirQuality");
+  const qualityDescriptionElement = document.querySelector(".air-quality-label");
+  
+  let fallbackMessage = translations[userLang].notAvailable || 'N/A';
+  
+  // Update UI with fallback values
+  if (airQualityElement) {
+    airQualityElement.innerText = fallbackMessage;
+  }
+  if (qualityDescriptionElement) {
+    qualityDescriptionElement.innerText = translations[userLang].notAvailable || 'Not Available';
+    qualityDescriptionElement.classList = "air-quality-label ml-0 not-available";
+  }
+  
+  console.warn('Air Quality Error for', city, ':', error.message);
 };
 
 const updateAirQuality = (aqi) => {
@@ -466,24 +572,58 @@ let weather = {
         `&lang=${translations[userLang].apiLang}`;
     }
 
-    // Fetch weather
-    fetch(url)
+    // Show loading state
+    this.showLoadingState();
+
+    // Enhanced fetch with comprehensive error handling
+    const controller = new AbortController();
+    const timeoutId = setTimeout(() => controller.abort(), 10000); // 10 second timeout
+
+    fetch(url, { 
+      signal: controller.signal,
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json'
+      }
+    })
       .then((response) => {
+        clearTimeout(timeoutId);
+        
         if (!response.ok) {
-          toastFunction(`${translations[userLang].noWeatherFound}`);
-          document.getElementById("city").innerHTML = "City not Found";
-          document.getElementById("temp").style.display = "none";
-          document.querySelector(".weather-component__data-wrapper").style.display =
-            "none";
-          throw new Error(`${translations[userLang].noWeatherFound}`);
+          // Handle different HTTP status codes
+          switch (response.status) {
+            case 401:
+              throw new Error('API_KEY_INVALID');
+            case 404:
+              throw new Error('CITY_NOT_FOUND');
+            case 429:
+              throw new Error('RATE_LIMIT_EXCEEDED');
+            case 500:
+            case 502:
+            case 503:
+              throw new Error('SERVER_ERROR');
+            default:
+              throw new Error('NETWORK_ERROR');
+          }
         }
         return response.json();
       })
       .then((data) => {
+        // Validate response data
+        if (!data || !data.main || !data.weather || !data.weather[0]) {
+          throw new Error('INVALID_DATA');
+        }
+        
+        this.hideLoadingState();
         document.getElementById("temp").style.display = "block";
         document.querySelector(".weather-component__data-wrapper").style.display =
           "block";
         this.displayWeather(data, city);
+      })
+      .catch((error) => {
+        clearTimeout(timeoutId);
+        this.hideLoadingState();
+        this.handleWeatherError(error, city);
       });
   },
 
@@ -576,39 +716,191 @@ let weather = {
         ".weather-component__search-bar"
       ).value;
       this.fetchWeather(selectedCity);
-      const apiKey = "OOjKyciq4Sk0Kla7riLuR2j8C9FwThFzKIKIHrpq7c27KvrCul5rVxJj";
-      const apiUrl = `https://api.pexels.com/v1/search?query=${selectedCity}&orientation=landscape`;
-
-      fetch(apiUrl, {
-        method: "GET",
-        headers: {
-          Authorization: apiKey,
-        },
-      })
-        .then((response) => response.json())
-        .then((data) => {
-          const randomIndex = Math.floor(Math.random() * 10);
-          const url = data.photos[randomIndex].src.large2x;
-          document.getElementById(
-            "background"
-          ).style.backgroundImage = `url(${url})`;
-        })
-        .catch((error) => {
-          console.error(error);
-        });
+      // Enhanced background image fetch with error handling
+      this.fetchCityBackground(selectedCity);
       //url = "";
     } else {
       toastFunction(translations[userLang].pleaseAddLocation);
     }
   },
+
+  showLoadingState: function() {
+    const weatherElement = document.getElementById("weather");
+    const cityElement = document.getElementById("city");
+    const tempElement = document.getElementById("temp");
+    
+    if (weatherElement) weatherElement.classList.add("loading");
+    if (cityElement) cityElement.innerHTML = `${translations[userLang].loading || 'Loading weather data...'}`;
+    if (tempElement) tempElement.style.display = "none";
+  },
+
+  hideLoadingState: function() {
+    const weatherElement = document.getElementById("weather");
+    
+    if (weatherElement) weatherElement.classList.remove("loading");
+  },
+
+  handleWeatherError: function(error, city) {
+    const cityElement = document.getElementById("city");
+    const tempElement = document.getElementById("temp");
+    const dataWrapper = document.querySelector(".weather-component__data-wrapper");
+    
+    // Hide weather data
+    if (tempElement) tempElement.style.display = "none";
+    if (dataWrapper) dataWrapper.style.display = "none";
+    
+    let errorMessage;
+    let toastType = 'error';
+    
+    switch (error.message) {
+      case 'API_KEY_INVALID':
+        errorMessage = translations[userLang].apiKeyInvalid || 'Invalid API key. Please check configuration.';
+        if (cityElement) cityElement.innerHTML = "Configuration Error";
+        break;
+      case 'CITY_NOT_FOUND':
+        errorMessage = translations[userLang].noWeatherFound || 'City not found. Please check spelling.';
+        if (cityElement) cityElement.innerHTML = "City Not Found";
+        break;
+      case 'RATE_LIMIT_EXCEEDED':
+        errorMessage = translations[userLang].rateLimitExceeded || 'Too many requests. Please try again later.';
+        if (cityElement) cityElement.innerHTML = "Rate Limit Exceeded";
+        toastType = 'warning';
+        break;
+      case 'SERVER_ERROR':
+        errorMessage = translations[userLang].serverError || 'Weather service temporarily unavailable. Please try again.';
+        if (cityElement) cityElement.innerHTML = "Service Unavailable";
+        break;
+      case 'INVALID_DATA':
+        errorMessage = translations[userLang].invalidData || 'Received invalid weather data. Please try again.';
+        if (cityElement) cityElement.innerHTML = "Data Error";
+        break;
+      default:
+        if (error.name === 'AbortError') {
+          errorMessage = translations[userLang].requestTimeout || 'Request timed out. Please check your connection.';
+          if (cityElement) cityElement.innerHTML = "Connection Timeout";
+        } else {
+          errorMessage = translations[userLang].networkError || 'Network error. Please check your connection.';
+          if (cityElement) cityElement.innerHTML = "Network Error";
+        }
+    }
+    
+    toastFunction(errorMessage, toastType, 6000);
+    console.error('Weather API Error:', error);
+  },
+
+  fetchCityBackground: function(city) {
+    const apiKey = "OOjKyciq4Sk0Kla7riLuR2j8C9FwThFzKIKIHrpq7c27KvrCul5rVxJj";
+    const apiUrl = `https://api.pexels.com/v1/search?query=${encodeURIComponent(city)}&orientation=landscape&per_page=15`;
+    
+    const controller = new AbortController();
+    const timeoutId = setTimeout(() => controller.abort(), 8000);
+
+    fetch(apiUrl, {
+      method: "GET",
+      signal: controller.signal,
+      headers: {
+        Authorization: apiKey,
+        'Accept': 'application/json'
+      },
+    })
+      .then((response) => {
+        clearTimeout(timeoutId);
+        
+        if (!response.ok) {
+          throw new Error(`Pexels API error: ${response.status}`);
+        }
+        return response.json();
+      })
+      .then((data) => {
+        if (data && data.photos && data.photos.length > 0) {
+          const randomIndex = Math.floor(Math.random() * Math.min(data.photos.length, 10));
+          const imageUrl = data.photos[randomIndex].src.large2x;
+          
+          // Preload image before setting as background
+          const img = new Image();
+          img.onload = () => {
+            document.getElementById("background").style.backgroundImage = `url(${imageUrl})`;
+          };
+          img.onerror = () => {
+            this.setFallbackBackground();
+          };
+          img.src = imageUrl;
+        } else {
+          this.setFallbackBackground();
+        }
+      })
+      .catch((error) => {
+        clearTimeout(timeoutId);
+        console.warn('Background image fetch failed:', error.message);
+        this.setFallbackBackground();
+      });
+  },
+
+  setFallbackBackground: function() {
+    // Use Unsplash as fallback or default gradient
+    const fallbackUrl = `https://source.unsplash.com/${
+      window.innerWidth < 768 ? "720x1280" : "1600x900"
+    }/?landscape`;
+    
+    const img = new Image();
+    img.onload = () => {
+      document.getElementById("background").style.backgroundImage = `url(${fallbackUrl})`;
+    };
+    img.onerror = () => {
+      // Final fallback to gradient
+      document.getElementById("background").style.background = 
+        'linear-gradient(135deg, #74b9ff 0%, #0984e3 100%)';
+    };
+    img.src = fallbackUrl;
+  }
 };
 
 async function getWeatherWeekly(url) {
-  fetch(url)
-    .then((res) => res.json())
-    .then((data) => {
-      showWeatherData(data);
+  const controller = new AbortController();
+  const timeoutId = setTimeout(() => controller.abort(), 10000);
+
+  try {
+    const response = await fetch(url, { 
+      signal: controller.signal,
+      headers: {
+        'Accept': 'application/json'
+      }
     });
+    
+    clearTimeout(timeoutId);
+    
+    if (!response.ok) {
+      throw new Error(`Weekly weather API error: ${response.status}`);
+    }
+    
+    const data = await response.json();
+    
+    // Validate weekly weather data
+    if (!data || !data.daily || !Array.isArray(data.daily)) {
+      throw new Error('Invalid weekly weather data');
+    }
+    
+    showWeatherData(data);
+    
+  } catch (error) {
+    clearTimeout(timeoutId);
+    handleWeeklyWeatherError(error);
+  }
+}
+
+function handleWeeklyWeatherError(error) {
+  const container = document.getElementById("weather-forecast");
+  
+  if (container) {
+    container.innerHTML = `
+      <div class="forecast-error">
+        <i class="fas fa-exclamation-triangle"></i>
+        <p>${translations[userLang].weeklyForecastError || 'Weekly forecast temporarily unavailable'}</p>
+      </div>
+    `;
+  }
+  
+  console.warn('Weekly Weather Error:', error.message);
 }
 
 function generateWeatherItem(
