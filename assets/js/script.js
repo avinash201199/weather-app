@@ -470,7 +470,7 @@ let weather = {
     fetch(url)
       .then((response) => {
         if (!response.ok) {
-          toastFunction(`${translations[userLang].noWeatherFound}`);
+          toastFunction(`${translations[userLang].noWeatherFound}`, 'error', 5000);
           document.getElementById("city").innerHTML = "City not Found";
           document.getElementById("temp").style.display = "none";
           document.querySelector(".weather-component__data-wrapper").style.display =
@@ -598,7 +598,7 @@ let weather = {
         });
       //url = "";
     } else {
-      toastFunction(translations[userLang].pleaseAddLocation);
+      toastFunction(translations[userLang].pleaseAddLocation, 'warning', 3000);
     }
   },
 };
@@ -684,15 +684,63 @@ function showWeatherData(data) {
     container.appendChild(element);
   });
 }
-//toast function
-function toastFunction(val) {
-  var x = document.getElementById("toast");
-  x.className = "show";
-  //change inner text
-  document.getElementById("toast").innerText = val;
-  setTimeout(function () {
-    x.className = x.className.replace("show", "");
-  }, 3000);
+// Enhanced Toast Notification System
+function toastFunction(message, type = 'info', duration = 4000) {
+  const toast = document.getElementById("toast");
+  const toastMessage = document.getElementById("toast-message");
+  const toastClose = document.getElementById("toast-close");
+  
+  // Safety check for DOM elements
+  if (!toast || !toastMessage || !toastClose) {
+    console.error("Toast elements not found in DOM");
+    // Fallback to console log for debugging
+    console.log(`Toast ${type.toUpperCase()}: ${message}`);
+    return;
+  }
+  
+  // Clear any existing timeouts
+  if (toast.hideTimeout) {
+    clearTimeout(toast.hideTimeout);
+  }
+  
+  // Set message content
+  toastMessage.textContent = message;
+  
+  // Reset classes and add new type
+  toast.className = `toast show ${type}`;
+  
+  // Auto-hide functionality
+  toast.hideTimeout = setTimeout(() => {
+    hideToast();
+  }, duration);
+  
+  // Close button event (remove existing listeners first)
+  toastClose.onclick = null;
+  toastClose.onclick = () => {
+    if (toast.hideTimeout) {
+      clearTimeout(toast.hideTimeout);
+    }
+    hideToast();
+  };
+  
+  // Hide toast function with animation
+  function hideToast() {
+    toast.classList.remove('show');
+    toast.classList.add('hide');
+    
+    // Reset to initial state after animation
+    setTimeout(() => {
+      toast.className = 'toast';
+      if (toast.hideTimeout) {
+        clearTimeout(toast.hideTimeout);
+        toast.hideTimeout = null;
+      }
+    }, 300);
+  }
+  
+  // Accessibility: Focus management for screen readers
+  toast.setAttribute('role', 'alert');
+  toast.setAttribute('aria-live', 'polite');
 }
 document
   .querySelector(".weather-component__search button")
@@ -828,7 +876,7 @@ function initLocationAndWeather() {
         } else {
           errorMessage = `${translations[userLang].locationError}`;
         }
-        toastFunction(errorMessage);
+        toastFunction(errorMessage, 'error', 5000);
 
 
         // We already loaded fallback above; keep UI responsive
@@ -842,7 +890,7 @@ function initLocationAndWeather() {
     );
   } else {
     // If browser doesn't support geolocation at all
-    toastFunction(`${translations[userLang].notSupported}`);
+    toastFunction(`${translations[userLang].notSupported}`, 'error', 5000);
     weather.fetchWeather("London");
   }
 }
