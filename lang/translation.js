@@ -37,7 +37,10 @@ export const translations = {
     sunday: "Sunday",
     day: "Day",
     night: "Night",
-    notAvailable: "Not Available"
+    notAvailable: "Not Available",
+    permissionDenied: "Location access denied. Using default location.",
+    locationError: "Unable to get your location. Using default location.",
+    notSupported: "Geolocation is not supported by this browser."
   },
   "pt-BR": {
     apiLang: "pt_br",
@@ -66,7 +69,10 @@ export const translations = {
     sunday: "Domingo",
     day: "Dia",
     night: "Noite",
-    notAvailable: "Indisponível"
+    notAvailable: "Indisponível",
+    permissionDenied: "Acesso à localização negado. Usando localização padrão.",
+    locationError: "Não foi possível obter sua localização. Usando localização padrão.",
+    notSupported: "Geolocalização não é suportada por este navegador."
   },
   "es-MX": {
     apiLang: "es",

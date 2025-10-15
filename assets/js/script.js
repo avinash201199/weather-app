@@ -470,7 +470,7 @@ let weather = {
     fetch(url)
       .then((response) => {
         if (!response.ok) {
-          toastFunction(`${translations[userLang].noWeatherFound}`);
+          toastFunction(`${translations[userLang].noWeatherFound}`, 'error');
           document.getElementById("city").innerHTML = "City not Found";
           document.getElementById("temp").style.display = "none";
           document.querySelector(".weather-component__data-wrapper").style.display =
@@ -598,7 +598,7 @@ let weather = {
         });
       //url = "";
     } else {
-      toastFunction(translations[userLang].pleaseAddLocation);
+      toastFunction(translations[userLang].pleaseAddLocation, 'warning');
     }
   },
 };
@@ -685,14 +685,39 @@ function showWeatherData(data) {
   });
 }
 //toast function
-function toastFunction(val) {
-  var x = document.getElementById("toast");
-  x.className = "show";
-  //change inner text
-  document.getElementById("toast").innerText = val;
-  setTimeout(function () {
-    x.className = x.className.replace("show", "");
-  }, 3000);
+function toastFunction(message, type = 'info', duration = 4000) {
+  const toast = document.getElementById("toast");
+  const toastMessage = document.getElementById("toast-message");
+  const toastClose = document.getElementById("toast-close");
+  
+  if (!toast || !toastMessage) {
+    console.error("Toast elements not found");
+    return;
+  }
+  
+  // Set message
+  toastMessage.innerText = message;
+  
+  // Reset classes and add type
+  toast.className = `toast show ${type}`;
+  
+  // Auto hide after duration
+  const hideTimeout = setTimeout(() => {
+    hideToast();
+  }, duration);
+  
+  // Close button functionality
+  toastClose.onclick = () => {
+    clearTimeout(hideTimeout);
+    hideToast();
+  };
+  
+  function hideToast() {
+    toast.classList.add('hide');
+    setTimeout(() => {
+      toast.className = 'toast';
+    }, 300);
+  }
 }
 document
   .querySelector(".weather-component__search button")
@@ -828,7 +853,7 @@ function initLocationAndWeather() {
         } else {
           errorMessage = `${translations[userLang].locationError}`;
         }
-        toastFunction(errorMessage);
+        toastFunction(errorMessage, 'error');
 
 
         // We already loaded fallback above; keep UI responsive
@@ -842,7 +867,7 @@ function initLocationAndWeather() {
     );
   } else {
     // If browser doesn't support geolocation at all
-    toastFunction(`${translations[userLang].notSupported}`);
+    toastFunction(`${translations[userLang].notSupported}`, 'error');
     weather.fetchWeather("London");
   }
 }
