@@ -4,367 +4,216 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="description"
-    content="A Beautiful weather app displaying a weekly weather forecast for the selected location" />
-  <title id="dynamic">Weather-App</title>
+  <meta name="description" content="A Beautiful weather app displaying a weekly weather forecast for the selected location" />
+  <title id="dynamic">Weather Dashboard</title>
+  
+  <!-- Preconnect for fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Belanosima&family=Chivo+Mono:ital,wght@1,300;1,400&family=Josefin+Sans:ital@1&family=Poppins:ital,wght@1,200;1,300&family=Raleway:wght@300&display=swap" rel="stylesheet">
-  <link
-    href="https://fonts.googleapis.com/css2?family=Inter:wght@200;300;400&family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap"
-    rel="stylesheet">
-  <!-- favicon -->
+  
+  <!-- Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&family=Inter:wght@200;300;400&display=swap" rel="stylesheet">
+  
+  <!-- Favicon -->
   <link rel="shortcut icon" type="image/jpg" href="./assets/weather-icon.png" />
+  
+  <!-- Stylesheets -->
   <link rel="stylesheet" href="./assets/css/bootstrap.min.css">
-  <link rel="stylesheet" href="./assets/css/style.css">
-
-  <link rel="icon" href="assets/favicon.ico">
-  <!-- <link rel="logo" href="assets/icons/logo.png"> -->
-
-  <link rel="stylesheet" href="fonts/icomoon/style.css">
-
-  <!-- jquery CDN -->
-  <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script> -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-  <!-- fontawesome CDN -->
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="./assets/css/styles.css">
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Work+Sans:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css" integrity="sha512-2SwdPD6INVrV/lHTZbO2nodKhrnDdJK9/kg2XD1r9uGqPo1cUbujc+IYdlYdEErWNu69gVcYgdxlmVmzTWnetw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-  <!-- Leaflet CSS -->
   <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin=""/>
+  <link rel="stylesheet" href="./assets/css/style.css">
+  <link rel="stylesheet" href="./assets/css/styles.css">
+  <link rel="stylesheet" href="./assets/css/layout-improvements.css">
 </head>
 
 <body id="body">
+  <!-- Background -->
+  <div id="background"></div>
+
+  <!-- Navigation -->
   <nav class="navbar top-nav">
-    <div class="logo" style="display: flex; align-items: center; gap: 10px;">
+    <div class="logo">
       <img src="./assets/icons/logo.png" alt="Logo" class="img-fluid logo-img">
       <span class="logo-title">Weather Dashboard</span>
     </div>
-    <div style="display: flex;">
-      <i class="whatsapp" id="whatsapp-button">
+    <div class="nav-controls">
+      <div class="whatsapp" id="whatsapp-button">
         <img src="assets/Whatsapp-logo.svg" alt="whatsapp">
-      </i>
-      <div class="nav-component__celcius-block col-auto">
+      </div>
+      <div class="nav-component__celcius-block">
         <input type="checkbox" id="unit" class="checkbox">
         <label for="unit" class="label">
-          <span class="farenheit" style="color:rgb(77, 158, 183);">°F</span>
-          <span class="celcius" style="color: rgb(235, 235, 80);">°C</span>
-          <div class='ball'>
+          <span class="farenheit">°F</span>
+          <span class="celcius">°C</span>
+          <div class='ball'></div>
         </label>
       </div>
     </div>
   </nav>
 
-  <div id="background"></div>
-
-
-  <h2 class="header-component">
+  <!-- Date Time Header -->
+  <header class="header-component">
     <div id="date-time-container">
-    <span id='date-time'></span>
-    <span id='date-time2'></span>
-  </div>
-  </h2>
-  <section>
-    <div class="container">
-      <div class="row g-4">
-        <div class="col">
-
-        </div>
-        <div class="col">
-
+      <span id='date-time'></span>
+      <span id='date-time2'></span>
     </div>
+  </header>
 
-
-  </section>
-
-  <section class="pt-4 card-grid">
+  <!-- Main Weather Section -->
+  <main class="main-content">
     <div class="container">
       <div class="row justify-content-center">
-        <div class="col-12 col-md-10 col-lg-8">
-          <div class="weather-component container d-flex justify-content-center align-items-center flex-column">
-            <div class="weather-component__card text-white rounded-5" style="padding-top: 50px;">
-              <div class="weather-component__search" style="margin-left: 1rem;">
+        <div class="col-12 col-lg-10">
+          
+          <!-- Weather Card -->
+          <div class="weather-component__card">
+            
+            <!-- Search Section -->
+            <div class="weather-component__search">
+              <div class="search-input-group">
                 <input type="text" class="weather-component__search-bar" name="search-bar" list="place"
-                   placeholder="Search for a city, e.g., London" autocomplete="address-level2" />
+                       placeholder="Search for a city, e.g., London" autocomplete="address-level2" />
                 <datalist id="place" class="weather-component__datalist">
-                  <!-- Content will be generated By Javascript  -->
+                  <!-- Content will be generated By Javascript -->
                 </datalist>
-               <div class="button_container" style="margin-left: 1rem;">
-                <button class="weather-component__button text-white rounded-circl"
-                  aria-label="click here to search class" style="margin-top: 0.5rem; margin-right: -0.1rem;">
-                  <svg stroke="currentColor" fill="#ffffff" stroke-width="0" viewBox="0 0 1024 1024" height="1.5em"
-                    width="1.5em" xmlns="http://www.w3.org/2000/svg">
-                    <path
-                      d="M909.6 854.5L649.9 594.8C690.2 542.7 712 479 712 412c0-80.2-31.3-155.4-87.9-212.1-56.6-56.7-132-87.9-212.1-87.9s-155.5 31.3-212.1 87.9C143.2 256.5 112 331.8 112 412c0 80.1 31.3 155.5 87.9 212.1C256.5 680.8 331.8 712 412 712c67 0 130.6-21.8 182.7-62l259.7 259.6a8.2 8.2 0 0 0 11.6 0l43.6-43.5a8.2 8.2 0 0 0 0-11.6zM570.4 570.4C528 612.7 471.8 636 412 636s-116-23.3-158.4-65.6C211.3 528 188 471.8 188 412s23.3-116.1 65.6-158.4C296 211.3 352.2 188 412 188s116.1 23.2 158.4 65.6S636 352.2 636 412s-23.3 116.1-65.6 158.4z">
-                    </path>
-                  </svg>
-                </button>
-                <button class="weather-component__button-microphone voice-command-btn" aria-label="speak" id="microphone-button" title="Ask me about weather!">
-                  <svg style="color: white" xmlns="http://www.w3.org/2000/svg" width="20" height="20"
-                    fill="#ffffff" class="bi bi-mic" viewBox="0 0 16 16">
-                    <path
-                      d="M3.5 6.5A.5.5 0 0 1 4 7v1a4 4 0 0 0 8 0V7a.5.5 0 0 1 1 0v1a5 5 0 0 1-4.5 4.975V15h3a.5.5 0 0 1 0 1h-7a.5.5 0 0 1 0-1h3v-2.025A5 5 0 0 1 3 8V7a.5.5 0 0 1 .5-.5z"
-                      fill="#ffffff"></path>
-                    <path d="M10 8a2 2 0 1 1-4 0V3a2 2 0 1 1 4 0v5zM8 0a3 3 0 0 0-3 3v5a3 3 0 0 0 6 0V3a3 3 0 0 0-3-3z"
-                      fill="#ffffff"></path>
-                  </svg>
-                </button>
-                <div class="voice-status" id="voice-status"></div>
-
-              </div>
-               <div id="error-message" class="error-message" role="alert" aria-live="polite" hidden></div>  
-            </div>
-              <!-- Interactive Map (Leaflet + Esri World Imagery) -->
-
-              <div class="map-box">
-                <div class="map-city-label" id="map-city-label"></div>
-
-                  <div id="weather-map"></div>
-
-
+                <div class="search-buttons">
+                  <button class="weather-component__button" aria-label="Search for weather">
+                    <i class="fas fa-search"></i>
+                  </button>
+                  <button class="weather-component__button-microphone voice-command-btn" 
+                          aria-label="Voice search" id="microphone-button" title="Ask me about weather!">
+                    <i class="fas fa-microphone"></i>
+                  </button>
                 </div>
-              <div id="weather" class="weather-component__data loading">
-                <h1 id="city" class="weather-component__city-name fw-bold">___</h1>
+              </div>
+              <div id="error-message" class="error-message" role="alert" aria-live="polite" hidden></div>
+              <div class="voice-status" id="voice-status"></div>
+            </div>
 
-                <h2 id="temp" class="weather-component__city-temperature fw-bold display-1">32°C</h2>
+            <!-- Weather Data Section -->
+            <div id="weather" class="weather-component__data loading">
+              
+              <!-- City and Temperature -->
+              <div class="weather-main-info">
+                <h1 id="city" class="weather-component__city-name">___</h1>
+                <h2 id="temp" class="weather-component__city-temperature">32°C</h2>
+              </div>
 
-                <div class="weather-component__data-wrapper">
-
-
-                <!-- weather icon + description -->
-
-
+              <!-- Weather Icon and Description -->
+              <div class="weather-icon-section">
                 <figure class="weather-component__icn">
                   <img class="icon" src="https://openweathermap.org/img/wn/04n.png" alt="Partly Cloudy" id="icon" />
-                  <figcaption class="text-uppercase text-wrap" id="description">___</figcaption>
+                  <figcaption id="description">___</figcaption>
                 </figure>
+              </div>
 
-                <!-- 2x2 grid  -->
-
-                <div class="weather-component__grid">
-                  <!-- Humidity -->
-                  <div class="grid-item">
-                    <div class="heading">
-                      <h6>Humidity</h6>
-                      <i class="fa-solid fa-droplet"></i>
-
-                    </div>
-                    <div class="data">
-                      <span id="humidity">
-                        <a href="https://en.wikipedia.org/wiki/Humidity"></a>: 60%
-                      </span>
-                    </div>
-
-
+              <!-- Weather Details Grid -->
+              <div class="weather-component__grid">
+                <div class="grid-item">
+                  <div class="heading">
+                    <h6>Humidity</h6>
+                    <i class="fa-solid fa-droplet"></i>
                   </div>
-
-                  <!-- Wind -->
-                  <div class="grid-item">
-                    <div class="heading">
-                      <h6>Wind Speed</h6>
-                      <i class="fa-solid fa-flag"></i>
-
-                    </div>
-                    <div class="data">
-                      <span id="wind">
-                        <a href="https://en.wikipedia.org/wiki/Wind_speed">Wind speed</a>: 6.2 km/h
-                      </span>
-                    </div>
-
-
-                  </div>
-
-                  <!-- Air Quality -->
-                  <div class="grid-item-air-quality">
-                    <div class="heading">
-                      <h6>Air Quality</h6>
-                      <i class="fa-solid fa-wind"></i>
-                    </div>
-
-                    <span id="AirQuality">Air Quality: 75</span>
-                    <span class="air-quality-label">Satisfactory</span>
-                  </div>
-
-                  <!-- Sunrise & Sunset -->
-                  <div class="grid-item-sun">
-                    <div class="sunrise">
-                      <div class="heading">
-                        <h6>Sunrise</h6>
-                        <i class="fa-solid fa-sun"></i>
-                      </div>
-                      <span id="sunrise">
-                        <a href="https://en.wikipedia.org/wiki/Sunrise">Sunrise</a>: 5:00 AM
-                      </span>
-                    </div>
-                    <div class="sunset">
-                      <div class="heading">
-                        <h6>Sunset</h6>
-                      </div>
-
-                      <span id="sunset">
-                        <a href="https://en.wikipedia.org/wiki/Sunset">Sunset</a>: 6:00 PM
-                      </span>
-                    </div>
-
+                  <div class="data">
+                    <span id="humidity">60%</span>
                   </div>
                 </div>
 
-              </div>
+                <div class="grid-item">
+                  <div class="heading">
+                    <h6>Wind Speed</h6>
+                    <i class="fa-solid fa-flag"></i>
+                  </div>
+                  <div class="data">
+                    <span id="wind">6.2 km/h</span>
+                  </div>
+                </div>
 
+                <div class="grid-item">
+                  <div class="heading">
+                    <h6>Air Quality</h6>
+                    <i class="fa-solid fa-wind"></i>
+                  </div>
+                  <div class="data">
+                    <span id="AirQuality">75</span>
+                    <span class="air-quality-label">Satisfactory</span>
+                  </div>
+                </div>
 
-
-
-
-
-                <!-- <div class="weather-component__data-wrapper">
-                  <div class="weather-component__desc-primary">
-
-
-                  <div class="weather-component__desc-secondary d-flex ">
-                    <div class="d-flex flex-1 flex-column" style="margin-top: 10px;">
-                      <figure class="d-flex flex-1 flex-row humidity ms-0">
-                        <img src="./assets/icons/humidity.png" alt="Humidity" class="humidity-img">
-                        <figcaption id="humidity"><a href="https://en.wikipedia.org/wiki/Humidity">Humidity</a>: 60%
-                        </figcaption>
-                      </figure>
-
-
-
-                      <div class="d-flex flex-1 flex-row wind ms-0"><img src="./assets/icons/wind.png" alt="Wind Speed"
-                          class="wind-img">
-                        <div id="wind"><a href="https://en.wikipedia.org/wiki/Wind_speed">Wind speed</a>: 6.2 km/h
-                        </div>
-                      </div>
-
-
-
+                <div class="grid-item">
+                  <div class="heading">
+                    <h6>Sun Times</h6>
+                    <i class="fa-solid fa-sun"></i>
+                  </div>
+                  <div class="data sun-times">
+                    <div class="sun-time">
+                      <span class="sun-label">Sunrise:</span>
+                      <span id="sunrise">5:00 AM</span>
                     </div>
-
-
-
-                     <div class="d-flex flex-1 flex-column">
-                      <div class="class 1">
-                        <div class="weather-component__AQI" style="display: flex; flex-direction: column;">
-                          <div id="AirQuality">Air Quality: 75
-                          </div>
-                          <div class="air-quality-label ml-0">Satisfactory</div>
-                        </div>
-                      </div>
-                      </div>
-                      <div class="class2">
-
-                        <figure class="d-flex flex-1 flex-row sunrise me-0 justify-content-end">
-                          <img src="./assets/icons/sunrise (2).png" alt="Sunrise" class="sunrise-img">
-                          <figcaption id="sunrise"><a href="https://en.wikipedia.org/wiki/Sunrise">Sunrise</a>:5:00AM
-                          </figcaption>
-                        </figure>
-
-
-                        <figure class="d-flex flex-1 flex-row sunset me-0 justify-content-end"><img
-                            src="./assets/icons/sunset (1).png" alt="Sunset" class="sunset-img">
-                          <figcaption id="sunset" style="margin-right: 0.65rem;"><a href="https://en.wikipedia.org/wiki/Sunset">Sunset</a>:6:00AM
-                          </figcaption>
-                        </figure>
-                      </div>
-
+                    <div class="sun-time">
+                      <span class="sun-label">Sunset:</span>
+                      <span id="sunset">6:00 PM</span>
                     </div>
                   </div>
-
-                </div> -->
-
-              </div>
-
-            </div>
-          </div>
-        </div>
-        <!-- Commenting out the Forecast cards since they were not visible in the final site as well. will incorporate them seperately in future builds -->
-        <!-- <div class="col" style="margin-top: 3.5rem;">
-          <div class="forecast-component p-2 overflow-hidden text-white w-100">
-            <div class="forecast-component__items-wrapper transition overflow-hidden " id="weather-forecast">
-              <div class="forecast-component__item rounded text-center" id="weather-forecast-item">
-                <div>Mon</div>
-                <figure class="forecast-img">
-                  <img src="http://openweathermap.org/img/wn/10d@2x.png" alt="weather icon">
-                </figure>
-                <div>Day - 35.6&#176; C</div>
-                <div>Night - 25.6&#176; C</div>
-                <div>view more</div>
+                </div>
               </div>
             </div>
-          </div>
-        </div> -->
-  </section>
 
-  <!-- Weather Mood Recommendations Section -->
-  <section class="mood-section pt-4">
-    <div class="container">
-      <div class="row justify-content-center">
-        <div class="col-12 col-md-10 col-lg-8">
-          <div class="mood-recommendations-card text-white rounded-5">
-            <h3 class="text-center mb-3">🌟 Weather Mood & Activity Suggestions</h3>
-            <div id="mood-recommendations" class="mood-content">
-              <div class="mood-loading">Analyzing weather conditions for personalized suggestions...</div>
+            <!-- Interactive Map -->
+            <div class="map-section">
+              <div class="map-box">
+                <div id="weather-map"></div>
+                <div class="map-city-label" id="map-city-label"></div>
+              </div>
             </div>
+
           </div>
         </div>
       </div>
     </div>
+  </main>
   </section>
 
-  <!-- Weather Time Machine Section -->
-  <section class="time-machine-section pt-4">
+  <!-- Additional Features Section -->
+  <section class="additional-features">
     <div class="container">
       <div class="row justify-content-center">
-        <div class="col-12 col-md-10 col-lg-8">
-          <div class="time-machine-card text-white rounded-5">
-            <h3 class="text-center mb-3">⏰ Weather Time Machine</h3>
-            <div class="time-machine-controls text-center mb-3">
-              <button id="time-machine-btn" class="btn btn-primary me-2">View This Day in History</button>
-              <select id="year-selector" class="form-select d-inline-block w-auto">
+        <div class="col-12 col-lg-10">
+          
+          <!-- Weather Mood Recommendations -->
+          <div class="feature-card mood-recommendations-card">
+            <h3 class="feature-title">🌟 Weather Mood & Activity Suggestions</h3>
+            <div id="mood-recommendations" class="mood-content">
+              <div class="mood-loading">Analyzing weather conditions for personalized suggestions...</div>
+            </div>
+          </div>
+
+          <!-- Weather Time Machine -->
+          <div class="feature-card time-machine-card">
+            <h3 class="feature-title">⏰ Weather Time Machine</h3>
+            <div class="time-machine-controls">
+              <button id="time-machine-btn" class="feature-btn">View This Day in History</button>
+              <select id="year-selector" class="year-select">
                 <option value="2024">2024</option>
                 <option value="2023">2023</option>
                 <option value="2022">2022</option>
                 <option value="2021">2021</option>
                 <option value="2020">2020</option>
-                <option value="2019">2019</option>
-                <option value="2018">2018</option>
-                <option value="2017">2017</option>
-                <option value="2016">2016</option>
-                <option value="2015">2015</option>
               </select>
             </div>
             <div id="historical-weather" class="historical-content">
               <div class="historical-placeholder">Select a year to explore weather history!</div>
             </div>
           </div>
-        </div>
-      </div>
-    </div>
-  </section>
 
-  <!-- Interactive Weather Globe Section -->
-  <section class="globe-section pt-4">
-    <div class="container">
-      <div class="row justify-content-center">
-        <div class="col-12 col-md-10 col-lg-8">
-          <div class="globe-card text-white rounded-5">
-            <h3 class="text-center mb-3">🌍 Interactive Weather Globe</h3>
+          <!-- Interactive Weather Globe -->
+          <div class="feature-card globe-card">
+            <h3 class="feature-title">🌍 Interactive Weather Globe</h3>
             <div id="weather-globe" class="globe-container">
               <div class="globe-wrapper">
                 <div class="globe" id="animated-globe">
                   <div class="globe-sphere"></div>
-                  <div class="globe-markers" id="globe-markers">
-                    <!-- Weather markers will be added dynamically -->
-                  </div>
+                  <div class="globe-markers" id="globe-markers"></div>
                 </div>
                 <div class="globe-controls">
                   <button class="globe-btn" data-region="americas">🌎 Americas</button>
@@ -375,6 +224,7 @@
               </div>
             </div>
           </div>
+
         </div>
       </div>
     </div>
@@ -390,7 +240,7 @@
   </div>
 
   <!-- Weather Safety Tips Modal -->
-  <div class="modal-overlay" id="safety-modal-overlay" style="display: none;">
+  <div class="modal-overlay" id="safety-modal-overlay">
     <div class="safety-modal">
       <div class="modal-header">
         <h3>⚠️ Weather Safety Tips</h3>
@@ -403,37 +253,31 @@
   </div>
 
 
-  <footer>
-
-    <a href="#top" class="smoothscroll scroll-top">
-      <span class="icon-keyboard_arrow_up"></span>
-    </a>
-
-    <div>
-      <h2 class="textfooter">
-        Made with 💝 Avinash Singh
-      </h2>
-
-      <div class="footerSection">
-        <ul style="list-style: none;margin:0;padding:0;color: white; display: inline-flex;">
-          <li>
-            <a href="https://github.com/avinash201199" target="_blank">
-              <i class="socialIcons fab fa-github fa-3x link1"></i>
-          </li>
-          <li>
-            <a href="https://www.linkedin.com/in/avinash-singh-bb0b8a371/" target="_blank">
-              <i class="fab fa-linkedin-in fa-3x link2"></i>
-          </li>
-          <li>
-            <a href="https://www.instagram.com/lets__code/" target="_blank">
-              <i class="fab fa-instagram fa-3x link3"></i>
-          </li>
-          <li>
-            <a href="https://twitter.com/Lets__Code/" target="_blank">
-              <i class="fa-brands fa-x-twitter fa-3x link4"></i>
-            </li>
-        </ul>
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-content">
+        <div class="footer-text">
+          <h2>Made with 💝 by Avinash Singh</h2>
+        </div>
+        <div class="social-links">
+          <a href="https://github.com/avinash201199" target="_blank" rel="noopener noreferrer" class="social-link">
+            <i class="fab fa-github"></i>
+          </a>
+          <a href="https://www.linkedin.com/in/avinash-singh-bb0b8a371/" target="_blank" rel="noopener noreferrer" class="social-link">
+            <i class="fab fa-linkedin-in"></i>
+          </a>
+          <a href="https://www.instagram.com/lets__code/" target="_blank" rel="noopener noreferrer" class="social-link">
+            <i class="fab fa-instagram"></i>
+          </a>
+          <a href="https://twitter.com/Lets__Code/" target="_blank" rel="noopener noreferrer" class="social-link">
+            <i class="fab fa-x-twitter"></i>
+          </a>
+        </div>
       </div>
+      <a href="#top" class="scroll-top">
+        <i class="fas fa-chevron-up"></i>
+      </a>
     </div>
   </footer>
 
