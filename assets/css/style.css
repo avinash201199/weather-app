@@ -326,6 +326,7 @@ body {
   background: linear-gradient(135deg, rgba(15, 32, 39, 0.6), rgba(32, 58, 67, 0.5), rgba(44, 83, 100, 0.4));
   box-shadow: 0 0 25px rgba(0, 255, 255, 0.1), inset 0 0 20px rgba(255, 255, 255, 0.05);
   border: 1px solid rgba(255, 255, 255, 0.1);
+  box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
   border-radius: 25px;
   backdrop-filter: blur(12px);
   color: #fff;
@@ -824,41 +825,60 @@ footer {
 }
 
 .label {
-  width: 85px;
+  width: 80px;
   height: 40px;
-  background-color: #111;
+  background-color: rgba(0, 0, 0, 0.25);
+  border: 1px solid rgba(255, 255, 255, 0.2);
   display: flex;
   border-radius: 50px;
   align-items: center;
   justify-content: space-between;
-  padding: 15px;
+  padding: 5px;
   position: relative;
   transform: scale(1);
+  transition: background-color 0.3s ease;
 }
 
 .ball {
-  width: 35px;
-  height: 35px;
-  background-color: white;
+  width: 30px;
+  height: 30px;
+  background-color: #fff;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.2);
   position: absolute;
-  top: 2px;
-  left: 2px;
+  top: 4px;
+  left: 5px;
   border-radius: 50%;
-  transition: transform 0.2s linear;
+  transition: transform 0.3s cubic-bezier(0.68, -0.55, 0.27, 1.55);
 }
 
 .checkbox:checked + .label .ball {
-  transform: translateX(45px);
+  transform: translateX(35px);
+}
+
+.checkbox:checked + .label {
+  background-color: #4a90e2;
 }
 
 .celcius {
   color: white;
   font-size: 15px;
+  padding-left: 10px;
+  transition: color 0.3s ease;
 }
 
 .farenheit {
   color: white;
   font-size: 15px;
+}
+
+.checkbox:checked + .label .celcius {
+  color: #fff;
+  font-weight: bold;
+}
+
+.checkbox:not(:checked) + .label .farenheit {
+  color: #fff;
+  font-weight: bold;
 }
 
 .link1 {
@@ -984,8 +1004,8 @@ html body #scroll-btn {
   color: #fff;
   background-color: deepskyblue;
   position: fixed;
-  bottom: 7%;
-  right: 5%;
+  bottom: 20%;
+  right: 10%;
   border: 2px solid #fff;
   border-radius: 50%;
   font: bold 20px monospace;
@@ -1130,18 +1150,21 @@ html body #scroll-btn {
     color: #000 !important;
 }
 
-/* === Weather search error message === */
-.error-message[hidden] {
-  display: none !important;
+.data-value {
+  font-weight: bold;
 }
 
-.error-message {
-  margin-top: 8px;
-  padding: 10px 12px;
-  border-radius: 10px;
-  background: #fee2e2;      /* soft red */
-  color: #7f1d1d;            /* dark red text */
-  border: 1px solid #fecaca; /* red border */
-  font-size: 0.95rem;
-  line-height: 1.35;
+.last-updated {
+  font-size: 0.75rem;
+  color: rgba(255, 255, 255, 0.7);
+  text-align: center;
+  margin-top: 15px;
+}
+
+.weather-component__card.night {
+  background: linear-gradient(135deg, rgba(15, 32, 39, 0.7), rgba(32, 58, 67, 0.6), rgba(44, 83, 100, 0.5));
+}
+
+.weather-component__card.day {
+  background: linear-gradient(135deg, rgba(74, 144, 226, 0.5), rgba(30, 144, 255, 0.4));
 }
