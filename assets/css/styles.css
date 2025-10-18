@@ -1,29 +1,36 @@
 @keyframes fadeIn {
-  from {
+  0% {
     opacity: 0;
-    transform: translateY(-20px);
+    transform: translateY(-20px) scale(0.95);
   }
-  to {
+  50% {
+    transform: translateY(5px) scale(1.02);
+  }
+  100% {
     opacity: 1;
-    transform: translateY(0);
+    transform: translateY(0) scale(1);
   }
 }
 
 @keyframes textGlow {
   0% {
-    text-shadow: 0 0 5px rgba(255, 255, 255, 0.5);
+    text-shadow: 0 0 5px rgba(255, 255, 255, 0.5),
+      0 0 10px rgba(135, 206, 235, 0.3);
   }
   50% {
-    text-shadow: 0 0 15px rgba(255, 255, 255, 0.8);
+    text-shadow: 0 0 15px rgba(255, 255, 255, 0.8),
+      0 0 20px rgba(135, 206, 235, 0.6);
   }
   100% {
-    text-shadow: 0 0 5px rgba(255, 255, 255, 0.5);
+    text-shadow: 0 0 5px rgba(255, 255, 255, 0.5),
+      0 0 10px rgba(135, 206, 235, 0.3);
   }
 }
 
 .logo-title {
-  animation: fadeIn 1s ease-out, textGlow 3s infinite;
+  animation: fadeIn 1.2s cubic-bezier(0.4, 0, 0.2, 1), textGlow 4s infinite;
   font-weight: 600;
+  letter-spacing: 0.5px;
 }
 
 .header-component {
@@ -63,37 +70,62 @@
 }
 
 @keyframes slideIn {
-  from {
+  0% {
     opacity: 0;
-    transform: translateX(-30px);
+    transform: translateX(-30px) rotateY(-10deg);
   }
-  to {
+  70% {
+    transform: translateX(5px) rotateY(5deg);
+  }
+  100% {
     opacity: 1;
-    transform: translateX(0);
+    transform: translateX(0) rotateY(0);
   }
 }
 
-@keyframes pulseText {
+@keyframes weatherFloat {
   0% {
-    transform: scale(1);
+    transform: translateY(0) scale(1);
   }
   50% {
-    transform: scale(1.05);
+    transform: translateY(-5px) scale(1.03);
   }
   100% {
-    transform: scale(1);
+    transform: translateY(0) scale(1);
+  }
+}
+
+@keyframes conditionFade {
+  0% {
+    opacity: 0.7;
+    filter: blur(0.5px);
+  }
+  50% {
+    opacity: 1;
+    filter: blur(0);
+  }
+  100% {
+    opacity: 0.7;
+    filter: blur(0.5px);
   }
 }
 
 h1,
 h2,
 h3 {
-  animation: slideIn 0.8s ease-out;
+  animation: slideIn 1s cubic-bezier(0.34, 1.56, 0.64, 1);
+  transform-origin: left center;
 }
 
 .temperature {
-  animation: pulseText 2s infinite;
-  transition: all 0.3s ease;
+  animation: weatherFloat 3s infinite ease-in-out;
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  font-weight: 500;
+}
+
+.weather-condition {
+  animation: conditionFade 4s infinite ease-in-out;
+  letter-spacing: 0.3px;
 }
 
 .header-component::after {
