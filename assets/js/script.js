@@ -439,10 +439,7 @@ const getAirQualityClass = (aqi) => {
 };
 
 let weather = {
-  // Show loading state
-  setLoading: function(isLoading) {
-    document.querySelector('.weather-component__card').classList.toggle('loading-state', isLoading);
-  },
+
   fetchWeather: async function (city = null, lat = null, lon = null) {
     let url;
 
@@ -479,11 +476,7 @@ let weather = {
         `&lang=${translations[userLang].apiLang}`;
     }
 
-    this.setLoading(true);
-    try {
-      const response = await fetch(url);
-      if (!response.ok) {
-        toastFunction(`${translations[userLang].noWeatherFound}`);
+
         document.getElementById("city").innerHTML = "City not Found";
         document.getElementById("temp").style.display = "none";
         document.querySelector(".weather-component__data-wrapper").style.display = "none";
@@ -681,6 +674,21 @@ let weather = {
 
       try {
         const response = await fetch(apiUrl, {
+          method: "GET",
+          headers: {
+            Authorization: apiKey,
+          },
+        });
+        const data = await response.json();
+        if (data.photos && data.photos.length > 0) {
+          const randomIndex = Math.floor(Math.random() * data.photos.length);
+          const url = data.photos[randomIndex].src.large2x;
+          document.getElementById(
+            "background"
+          ).style.backgroundImage = `url(${url})`;
+        }
+      } catch (error) {
+        console.error("Error fetching background image:", error);
           headers: { Authorization: apiKey },
         });
         const data = await response.json();
@@ -693,10 +701,20 @@ let weather = {
         console.error("Failed to fetch background from Pexels:", error);
       }
     } else {
-      toastFunction(translations[userLang].pleaseAddLocation);
+      toastFunction(translations[userLang].pleaseAddLocation, 'warning', 3000);
     }
   },
 };
+
+async function getWeatherWeekly(url) {
+  try {
+    const res = await fetch(url);
+    const data = await res.json();
+    showWeatherData(data);
+  } catch (error) {
+    console.error("Error fetching weekly weather:", error);
+  }
+}
 
 function generateWeatherItem(
   dayString,
@@ -771,15 +789,81 @@ function showWeatherData(data) {
     container.appendChild(element);
   });
 }
-//toast function
-function toastFunction(val) {
-  var x = document.getElementById("toast");
-  x.className = "show";
-  //change inner text
-  document.getElementById("toast").innerText = val;
-  setTimeout(function () {
-    x.className = x.className.replace("show", "");
-  }, 3000);
+// Enhanced Toast Notification System
+function toastFunction(message, type = 'info', duration = 4000) {
+  const toast = document.getElementById("toast");
+  const toastMessage = document.getElementById("toast-message");
+  const toastClose = document.getElementById("toast-close");
+
+  // Safety check for DOM elements — if missing, fallback to console
+  if (!toast || !toastMessage || !toastClose) {
+    console.error("Toast elements not found in DOM");
+    console.log(`Toast ${type.toUpperCase()}: ${message}`);
+    return;
+  }
+
+  // Clear any existing timeouts
+  if (toast.hideTimeout) {
+    clearTimeout(toast.hideTimeout);
+    toast.hideTimeout = null;
+  }
+
+  // Populate message and type
+  toastMessage.textContent = message;
+  // ensure other type classes removed
+  toast.classList.remove('error', 'success', 'warning', 'info');
+  toast.classList.add('show');
+  if (type && typeof type === 'string') toast.classList.add(type);
+
+  // Accessibility: expose to assistive tech
+  toast.setAttribute('aria-hidden', 'false');
+  toast.setAttribute('role', 'status');
+  toast.setAttribute('aria-live', 'polite');
+
+  // Keep track of previously focused element to restore later
+  const previouslyFocused = document.activeElement;
+  try {
+    toast.setAttribute('tabindex', '-1');
+    toast.focus({ preventScroll: true });
+  } catch (e) {
+    // ignore focus failures
+  }
+
+  // Auto-hide
+  toast.hideTimeout = setTimeout(() => {
+    hideToast();
+  }, duration);
+
+  // Remove any previous click handler then add new
+  toastClose.onclick = null;
+  toastClose.addEventListener('click', function onCloseClick(e) {
+    e.preventDefault();
+    if (toast.hideTimeout) {
+      clearTimeout(toast.hideTimeout);
+      toast.hideTimeout = null;
+    }
+    hideToast();
+  }, { once: true });
+
+  function hideToast() {
+    toast.classList.remove('show');
+    toast.classList.add('hide');
+
+    // After animation, reset state
+    setTimeout(() => {
+      toast.className = 'toast';
+      toast.setAttribute('aria-hidden', 'true');
+      try { toast.removeAttribute('tabindex'); } catch (e) {}
+      if (toast.hideTimeout) {
+        clearTimeout(toast.hideTimeout);
+        toast.hideTimeout = null;
+      }
+      // restore focus
+      try {
+        if (previouslyFocused && previouslyFocused.focus) previouslyFocused.focus();
+      } catch (e) {}
+    }, 300);
+  }
 }
 document
   .querySelector(".weather-component__search button")
@@ -915,7 +999,7 @@ function initLocationAndWeather() {
         } else {
           errorMessage = `${translations[userLang].locationError}`;
         }
-        toastFunction(errorMessage);
+        toastFunction(errorMessage, 'error', 5000);
 
 
         // We already loaded fallback above; keep UI responsive
@@ -929,7 +1013,7 @@ function initLocationAndWeather() {
     );
   } else {
     // If browser doesn't support geolocation at all
-    toastFunction(`${translations[userLang].notSupported}`);
+    toastFunction(`${translations[userLang].notSupported}`, 'error', 5000);
     weather.fetchWeather("London");
   }
 }
