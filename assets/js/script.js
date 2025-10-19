@@ -3,6 +3,49 @@ import CITY from "./City.js";
 import { translations, getUserLanguage } from "../../lang/translation.js";
 import config from "./../../config/config.js";
 
+// ===== Error handling helpers (top of script.js) =====
+const errorEl = document.getElementById('error-message');
+
+function setError(message) {
+  if (!errorEl) return;
+  if (!message) {
+    errorEl.textContent = '';
+    errorEl.hidden = true;
+  } else {
+    errorEl.textContent = message;
+    errorEl.hidden = false;
+  }
+}
+
+// ===== Wire search events (once) =====
+const searchInput = document.querySelector('.weather-component__search-bar');
+const searchBtn   = document.querySelector('.weather-component__button');
+
+if (searchBtn && searchInput) {
+  // Click button
+  searchBtn.addEventListener('click', () => {
+    const city = (searchInput.value || '').trim();
+    if (!city) {
+      setError('Please enter a city name.');
+      return;
+    }
+    safeFetchWeather(city);
+  });
+
+  // Press Enter in input
+  searchInput.addEventListener('keydown', (e) => {
+    if (e.key === 'Enter') {
+      const city = (searchInput.value || '').trim();
+      if (!city) {
+        setError('Please enter a city name.');
+        return;
+      }
+      safeFetchWeather(city);
+    }
+  });
+}
+
+
 // Weather Alerts System
 class WeatherAlerts {
   constructor() {
@@ -384,32 +427,6 @@ function updateMapView(lat, lon, cityLabel) {
     console.error('Map update error:', e);
   }
 }
-function initMap() {
-            const mapEl = document.getElementById('weather-map');
-            // In a real application, you would initialize Leaflet or Google Maps here
-            // e.g., const map = L.map('weather-map').setView([51.505, -0.09], 13);
-            console.log('Map initialized in placeholder.');
-        }
-
-        // The logic to update the label text
-        function updateMapLabel(cityLabel) {
-            try {
-                const labelEl = document.getElementById('map-city-label');
-                if (labelEl) {
-                    // Set the content of the label
-                    labelEl.textContent = cityLabel || '';
-                }
-            } catch (e) {
-                console.error('Map update error:', e);
-            }
-        }
-
-        // Example usage: Set the label after the "map" loads
-        window.onload = function() {
-            initMap();
-            // Simulate receiving the city data
-            updateMapLabel("Currently Viewing: Tokyo, Japan");
-        };
 const AirQuality = (city) => {
   fetchAirQuality(city)
     .then((aqi) => updateAirQuality(aqi))
@@ -536,7 +553,11 @@ const getAirQualityClass = (aqi) => {
 };
 
 let weather = {
-  fetchWeather: function (city = null, lat = null, lon = null) {
+  // Show loading state
+  setLoading: function(isLoading) {
+    document.querySelector('.weather-component__card').classList.toggle('loading-state', isLoading);
+  },
+  fetchWeather: async function (city = null, lat = null, lon = null) {
     let url;
 
     // Case 1: If latitude & longitude are provided (auto-location)
@@ -625,6 +646,101 @@ let weather = {
         this.hideLoadingState();
         this.handleWeatherError(error, city);
       });
+    this.setLoading(true);
+    try {
+      const response = await fetch(url);
+      if (!response.ok) {
+        toastFunction(`${translations[userLang].noWeatherFound}`);
+        document.getElementById("city").innerHTML = "City not Found";
+        document.getElementById("temp").style.display = "none";
+        document.querySelector(".weather-component__data-wrapper").style.display = "none";
+        throw new Error(`${translations[userLang].noWeatherFound}`);
+      }
+      const data = await response.json();
+      document.getElementById("temp").style.display = "block";
+      document.querySelector(".weather-component__data-wrapper").style.display = "block";
+      this.displayWeather(data, city);
+    } catch (error) {
+      console.error("Error fetching weather:", error);
+    } finally {
+      this.setLoading(false);
+    }
+  },
+
+  getWeatherIcon: function(iconCode) {
+    const iconMap = {
+      '01d': 'fa-sun',
+      '01n': 'fa-moon',
+      '02d': 'fa-cloud-sun',
+      '02n': 'fa-cloud-moon',
+      '03d': 'fa-cloud',
+      '03n': 'fa-cloud',
+      '04d': 'fa-cloud',
+      '04n': 'fa-cloud',
+      '09d': 'fa-cloud-showers-heavy',
+      '09n': 'fa-cloud-showers-heavy',
+      '10d': 'fa-cloud-sun-rain',
+      '10n': 'fa-cloud-moon-rain',
+      '11d': 'fa-bolt',
+      '11n': 'fa-bolt',
+      '13d': 'fa-snowflake',
+      '13n': 'fa-snowflake',
+      '50d': 'fa-smog',
+      '50n': 'fa-smog',
+    };
+    return iconMap[iconCode] || 'fa-question-circle';
+  },
+
+  getUVIndexDescription: function(uvi) {
+    if (uvi <= 2) {
+      return { text: "Low", tip: "No protection needed.", className: "uvi-low" };
+    } else if (uvi <= 5) {
+      return { text: "Moderate", tip: "Sunscreen recommended.", className: "uvi-moderate" };
+    } else if (uvi <= 7) {
+      return { text: "High", tip: "Wear a hat and sunglasses.", className: "uvi-high" };
+    } else if (uvi <= 10) {
+      return { text: "Very High", tip: "Seek shade during midday.", className: "uvi-very-high" };
+    } else {
+      return { text: "Extreme", tip: "Avoid being outside.", className: "uvi-extreme" };
+    }
+  },
+
+  fetchUVIndex: async function (lat, lon) {
+    try {
+      const uvUrl = `https://api.openweathermap.org/data/2.5/uvi?lat=${lat}&lon=${lon}&appid=${config.API_KEY}`;
+      const response = await fetch(uvUrl);
+      if (!response.ok) {
+        throw new Error("Failed to fetch UV index.");
+      }
+      const uvData = await response.json();
+      this.updateUVIndex(uvData.value);
+    } catch (error) {
+      console.error("Error fetching UV index:", error);
+    }
+  },
+  updateUVIndex: function(uvi) {
+    const uviValueElement = document.getElementById('uvi');
+    const uviTextElement = document.getElementById('uvi-text');
+    const uviGridItem = document.querySelector('.grid-item-uvi');
+
+    if (uviValueElement && uviTextElement && uviGridItem) {
+      const uviValue = Math.round(uvi);
+      const { text, tip, className } = this.getUVIndexDescription(uviValue);
+
+      uviValueElement.textContent = uviValue;
+      uviTextElement.textContent = `${text} - ${tip}`;
+
+      // Remove old classes and add the new one for styling
+      uviGridItem.classList.remove('uvi-low', 'uvi-moderate', 'uvi-high', 'uvi-very-high', 'uvi-extreme');
+      uviGridItem.classList.add(className);
+    }
+  },
+
+  updateLastUpdated: function() {
+    const now = new Date();
+    const timeString = now.toLocaleTimeString(translations[userLang].formattingLocale, { hour: '2-digit', minute: '2-digit' });
+    const lastUpdatedElement = document.getElementById('last-updated');
+    lastUpdatedElement.textContent = `Last updated at ${timeString}`;
   },
 
 
@@ -642,27 +758,36 @@ let weather = {
     // Check weather conditions for alerts
     setTimeout(() => {
       weatherAlerts.checkWeatherConditions(data);
+      if (voiceCommands) {
+        voiceCommands.updateMoodRecommendations();
+      }
     }, 1000); // Delay to ensure air quality data is loaded
 
-    document
-      .getElementById("icon")
-      .addEventListener("click", changeBackgroundImage);
+    // Update background based on time of day
+    const weatherCard = document.querySelector('.weather-component__card');
+    const isNight = icon.includes('n');
+    weatherCard.classList.toggle('night', isNight);
+    weatherCard.classList.toggle('day', !isNight);
 
     document.getElementById("dynamic").innerText =
       `${translations[userLang].weatherIn} ` + name;
 
     document.getElementById("city").innerText =
-      `${translations[userLang].weatherIn} ` + name;
+      name;
 
     // Update interactive map view
     updateMapView(lat, lon, name);
 
-    document.getElementById(
-      "icon"
-    ).src = `https://openweathermap.org/img/wn/${icon}.png`;
+    // Update weather icon
+    const iconElement = document.getElementById("icon");
+    iconElement.className = `fas ${this.getWeatherIcon(icon)} fa-3x`;
+    iconElement.addEventListener("click", changeBackgroundImage);
 
     document.getElementById("description").innerText = description;
 
+    // Add transition class to temperature
+    const tempElement = document.getElementById("temp");
+    tempElement.style.transition = 'all 0.4s ease-in-out';
     let temperature = temp;
 
     if (!isCelcius) {
@@ -672,7 +797,7 @@ let weather = {
     } else {
       temperature = temperature + "°C";
     }
-    document.getElementById("temp").innerText = temperature;
+    tempElement.innerText = temperature;
 
     document.getElementById("humidity").innerText = `${humidity}%`;
 
@@ -686,8 +811,9 @@ let weather = {
 
     document.getElementById("sunset").innerText = `${formatAMPM(date2)}`;
 
-    let url = `https://api.openweathermap.org/data/2.5/onecall?lat=${lat}&lon=${lon}&units=metric&appid=${config.API_KEY}`;
-    getWeatherWeekly(url);
+    this.updateLastUpdated();
+
+    this.fetchUVIndex(lat, lon);
     document
       .getElementById("whatsapp-button")
       .replaceWith(document.getElementById("whatsapp-button").cloneNode(true));
@@ -710,7 +836,7 @@ let weather = {
         window.open(whatsappUrl, "_blank");
       });
   },
-  search: function () {
+  search: async function () {
     if (document.querySelector(".weather-component__search-bar").value != "") {
       selectedCity = document.querySelector(
         ".weather-component__search-bar"
@@ -719,6 +845,23 @@ let weather = {
       // Enhanced background image fetch with error handling
       this.fetchCityBackground(selectedCity);
       //url = "";
+      
+      const apiKey = "OOjKyciq4Sk0Kla7riLuR2j8C9FwThFzKIKIHrpq7c27KvrCul5rVxJj";
+      const apiUrl = `https://api.pexels.com/v1/search?query=${selectedCity}&orientation=landscape`;
+
+      try {
+        const response = await fetch(apiUrl, {
+          headers: { Authorization: apiKey },
+        });
+        const data = await response.json();
+        if (data.photos && data.photos.length > 0) {
+            const randomIndex = Math.floor(Math.random() * data.photos.length);
+            const url = data.photos[randomIndex].src.large2x;
+            document.getElementById("background").style.backgroundImage = `url(${url})`;
+        }
+      } catch (error) {
+        console.error("Failed to fetch background from Pexels:", error);
+      }
     } else {
       toastFunction(translations[userLang].pleaseAddLocation);
     }
@@ -854,54 +997,6 @@ let weather = {
     img.src = fallbackUrl;
   }
 };
-
-async function getWeatherWeekly(url) {
-  const controller = new AbortController();
-  const timeoutId = setTimeout(() => controller.abort(), 10000);
-
-  try {
-    const response = await fetch(url, { 
-      signal: controller.signal,
-      headers: {
-        'Accept': 'application/json'
-      }
-    });
-    
-    clearTimeout(timeoutId);
-    
-    if (!response.ok) {
-      throw new Error(`Weekly weather API error: ${response.status}`);
-    }
-    
-    const data = await response.json();
-    
-    // Validate weekly weather data
-    if (!data || !data.daily || !Array.isArray(data.daily)) {
-      throw new Error('Invalid weekly weather data');
-    }
-    
-    showWeatherData(data);
-    
-  } catch (error) {
-    clearTimeout(timeoutId);
-    handleWeeklyWeatherError(error);
-  }
-}
-
-function handleWeeklyWeatherError(error) {
-  const container = document.getElementById("weather-forecast");
-  
-  if (container) {
-    container.innerHTML = `
-      <div class="forecast-error">
-        <i class="fas fa-exclamation-triangle"></i>
-        <p>${translations[userLang].weeklyForecastError || 'Weekly forecast temporarily unavailable'}</p>
-      </div>
-    `;
-  }
-  
-  console.warn('Weekly Weather Error:', error.message);
-}
 
 function generateWeatherItem(
   dayString,
@@ -1139,13 +1234,6 @@ function initLocationAndWeather() {
   }
 }
 
-
-window.onload = function () {
-  document.getElementsByName("search-bar")[0].focus();
-  fetchNewBackground();
-  initLocationAndWeather(); // This is the single, clean call for the location feature
-};
-scrollTop();
 
 //Fetching Random Landscape Background Image From Unsplash
 const fetchNewBackground = () => {
@@ -1734,6 +1822,8 @@ class WeatherGlobe {
   }
 }
 
+let voiceCommands; // Make voiceCommands globally accessible
+
 // 4. Smart Weather Notifications
 class SmartNotifications {
   constructor() {
@@ -1797,11 +1887,19 @@ class SmartNotifications {
 }
 
 // Initialize all unique features
-document.addEventListener('DOMContentLoaded', () => {
-  const voiceCommands = new VoiceWeatherCommands();
+function initializeApp() {
+  document.getElementsByName("search-bar")[0].focus();
+  fetchNewBackground();
+  initLocationAndWeather();
+  scrollTop();
+  weather.setLoading(true);
+
+  voiceCommands = new VoiceWeatherCommands();
   const timeMachine = new WeatherTimeMachine();
   const weatherGlobe = new WeatherGlobe();
   const smartNotifications = new SmartNotifications();
 
   console.log('🌟 Unique weather features initialized!');
-});
+}
+
+document.addEventListener('DOMContentLoaded', initializeApp);
