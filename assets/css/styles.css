@@ -191,8 +191,8 @@ figure.weather-component__icn {
 
 /* 2x2 grid layout */
 .weather-component__grid {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
+  display: flex;
+  flex-wrap: wrap;
   gap: 1rem;
   /* space between items */
   margin-top: 1rem;
@@ -201,6 +201,7 @@ figure.weather-component__icn {
 .grid-item {
   display: flex;
   flex-direction: column;
+  flex: 1 1 calc(50% - 1rem); /* Flexbox for responsive grid */
   align-items: flex-start;
   background: rgba(255, 255, 255, 0.1);
   /* frosted-glass feel */
@@ -208,6 +209,11 @@ figure.weather-component__icn {
   border-radius: 12px;
   font-size: 0.9rem;
   height: 90px;
+  min-width: 140px; /* Prevent items from getting too small */
+}
+
+.grid-item .data-value {
+  font-weight: bold;
 }
 
 .grid-item img {
@@ -235,6 +241,7 @@ figure.weather-component__icn {
 .grid-item-air-quality{
   display: flex;
     flex-direction: column;
+    flex: 1 1 calc(50% - 1rem);
     gap: 0px;
     align-items: flex-start;
     background: rgba(255, 255, 255, 0.1);
@@ -243,6 +250,7 @@ figure.weather-component__icn {
     border-radius: 12px;
     font-size: 0.9rem;
     height: 90px;
+    min-width: 140px;
 }
 
 .grid-item-air-quality .heading{
@@ -258,6 +266,7 @@ figure.weather-component__icn {
 
 .grid-item-sun{
 
+      flex: 1 1 calc(50% - 1rem);
       display: flex;
       flex-direction: column;
       align-items: flex-start;
@@ -265,18 +274,21 @@ figure.weather-component__icn {
       /* frosted-glass feel */
       padding: 0rem;
       border-radius: 12px;
-      font-size: 0.9rem;
+      font-size: 0.8rem;
       height: 90px;
+      min-width: 140px;
 }
 
 .sunset, .sunrise{
-  width: 137px;
+  width: 100%;
   margin-bottom: 0px;
+  padding: 0.5rem 0.75rem;
 }
 
 .grid-item-sun .sunrise .heading , .grid-item-sun .sunset .heading{
   width: 100%;
   display: flex;
+  align-items: center;
   justify-content: space-between;
 }
 
@@ -284,6 +296,59 @@ figure.weather-component__icn {
   font-size: x-small;
   padding-bottom: 0%;
   margin-bottom: 0rem;
+}
+
+.grid-item-uvi .data {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.grid-item-uvi .data-value {
+  font-size: 1.5rem; /* Make the number bigger */
+  font-weight: bold;
+}
+
+.uvi-description {
+  font-size: 0.8rem;
+  margin-top: 4px;
+  margin-bottom: 0;
+  line-height: 1.2;
+  color: rgba(255, 255, 255, 0.8);
+}
+
+/* UV Index Color Coding */
+.grid-item-uvi.uvi-low {
+  border-left: 5px solid #4caf50; /* Green */
+}
+.grid-item-uvi.uvi-low .data-value { color: #4caf50; }
+
+.grid-item-uvi.uvi-moderate {
+  border-left: 5px solid #ffc107; /* Yellow */
+}
+.grid-item-uvi.uvi-moderate .data-value { color: #ffc107; }
+
+.grid-item-uvi.uvi-high {
+  border-left: 5px solid #ff9800; /* Orange */
+}
+.grid-item-uvi.uvi-high .data-value { color: #ff9800; }
+
+.grid-item-uvi.uvi-very-high {
+  border-left: 5px solid #f44336; /* Red */
+}
+.grid-item-uvi.uvi-very-high .data-value { color: #f44336; }
+
+.grid-item-uvi.uvi-extreme {
+  border-left: 5px solid #9c27b0; /* Purple */
+}
+.grid-item-uvi.uvi-extreme .data-value { color: #9c27b0; }
+
+
+.last-updated {
+  font-size: 0.75rem;
+  color: rgba(255, 255, 255, 0.7);
+  text-align: center;
+  margin-top: 15px;
 }
 
 
@@ -453,6 +518,7 @@ figure.weather-component__icn {
     display: flex;
     flex-direction: column;
     align-items: center;
+    perspective: 1000px; /* Set up a perspective for 3D effects */
 }
 
 .globe-wrapper {
@@ -461,24 +527,21 @@ figure.weather-component__icn {
     height: 300px;
 }
 
+
 .globe {
     position: relative;
     width: 100%;
     height: 100%;
     border-radius: 50%;
     background:
-        linear-gradient(45deg, #1a1a2e 0%, #16213e 25%, #0f3460 50%, #533483 75%, #1a1a2e 100%),
-        radial-gradient(circle at 20% 30%, rgba(70, 130, 180, 0.3) 0%, transparent 50%),
-        radial-gradient(circle at 80% 20%, rgba(100, 149, 237, 0.2) 0%, transparent 40%),
-        radial-gradient(circle at 60% 80%, rgba(25, 25, 112, 0.4) 0%, transparent 30%);
-    animation: globeRotate 30s linear infinite;
+        radial-gradient(circle at 25% 25%, rgba(100, 149, 237, 0.4) 0%, rgba(25, 25, 112, 0) 50%),
+        radial-gradient(circle at 75% 75%, #16213e, #0f3460);
+    animation: globeRotate 25s linear infinite;
     box-shadow:
-        inset -40px -40px 80px rgba(0, 0, 0, 0.6),
-        inset 20px 20px 40px rgba(100, 149, 237, 0.1),
-        0 0 60px rgba(70, 130, 180, 0.4),
-        0 0 100px rgba(25, 25, 112, 0.2);
+        inset -30px -30px 60px rgba(0, 0, 0, 0.7), /* Inner shadow for depth */
+        inset 10px 10px 20px rgba(100, 149, 237, 0.2);
     overflow: hidden;
-    border: 2px solid rgba(100, 149, 237, 0.3);
+    transform-style: preserve-3d; /* This is key for 3D */
 }
 
 .globe-sphere {
@@ -486,42 +549,28 @@ figure.weather-component__icn {
     width: 100%;
     height: 100%;
     border-radius: 50%;
-    background:
-        /* Latitude lines */
-        repeating-linear-gradient(
-            0deg,
-            transparent 0%,
-            transparent 8%,
-            rgba(100, 149, 237, 0.15) 8.5%,
-            rgba(100, 149, 237, 0.15) 9%,
-            transparent 9.5%
-        ),
-        /* Longitude lines */
-        repeating-linear-gradient(
-            90deg,
-            transparent 0%,
-            transparent 12%,
-            rgba(100, 149, 237, 0.1) 12.5%,
-            rgba(100, 149, 237, 0.1) 13%,
-            transparent 13.5%
-        ),
-        /* Continental outlines */
-        radial-gradient(ellipse at 25% 40%, rgba(34, 139, 34, 0.4) 0%, transparent 25%),
-        radial-gradient(ellipse at 75% 35%, rgba(34, 139, 34, 0.3) 0%, transparent 20%),
-        radial-gradient(ellipse at 50% 65%, rgba(34, 139, 34, 0.35) 0%, transparent 30%),
-        radial-gradient(ellipse at 80% 70%, rgba(34, 139, 34, 0.25) 0%, transparent 15%);
+    background: url('https://raw.githubusercontent.com/avinash201199/weather-app/main/assets/icons/world-map-dot-white.png');
+    background-size: 600px 300px; /* Adjust size of map texture */
+    animation: map-scroll 25s linear infinite;
+    transform: rotateX(-15deg) rotateY(0deg); /* Initial tilt */
 }
 
 @keyframes globeRotate {
-    from { transform: rotateY(0deg); }
-    to { transform: rotateY(360deg); }
+    from { transform: rotateY(0deg) rotateX(10deg); }
+    to { transform: rotateY(360deg) rotateX(10deg); }
+}
+
+@keyframes map-scroll {
+    from { background-position: 0px 0; }
+    to { background-position: -600px 0; }
 }
 
 .globe-markers {
     position: absolute;
     width: 100%;
     height: 100%;
-    border-radius: 50%;
+    border-radius: 50%; /* Keep this */
+    transform-style: preserve-3d; /* Allow markers to be positioned in 3D space */
 }
 
 .weather-marker {
@@ -531,7 +580,7 @@ figure.weather-component__icn {
     border-radius: 50%;
     cursor: pointer;
     transition: all 0.3s ease;
-    box-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
+    box-shadow: 0 0 12px rgba(255, 255, 255, 0.6);
     z-index: 10;
 }
 
@@ -604,13 +653,11 @@ figure.weather-component__icn {
     border-radius: 10px;
 }
  .map-box {
-            width: 100%;
-            max-width: 900px; /* Constrain size for desktop viewing */
-            margin: 0 auto;
-            background-color: #374151; /* Card background */
-            padding: 20px;
-            border-radius: 20px;
-            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.4);
+            width: 100%; /* Let it fill the container */
+            margin: 0 auto; /* Center it */
+            padding: 0; /* Remove extra padding */
+            border-radius: 20px; /* Keep the rounded corners */
+            /* Remove background and shadow to blend in */
         }
 
         #weather-map {
@@ -619,8 +666,8 @@ figure.weather-component__icn {
             height: 360px;
             min-height: 360px;
             border-radius: 12px;
-            overflow: hidden;
-            margin-top: 30px;
+            overflow: hidden; /* Keep this */
+            margin-top: 0; /* Remove top margin */
             background: #000; /* Placeholder color, simulating map */
             display: flex;
             justify-content: center;
@@ -635,7 +682,7 @@ figure.weather-component__icn {
             /* Remove position: absolute */
             display: block; /* Ensure it takes up full width for centering */
             text-align: center; /* Center the text content */
-            margin-top: 16px; /* Spacing below the map */
+            margin-bottom: 1rem; /* Add space below the label */
             color: #f3f4f6;
             background: rgba(255, 255, 255, 0.1);
             padding: 8px 20px;
