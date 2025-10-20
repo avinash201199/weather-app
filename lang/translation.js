@@ -46,6 +46,9 @@ export const translations = {
     requestTimeout: "Request timed out. Please check your connection.",
     invalidData: "Received invalid weather data. Please try again.",
     weeklyForecastError: "Weekly forecast temporarily unavailable"
+    permissionDenied: "Location access denied. Using default location.",
+    locationError: "Unable to get your location. Using default location.",
+    notSupported: "Geolocation is not supported by this browser."
   },
   "pt-BR": {
     apiLang: "pt_br",
@@ -74,7 +77,10 @@ export const translations = {
     sunday: "Domingo",
     day: "Dia",
     night: "Noite",
-    notAvailable: "Indisponível"
+    notAvailable: "Indisponível",
+    permissionDenied: "Acesso à localização negado. Usando localização padrão.",
+    locationError: "Não foi possível obter sua localização. Usando localização padrão.",
+    notSupported: "Geolocalização não é suportada por este navegador."
   },
   "es-MX": {
     apiLang: "es",
@@ -103,7 +109,10 @@ export const translations = {
     sunday: "Domingo",
     day: "Día",
     night: "Noche",
-    notAvailable: "No disponible"
+    notAvailable: "No disponible",
+    permissionDenied: "Acceso a ubicación denegado. Usando ubicación predeterminada.",
+    locationError: "No se pudo obtener su ubicación. Usando ubicación predeterminada.",
+    notSupported: "La geolocalización no es compatible con este navegador."
   },
   "de-DE": {
     apiLang: "de",
