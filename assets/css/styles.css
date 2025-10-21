@@ -930,3 +930,381 @@ figure.weather-component__icn {
     animation: none;
   }
 }
+
+/* ===================================
+   COMPREHENSIVE RESPONSIVE DESIGN FIXES
+   =================================== */
+
+/* Tablet and below (768px) */
+@media (max-width: 768px) {
+  /* Make weather card height dynamic */
+  .weather-component__card {
+    height: auto;
+    min-height: 460px;
+    padding: 1.5rem 1rem;
+  }
+
+  /* Improve grid responsiveness */
+  .weather-component__grid {
+    gap: 0.75rem;
+  }
+
+  .grid-item,
+  .grid-item-air-quality,
+  .grid-item-sun {
+    flex: 1 1 100%;
+    min-width: unset;
+    height: auto;
+    min-height: 80px;
+  }
+
+  /* Search bar improvements */
+  input.weather-component__search-bar {
+    width: 100%;
+    font-size: 0.9rem;
+    padding: 0.7em 1em;
+  }
+
+  .weather-component__search {
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+
+  .button_container {
+    width: 100%;
+    justify-content: center;
+    border-radius: 30px;
+  }
+
+  /* Responsive typography */
+  #temp {
+    font-size: 3rem;
+  }
+
+  #city {
+    font-size: 1.2rem;
+  }
+
+  .weather-component__city-temperature {
+    font-size: 2.2rem;
+    margin-left: 5%;
+    width: 90%;
+  }
+
+  /* Map height */
+  #weather-map {
+    height: 250px;
+    min-height: 250px;
+    font-size: 1rem;
+  }
+
+  /* Feature cards padding */
+  .mood-recommendations-card,
+  .time-machine-card,
+  .globe-card {
+    padding: 20px 15px;
+  }
+
+  /* Logo and nav */
+  .logo-img {
+    max-width: 40px;
+    max-height: 40px;
+  }
+
+  .logo-title {
+    font-size: 0.95rem;
+  }
+
+  /* Header component */
+  .header-component {
+    width: 200px;
+    height: 80px;
+    padding: 15px;
+    font-size: 0.9em;
+  }
+
+  #date-time2 {
+    font-size: large;
+  }
+}
+
+/* Mobile landscape and small tablets (640px) */
+@media (max-width: 640px) {
+  .weather-component__card {
+    margin: 1rem auto;
+    padding: 1rem 0.75rem;
+  }
+
+  #temp {
+    font-size: 2.5rem;
+  }
+
+  .grid-item .heading h6,
+  .grid-item-air-quality .heading h6,
+  .grid-item-sun .heading h6 {
+    font-size: 0.7rem;
+  }
+
+  .data-value {
+    font-size: 0.9rem;
+  }
+
+  /* Make buttons touch-friendly */
+  .weather-component__button,
+  .weather-component__button-microphone {
+    height: 50px;
+    width: 50px;
+    margin: 0.3rem;
+  }
+
+  /* Globe size */
+  .globe-wrapper {
+    width: 200px;
+    height: 200px;
+  }
+
+  /* Mood items */
+  .mood-icon {
+    font-size: 2.5rem;
+  }
+
+  .mood-title {
+    font-size: 1.1rem;
+  }
+
+  .mood-description {
+    font-size: 0.85rem;
+  }
+}
+
+/* Small mobile devices (480px) */
+@media (max-width: 480px) {
+  body {
+    font-size: 14px;
+  }
+
+  .weather-component__card {
+    border-radius: 15px;
+    padding: 0.75rem 0.5rem;
+  }
+
+  #temp {
+    font-size: 2rem;
+  }
+
+  #city {
+    font-size: 1rem;
+  }
+
+  .weather-component__city-temperature {
+    font-size: 1.8rem;
+    padding: 3px;
+  }
+
+  input.weather-component__search-bar {
+    font-size: 0.85rem;
+    padding: 0.6em 0.9em;
+  }
+
+  .weather-component__button,
+  .weather-component__button-microphone {
+    height: 45px;
+    width: 45px;
+  }
+
+  /* Grid items more compact */
+  .grid-item,
+  .grid-item-air-quality,
+  .grid-item-sun {
+    padding: 0.5rem;
+    min-height: 70px;
+  }
+
+  /* Map */
+  #weather-map {
+    height: 200px;
+    min-height: 200px;
+    font-size: 0.9rem;
+  }
+
+  /* Logo */
+  .logo-img {
+    max-width: 35px;
+    max-height: 35px;
+  }
+
+  .logo-title {
+    font-size: 0.85rem;
+  }
+
+  /* Header */
+  .header-component {
+    width: 180px;
+    height: 70px;
+    padding: 10px;
+    font-size: 0.8em;
+  }
+
+  /* Feature cards */
+  .mood-recommendations-card,
+  .time-machine-card,
+  .globe-card {
+    padding: 15px 10px;
+  }
+
+  .mood-recommendations-card h3,
+  .time-machine-card h3,
+  .globe-card h3 {
+    font-size: 1.2rem;
+  }
+
+  /* Globe */
+  .globe-wrapper {
+    width: 180px;
+    height: 180px;
+  }
+
+  /* Buttons */
+  .globe-btn,
+  #time-machine-btn {
+    padding: 10px 16px;
+    font-size: 0.9rem;
+  }
+
+  /* Weather icon */
+  figure.weather-component__icn {
+    width: 130px;
+    height: 35px;
+    font-size: 0.75rem;
+  }
+
+  /* UV Index */
+  .grid-item-uvi .data-value {
+    font-size: 1.2rem;
+  }
+
+  .uvi-description {
+    font-size: 0.7rem;
+  }
+}
+
+/* Extra small devices (375px) */
+@media (max-width: 375px) {
+  .weather-component__card {
+    padding: 0.5rem;
+  }
+
+  #temp {
+    font-size: 1.8rem;
+  }
+
+  .weather-component__city-temperature {
+    font-size: 1.5rem;
+  }
+
+  input.weather-component__search-bar {
+    font-size: 0.8rem;
+  }
+
+  .weather-component__button,
+  .weather-component__button-microphone {
+    height: 40px;
+    width: 40px;
+  }
+
+  .grid-item,
+  .grid-item-air-quality,
+  .grid-item-sun {
+    padding: 0.4rem;
+    min-height: 65px;
+  }
+
+  .grid-item .heading h6,
+  .grid-item-air-quality .heading h6,
+  .grid-item-sun .heading h6 {
+    font-size: 0.65rem;
+  }
+
+  .data-value {
+    font-size: 0.8rem;
+  }
+
+  #weather-map {
+    height: 180px;
+    min-height: 180px;
+  }
+
+  .header-component {
+    width: 160px;
+    height: 65px;
+    font-size: 0.75em;
+  }
+
+  .logo-title {
+    font-size: 0.75rem;
+  }
+
+  .globe-wrapper {
+    width: 160px;
+    height: 160px;
+  }
+}
+
+/* Landscape orientation fixes */
+@media (max-height: 600px) and (orientation: landscape) {
+  .weather-component__card {
+    margin: 0.5rem auto;
+  }
+
+  #weather-map {
+    height: 200px;
+    min-height: 200px;
+  }
+
+  .header-component {
+    height: 60px;
+    padding: 8px;
+  }
+
+  .mood-recommendations-card,
+  .time-machine-card,
+  .globe-card {
+    padding: 15px;
+  }
+}
+
+/* Large screens optimization (1200px+) */
+@media (min-width: 1200px) {
+  .weather-component__card {
+    max-width: 900px;
+  }
+
+  .weather-component__grid {
+    gap: 1.25rem;
+  }
+
+  input.weather-component__search-bar {
+    font-size: 1.1rem;
+  }
+
+  #temp {
+    font-size: 4.2rem;
+  }
+}
+
+/* Print styles */
+@media print {
+  .weather-component__search,
+  .weather-component__button,
+  .weather-component__button-microphone,
+  .nav-component__celcius-block,
+  .whatsapp,
+  footer {
+    display: none;
+  }
+
+  .weather-component__card {
+    box-shadow: none;
+    border: 1px solid #000;
+  }
+}
