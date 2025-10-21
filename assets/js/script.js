@@ -291,8 +291,45 @@ class WeatherAlerts {
 // Initialize weather alerts system
 const weatherAlerts = new WeatherAlerts();
 
+// Reusable function to fetch background image from Pexels API
+async function fetchBackgroundImage(cityName) {
+  const apiKey = "OOjKyciq4Sk0Kla7riLuR2j8C9FwThFzKIKIHrpq7c27KvrCul5rVxJj";
+  const apiUrl = `https://api.pexels.com/v1/search?query=${cityName}&orientation=landscape`;
+
+  try {
+    const response = await fetch(apiUrl, {
+      method: "GET",
+      headers: {
+        Authorization: apiKey,
+      },
+    });
+    
+    if (!response.ok) {
+      throw new Error(`Pexels API error: ${response.status}`);
+    }
+    
+    const data = await response.json();
+    
+    if (data.photos && data.photos.length > 0) {
+      const randomIndex = Math.floor(Math.random() * data.photos.length);
+      const url = data.photos[randomIndex].src.large2x;
+      document.getElementById("background").style.backgroundImage = `url(${url})`;
+      return true;
+    } else {
+      console.warn(`No background images found for: ${cityName}`);
+      return false;
+    }
+  } catch (error) {
+    console.error("Failed to fetch background from Pexels:", error);
+    return false;
+  }
+}
+
 function changeBackgroundImage() {
-  fetchNewBackground();
+  // Fetch new background for the currently selected city
+  if (selectedCity) {
+    fetchBackgroundImage(selectedCity);
+  }
 }
 
 const userLang = getUserLanguage() || "en-US";
@@ -476,18 +513,24 @@ let weather = {
         `&lang=${translations[userLang].apiLang}`;
     }
 
-
+    try {
+      this.setLoading(true);
+      const response = await fetch(url);
+      
+      if (!response.ok) {
         document.getElementById("city").innerHTML = "City not Found";
         document.getElementById("temp").style.display = "none";
         document.querySelector(".weather-component__data-wrapper").style.display = "none";
         throw new Error(`${translations[userLang].noWeatherFound}`);
       }
+      
       const data = await response.json();
       document.getElementById("temp").style.display = "block";
       document.querySelector(".weather-component__data-wrapper").style.display = "block";
       this.displayWeather(data, city);
     } catch (error) {
       console.error("Error fetching weather:", error);
+      setError(error.message || "Failed to fetch weather data");
     } finally {
       this.setLoading(false);
     }
@@ -663,45 +706,29 @@ let weather = {
       });
   },
   search: async function () {
-    if (document.querySelector(".weather-component__search-bar").value != "") {
-      selectedCity = document.querySelector(
-        ".weather-component__search-bar"
-      ).value;
+    const searchBar = document.querySelector(".weather-component__search-bar");
+    
+    if (searchBar && searchBar.value.trim() !== "") {
+      selectedCity = searchBar.value.trim();
+      
+      // Fetch weather data
       this.fetchWeather(selectedCity);
       
-      const apiKey = "OOjKyciq4Sk0Kla7riLuR2j8C9FwThFzKIKIHrpq7c27KvrCul5rVxJj";
-      const apiUrl = `https://api.pexels.com/v1/search?query=${selectedCity}&orientation=landscape`;
-
-      try {
-        const response = await fetch(apiUrl, {
-          method: "GET",
-          headers: {
-            Authorization: apiKey,
-          },
-        });
-        const data = await response.json();
-        if (data.photos && data.photos.length > 0) {
-          const randomIndex = Math.floor(Math.random() * data.photos.length);
-          const url = data.photos[randomIndex].src.large2x;
-          document.getElementById(
-            "background"
-          ).style.backgroundImage = `url(${url})`;
-        }
-      } catch (error) {
-        console.error("Error fetching background image:", error);
-          headers: { Authorization: apiKey },
-        });
-        const data = await response.json();
-        if (data.photos && data.photos.length > 0) {
-            const randomIndex = Math.floor(Math.random() * data.photos.length);
-            const url = data.photos[randomIndex].src.large2x;
-            document.getElementById("background").style.backgroundImage = `url(${url})`;
-        }
-      } catch (error) {
-        console.error("Failed to fetch background from Pexels:", error);
-      }
+      // Fetch background image using the reusable function
+      await fetchBackgroundImage(selectedCity);
     } else {
       toastFunction(translations[userLang].pleaseAddLocation, 'warning', 3000);
+    }
+  },
+  
+  setLoading: function(isLoading) {
+    const weatherElement = document.getElementById("weather");
+    if (weatherElement) {
+      if (isLoading) {
+        weatherElement.classList.add("loading");
+      } else {
+        weatherElement.classList.remove("loading");
+      }
     }
   },
 };
