@@ -664,16 +664,60 @@ input.weather-component__search-bar::placeholder {
   transform: translateY(0); /* Slide in from the top */
 }
 
+/* Footer Container */
 footer {
-  height: 300px;
+  height: 150px; /* Smaller height */
   display: flex;
-  position: relative;
-  top: 240px;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
-  text-decoration-color: white;
-  text-emphasis-style: bold;
+  color: white;
+  text-align: center;
+  font-weight: 500;
+  background: rgba(0, 0, 0, 0.5); /* Slight glass effect */
+  backdrop-filter: blur(5px);
+  border-radius: 10px;
+  padding: 15px;
 }
+
+/* Footer Heading */
+footer h2 {
+  font-size: 1.2rem;
+  background: linear-gradient(90deg, #facc15, #ec4899);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: gradientShift 4s ease-in-out infinite alternate;
+  margin-bottom: 10px;
+}
+
+@keyframes gradientShift {
+  0% { background-position: 0% 50%; }
+  100% { background-position: 100% 50%; }
+}
+
+/* Social Icons Container */
+.footerSection ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  gap: 15px;
+}
+
+/* Social Icons */
+.footerSection ul li a {
+  display: inline-block;
+  color: white;
+  font-size: 1.5rem; /* Smaller icon size */
+  transition: transform 0.3s ease, color 0.3s ease;
+}
+
+/* Subtle hover animation */
+.footerSection ul li a:hover {
+  transform: translateY(-5px); /* Small lift on hover */
+  color: #facc15; /* Gold color on hover */
+}
+
 
 /* .col-auto {
   margin: 10px 20px;
@@ -763,9 +807,40 @@ footer {
 
 /* --End Of Scroll Bar-- */
 .footerSection {
-  margin-top: 20px;
-  margin-bottom: 0;
+  margin: 20px 0 0 0;
+  padding: 20px;
+  text-align: center;
+  background: rgba(255, 255, 255, 0.05);
+  backdrop-filter: blur(10px);
+  border-radius: 15px;
+  border: 1px solid rgba(255, 255, 255, 0.2);
 }
+
+/* Floating animation for icons */
+@keyframes float {
+  0% { transform: translateY(0px); }
+  50% { transform: translateY(-6px); }
+  100% { transform: translateY(0px); }
+}
+
+.footerSection ul li a i {
+  color: #fff;
+  margin: 0 15px;
+  font-size: 2.5rem;
+  display: inline-block;
+  transition: transform 0.3s ease, color 0.3s ease;
+  animation: float 3s ease-in-out infinite;
+}
+
+/* Hover effect for individual icons */
+.footerSection ul li a i:hover {
+  transform: scale(1.4) rotate(10deg);
+  color: #ffcc00;
+  animation-play-state: paused; /* pause float on hover */
+}
+
+
+
 /* Responsive */
 
 @media only screen and (min-width: 1200px) {
