@@ -701,21 +701,42 @@ footer h2 {
   margin: 0;
   padding: 0;
   display: flex;
-  gap: 15px;
+  gap: 20px; /* Slightly more spacing for breathing room */
+  justify-content: center; /* Center icons */
+  align-items: center;
 }
 
 /* Social Icons */
 .footerSection ul li a {
   display: inline-block;
-  color: white;
-  font-size: 1.5rem; /* Smaller icon size */
-  transition: transform 0.3s ease, color 0.3s ease;
+  color: #fff;
+  font-size: 1.5rem;
+  transition: transform 0.3s ease, color 0.3s ease, filter 0.3s ease;
+  position: relative;
 }
 
 /* Subtle hover animation */
 .footerSection ul li a:hover {
-  transform: translateY(-5px); /* Small lift on hover */
+  transform: translateY(-5px) scale(1.1); /* Lift + slight scale */
   color: #facc15; /* Gold color on hover */
+  filter: drop-shadow(0 0 6px #facc15); /* Glowing effect */
+}
+
+/* Optional: smooth icon entry animation */
+.footerSection ul li a {
+  animation: fadeInUp 0.8s ease forwards;
+  opacity: 0;
+}
+
+@keyframes fadeInUp {
+  0% {
+    transform: translateY(20px);
+    opacity: 0;
+  }
+  100% {
+    transform: translateY(0);
+    opacity: 1;
+  }
 }
 
 
