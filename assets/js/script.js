@@ -476,12 +476,17 @@ let weather = {
         `&lang=${translations[userLang].apiLang}`;
     }
 
-
+    try {
+      this.setLoading(true);
+      const response = await fetch(url);
+      
+      if (!response.ok) {
         document.getElementById("city").innerHTML = "City not Found";
         document.getElementById("temp").style.display = "none";
         document.querySelector(".weather-component__data-wrapper").style.display = "none";
         throw new Error(`${translations[userLang].noWeatherFound}`);
       }
+      
       const data = await response.json();
       document.getElementById("temp").style.display = "block";
       document.querySelector(".weather-component__data-wrapper").style.display = "block";
