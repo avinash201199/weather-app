@@ -729,6 +729,170 @@ figure.weather-component__icn {
     }
 }
 /* ===================================
+   API ERROR HANDLING & LOADING STATES
+   =================================== */
+
+/* Loading State for Weather Component */
+.weather-component__data.loading {
+  opacity: 0.6;
+  pointer-events: none;
+  position: relative;
+}
+
+.weather-component__data.loading::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 30px;
+  height: 30px;
+  margin: -15px 0 0 -15px;
+  border: 3px solid rgba(255, 255, 255, 0.3);
+  border-top: 3px solid #ffffff;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+  z-index: 10;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+/* Forecast Error Styling */
+.forecast-error {
+  text-align: center;
+  padding: 20px;
+  color: rgba(255, 255, 255, 0.8);
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 12px;
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  margin: 10px;
+}
+
+.forecast-error i {
+  font-size: 24px;
+  margin-bottom: 10px;
+  color: #ffc107;
+}
+
+.forecast-error p {
+  margin: 0;
+  font-size: 14px;
+  font-family: 'Inter', 'Poppins', sans-serif;
+  line-height: 1.4;
+}
+
+/* Air Quality Error State */
+.air-quality-label.not-available {
+  color: #6c757d !important;
+  font-style: italic;
+  opacity: 0.7;
+}
+
+/* Error States for City Names */
+.weather-component__city-name.error {
+  color: #ff6b6b !important;
+}
+
+/* Loading Spinner for General Use */
+.loading-spinner {
+  display: inline-block;
+  width: 20px;
+  height: 20px;
+  border: 2px solid rgba(255, 255, 255, 0.3);
+  border-radius: 50%;
+  border-top-color: #ffffff;
+  animation: spin 1s ease-in-out infinite;
+}
+
+/* Network Status Indicator */
+.network-status {
+  position: fixed;
+  top: 80px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: rgba(220, 53, 69, 0.95);
+  color: white;
+  padding: 8px 16px;
+  border-radius: 20px;
+  font-size: 12px;
+  font-family: 'Inter', sans-serif;
+  z-index: 9998;
+  display: none;
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+}
+
+.network-status.show {
+  display: block;
+  animation: slideInDown 0.3s ease-out;
+}
+
+.network-status i {
+  margin-right: 6px;
+}
+
+/* Mobile Responsive Error States */
+@media (max-width: 768px) {
+  .forecast-error {
+    padding: 15px;
+    margin: 5px;
+  }
+  
+  .forecast-error i {
+    font-size: 20px;
+  }
+  
+  .forecast-error p {
+    font-size: 13px;
+  }
+  
+  .weather-component__data.loading::after {
+    width: 25px;
+    height: 25px;
+    margin: -12.5px 0 0 -12.5px;
+    border-width: 2px;
+  }
+  
+  .network-status {
+    top: 70px;
+    font-size: 11px;
+    padding: 6px 12px;
+  }
+}
+
+/* Accessibility - Reduced Motion */
+@media (prefers-reduced-motion: reduce) {
+  .weather-component__data.loading::after,
+  .loading-spinner {
+    animation: none;
+  }
+  
+  .weather-component__data.loading::after::before {
+    content: '⏳';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 16px;
+  }
+}
+
+/* High Contrast Mode Support */
+@media (prefers-contrast: high) {
+  .forecast-error {
+    border-width: 2px;
+    background: rgba(0, 0, 0, 0.8);
+  }
+  
+  .network-status {
+    border-width: 2px;
+    background: #dc3545;
    TOAST NOTIFICATION SYSTEM
    =================================== */
 
