@@ -654,6 +654,7 @@ let weather = {
         document.querySelector(".weather-component__data-wrapper").style.display = "none";
         throw new Error(`${translations[userLang].noWeatherFound}`);
       }
+      
       const data = await response.json();
       document.getElementById("temp").style.display = "block";
       document.querySelector(".weather-component__data-wrapper").style.display = "block";
@@ -864,16 +865,6 @@ let weather = {
         }
       } catch (error) {
         console.error("Error fetching background image:", error);
-          headers: { Authorization: apiKey },
-        });
-        const data = await response.json();
-        if (data.photos && data.photos.length > 0) {
-            const randomIndex = Math.floor(Math.random() * data.photos.length);
-            const url = data.photos[randomIndex].src.large2x;
-            document.getElementById("background").style.backgroundImage = `url(${url})`;
-        }
-      } catch (error) {
-        console.error("Failed to fetch background from Pexels:", error);
       }
     } else {
       toastFunction(translations[userLang].pleaseAddLocation, 'warning', 3000);
@@ -1981,7 +1972,6 @@ function initializeApp() {
   fetchNewBackground();
   initLocationAndWeather();
   scrollTop();
-  weather.setLoading(true);
 
   voiceCommands = new VoiceWeatherCommands();
   const timeMachine = new WeatherTimeMachine();
