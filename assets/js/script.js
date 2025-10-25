@@ -17,35 +17,6 @@ function setError(message) {
   }
 }
 
-// ===== Wire search events (once) =====
-const searchInput = document.querySelector('.weather-component__search-bar');
-const searchBtn = document.querySelector('.weather-component__button');
-
-if (searchBtn && searchInput) {
-  // Click button
-  searchBtn.addEventListener('click', () => {
-    const city = (searchInput.value || '').trim();
-    if (!city) {
-      setError('Please enter a city name.');
-      return;
-    }
-    weather.fetchWeather(city);
-  });
-
-  // Press Enter in input
-  searchInput.addEventListener('keydown', (e) => {
-    if (e.key === 'Enter') {
-      const city = (searchInput.value || '').trim();
-      if (!city) {
-        setError('Please enter a city name.');
-        return;
-      }
-      weather.fetchWeather(city);
-    }
-  });
-}
-
-
 // Weather Alerts System
 class WeatherAlerts {
   constructor() {
