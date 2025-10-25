@@ -688,7 +688,7 @@ figure.weather-component__icn {
     display: flex;
     justify-content: center;
     gap: 15px;
-    margin-top: 30px;
+    margin-top: 10px;
     flex-wrap: wrap;
 }
 
