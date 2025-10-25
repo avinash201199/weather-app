@@ -45,7 +45,7 @@ export const translations = {
     networkError: "Network error. Please check your connection.",
     requestTimeout: "Request timed out. Please check your connection.",
     invalidData: "Received invalid weather data. Please try again.",
-    weeklyForecastError: "Weekly forecast temporarily unavailable"
+    weeklyForecastError: "Weekly forecast temporarily unavailable",
     permissionDenied: "Location access denied. Using default location.",
     locationError: "Unable to get your location. Using default location.",
     notSupported: "Geolocation is not supported by this browser."
