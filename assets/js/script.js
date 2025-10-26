@@ -17,35 +17,6 @@ function setError(message) {
   }
 }
 
-// ===== Wire search events (once) =====
-const searchInput = document.querySelector('.weather-component__search-bar');
-const searchBtn   = document.querySelector('.weather-component__button');
-
-if (searchBtn && searchInput) {
-  // Click button
-  searchBtn.addEventListener('click', () => {
-    const city = (searchInput.value || '').trim();
-    if (!city) {
-      setError('Please enter a city name.');
-      return;
-    }
-    //safeFetchWeather(city);
-  });
-
-  // Press Enter in input
-  searchInput.addEventListener('keydown', (e) => {
-    if (e.key === 'Enter') {
-      const city = (searchInput.value || '').trim();
-      if (!city) {
-        setError('Please enter a city name.');
-        return;
-      }
-      //safeFetchWeather(city);
-    }
-  });
-}
-
-
 // Weather Alerts System
 class WeatherAlerts {
   constructor() {
@@ -67,7 +38,7 @@ class WeatherAlerts {
   checkWeatherConditions(weatherData) {
     const alerts = [];
     const { main, wind } = weatherData;
-    const temp = isCelcius ? main.temp : (main.temp * 9/5) + 32;
+    const temp = isCelcius ? main.temp : (main.temp * 9 / 5) + 32;
     const humidity = main.humidity;
     const windSpeed = wind.speed;
 
@@ -407,7 +378,7 @@ function initLeafletMap() {
     }
   });
   // Invalidate size after the current frame to fix hidden container sizing
-  setTimeout(() => { try { _weatherMap.invalidateSize(false); } catch(e){} }, 50);
+  setTimeout(() => { try { _weatherMap.invalidateSize(false); } catch (e) { } }, 50);
 }
 function updateMapView(lat, lon, cityLabel) {
   try {
@@ -435,12 +406,12 @@ const AirQuality = (city) => {
 
 const fetchAirQuality = (city) => {
   const url = `https://api.waqi.info/v2/search/?token=${config.AIR_KEY}&keyword=${city}`;
-  
+
   // Add timeout for air quality API
   const controller = new AbortController();
   const timeoutId = setTimeout(() => controller.abort(), 8000); // 8 second timeout
 
-  return fetch(url, { 
+  return fetch(url, {
     signal: controller.signal,
     headers: {
       'Accept': 'application/json'
@@ -448,7 +419,7 @@ const fetchAirQuality = (city) => {
   })
     .then((res) => {
       clearTimeout(timeoutId);
-      
+
       if (!res.ok) {
         switch (res.status) {
           case 401:
@@ -469,13 +440,13 @@ const fetchAirQuality = (city) => {
       if (!data || !data.data || !Array.isArray(data.data) || data.data.length === 0) {
         throw new Error('AQI_NO_DATA');
       }
-      
+
       const relevantLocation = data.data[0];
       relevantLocation.aqi = Number(relevantLocation.aqi);
       if (!relevantLocation || isNaN(relevantLocation.aqi) ) {
         throw new Error('AQI_INVALID_DATA');
       }
-      
+
       return relevantLocation.aqi;
     })
     .catch((error) => {
@@ -487,9 +458,9 @@ const fetchAirQuality = (city) => {
 const handleAirQualityError = (error, city) => {
   const airQualityElement = document.querySelector("#AirQuality");
   const qualityDescriptionElement = document.querySelector(".air-quality-label");
-  
+
   let fallbackMessage = translations[userLang].notAvailable || 'N/A';
-  
+
   // Update UI with fallback values
   if (airQualityElement) {
     airQualityElement.innerText = fallbackMessage;
@@ -498,7 +469,7 @@ const handleAirQualityError = (error, city) => {
     qualityDescriptionElement.innerText = translations[userLang].notAvailable || 'Not Available';
     qualityDescriptionElement.classList = "air-quality-label ml-0 not-available";
   }
-  
+
   console.warn('Air Quality Error for', city, ':', error.message);
 };
 
@@ -558,6 +529,7 @@ let weather = {
 
   fetchWeather: async function (city = null, lat = null, lon = null) {
     let url;
+    const lang = (translations[userLang] && translations[userLang].apiLang) || 'en';
 
     // Case 1: If latitude & longitude are provided (auto-location)
     if (lat && lon) {
@@ -568,7 +540,7 @@ let weather = {
         lon +
         "&units=metric&appid=" +
         config.API_KEY +
-        `&lang=${translations[userLang].apiLang}`;
+        `&lang=${lang}`;
     } else {
       // Case 2: If user typed a city or country
       let isCountry = false;
@@ -589,7 +561,7 @@ let weather = {
         city +
         "&units=metric&appid=" +
         config.API_KEY +
-        `&lang=${translations[userLang].apiLang}`;
+        `&lang=${lang}`;
     }
 
     // Show loading state
@@ -599,13 +571,11 @@ let weather = {
     const controller = new AbortController();
     const timeoutId = setTimeout(() => controller.abort(), 10000); // 10 second timeout
 
+    // Store 'this' context for use in callbacks
+    const self = this;
+
     fetch(url, {
-      signal: controller.signal,
-      headers: {
-        Accept: "application/json",
-        "Content-Type": "application/json",
-        
-      },
+      signal: controller.signal
     })
       .then((response) => {
         clearTimeout(timeoutId);
@@ -635,42 +605,20 @@ let weather = {
           throw new Error("INVALID_DATA");
         }
 
-        this.hideLoadingState();
+        self.hideLoadingState();
         document.getElementById("temp").style.display = "block";
-        document.querySelector(
-          ".weather-component__data-wrapper"
-        ).style.display = "block";
-        this.displayWeather(data, city);
+        document.querySelector(".weather-component__data-wrapper").style.display =
+          "block";
+        self.displayWeather(data, city);
       })
       .catch((error) => {
         clearTimeout(timeoutId);
-        this.hideLoadingState();
-        this.handleWeatherError(error, city);
+        self.hideLoadingState();
+        self.handleWeatherError(error, city);
       });
-    //this.setLoading(true);
-    try {
-      const response = await fetch(url);
-      if (!response.ok) {
-        toastFunction(`${translations[userLang].noWeatherFound}`);
-
-        document.getElementById("city").innerHTML = "City not Found";
-        document.getElementById("temp").style.display = "none";
-        document.querySelector(".weather-component__data-wrapper").style.display = "none";
-        throw new Error(`${translations[userLang].noWeatherFound}`);
-      }
-      
-      const data = await response.json();
-      document.getElementById("temp").style.display = "block";
-      document.querySelector(".weather-component__data-wrapper").style.display = "block";
-      this.displayWeather(data, city);
-    } catch (error) {
-      console.error("Error fetching weather:", error);
-    } finally {
-      //this.setLoading(false);
-    }
   },
 
-  getWeatherIcon: function(iconCode) {
+  getWeatherIcon: function (iconCode) {
     const iconMap = {
       '01d': 'fa-sun',
       '01n': 'fa-moon',
@@ -694,7 +642,7 @@ let weather = {
     return iconMap[iconCode] || 'fa-question-circle';
   },
 
-  getUVIndexDescription: function(uvi) {
+  getUVIndexDescription: function (uvi) {
     if (uvi <= 2) {
       return { text: "Low", tip: "No protection needed.", className: "uvi-low" };
     } else if (uvi <= 5) {
@@ -721,7 +669,7 @@ let weather = {
       console.error("Error fetching UV index:", error);
     }
   },
-  updateUVIndex: function(uvi) {
+  updateUVIndex: function (uvi) {
     const uviValueElement = document.getElementById('uvi');
     const uviTextElement = document.getElementById('uvi-text');
     const uviGridItem = document.querySelector('.grid-item-uvi');
@@ -739,7 +687,7 @@ let weather = {
     }
   },
 
-  updateLastUpdated: function() {
+  updateLastUpdated: function () {
     const now = new Date();
     const timeString = now.toLocaleTimeString(translations[userLang].formattingLocale, { hour: '2-digit', minute: '2-digit' });
     const lastUpdatedElement = document.getElementById('last-updated');
@@ -756,7 +704,13 @@ let weather = {
     let date1 = new Date(sunrise * 1000);
     let date2 = new Date(sunset * 1000);
     const { lat, lon } = data.coord;
-    AirQuality(city);
+
+    // Call AirQuality but don't let it block the weather display
+    try {
+      AirQuality(city);
+    } catch (aqError) {
+      console.warn('Air Quality fetch failed:', aqError);
+    }
 
     // Check weather conditions for alerts
     setTimeout(() => {
@@ -847,62 +801,39 @@ let weather = {
       this.fetchWeather(selectedCity);
       // Enhanced background image fetch with error handling
       this.fetchCityBackground(selectedCity);
-      //url = "";
-      
-      const apiKey = "OOjKyciq4Sk0Kla7riLuR2j8C9FwThFzKIKIHrpq7c27KvrCul5rVxJj";
-      const apiUrl = `https://api.pexels.com/v1/search?query=${selectedCity}&orientation=landscape`;
-
-      try {
-        const response = await fetch(apiUrl, {
-          method: "GET",
-          headers: {
-            Authorization: apiKey,
-          },
-        });
-        const data = await response.json();
-        if (data.photos && data.photos.length > 0) {
-          const randomIndex = Math.floor(Math.random() * data.photos.length);
-          const url = data.photos[randomIndex].src.large2x;
-          document.getElementById(
-            "background"
-          ).style.backgroundImage = `url(${url})`;
-        }
-      } catch (error) {
-        console.error("Error fetching background image:", error);
-      }
     } else {
       toastFunction(translations[userLang].pleaseAddLocation, 'warning', 3000);
     }
   },
 
-  showLoadingState: function() {
+  showLoadingState: function () {
     const weatherElement = document.getElementById("weather");
     const cityElement = document.getElementById("city");
     const tempElement = document.getElementById("temp");
-    
+
     if (weatherElement) weatherElement.classList.add("loading");
     if (cityElement) cityElement.innerHTML = `${translations[userLang].loading || 'Loading weather data...'}`;
     if (tempElement) tempElement.style.display = "none";
   },
 
-  hideLoadingState: function() {
+  hideLoadingState: function () {
     const weatherElement = document.getElementById("weather");
-    
+
     if (weatherElement) weatherElement.classList.remove("loading");
   },
 
-  handleWeatherError: function(error, city) {
+  handleWeatherError: function (error, city) {
     const cityElement = document.getElementById("city");
     const tempElement = document.getElementById("temp");
     const dataWrapper = document.querySelector(".weather-component__data-wrapper");
-    
+
     // Hide weather data
     if (tempElement) tempElement.style.display = "none";
     if (dataWrapper) dataWrapper.style.display = "none";
-    
+
     let errorMessage;
     let toastType = 'error';
-    
+
     switch (error.message) {
       case 'API_KEY_INVALID':
         errorMessage = translations[userLang].apiKeyInvalid || 'Invalid API key. Please check configuration.';
@@ -934,15 +865,15 @@ let weather = {
           if (cityElement) cityElement.innerHTML = "Network Error";
         }
     }
-    
+
     toastFunction(errorMessage, toastType, 6000);
     
   },
 
-  fetchCityBackground: function(city) {
+  fetchCityBackground: function (city) {
     const apiKey = "OOjKyciq4Sk0Kla7riLuR2j8C9FwThFzKIKIHrpq7c27KvrCul5rVxJj";
     const apiUrl = `https://api.pexels.com/v1/search?query=${encodeURIComponent(city)}&orientation=landscape&per_page=15`;
-    
+
     const controller = new AbortController();
     const timeoutId = setTimeout(() => controller.abort(), 8000);
 
@@ -956,7 +887,7 @@ let weather = {
     })
       .then((response) => {
         clearTimeout(timeoutId);
-        
+
         if (!response.ok) {
           throw new Error(`Pexels API error: ${response.status}`);
         }
@@ -966,7 +897,7 @@ let weather = {
         if (data && data.photos && data.photos.length > 0) {
           const randomIndex = Math.floor(Math.random() * Math.min(data.photos.length, 10));
           const imageUrl = data.photos[randomIndex].src.large2x;
-          
+
           // Preload image before setting as background
           const img = new Image();
           img.onload = () => {
@@ -987,19 +918,18 @@ let weather = {
       });
   },
 
-  setFallbackBackground: function() {
+  setFallbackBackground: function () {
     // Use Unsplash as fallback or default gradient
-    const fallbackUrl = `https://source.unsplash.com/${
-      window.innerWidth < 768 ? "720x1280" : "1600x900"
-    }/?landscape`;
-    
+    const fallbackUrl = `https://source.unsplash.com/${window.innerWidth < 768 ? "720x1280" : "1600x900"
+      }/?landscape`;
+
     const img = new Image();
     img.onload = () => {
       document.getElementById("background").style.backgroundImage = `url(${fallbackUrl})`;
     };
     img.onerror = () => {
       // Final fallback to gradient
-      document.getElementById("background").style.background = 
+      document.getElementById("background").style.background =
         'linear-gradient(135deg, #74b9ff 0%, #0984e3 100%)';
     };
     img.src = fallbackUrl;
@@ -1153,7 +1083,7 @@ function toastFunction(message, type = 'info', duration = 4000) {
     setTimeout(() => {
       toast.className = 'toast';
       toast.setAttribute('aria-hidden', 'true');
-      try { toast.removeAttribute('tabindex'); } catch (e) {}
+      try { toast.removeAttribute('tabindex'); } catch (e) { }
       if (toast.hideTimeout) {
         clearTimeout(toast.hideTimeout);
         toast.hideTimeout = null;
@@ -1161,7 +1091,7 @@ function toastFunction(message, type = 'info', duration = 4000) {
       // restore focus
       try {
         if (previouslyFocused && previouslyFocused.focus) previouslyFocused.focus();
-      } catch (e) {}
+      } catch (e) { }
     }, 300);
   }
 }
@@ -1229,9 +1159,9 @@ const month = [
   "November",
   "December",
 ];
-const formatLeadingZero=(value)=>{
-    //to add leading zeros if value is less than 10
-    return value.toString().padStart(2, '0');
+const formatLeadingZero = (value) => {
+  //to add leading zeros if value is less than 10
+  return value.toString().padStart(2, '0');
 }
 setInterval(() => {
   a = new Date();
@@ -1321,9 +1251,8 @@ function initLocationAndWeather() {
 
 //Fetching Random Landscape Background Image From Unsplash
 const fetchNewBackground = () => {
-  let url = `https://source.unsplash.com/${
-    window.innerWidth < 768 ? "720x1280" : "1600x900"
-  }/?landscape`;
+  let url = `https://source.unsplash.com/${window.innerWidth < 768 ? "720x1280" : "1600x900"
+    }/?landscape`;
   const bgElement = document.getElementById("background");
   bgElement.style.backgroundImage = `url(${url})`;
 };
@@ -1696,10 +1625,9 @@ class WeatherTimeMachine {
               <div style="font-size: 1.2rem; font-weight: bold; color: #fff;">
                 ${day.temp}°C
               </div>
-              <div style="font-size: 0.8rem; opacity: 0.8; color: ${
-                day.comparison === 'warmer' ? '#ff6b6b' :
-                day.comparison === 'cooler' ? '#4ecdc4' : '#ffa500'
-              };">
+              <div style="font-size: 0.8rem; opacity: 0.8; color: ${day.comparison === 'warmer' ? '#ff6b6b' :
+        day.comparison === 'cooler' ? '#4ecdc4' : '#ffa500'
+      };">
                 ${day.tempDiff}° ${day.comparison}
               </div>
             </div>
@@ -1982,7 +1910,7 @@ function initializeApp() {
   const weatherGlobe = new WeatherGlobe();
   const smartNotifications = new SmartNotifications();
 
-  console.log('🌟 Unique weather features initialized!');
+  console.log('Weather features initialized');
 }
 
 document.addEventListener('DOMContentLoaded', initializeApp);
