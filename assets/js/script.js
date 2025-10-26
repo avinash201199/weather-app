@@ -29,7 +29,7 @@ if (searchBtn && searchInput) {
       setError('Please enter a city name.');
       return;
     }
-    safeFetchWeather(city);
+    //safeFetchWeather(city);
   });
 
   // Press Enter in input
@@ -40,7 +40,7 @@ if (searchBtn && searchInput) {
         setError('Please enter a city name.');
         return;
       }
-      safeFetchWeather(city);
+      //safeFetchWeather(city);
     }
   });
 }
@@ -465,12 +465,14 @@ const fetchAirQuality = (city) => {
     })
     .then((data) => {
       // Validate air quality data
+      
       if (!data || !data.data || !Array.isArray(data.data) || data.data.length === 0) {
         throw new Error('AQI_NO_DATA');
       }
       
       const relevantLocation = data.data[0];
-      if (!relevantLocation || typeof relevantLocation.aqi !== 'number') {
+      relevantLocation.aqi = Number(relevantLocation.aqi);
+      if (!relevantLocation || isNaN(relevantLocation.aqi) ) {
         throw new Error('AQI_INVALID_DATA');
       }
       
@@ -597,31 +599,32 @@ let weather = {
     const controller = new AbortController();
     const timeoutId = setTimeout(() => controller.abort(), 10000); // 10 second timeout
 
-    fetch(url, { 
+    fetch(url, {
       signal: controller.signal,
       headers: {
-        'Accept': 'application/json',
-        'Content-Type': 'application/json'
-      }
+        Accept: "application/json",
+        "Content-Type": "application/json",
+        
+      },
     })
       .then((response) => {
         clearTimeout(timeoutId);
-        
+
         if (!response.ok) {
           // Handle different HTTP status codes
           switch (response.status) {
             case 401:
-              throw new Error('API_KEY_INVALID');
+              throw new Error("API_KEY_INVALID");
             case 404:
-              throw new Error('CITY_NOT_FOUND');
+              throw new Error("CITY_NOT_FOUND");
             case 429:
-              throw new Error('RATE_LIMIT_EXCEEDED');
+              throw new Error("RATE_LIMIT_EXCEEDED");
             case 500:
             case 502:
             case 503:
-              throw new Error('SERVER_ERROR');
+              throw new Error("SERVER_ERROR");
             default:
-              throw new Error('NETWORK_ERROR');
+              throw new Error("NETWORK_ERROR");
           }
         }
         return response.json();
@@ -629,13 +632,14 @@ let weather = {
       .then((data) => {
         // Validate response data
         if (!data || !data.main || !data.weather || !data.weather[0]) {
-          throw new Error('INVALID_DATA');
+          throw new Error("INVALID_DATA");
         }
-        
+
         this.hideLoadingState();
         document.getElementById("temp").style.display = "block";
-        document.querySelector(".weather-component__data-wrapper").style.display =
-          "block";
+        document.querySelector(
+          ".weather-component__data-wrapper"
+        ).style.display = "block";
         this.displayWeather(data, city);
       })
       .catch((error) => {
@@ -643,7 +647,7 @@ let weather = {
         this.hideLoadingState();
         this.handleWeatherError(error, city);
       });
-    this.setLoading(true);
+    //this.setLoading(true);
     try {
       const response = await fetch(url);
       if (!response.ok) {
@@ -662,7 +666,7 @@ let weather = {
     } catch (error) {
       console.error("Error fetching weather:", error);
     } finally {
-      this.setLoading(false);
+      //this.setLoading(false);
     }
   },
 
@@ -932,7 +936,7 @@ let weather = {
     }
     
     toastFunction(errorMessage, toastType, 6000);
-    console.error('Weather API Error:', error);
+    
   },
 
   fetchCityBackground: function(city) {
