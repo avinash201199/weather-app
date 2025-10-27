@@ -1220,19 +1220,23 @@ html body #scroll-btn {
 }
 
 .scroll-top {
-  position: absolute;
-  z-index: 5;
-  top: 0;
-  width: 40px;
-  height: 40px;
-  border-radius: 50%;
-  background: #fff;
-  left: 50%;
-  -webkit-transform: translate(-50%, -50%);
-  -ms-transform: translate(-50%, -50%);
-  transform: translate(-50%, -50%);
-  -webkit-box-shadow: 0 0px 10px 0px rgba(0, 0, 0, 0.1);
-  box-shadow: 0 0px 10px 0px rgba(0, 0, 0, 0.1);
+    position: absolute;
+    z-index: 5;
+    /* Increased bottom value to place the button far above the footer text */
+    bottom: 168px; 
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background: #fff;
+    left: 50%;
+    
+    /* Centers the button horizontally */
+    -webkit-transform: translate(-50%, 0);
+    -ms-transform: translate(-50%, 0);
+    transform: translate(-50%, 0);
+    
+    -webkit-box-shadow: 0 0px 10px 0px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 0px 10px 0px rgba(0, 0, 0, 0.1);
 }
 
 .scroll-top > span {
@@ -1240,12 +1244,12 @@ html body #scroll-btn {
     font-size: 2rem;
     top: 50%;
     left: 50%;
+    /* Centers the arrow icon inside the button */
     -webkit-transform: translate(-50%, -50%);
     -ms-transform: translate(-50%, -50%);
     transform: translate(-50%, -50%);
     color: #000 !important;
 }
-
 .data-value {
   font-weight: bold;
 }
