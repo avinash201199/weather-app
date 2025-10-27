@@ -2,6 +2,7 @@ import Capitals from "./Capitals.js";
 import CITY from "./City.js";
 import { translations, getUserLanguage } from "../../lang/translation.js";
 import config from "./../../config/config.js";
+import ThemeManager from "./themeManager.js";
 
 // ===== Error handling helpers (top of script.js) =====
 const errorEl = document.getElementById('error-message');
@@ -1898,6 +1899,9 @@ class SmartNotifications {
 
 // Initialize all unique features
 function initializeApp() {
+  // Initialize theme manager first for proper styling
+  initThemeManager();
+  
   document.getElementsByName("search-bar")[0].focus();
   fetchNewBackground();
   initLocationAndWeather();
@@ -1909,6 +1913,45 @@ function initializeApp() {
   const smartNotifications = new SmartNotifications();
 
   console.log('Weather features initialized');
+}
+
+// Initialize Theme Manager
+let themeManager = null;
+let themeBackgroundManager = null;
+
+function initThemeManager() {
+  try {
+    themeManager = new ThemeManager();
+    
+    // Initialize theme-aware background manager
+    if (window.ThemeBackgroundManager) {
+      themeBackgroundManager = new window.ThemeBackgroundManager(themeManager);
+    }
+    
+    // Listen for theme changes to update weather components
+    document.addEventListener('themeChanged', (e) => {
+      console.log('🎨 Theme changed to:', e.detail.theme);
+      
+      // Update any theme-dependent components
+      updateWeatherComponentsForTheme(e.detail.theme);
+    });
+    
+    console.log('✅ Theme Manager initialized successfully');
+  } catch (error) {
+    console.error('❌ Failed to initialize Theme Manager:', error);
+  }
+}
+
+// Update weather components when theme changes
+function updateWeatherComponentsForTheme(theme) {
+  // Update map tiles if needed
+  if (_weatherMap) {
+    // You can add theme-specific map styling here if needed
+    console.log('🗺️ Map theme updated to:', theme);
+  }
+  
+  // Update any other theme-dependent components
+  // This is where you can add custom theme logic for specific components
 }
 
 document.addEventListener('DOMContentLoaded', initializeApp);

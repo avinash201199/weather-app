@@ -3,8 +3,9 @@ body {
   align-items: center;
   height: 90vh;
   margin: 0;
-  /* font-family: "Roboto", sans-serif; */
-  background: #222;
+  /* Use CSS variables for theme-aware background */
+  background: var(--bg-primary, #222);
+  color: var(--text-primary, #ffffff);
   /* background-image: url('https://source.unsplash.com/1600x900/?landscape'); */
   /* background-repeat: no-repeat;
   background-size: cover;
@@ -16,7 +17,8 @@ body {
   /* Scroll is required to see full info */
   position: relative;
   font-family: 'Poppins', sans-serif;
-
+  /* Smooth transitions for theme changes */
+  transition: background-color 0.3s ease, color 0.3s ease;
 }
 /* .logo {
   position: fixed;

@@ -1,0 +1,394 @@
+/* ===== CSS VARIABLES FOR THEME MANAGEMENT ===== */
+:root {
+    /* Light Theme Colors */
+    --bg-primary: #f8fafc;
+    --bg-secondary: #ffffff;
+    --bg-tertiary: #f1f5f9;
+    --bg-glass: rgba(255, 255, 255, 0.1);
+    --bg-card: rgba(255, 255, 255, 0.95);
+
+    /* Text Colors */
+    --text-primary: #1e293b;
+    --text-secondary: #64748b;
+    --text-accent: #0f172a;
+    --text-muted: #94a3b8;
+
+    /* Border & Shadow */
+    --border-color: rgba(148, 163, 184, 0.2);
+    --shadow-light: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+    --shadow-medium: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+    --shadow-heavy: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+
+    /* Accent Colors */
+    --accent-primary: #3b82f6;
+    --accent-secondary: #06b6d4;
+    --accent-success: #10b981;
+    --accent-warning: #f59e0b;
+    --accent-error: #ef4444;
+
+    /* Glass Effect */
+    --glass-bg: rgba(255, 255, 255, 0.1);
+    --glass-border: rgba(255, 255, 255, 0.3);
+    --glass-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+
+    /* Transitions */
+    --transition-fast: 0.15s ease;
+    --transition-normal: 0.3s ease;
+    --transition-slow: 0.5s ease;
+}
+
+/* Dark Theme Colors */
+[data-theme="dark"] {
+    --bg-primary: #0f172a;
+    --bg-secondary: #1e293b;
+    --bg-tertiary: #334155;
+    --bg-glass: rgba(15, 23, 42, 0.8);
+    --bg-card: rgba(30, 41, 59, 0.95);
+
+    --text-primary: #f8fafc;
+    --text-secondary: #cbd5e1;
+    --text-accent: #ffffff;
+    --text-muted: #64748b;
+
+    --border-color: rgba(100, 116, 139, 0.2);
+    --shadow-light: 0 4px 6px -1px rgba(0, 0, 0, 0.3);
+    --shadow-medium: 0 10px 15px -3px rgba(0, 0, 0, 0.4);
+    --shadow-heavy: 0 25px 50px -12px rgba(0, 0, 0, 0.6);
+
+    --glass-bg: rgba(15, 23, 42, 0.3);
+    --glass-border: rgba(100, 116, 139, 0.3);
+    --glass-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
+}
+
+/* ===== THEME TOGGLE BUTTON STYLES ===== */
+
+.theme-toggle-btn {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 60px;
+    height: 30px;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    border-radius: 50px;
+    position: relative;
+    cursor: pointer;
+    transition: all var(--transition-normal);
+    box-shadow: var(--shadow-light);
+    border: 2px solid var(--glass-border);
+    outline: none;
+}
+
+.theme-toggle-btn:hover {
+    transform: scale(1.05);
+    box-shadow: var(--shadow-medium);
+}
+
+.theme-toggle-btn:focus {
+    outline: 2px solid var(--accent-primary);
+    outline-offset: 2px;
+}
+
+.theme-icon {
+    font-size: 12px;
+    z-index: 2;
+    transition: all var(--transition-normal);
+    padding: 0 6px;
+    pointer-events: none;
+}
+
+.sun-icon {
+    opacity: 1;
+}
+
+.moon-icon {
+    opacity: 0.3;
+}
+
+.theme-indicator {
+    width: 22px;
+    height: 22px;
+    background: linear-gradient(135deg, #ffffff 0%, #f8fafc 100%);
+    border-radius: 50%;
+    position: absolute;
+    top: 2px;
+    left: 2px;
+    transition: all var(--transition-normal);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+    border: 1px solid rgba(255, 255, 255, 0.8);
+    pointer-events: none;
+}
+
+/* Dark mode styles for toggle */
+.theme-toggle-btn[data-theme="dark"] {
+    background: linear-gradient(135deg, #2d3748 0%, #1a202c 100%);
+}
+
+.theme-toggle-btn[data-theme="dark"] .sun-icon {
+    opacity: 0.3;
+}
+
+.theme-toggle-btn[data-theme="dark"] .moon-icon {
+    opacity: 1;
+}
+
+.theme-toggle-btn[data-theme="dark"] .theme-indicator {
+    transform: translateX(30px);
+    background: linear-gradient(135deg, #4a5568 0%, #2d3748 100%);
+}
+
+/* ===== GLOBAL THEME STYLES ===== */
+* {
+    transition: background-color var(--transition-normal),
+        color var(--transition-normal),
+        border-color var(--transition-normal),
+        box-shadow var(--transition-normal);
+}
+
+body {
+    background-color: var(--bg-primary);
+    color: var(--text-primary);
+    transition: all var(--transition-normal);
+}
+
+/* Navigation */
+.navbar {
+    background: var(--glass-bg);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border-bottom: 1px solid var(--border-color);
+    box-shadow: var(--shadow-light);
+}
+
+.logo-title {
+    color: var(--text-accent) !important;
+}
+
+/* Weather Cards */
+.weather-component__card {
+    background: var(--glass-bg) !important;
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border: 1px solid var(--glass-border);
+    box-shadow: var(--glass-shadow);
+    color: var(--text-primary) !important;
+}
+
+.header-component {
+    background: var(--glass-bg) !important;
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border: 1px solid var(--glass-border);
+    box-shadow: var(--glass-shadow);
+    color: var(--text-primary) !important;
+}
+
+/* Grid Items */
+.grid-item,
+.grid-item-air-quality,
+.grid-item-sun {
+    background: var(--bg-secondary);
+    border: 1px solid var(--border-color);
+    box-shadow: var(--shadow-light);
+    color: var(--text-primary);
+}
+
+.grid-item h6,
+.grid-item-air-quality h6,
+.grid-item-sun h6 {
+    color: var(--text-secondary);
+}
+
+.data-value {
+    color: var(--text-accent);
+}
+
+/* Search Bar */
+.weather-component__search-bar {
+    background: var(--bg-secondary);
+    color: var(--text-primary);
+    border: 1px solid var(--border-color);
+    box-shadow: var(--shadow-light);
+}
+
+.weather-component__search-bar::placeholder {
+    color: var(--text-muted);
+}
+
+.weather-component__search-bar:focus {
+    border-color: var(--accent-primary);
+    box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+}
+
+/* Buttons */
+.weather-component__button,
+.weather-component__button-microphone {
+    background: var(--accent-primary);
+    border: 1px solid var(--accent-primary);
+    box-shadow: var(--shadow-light);
+    transition: all var(--transition-fast);
+}
+
+.weather-component__button:hover,
+.weather-component__button-microphone:hover {
+    background: var(--accent-secondary);
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-medium);
+}
+
+/* Map Container */
+.map-box {
+    background: var(--bg-secondary);
+    border: 1px solid var(--border-color);
+    box-shadow: var(--shadow-light);
+}
+
+/* Mood and Time Machine Cards */
+.mood-recommendations-card,
+.time-machine-card,
+.globe-card {
+    background: var(--glass-bg) !important;
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border: 1px solid var(--glass-border);
+    box-shadow: var(--glass-shadow);
+    color: var(--text-primary) !important;
+}
+
+/* Footer */
+footer {
+    background: var(--bg-secondary);
+    color: var(--text-primary);
+    border-top: 1px solid var(--border-color);
+}
+
+.textfooter {
+    color: var(--text-primary) !important;
+}
+
+/* Social Icons */
+.socialIcons {
+    color: var(--text-secondary);
+    transition: all var(--transition-fast);
+}
+
+.socialIcons:hover {
+    color: var(--accent-primary);
+    transform: translateY(-2px);
+}
+
+/* Toast Notifications */
+.toast {
+    background: var(--bg-card);
+    border: 1px solid var(--border-color);
+    box-shadow: var(--shadow-medium);
+    color: var(--text-primary);
+}
+
+/* Weather Alerts */
+.weather-alerts-container {
+    color: var(--text-primary);
+}
+
+/* Modal */
+.modal-overlay {
+    background: rgba(0, 0, 0, 0.5);
+}
+
+.safety-modal {
+    background: var(--bg-card);
+    border: 1px solid var(--border-color);
+    box-shadow: var(--shadow-heavy);
+    color: var(--text-primary);
+}
+
+/* Form Controls */
+.form-select,
+.btn {
+    background: var(--bg-secondary);
+    color: var(--text-primary);
+    border: 1px solid var(--border-color);
+}
+
+.btn-primary {
+    background: var(--accent-primary);
+    border-color: var(--accent-primary);
+}
+
+.btn-primary:hover {
+    background: var(--accent-secondary);
+    border-color: var(--accent-secondary);
+}
+
+/* Globe Controls */
+.globe-btn {
+    background: var(--bg-secondary);
+    color: var(--text-primary);
+    border: 1px solid var(--border-color);
+    transition: all var(--transition-fast);
+}
+
+.globe-btn:hover,
+.globe-btn.active {
+    background: var(--accent-primary);
+    color: white;
+    transform: translateY(-2px);
+}
+
+/* Responsive Design Enhancements */
+@media (max-width: 768px) {
+
+    .theme-toggle-btn {
+        width: 50px;
+        height: 25px;
+    }
+
+    .theme-indicator {
+        width: 19px;
+        height: 19px;
+    }
+
+    .theme-toggle-btn[data-theme="dark"] .theme-indicator {
+        transform: translateX(25px);
+    }
+
+    .theme-icon {
+        font-size: 10px;
+        padding: 0 4px;
+    }
+}
+
+/* Smooth scroll behavior */
+html {
+    scroll-behavior: smooth;
+}
+
+/* Enhanced focus styles for accessibility */
+.theme-toggle-btn:focus-visible {
+    outline: 2px solid var(--accent-primary);
+    outline-offset: 2px;
+}
+
+/* Loading states */
+.loading {
+    opacity: 0.7;
+    transition: opacity var(--transition-normal);
+}
+
+/* Animation for theme transition */
+@keyframes themeTransition {
+    0% {
+        opacity: 0.8;
+    }
+
+    50% {
+        opacity: 0.9;
+    }
+
+    100% {
+        opacity: 1;
+    }
+}
+
+[data-theme] {
+    animation: themeTransition var(--transition-slow);
+}
