@@ -1,0 +1,38 @@
+/* PWA Install Button */
+.install-btn {
+  background: linear-gradient(135deg, #4a90e2, #357abd);
+  color: white;
+  border: none;
+  padding: 8px 12px;
+  border-radius: 20px;
+  font-size: 0.9rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.install-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(74, 144, 226, 0.3);
+}
+
+/* Offline Status */
+[data-connection="offline"] {
+  filter: grayscale(0.3);
+}
+
+[data-connection="offline"]::before {
+  content: "📡 Offline Mode";
+  position: fixed;
+  top: 10px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: #ff6b6b;
+  color: white;
+  padding: 5px 15px;
+  border-radius: 15px;
+  font-size: 0.8rem;
+  z-index: 9999;
+}
