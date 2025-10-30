@@ -436,12 +436,14 @@ const fetchAirQuality = (city) => {
     })
     .then((data) => {
       // Validate air quality data
+      
       if (!data || !data.data || !Array.isArray(data.data) || data.data.length === 0) {
         throw new Error('AQI_NO_DATA');
       }
 
       const relevantLocation = data.data[0];
-      if (!relevantLocation || typeof relevantLocation.aqi !== 'number') {
+      relevantLocation.aqi = Number(relevantLocation.aqi);
+      if (!relevantLocation || isNaN(relevantLocation.aqi) ) {
         throw new Error('AQI_INVALID_DATA');
       }
 
@@ -582,17 +584,17 @@ let weather = {
           // Handle different HTTP status codes
           switch (response.status) {
             case 401:
-              throw new Error('API_KEY_INVALID');
+              throw new Error("API_KEY_INVALID");
             case 404:
-              throw new Error('CITY_NOT_FOUND');
+              throw new Error("CITY_NOT_FOUND");
             case 429:
-              throw new Error('RATE_LIMIT_EXCEEDED');
+              throw new Error("RATE_LIMIT_EXCEEDED");
             case 500:
             case 502:
             case 503:
-              throw new Error('SERVER_ERROR');
+              throw new Error("SERVER_ERROR");
             default:
-              throw new Error('NETWORK_ERROR');
+              throw new Error("NETWORK_ERROR");
           }
         }
         return response.json();
@@ -600,7 +602,7 @@ let weather = {
       .then((data) => {
         // Validate response data
         if (!data || !data.main || !data.weather || !data.weather[0]) {
-          throw new Error('INVALID_DATA');
+          throw new Error("INVALID_DATA");
         }
 
         self.hideLoadingState();
@@ -865,7 +867,7 @@ let weather = {
     }
 
     toastFunction(errorMessage, toastType, 6000);
-    console.error('Weather API Error:', error);
+    
   },
 
   fetchCityBackground: function (city) {
