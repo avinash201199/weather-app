@@ -793,6 +793,20 @@ let weather = {
         // Open WhatsApp in a new tab to share the message
         window.open(whatsappUrl, "_blank");
       });
+      
+      // Trigger weather update event for the globe
+      const weatherUpdateEvent = new CustomEvent('weatherUpdate', {
+        detail: {
+          city: name,
+          temp: temp,
+          lat: lat,
+          lon: lon,
+          description: description,
+          humidity: humidity,
+          wind: speed
+        }
+      });
+      document.dispatchEvent(weatherUpdateEvent);
   },
   search: async function () {
     if (document.querySelector(".weather-component__search-bar").value != "") {
