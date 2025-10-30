@@ -33,28 +33,36 @@
       <img src="./assets/icons/logo.png" alt="Logo" class="img-fluid logo-img">
       <span class="logo-title">Weather Dashboard</span>
     </div>
-    <div style="display: flex; align-items: center; gap: 15px;">
-      <!-- Theme Toggle Button -->
-      <button id="theme-toggle" class="theme-toggle-btn" 
-              aria-label="Toggle dark/light mode" 
-              title="Toggle dark/light mode"
-              role="switch"
-              aria-pressed="false">
-        <span class="theme-icon sun-icon" aria-hidden="true">☀️</span>
-        <span class="theme-icon moon-icon" aria-hidden="true">🌙</span>
-        <div class="theme-indicator" aria-hidden="true"></div>
-      </button>
-      
-      <i class="whatsapp" id="whatsapp-button">
-        <img src="assets/Whatsapp-logo.svg" alt="whatsapp">
-      </i>
-      <div class="nav-component__celcius-block col-auto">
-        <input type="checkbox" id="unit" class="checkbox" checked>
-        <label for="unit" class="label" title="Toggle temperature unit">
-          <span class="farenheit">°F</span>
-          <span class="celcius">°C</span>
-          <div class='ball'></div>
-        </label>
+    <div class="nav-controls">
+      <div class="control theme-control">
+        <div class="theme-toggle-wrapper">
+          <button id="theme-toggle" class="theme-toggle-btn" 
+                  aria-label="Toggle dark/light mode" 
+                  title="Toggle dark/light mode"
+                  role="switch"
+                  aria-pressed="false">
+            <div class="theme-indicator" aria-hidden="true"></div>
+          </button>
+          <div class="theme-toggle-label">Light</div>
+        </div>
+      </div>
+
+      <div class="control whatsapp-control">
+        <i class="whatsapp" id="whatsapp-button">
+          <img src="assets/Whatsapp-logo.svg" alt="whatsapp">
+        </i>
+      </div>
+
+      <div class="control unit-control">
+        <div class="nav-component__celcius-block col-auto">
+          <input type="checkbox" id="unit" class="checkbox" checked>
+          <label for="unit" class="label" title="Toggle temperature unit">
+            <span class="farenheit">°F</span>
+            <span class="celcius">°C</span>
+            <div class='ball'></div>
+          </label>
+          <div class="unit-toggle-label">°C</div>
+        </div>
       </div>
     </div>
   </nav>
