@@ -1,0 +1,337 @@
+/* Missing CSS for new components */
+
+/* Weather Grid Layout */
+.weather-component__grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 15px;
+  margin-top: 20px;
+}
+
+.grid-item {
+  background: rgba(255, 255, 255, 0.1);
+  padding: 15px;
+  border-radius: 12px;
+  text-align: center;
+}
+
+.grid-item .heading {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  margin-bottom: 8px;
+}
+
+.grid-item .heading h6 {
+  margin: 0;
+  font-size: 0.9rem;
+  color: rgba(255, 255, 255, 0.8);
+}
+
+.grid-item .data {
+  font-size: 1.2rem;
+  font-weight: bold;
+  color: #fff;
+}
+
+/* UV Index specific styling */
+.grid-item-uvi {
+  background: rgba(255, 255, 255, 0.1);
+  padding: 15px;
+  border-radius: 12px;
+  text-align: center;
+}
+
+.uvi-low { border-left: 4px solid #4caf50; }
+.uvi-moderate { border-left: 4px solid #ff9800; }
+.uvi-high { border-left: 4px solid #f44336; }
+.uvi-very-high { border-left: 4px solid #9c27b0; }
+.uvi-extreme { border-left: 4px solid #000; }
+
+/* Air Quality specific styling */
+.grid-item-air-quality {
+  background: rgba(255, 255, 255, 0.1);
+  padding: 15px;
+  border-radius: 12px;
+  text-align: center;
+  grid-column: span 2;
+}
+
+/* Sun times specific styling */
+.grid-item-sun {
+  background: rgba(255, 255, 255, 0.1);
+  padding: 15px;
+  border-radius: 12px;
+  display: flex;
+  justify-content: space-between;
+  grid-column: span 2;
+}
+
+.sunrise, .sunset {
+  text-align: center;
+  flex: 1;
+}
+
+/* Map Box */
+.map-box {
+  margin: 20px 0;
+  border-radius: 12px;
+  overflow: hidden;
+  height: 200px;
+  position: relative;
+}
+
+#weather-map {
+  width: 100%;
+  height: 100%;
+}
+
+.map-city-label {
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  background: rgba(0, 0, 0, 0.7);
+  color: white;
+  padding: 5px 10px;
+  border-radius: 5px;
+  z-index: 1000;
+  font-size: 0.9rem;
+}
+
+/* Mood Recommendations */
+.mood-recommendations-card {
+  background: rgba(15, 32, 39, 0.6);
+  padding: 25px;
+  margin: 20px 0;
+  backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.mood-content {
+  display: grid;
+  gap: 15px;
+}
+
+.mood-item {
+  background: rgba(255, 255, 255, 0.1);
+  padding: 15px;
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  gap: 15px;
+}
+
+.mood-icon {
+  font-size: 2rem;
+}
+
+.mood-title {
+  font-weight: bold;
+  margin-bottom: 5px;
+}
+
+.mood-description {
+  font-size: 0.9rem;
+  opacity: 0.8;
+}
+
+.mood-loading {
+  text-align: center;
+  padding: 20px;
+  color: rgba(255, 255, 255, 0.7);
+  font-style: italic;
+}
+
+.historical-placeholder {
+  text-align: center;
+  padding: 20px;
+  color: rgba(255, 255, 255, 0.7);
+  font-style: italic;
+}
+
+/* Time Machine */
+.time-machine-card {
+  background: rgba(15, 32, 39, 0.6);
+  padding: 25px;
+  margin: 20px 0;
+  backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.historical-content {
+  margin-top: 20px;
+}
+
+.historical-item {
+  background: rgba(255, 255, 255, 0.05);
+  padding: 12px;
+  border-radius: 8px;
+  border-left: 3px solid #4a90e2;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+/* Globe */
+.globe-card {
+  background: rgba(15, 32, 39, 0.6);
+  padding: 25px;
+  margin: 20px 0;
+  backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.globe-container {
+  text-align: center;
+}
+
+.globe-wrapper {
+  position: relative;
+  width: 300px;
+  height: 300px;
+  margin: 0 auto;
+}
+
+.globe {
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  background: linear-gradient(45deg, #1e3c72, #2a5298);
+  position: relative;
+  overflow: hidden;
+}
+
+.globe-markers {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.weather-marker {
+  position: absolute;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  cursor: pointer;
+  transition: transform 0.3s ease;
+}
+
+.weather-marker:hover {
+  transform: scale(1.2);
+}
+
+.weather-marker.sunny { background: #ffd700; }
+.weather-marker.cloudy { background: #87ceeb; }
+.weather-marker.rainy { background: #4682b4; }
+
+.globe-controls {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.globe-btn {
+  background: rgba(255, 255, 255, 0.1);
+  color: white;
+  border: none;
+  padding: 8px 15px;
+  border-radius: 20px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.globe-btn:hover,
+.globe-btn.active {
+  background: #4a90e2;
+  transform: translateY(-2px);
+}
+
+/* Voice Status */
+.voice-status {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  right: 0;
+  background: rgba(0, 0, 0, 0.8);
+  color: white;
+  padding: 8px;
+  border-radius: 5px;
+  font-size: 0.8rem;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.voice-status.show {
+  opacity: 1;
+}
+
+/* Error Message */
+.error-message {
+  background: rgba(220, 53, 69, 0.1);
+  border: 1px solid rgba(220, 53, 69, 0.3);
+  color: #dc3545;
+  padding: 10px 15px;
+  border-radius: 8px;
+  margin: 10px 0;
+  font-size: 0.9rem;
+  text-align: center;
+}
+
+.error-message[hidden] {
+  display: none;
+}
+
+/* Theme Toggle Button */
+.theme-toggle-btn {
+  background: rgba(255, 255, 255, 0.1);
+  border: 2px solid rgba(255, 255, 255, 0.2);
+  border-radius: 25px;
+  padding: 8px 12px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  position: relative;
+  overflow: hidden;
+}
+
+.theme-toggle-btn:hover {
+  background: rgba(255, 255, 255, 0.2);
+  transform: translateY(-2px);
+}
+
+.theme-icon {
+  font-size: 1.2rem;
+  transition: opacity 0.3s ease;
+}
+
+.theme-indicator {
+  position: absolute;
+  width: 20px;
+  height: 20px;
+  background: rgba(255, 255, 255, 0.3);
+  border-radius: 50%;
+  transition: transform 0.3s ease;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .weather-component__grid {
+    grid-template-columns: 1fr;
+  }
+  
+  .grid-item-air-quality,
+  .grid-item-sun {
+    grid-column: span 1;
+  }
+  
+  .globe-wrapper {
+    width: 250px;
+    height: 250px;
+  }
+}
