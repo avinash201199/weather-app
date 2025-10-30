@@ -97,10 +97,12 @@
 }
 
 .sun-icon {
+    margin-left: -6.8px;
     opacity: 1;
 }
 
 .moon-icon {
+    margin-right: -2px;
     opacity: 0.3;
 }
 

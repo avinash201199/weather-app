@@ -3,9 +3,8 @@ body {
   align-items: center;
   height: 90vh;
   margin: 0;
-  /* Use CSS variables for theme-aware background */
-  background: var(--bg-primary, #222);
-  color: var(--text-primary, #ffffff);
+  /* font-family: "Roboto", sans-serif; */
+  background: #222;
   /* background-image: url('https://source.unsplash.com/1600x900/?landscape'); */
   /* background-repeat: no-repeat;
   background-size: cover;
@@ -17,8 +16,7 @@ body {
   /* Scroll is required to see full info */
   position: relative;
   font-family: 'Poppins', sans-serif;
-  /* Smooth transitions for theme changes */
-  transition: background-color 0.3s ease, color 0.3s ease;
+
 }
 /* .logo {
   position: fixed;
@@ -298,6 +296,7 @@ body {
   top: 30px;
   right: 30px;
   margin: 10px 20px;
+  z-index: 8;
   /* position: fixed !important; */
   /* replced from line 358 */
 }
@@ -931,22 +930,34 @@ footer h2 {
   border-radius: 50px;
   align-items: center;
   justify-content: space-between;
-  padding: 5px;
   position: relative;
-  transform: scale(1);
+  padding: 0 14px; /* space so ball doesn't cover text */
   transition: background-color 0.3s ease;
 }
-
+.farenheit,
+.celcius {
+  color: white;
+  font-size: 15px;
+  font-weight: 400;
+  position: relative;
+  z-index: 2; /* Text stays above ball */
+}
+.checkbox:not(:checked) + .label .farenheit,
+.checkbox:checked + .label .celcius {
+  font-weight: 700;
+}
 .ball {
   width: 30px;
   height: 30px;
-  background-color: #fff;
-  box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+  background-color: rgba(255, 255, 255, 0.18);
+  backdrop-filter: blur(6px);
+  border: 2px solid white;
   position: absolute;
-  top: 4px;
+  top: 5px;
   left: 5px;
   border-radius: 50%;
-  transition: transform 0.3s cubic-bezier(0.68, -0.55, 0.27, 1.55);
+  z-index: 1; /* Ball stays under text */
+  transition: transform 0.3s cubic-bezier(0.68,-0.55,0.27,1.55);
 }
 
 .checkbox:checked + .label .ball {
@@ -957,17 +968,20 @@ footer h2 {
   background-color: #4a90e2;
 }
 
-.celcius {
+/* .celcius {
   color: white;
+  margin-right: 3px;
   font-size: 15px;
   padding-left: 10px;
+  padding-right: 5px;
   transition: color 0.3s ease;
 }
 
 .farenheit {
   color: white;
   font-size: 15px;
-}
+  margin-left: 5px;
+} */
 
 .checkbox:checked + .label .celcius {
   color: #fff;
@@ -1222,23 +1236,19 @@ html body #scroll-btn {
 }
 
 .scroll-top {
-    position: absolute;
-    z-index: 5;
-    /* Increased bottom value to place the button far above the footer text */
-    bottom: 168px; 
-    width: 40px;
-    height: 40px;
-    border-radius: 50%;
-    background: #fff;
-    left: 50%;
-    
-    /* Centers the button horizontally */
-    -webkit-transform: translate(-50%, 0);
-    -ms-transform: translate(-50%, 0);
-    transform: translate(-50%, 0);
-    
-    -webkit-box-shadow: 0 0px 10px 0px rgba(0, 0, 0, 0.1);
-    box-shadow: 0 0px 10px 0px rgba(0, 0, 0, 0.1);
+  position: absolute;
+  z-index: 5;
+  top: 0;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: #fff;
+  left: 50%;
+  -webkit-transform: translate(-50%, -50%);
+  -ms-transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%);
+  -webkit-box-shadow: 0 0px 10px 0px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 0px 10px 0px rgba(0, 0, 0, 0.1);
 }
 
 .scroll-top > span {
@@ -1246,12 +1256,12 @@ html body #scroll-btn {
     font-size: 2rem;
     top: 50%;
     left: 50%;
-    /* Centers the arrow icon inside the button */
     -webkit-transform: translate(-50%, -50%);
     -ms-transform: translate(-50%, -50%);
     transform: translate(-50%, -50%);
     color: #000 !important;
 }
+
 .data-value {
   font-weight: bold;
 }
