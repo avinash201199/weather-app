@@ -580,6 +580,23 @@ const getAirQualityClass = (aqi) => {
       return "not-available";
   }
 };
+// ✅ --- ADD THIS NEW FUNCTION ---
+/**
+ * Converts a moon phase value (0-1) into a readable name.
+ * @param {number} phase - The moon phase value from the API.
+ * @returns {string} - The name of the moon phase.
+ */
+function getMoonPhaseName(phase) {
+  if (phase === 0 || phase === 1) return "New Moon";
+  if (phase > 0 && phase < 0.25) return "Waxing Crescent";
+  if (phase === 0.25) return "First Quarter";
+  if (phase > 0.25 && phase < 0.5) return "Waxing Gibbous";
+  if (phase === 0.5) return "Full Moon";
+  if (phase > 0.5 && phase < 0.75) return "Waning Gibbous";
+  if (phase === 0.75) return "Last Quarter";
+  if (phase > 0.75 && phase < 1) return "Waning Crescent";
+  return "Unknown";
+}
 
 let weather = {
   fetchWeather: async function (city = null, lat = null, lon = null) {
@@ -789,6 +806,12 @@ let weather = {
     let date1 = new Date(sunrise * 1000);
     let date2 = new Date(sunset * 1000);
     const { lat, lon } = data.coord;
+    try {
+      const oneCallUrl = `https://api.openweathermap.org/data/2.5/onecall?lat=${lat}&lon=${lon}&exclude=minutely,hourly,current,alerts&units=metric&appid=${config.API_KEY}`;
+      getWeatherWeekly(oneCallUrl);
+    } catch (e) {
+      console.error("Could not fetch daily forecast for moon phase", e);
+    }
 
     // Call AirQuality but don't let it block the weather display
     try {
@@ -1127,6 +1150,17 @@ function generateWeatherItem(
 }
 
 function showWeatherData(data) {
+  // ✅ --- START OF NEW MOON PHASE CODE ---
+  // Extract and display the moon phase
+  if (data && data.daily && data.daily.length > 0) {
+    const moonPhaseValue = data.daily[0].moon_phase;
+    const moonPhaseName = getMoonPhaseName(moonPhaseValue); // Uses the helper function
+    const moonPhaseEl = document.getElementById("moon-phase");
+    if (moonPhaseEl) {
+      moonPhaseEl.textContent = moonPhaseName;
+      moonPhaseEl.style.color = "var(--text-primary)"; // Ensures it is visible
+    }
+  }
   let container = document.getElementById("weather-forecast");
   container.innerHTML = "";
   data.daily.forEach((day, idx) => {
