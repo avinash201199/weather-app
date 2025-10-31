@@ -20,6 +20,7 @@
   <link rel="stylesheet" href="./assets/css/style.css">
   <link rel="stylesheet" href="./assets/css/styles.css">
   <link rel="stylesheet" href="./assets/css/theme.css">
+  <link rel="stylesheet" href="./assets/css/globe-styles.css">
 
   <!-- Font Awesome -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
@@ -33,28 +34,36 @@
       <img src="./assets/icons/logo.png" alt="Logo" class="img-fluid logo-img">
       <span class="logo-title">Weather Dashboard</span>
     </div>
-    <div style="display: flex; align-items: center; gap: 15px;">
-      <!-- Theme Toggle Button -->
-      <button id="theme-toggle" class="theme-toggle-btn" 
-              aria-label="Toggle dark/light mode" 
-              title="Toggle dark/light mode"
-              role="switch"
-              aria-pressed="false">
-        <span class="theme-icon sun-icon" aria-hidden="true">☀️</span>
-        <span class="theme-icon moon-icon" aria-hidden="true">🌙</span>
-        <div class="theme-indicator" aria-hidden="true"></div>
-      </button>
-      
-      <i class="whatsapp" id="whatsapp-button">
-        <img src="assets/Whatsapp-logo.svg" alt="whatsapp">
-      </i>
-      <div class="nav-component__celcius-block col-auto">
-        <input type="checkbox" id="unit" class="checkbox" checked>
-        <label for="unit" class="label" title="Toggle temperature unit">
-          <span class="farenheit">°F</span>
-          <span class="celcius">°C</span>
-          <div class='ball'></div>
-        </label>
+    <div class="nav-controls">
+      <div class="control theme-control">
+        <div class="theme-toggle-wrapper">
+          <button id="theme-toggle" class="theme-toggle-btn" 
+                  aria-label="Toggle dark/light mode" 
+                  title="Toggle dark/light mode"
+                  role="switch"
+                  aria-pressed="false">
+            <div class="theme-indicator" aria-hidden="true"></div>
+          </button>
+          <div class="theme-toggle-label">Light</div>
+        </div>
+      </div>
+
+      <div class="control whatsapp-control">
+        <i class="whatsapp" id="whatsapp-button">
+          <img src="assets/Whatsapp-logo.svg" alt="whatsapp">
+        </i>
+      </div>
+
+      <div class="control unit-control">
+        <div class="nav-component__celcius-block col-auto">
+          <input type="checkbox" id="unit" class="checkbox" checked>
+          <label for="unit" class="label" title="Toggle temperature unit">
+            <span class="farenheit">°F</span>
+            <span class="celcius">°C</span>
+            <div class='ball'></div>
+          </label>
+          <div class="unit-toggle-label">°C</div>
+        </div>
       </div>
     </div>
   </nav>
@@ -354,24 +363,17 @@
       </div>
     </div>
   </section>
-<!-- Interactive Weather Globe Section -->
+<!-- Interactive 3D Weather Globe Section -->
 <section class="globe-section pt-4">
     <div class="container">
       <div class="row justify-content-center">
         <div class="col-12 col-md-10 col-lg-8">
           <div class="globe-card text-white rounded-5">
-            <h3 class="text-center mb-3">🌍 Interactive Weather Globe</h3>
-            <div id="weather-globe" class="globe-container">
-              <div class="globe-wrapper">
-                <div class="globe" id="animated-globe">
-                  <div class="globe-sphere" aria-hidden="true"></div>
-                  <div class="globe-markers" id="globe-markers" aria-live="polite">
-                    <!-- Weather markers will be added dynamically -->
-                  </div>
-                </div>
-              </div>
-
-              <!-- Controls Card at the bottom -->
+            <h3 class="text-center mb-3">🌍 Interactive 3D Weather Globe</h3>
+            <div id="globe-container" class="globe-container">
+              <div id="globeViz" class="globe-visualization"></div>
+              
+              <!-- Globe Controls -->
               <div class="controls-card mt-4">
                 <div class="globe-controls">
                   <button class="globe-btn active" data-region="americas">🌎 Americas</button>
@@ -380,12 +382,301 @@
                   <button class="globe-btn" data-region="africa">🌍 Africa</button>
                 </div>
               </div>
-
             </div>
           </div>
         </div>
       </div>
     </div>
+    
+    <!-- Scripts for 3D Globe -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    
+    <script>
+      // Load OrbitControls dynamically
+      function loadOrbitControls() {
+        return new Promise((resolve, reject) => {
+          const script = document.createElement('script');
+          script.src = 'https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/controls/OrbitControls.js';
+          script.onload = () => {
+            // Check if OrbitControls is available
+            if (window.THREE && window.THREE.OrbitControls) {
+              resolve(window.THREE.OrbitControls);
+            } else {
+              reject(new Error('OrbitControls not found'));
+            }
+          };
+          script.onerror = reject;
+          document.head.appendChild(script);
+        });
+      }
+      
+      document.addEventListener('DOMContentLoaded', async function() {
+        const container = document.getElementById('globeViz');
+        if (!container) return;
+        
+        // Set up Three.js scene
+        const scene = new THREE.Scene();
+        const camera = new THREE.PerspectiveCamera(75, container.clientWidth / container.clientHeight, 0.1, 1000);
+        const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
+        renderer.setSize(container.clientWidth, container.clientHeight);
+        container.innerHTML = ''; // Clear previous content
+        container.appendChild(renderer.domElement);
+        
+        // Create the Earth
+        const earthGeometry = new THREE.SphereGeometry(1, 64, 64);
+        
+        // Handle texture loading with error fallback
+        const textureLoader = new THREE.TextureLoader();
+        
+        // Load Earth textures with error handling
+        let earthTexture, earthBump;
+        try {
+          earthTexture = textureLoader.load('https://cdn.jsdelivr.net/npm/three-globe/example/img/earth-blue-marble.jpg');
+        } catch (e) {
+          console.warn('Failed to load earth texture, using default material');
+          earthTexture = null;
+        }
+        
+        try {
+          earthBump = textureLoader.load('https://cdn.jsdelivr.net/npm/three-globe/example/img/earth-topology.png');
+        } catch (e) {
+          console.warn('Failed to load bump map, using default material');
+          earthBump = null;
+        }
+        
+        const earthMaterial = new THREE.MeshPhongMaterial({
+          map: earthTexture || new THREE.Color(0x2233ff),
+          bumpMap: earthBump,
+          bumpScale: 0.05
+        });
+        
+        const earthMesh = new THREE.Mesh(earthGeometry, earthMaterial);
+        scene.add(earthMesh);
+        
+        // Add clouds layer with rotation effect
+        const CLOUDS_IMG_URL = 'https://cdn.jsdelivr.net/npm/three-globe/example/img/earth-clouds.png';
+        const CLOUDS_ALT = 0.004;
+        const CLOUDS_ROTATION_SPEED = -0.006; // deg/frame
+        
+        textureLoader.load(CLOUDS_IMG_URL, 
+          // onLoad callback
+          (cloudsTexture) => {
+            const clouds = new THREE.Mesh(
+              new THREE.SphereGeometry(earthGeometry.parameters.radius * (1 + CLOUDS_ALT), 75, 75),
+              new THREE.MeshPhongMaterial({ map: cloudsTexture, transparent: true })
+            );
+            scene.add(clouds);
+            
+            // Add rotation animation for clouds
+            (function rotateClouds() {
+              clouds.rotation.y += CLOUDS_ROTATION_SPEED * Math.PI / 180;
+              requestAnimationFrame(rotateClouds);
+            })();
+          },
+          // onProgress callback
+          undefined,
+          // onError callback
+          (err) => {
+            console.warn('Failed to load clouds texture:', err);
+          }
+        );
+        
+        // Add atmosphere effect
+        const atmosphereGeometry = new THREE.SphereGeometry(1.02, 64, 64);
+        const atmosphereMaterial = new THREE.MeshPhongMaterial({
+          color: 0x3399ff,
+          transparent: true,
+          opacity: 0.1
+        });
+        
+        const atmosphereMesh = new THREE.Mesh(atmosphereGeometry, atmosphereMaterial);
+        scene.add(atmosphereMesh);
+        
+        // Add lighting
+        const ambientLight = new THREE.AmbientLight(0x333333);
+        scene.add(ambientLight);
+        
+        const sunLight = new THREE.DirectionalLight(0xffffff, 1);
+        sunLight.position.set(5, 3, 5);
+        scene.add(sunLight);
+        
+        // Position camera
+        camera.position.z = 2.5;
+        
+        // Add orbit controls
+        let controls;
+        try {
+          const OrbitControls = await loadOrbitControls();
+          controls = new OrbitControls(camera, renderer.domElement);
+          controls.enableDamping = true;
+          controls.dampingFactor = 0.05;
+          controls.autoRotate = true;
+          controls.autoRotateSpeed = 0.35; // Match the requested speed
+        } catch (error) {
+          console.warn('Failed to load OrbitControls, using basic rotation only:', error);
+        }
+        
+        // Add weather markers
+        const markersGroup = new THREE.Group();
+        scene.add(markersGroup);
+        
+        // Create initial markers for major cities
+        const cities = [
+          { name: 'New York', lat: 40.7128, lng: -74.0060, color: 0x00ff7f },
+          { name: 'London', lat: 51.5074, lng: -0.1278, color: 0xff9900 },
+          { name: 'Tokyo', lat: 35.6762, lng: 139.6503, color: 0xff4444 },
+          { name: 'Sydney', lat: -33.8688, lng: 151.2093, color: 0x4488ff },
+          { name: 'São Paulo', lat: -23.5505, lng: -46.6333, color: 0xff44ff },
+          { name: 'Cairo', lat: 30.0444, lng: 31.2357, color: 0xffff00 }
+        ];
+        
+        cities.forEach(city => {
+          const markerGeometry = new THREE.SphereGeometry(0.02, 16, 16);
+          const markerMaterial = new THREE.MeshBasicMaterial({ color: city.color });
+          const marker = new THREE.Mesh(markerGeometry, markerMaterial);
+          
+          // Convert lat/lng to 3D position
+          const phi = (90 - city.lat) * Math.PI / 180;
+          const theta = (city.lng + 180) * Math.PI / 180;
+          
+          marker.position.set(
+            -Math.sin(phi) * Math.cos(theta),
+            Math.cos(phi),
+            Math.sin(phi) * Math.sin(theta)
+          );
+          
+          marker.userData = { name: city.name };
+          markersGroup.add(marker);
+        });
+        
+        // Animation loop
+        function animate() {
+          requestAnimationFrame(animate);
+          
+          // Rotate earth
+          earthMesh.rotation.y += 0.0003;
+          
+          if (controls) {
+            controls.update();
+          }
+          renderer.render(scene, camera);
+        }
+        
+        // Handle window resize
+        window.addEventListener('resize', function() {
+          camera.aspect = container.clientWidth / container.clientHeight;
+          camera.updateProjectionMatrix();
+          renderer.setSize(container.clientWidth, container.clientHeight);
+        });
+        
+        // Start animation
+        animate();
+        
+        // Function to update globe with weather data
+        function updateGlobeWithWeatherData(event) {
+          if (!event.detail || !event.detail.lat || !event.detail.lon) return;
+          
+          const weatherData = event.detail;
+          
+          // Create a new marker for the current city
+          const markerGeometry = new THREE.SphereGeometry(0.03, 16, 16);
+          
+          // Temperature-based color
+          let color = 0x00aaff; // Default blue
+          if (weatherData.temp > 30) color = 0xff4444; // Hot - Red
+          else if (weatherData.temp > 20) color = 0xff9900; // Warm - Orange
+          else if (weatherData.temp > 10) color = 0x00ff7f; // Mild - Green
+          else if (weatherData.temp > 0) color = 0x4488ff; // Cool - Blue
+          
+          const markerMaterial = new THREE.MeshBasicMaterial({ color: color });
+          const marker = new THREE.Mesh(markerGeometry, markerMaterial);
+          
+          // Convert lat/lng to 3D position
+          const phi = (90 - weatherData.lat) * Math.PI / 180;
+          const theta = (weatherData.lon + 180) * Math.PI / 180;
+          
+          marker.position.set(
+            -Math.sin(phi) * Math.cos(theta),
+            Math.cos(phi),
+            Math.sin(phi) * Math.sin(theta)
+          );
+          
+          marker.userData = { 
+            name: weatherData.city,
+            temp: weatherData.temp,
+            description: weatherData.description
+          };
+          
+          // Remove any existing marker for this city
+          let existingIndex = -1;
+          for (let i = 0; i < markersGroup.children.length; i++) {
+            if (markersGroup.children[i].userData.name === weatherData.city) {
+              existingIndex = i;
+              break;
+            }
+          }
+          
+          if (existingIndex >= 0) {
+            markersGroup.remove(markersGroup.children[existingIndex]);
+          }
+          
+          markersGroup.add(marker);
+        }
+        
+        // Listen for weather updates
+        document.addEventListener('weatherUpdate', updateGlobeWithWeatherData);
+        
+        // Region focus functions
+        function focusOnRegion(region) {
+          let targetLat = 0, targetLng = 0;
+          
+          switch(region) {
+            case 'americas':
+              targetLat = 20;
+              targetLng = -100;
+              break;
+            case 'europe':
+              targetLat = 50;
+              targetLng = 10;
+              break;
+            case 'asia':
+              targetLat = 30;
+              targetLng = 100;
+              break;
+            case 'africa':
+              targetLat = 0;
+              targetLng = 20;
+              break;
+            default:
+              return;
+          }
+          
+          // Convert lat/lng to 3D position for camera
+          const phi = (90 - targetLat) * Math.PI / 180;
+          const theta = (targetLng + 180) * Math.PI / 180;
+          
+          const targetX = -Math.sin(phi) * Math.cos(theta) * 2.5;
+          const targetY = Math.cos(phi) * 2.5;
+          const targetZ = Math.sin(phi) * Math.sin(theta) * 2.5;
+          
+          // Animate camera to new position (simplified animation)
+          camera.position.set(targetX, targetY, targetZ);
+          camera.lookAt(0, 0, 0);
+        }
+        
+        // Add event listeners to region buttons
+        document.querySelectorAll('.globe-btn').forEach(btn => {
+          btn.addEventListener('click', function() {
+            const region = this.getAttribute('data-region');
+            focusOnRegion(region);
+            
+            // Update active button
+            document.querySelectorAll('.globe-btn').forEach(b => b.classList.remove('active'));
+            this.classList.add('active');
+          });
+        });
+      });
+    </script>
   </section>
 
 
@@ -427,6 +718,9 @@
     <!-- <a href="#top" class="smoothscroll scroll-top">
       <span class="icon-keyboard_arrow_up"></span>
     </a> -->
+    <a href="#top" class="smoothscroll scroll-top">
+      <span class="icon-keyboard_arrow_up">&#8679;</span>
+    </a>
 
     <div>
       <h2 class="textfooter">
@@ -467,8 +761,7 @@
 
   <!-- moment CDN -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js"
-    integrity="sha512-qTXRIMyZIFb8iQcfjXWCO8+M5Tbc38Qi5WzdPOYZHIlZpzBHG3L3by84BBBOiRGiEb7KKtAOAs5qYdUiZiQNNQ=="
-    crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    integrity="sha512-qTXRIMyZIFb8iQjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 
   <!-- Leaflet JS -->
   <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
