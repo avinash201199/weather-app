@@ -331,14 +331,14 @@ function changeBackgroundImage() {
 }
 
 const userLang = getUserLanguage() || "en-US";
-const place = document.querySelector("#place");
+//const place = document.querySelector("#place");
 
-for (let i in CITY) {
-  let option = document.createElement("option");
-  option.value = CITY[i];
-  option.text = CITY[i];
-  place.appendChild(option);
-}
+// for (let i in CITY) {
+//   let option = document.createElement("option");
+//   option.value = CITY[i];
+//   option.text = CITY[i];
+//   place.appendChild(option);
+// }
 
 function formatAMPM(date) {
   return date.toLocaleString(translations[userLang].formattingLocale, {
@@ -447,7 +447,6 @@ const fetchAirQuality = (city) => {
       if (!relevantLocation || isNaN(relevantLocation.aqi) ) {
         throw new Error('AQI_INVALID_DATA');
       }
-
       return relevantLocation.aqi;
     })
     .catch((error) => {
@@ -1109,6 +1108,40 @@ document
       weather.search();
     }
   });
+
+const place = document.querySelector("#place");
+
+
+async function ac(value) {
+  place.innerHTML=''
+  if(value.length<=2) return 
+  
+ try {
+   const response = await fetch(
+     `https://api.openweathermap.org/geo/1.0/direct?q=${value}&limit=5&appid=20a36f8e1152244bbbd9ac296d3640f2`
+   );
+   if (response.ok) {
+     const data = await response.json();
+     
+     for(let i=0;i<data.length;i++){
+       const option = document.createElement("option");
+       option.value = data[i].name.replace(/[^\w\s,.-]/g, "");
+       //option.text = data[i].name;
+       place.appendChild(option);
+     }
+     
+
+   } else {
+     throw new Error("Failed to fetch data");
+   }
+ } catch (error) {
+   console.error("Error:", error);
+ }
+  
+}
+
+const searchBar = document.querySelector(".weather-component__search-bar");
+searchBar.addEventListener("input", (e) => ac(e.target.value));
 
 
 document.getElementsByName("search-bar")[0].placeholder =
