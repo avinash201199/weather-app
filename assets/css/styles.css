@@ -277,6 +277,7 @@ figure.weather-component__icn {
       font-size: 0.8rem;
       height: 90px;
       min-width: 140px;
+      padding-right: 10px;
 }
 
 .sunset, .sunrise{
