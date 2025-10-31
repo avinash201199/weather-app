@@ -99,7 +99,8 @@ body {
 
 .alert-message {
   font-size: 12px;
-  color: #666;
+  color: #ffffff;
+  text-shadow: 0 1px 3px rgba(0, 0, 0, 0.8);
   line-height: 1.4;
 }
 
