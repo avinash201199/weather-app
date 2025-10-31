@@ -1,26 +1,109 @@
+// Enhanced theme-aware styles with modern design
 .demo {
-  color: aqua;
+  color: var(--accent-secondary, aqua);
+  transition: color var(--transition-normal, 0.3s ease);
 }
 
 .demo2 {
-  color: aquamarine;
+  color: var(--accent-primary, aquamarine);
+  transition: color var(--transition-normal, 0.3s ease);
 }
 
 .demo3 {
   width: 40px;
   height: 55px;
+  background: var(--bg-secondary, transparent);
+  border: 1px solid var(--border-color, transparent);
+  border-radius: 8px;
+  transition: all var(--transition-normal, 0.3s ease);
 }
 
 .demo4 {
-  color: white;
+  color: var(--text-accent, white);
   font-family: "Courier New", Courier, monospace;
+  background: var(--bg-secondary, transparent);
+  padding: 8px 12px;
+  border-radius: 6px;
+  transition: all var(--transition-normal, 0.3s ease);
+  
+  &:hover {
+    background: var(--bg-tertiary, rgba(255, 255, 255, 0.1));
+    transform: translateY(-2px);
+  }
 }
-.demo4 {
-  color: yellow;
-  font-family: "Courier New", Courier, monospace;
+
+// Enhanced header component with better theme integration
+.header-component {
+  width: 240px;
+  height: 100px;
+  background: var(--glass-bg, rgba(255, 255, 255, 0.1));
+  backdrop-filter: blur(19px);
+  -webkit-backdrop-filter: blur(19px);
+  border-radius: 20px;
+  border: 1px solid var(--glass-border, rgba(255, 255, 255, 0.3));
+  box-shadow: var(--glass-shadow, 0 8px 32px rgba(0, 0, 0, 0.1)),
+              inset 0 1px 0 rgba(255, 255, 255, 0.5),
+              inset 0 -1px 0 rgba(255, 255, 255, 0.1),
+              inset 0 0 8px 4px rgba(255, 255, 255, 0.4);
+  position: relative;
+  overflow: hidden;
+  padding: 20px;
+  color: var(--text-primary, #ffffff);
+  transition: all var(--transition-normal, 0.3s ease);
+
+  &::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 1px;
+    background: linear-gradient(
+      90deg,
+      transparent,
+      var(--glass-border, rgba(255, 255, 255, 0.8)),
+      transparent
+    );
+  }
+
+  &::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(
+      135deg,
+      var(--glass-bg, rgba(255, 255, 255, 0.1)) 0%,
+      transparent 50%,
+      var(--glass-bg, rgba(255, 255, 255, 0.05)) 100%
+    );
+    pointer-events: none;
+  }
+
+  // Responsive design
+  @media (max-width: 768px) {
+    width: 200px;
+    height: 80px;
+    padding: 15px;
+  }
+
+  @media (max-width: 480px) {
+    width: 180px;
+    height: 70px;
+    padding: 12px;
+  }
 }
-.demo, .demo2, .demo4 {
-  transition: color 0.3s ease;
+
+// Enhanced transitions for all interactive elements
+.demo, .demo2, .demo3, .demo4, .header-component {
+  transition: all var(--transition-normal, 0.3s ease);
+  
+  &:hover {
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-medium, 0 10px 15px -3px rgba(0, 0, 0, 0.1));
+  }
 }
 
 
